@@ -1,0 +1,1036 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_MP_25" template="MP/UI_MP_25:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:COMM/COMM_SRH_POP_VER:COMM/COMM_SRH_POP_ITEM:COMM/COMM_SRH_POP_ACCOUNT:COMM/COMM_SRH_POP_PROBLEM_ITEM:COMM/COMM_SRH_POP_PROBLEM_RES:MP/POP_UI_MP_25_01" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_SRH_VERSION:COMM_SRH_ITEM:COMM_SRH_ACCOUNT:COMM_SRH_PROBLEM_ITEM:COMM_SRH_PROBLEM_RES:COMM_SRH_POP_VER:COMM_SRH_POP_ITEM:COMM_SRH_POP_ACCOUNT:COMM_SRH_POP_PROBLEM_ITEM:COMM_SRH_POP_PROBLEM_RES:COMM_VIEW_META:POP_UI_MP_25_01" version="2.0">
+    <publish parent="MENU_04_02" open="true" seq="60" />
+    <component id="DATA_01" type="DATA">
+        <operations>
+            <operation id="LOAD_CHART_DATA">
+                <service-call id="SVC_UI_MP_25_GetProblemSummary">
+                    <service-id>GetProblemSummary</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="VERSION_ID" reference-id="SRH_CPT_SIMUL_VER_ID_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="DROPDOWN" type="DATA">
+        <actions>
+            <action event-type="meta">
+                <operation-call id="OPC_DROPDOWN_LOAD">
+                    <component-id>DROPDOWN</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="LOOKUP_CODE">
+                    <service-id>SRV_UI_CM_CODE</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="CODE" value="DEMAND_CLASS, DEMAND_TYPE, PROBLEM_TYPE" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="TTL_CPT_03" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_01">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_02">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_03">
+                    <component-id>SRH_CPT_T1_03_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_04">
+                    <component-id>SRH_CPT_ACCOUNT_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_05">
+                    <component-id>SRH_CPT_ACCOUNT_NM_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_06">
+                    <component-id>SRH_CPT_ITEM_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_07">
+                    <component-id>SRH_CPT_ITEM_NM_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_08">
+                    <component-id>SRH_CPT_ITEM_TP_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_09">
+                    <component-id>SRH_CPT_T1_04_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_10">
+                    <component-id>SRH_CPT_T1_05_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_11">
+                    <component-id>SRH_CPT_PROBLEM_ITEM_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_12">
+                    <component-id>SRH_CPT_PROBLEM_RES_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_13">
+                    <component-id>SRH_CPT_PROBLEM_RES_DESCRIP_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_14">
+                    <component-id>SRH_CPT_T1_06_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_01_LOAD_02">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+                <operation-call id="OPC_DATA_01_LOAD">
+                    <component-id>DATA_01</component-id>
+                    <operation-id>LOAD_CHART_DATA</operation-id>
+                    <success>
+                        <operation-call id="OPC_LOAD_RST_CRT_01">
+                            <component-id>RST_CRT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_LOAD_RST_CRT_02">
+                            <component-id>RST_CRT_02</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_LOAD_RST_CRT_03">
+                            <component-id>RST_CRT_03</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_LOAD_RST_CRT_04">
+                            <component-id>RST_CRT_04</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="RESULT_SPLIT" type="SPLIT">
+        <props>
+            <position>vertical</position>
+            <splits>
+                <split id="upper_result" collapsible="false" />
+                <split id="down_result" collapsed="false" collapsible="true" resizable="false" size="500" />
+            </splits>
+        </props>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DMND_ID</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DMND_TP_NM</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_02_04" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <value-id>CD_NM</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SRH_CPT_T1_02_04_LOAD">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:DEMAND_TYPE" />
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DMND_CLASS_NM</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_03_04" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SRH_CPT_T1_03_04_LOAD">
+                    <component-id>SRH_CPT_T1_03_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:DEMAND_CLASS" />
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_04_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>REQUEST_SITE_ID</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_04_04" type="INPUTBOX">
+        <props>
+            <width>150</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_04_05" type="BUTTON">
+        <props>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_MP_25_01_WINDOW_01_OPEN">
+                    <component-id>POP_UI_MP_25_01_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_25_01_WINDOW_01_GRD_LOAD">
+                    <component-id>POP_UI_MP_25_01_WINDOW_01_GRD</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_CPT_T1_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DESCRIP</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_05_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_06_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PROBLEM_TYPE</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_06_04" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>CD</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SRH_CPT_T1_06_04_LOAD">
+                    <component-id>SRH_CPT_T1_06_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:PROBLEM_TYPE" />
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <header-height>55</header-height>
+            <selection-mode>BLOCK</selection-mode>
+            <indicator>true</indicator>
+            <check-bar>false</check-bar>
+            <fit-style>none</fit-style>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <cell-attributes>
+                <cell-attribute id="RST_CPT_01_ATTR_01">
+                    <conditions>
+                        <condition id="RST_CPT_01_CON_01">
+                            <column>UI_NM_01</column>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="RST_CPT_01_ALY">
+                            <column>UI_NM_01</column>
+                            <attrs>
+                                <background>#FFFFFFFF</background>
+                                <foreground>#FF001166</foreground>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="RST_CPT_01_ATTR_02">
+                    <conditions>
+                        <condition id="RST_CPT_01_CON_02">
+                            <column>UI_NM_02</column>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="RST_CPT_01_ALY_02">
+                            <column>UI_NM_02</column>
+                            <attrs>
+                                <background>#FFFFFFFF</background>
+                                <foreground>#FF001166</foreground>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="RST_CPT_01_ATTR_03">
+                    <conditions>
+                        <condition id="RST_CPT_01_CON_03">
+                            <column>UI_NM_03</column>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="RST_CPT_01_ALY_03">
+                            <column>UI_NM_03</column>
+                            <attrs>
+                                <background>#FFFFFFFF</background>
+                                <foreground>#FF001166</foreground>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+            </cell-attributes>
+            <toolbar use="true">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="false" visible="false" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="COPY" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="SAVE" enable="false" visible="false" position="right" />
+            </toolbar>
+            <columns>
+                <column id="DMND_ID" title="DMND_ID" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="PO_ID" title="PO_ID" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ACTIVE_YN" title="ACTV_YN" type="bool">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="DMND_TP_NM" title="DMND_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="DMND_CLASS_NM" title="DMND_CLASS_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="URGENT_ORDER_TP_NM" title="URGENT_ORDER_TP" type="string">
+                    <width>140</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ITEM_DESCRIP" title="ITEM_DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ITEM_TP_NM" title="ITEM_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_01" title="ATTR_01" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_02" title="ATTR_02" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_03" title="ATTR_03" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_04" title="ATTR_04" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_05" title="ATTR_05" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_06" title="ATTR_06" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_07" title="ATTR_07" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_08" title="ATTR_08" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_09" title="ATTR_09" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_10" title="ATTR_10" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_11" title="ATTR_11" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_12" title="ATTR_12" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_13" title="ATTR_13" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_14" title="ATTR_14" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_15" title="ATTR_15" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_16" title="ATTR_16" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_17" title="ATTR_17" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_18" title="ATTR_18" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_19" title="ATTR_19" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_20" title="ATTR_20" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_21" title="ATTR_21" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_22" title="ATTR_22" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_23" title="ATTR_23" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_24" title="ATTR_24" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ATTR_25" title="ATTR_25" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="DMND_QTY" title="DMND_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="UOM_NM" title="UOM_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="DUE_DATE" title="DUE_DATE" type="date" sort="asc">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="REQUEST_SITE_ID" title="REQUEST_SITE_ID" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="REQUEST_SITE_DESCRIP" title="REQUEST_SITE_DESCRIP" type="string">
+                    <width>170</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="LOCAT_GRP_CD" title="LOCAT_GRP" type="string">
+                    <width>170</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="BUSINESS_UNIT" title="BUSINESS_UNIT" type="string">
+                    <width>170</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="IN_OUT_FLAG" title="IN_OUT_FLAG" type="string">
+                    <width>170</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="ACCOUNT_CD" title="ACCOUNT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="ACCOUNT_NM" title="ACCOUNT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="CHANNEL_TP" title="CHANNEL_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="INCOTERMS" title="INCOTERMS" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="SALES_PRIC" title="SALES_UNIT_PRIC" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="MARGIN" title="MARGIN" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="CURRENCY" title="CURCY_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="PROBLEM_TP" title="PROBLEM_TP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="PROBLEM_NM" title="PROBLEM_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="PROBLEM_VAL" title="PROBLEM_VAL" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="PROBLEM_CAPA" title="PROBLEM_CAPA" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="PROBLEM_DATE" title="PROBLEM_DATE" type="date">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="TARGET_REQ_DATE" title="TARGET_REQ_DATE" type="date">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="TARGET_GR_DATE" title="TARGET_GR_DATE" type="date">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="PROBLEM_LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="PROBLEM_ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="RES_CD" title="RES_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="RES_DESCRIP" title="RES_DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="RES_GRP_CD" title="RES_GRP_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="RES_GRP_NM" title="RES_GRP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="RES_ATTR_CD" title="RES_ATTR_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="RES_ATTR_NM" title="RES_ATTR_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="PROCESS_CD" title="PROCESS_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="PROCESS_NM" title="PROCESS_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="PROCESS_DESCRIP" title="PROCESS_DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="PROD_GRP_CD" title="PROD_GRP_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="PROD_GRP_NM" title="PROD_GRP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="PROCESS_PRIORT" title="PROCESS_PRIORT" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="ROUTE_CD" title="ROUTE_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="ROUTE_NM" title="ROUTE_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="ROUTE_SEQ" title="ROUTE_SEQ" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="DESCRIP" title="DESCRIP" type="string">
+                    <width>130</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="UI_NM_01" title="01" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <background>#FFEEEEEE</background>
+                    <header-background>#DDD7DEE3</header-background>
+                    <groups>UI_LINK</groups>
+                </column>
+                <column id="URL_01" title="01" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <groups>UI_LINK</groups>
+                </column>
+                <column id="UI_NM_02" title="02" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <background>#FFEEEEEE</background>
+                    <header-background>#DDD7DEE3</header-background>
+                    <groups>UI_LINK</groups>
+                </column>
+                <column id="URL_02" title="01" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <groups>UI_LINK</groups>
+                </column>
+                <column id="UI_NM_03" title="03" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <background>#FFEEEEEE</background>
+                    <header-background>#DDD7DEE3</header-background>
+                    <groups>UI_LINK</groups>
+                </column>
+                <column id="URL_03" title="01" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <groups>UI_LINK</groups>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-click">
+                <operation-call id="common_view_open">
+                    <component-id>COMMON</component-id>
+                    <operation-id>VIEW-OPEN</operation-id>
+                    <parameters>
+                        <parameter id="view" reference-id="RST_CPT_01:selections" extract-by="URL_01" />
+                        <parameter id="target" value="new" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_URL_01">
+                            <on-column>UI_NM_01</on-column>
+                            <column>UI_NM_01</column>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="common_view_open_02">
+                    <component-id>COMMON</component-id>
+                    <operation-id>VIEW-OPEN</operation-id>
+                    <parameters>
+                        <parameter id="view" reference-id="RST_CPT_01:selections" extract-by="URL_02" />
+                        <parameter id="target" value="new" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_URL_02">
+                            <on-column>UI_NM_02</on-column>
+                            <column>UI_NM_02</column>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="common_view_open_03">
+                    <component-id>COMMON</component-id>
+                    <operation-id>VIEW-OPEN</operation-id>
+                    <parameters>
+                        <parameter id="view" reference-id="RST_CPT_01:selections" extract-by="URL_03" />
+                        <parameter id="target" value="new" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_URL_03">
+                            <on-column>UI_NM_03</on-column>
+                            <column>UI_NM_03</column>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>        
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_MP_25_GetPlanProblem">
+                    <service-id>GetPlanProblem</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="VERSION_ID" reference-id="SRH_CPT_SIMUL_VER_ID_04" default-value="" />
+                        <parameter id="DMND_ID" reference-id="SRH_CPT_T1_01_04" default-value="" />
+                        <parameter id="ITEM_CD" reference-id="SRH_CPT_ITEM_CD_04" default-value="" />
+                        <parameter id="ITEM_NM" reference-id="SRH_CPT_ITEM_NM_04" default-value="" />
+                        <parameter id="ITEM_TP_NM" reference-id="SRH_CPT_ITEM_TP_04" default-value="" />
+                        <parameter id="ACCOUNT_CD" reference-id="SRH_CPT_ACCOUNT_CD_04" default-value="" />
+                        <parameter id="ACCOUNT_NM" reference-id="SRH_CPT_ACCOUNT_NM_04" default-value="" />
+                        <parameter id="DMND_TP" reference-id="SRH_CPT_T1_02_04" default-value="" />
+                        <parameter id="DMND_CLASS_NM" reference-id="SRH_CPT_T1_03_04" default-value="" />
+                        <parameter id="REQUEST_SITE_ID" reference-id="SRH_CPT_T1_04_04" default-value="" />
+                        <parameter id="REQUEST_SITE_DESCRIP" reference-id="SRH_CPT_T1_05_04" default-value="" />
+                        <parameter id="PROBLEM_ITEM_CD" reference-id="SRH_CPT_PROBLEM_ITEM_CD_04" default-value="" />
+                        <parameter id="PROBLEM_RES_CD" reference-id="SRH_CPT_PROBLEM_RES_CD_04" default-value="" />
+                        <parameter id="PROBLEM_RES_DESCRIP" reference-id="SRH_CPT_PROBLEM_RES_DESCRIP_04" default-value="" />
+                        <parameter id="PROBLEM_TYPE" reference-id="SRH_CPT_T1_06_04" default-value="" />
+                        <parameter id="LANG_CD" reference-id="COMMON:LANGUAGE_CODE" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="EXPORT" />
+        </operations>
+    </component>
+    <component id="RST_CRT_01" type="CHART_PIE">
+        <props>
+            <title>PROBLEM_TP</title>
+            <title-position>top</title-position>
+            <height>240</height>
+            <theme>default</theme>
+            <border>
+                <width>1</width>
+                <color>gray</color>
+            </border>
+            <legend>
+                <visible>true</visible>
+                <position>right</position>
+            </legend>
+            <labels>
+                <visible>true</visible>
+            </labels>
+            <tooltip>
+                <visible>true</visible>
+                <format>#,###.##</format>
+            </tooltip>
+            <serieses>
+                <series id="CATEGORY_VALUE">
+                    <category-field>CATEGORY_NAME</category-field>
+                </series>
+            </serieses>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DATA_01:SVC_UI_MP_25_GetProblemSummary" extract="GROUP_NAME:PROBLEM_TYPE" />
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CRT_02" type="CHART_PIE">
+        <props>
+            <title>PROBLEM_NM</title>
+            <title-position>top</title-position>
+            <height>240</height>
+            <theme>bootstrap</theme>
+            <border>
+                <width>1</width>
+                <color>gray</color>
+            </border>
+            <legend>
+                <visible>true</visible>
+                <position>right</position>
+            </legend>
+            <labels>
+                <visible>true</visible>
+            </labels>
+            <tooltip>
+                <visible>true</visible>
+                <format>#,###.##</format>
+            </tooltip>
+            <serieses>
+                <series id="CATEGORY_VALUE">
+                    <category-field>CATEGORY_NAME</category-field>
+                </series>
+            </serieses>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DATA_01:SVC_UI_MP_25_GetProblemSummary" extract="GROUP_NAME:PROBLEM_NAME" />
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CRT_03" type="CHART">
+        <props>
+            <title>PROBLEM_RES</title>
+            <height>240</height>
+            <theme>metro</theme>
+            <border>
+                <width>1</width>
+                <color>gray</color>
+            </border>
+            <legend>
+                <visible>false</visible>
+                <position>bottom</position>
+            </legend>
+            <tooltip>
+                <visible>true</visible>
+                <format>#,###.##</format>
+            </tooltip>
+            <category-axis>
+                <rotation>45</rotation>
+                <category id="CATEGORY_NAME" />
+            </category-axis>
+            <value-axis>
+                <value id="VALUE">
+                    <format>#,###.##</format>
+                </value>
+            </value-axis>
+            <serieses>
+                <series id="CATEGORY_VALUE">
+                    <chart-type type="bar" />
+                    <type>double</type>
+                </series>
+            </serieses>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DATA_01:SVC_UI_MP_25_GetProblemSummary" extract="GROUP_NAME:PROBLEM_RESOURCE" />
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CRT_04" type="CHART">
+        <props>
+            <title>PROBLEM_INV</title>
+            <height>240</height>
+            <theme>metro</theme>
+            <border>
+                <width>1</width>
+                <color>gray</color>
+            </border>
+            <legend>
+                <visible>false</visible>
+                <position>bottom</position>
+            </legend>
+            <tooltip>
+                <visible>true</visible>
+                <format>#,###.##</format>
+            </tooltip>
+            <category-axis>
+                <rotation>45</rotation>
+                <category id="CATEGORY_NAME" />
+            </category-axis>
+            <value-axis>
+                <value id="VALUE">
+                    <format>#,###.##</format>
+                </value>
+            </value-axis>
+            <serieses>
+                <series id="CATEGORY_VALUE">
+                    <chart-type type="bar" />
+                    <type>double</type>
+                </series>
+            </serieses>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DATA_01:SVC_UI_MP_25_GetProblemSummary" extract="GROUP_NAME:PROBLEM_INVENTORY" />
+            </operation>
+        </operations>
+    </component>
+</view>

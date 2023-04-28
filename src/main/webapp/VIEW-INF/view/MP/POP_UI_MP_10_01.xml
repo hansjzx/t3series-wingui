@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_MP_10_01" version="2.0">
+    <component id="POP_UI_MP_10_01_WINDOW_01_GRD" type="R_GRID">
+        <props>
+            <height>345</height>
+            <header-height>30</header-height>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="LOTSIZE_GRP_ID" title="LOTSIZE_GRP_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="CATAGY_GRP" title="LOT_SIZE_GRP" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LOT_SIZE_UOM_ID" title="LOT_SIZE_UOM_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="LOT_SIZE_UOM" title="LOT_SIZE_UOM" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="GRP_NO" title="GRP_NO" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LOTSIZE_CD" title="LOTSIZE_CD" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="FROM_QTY" title="FROM_QTY" type="number">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="TO_QTY" title="TO_QTY" type="number">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="EFFICY" title="EFFICY" type="number">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ADJT_EFFICY" title="ADJT_EFFICY" type="number">
+                    <width>150</width>
+                    <editable>true</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_POP_UI_MP_10_01_WINDOW_01_GRD_CLICK_01">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-LOTSIZE_GRP_ID" reference-id="POP_UI_MP_10_01_WINDOW_01_GRD:selections" extract-by="LOTSIZE_GRP_ID" default-value="" />
+                        <parameter id="SET_VALUE-to-CATAGY_GRP" reference-id="POP_UI_MP_10_01_WINDOW_01_GRD:selections" extract-by="CATAGY_GRP" default-value="" />
+                        <parameter id="SET_VALUE-to-LOT_SIZE_UOM_ID" reference-id="POP_UI_MP_10_01_WINDOW_01_GRD:selections" extract-by="LOT_SIZE_UOM_ID" default-value="" />
+                        <parameter id="SET_VALUE-to-LOT_SIZE_UOM" reference-id="POP_UI_MP_10_01_WINDOW_01_GRD:selections" extract-by="LOT_SIZE_UOM" default-value="" />
+                        <parameter id="SET_VALUE-to-GRP_NO" reference-id="POP_UI_MP_10_01_WINDOW_01_GRD:selections" extract-by="GRP_NO" default-value="" />
+                        <parameter id="SET_VALUE-to-LOTSIZE_CD" reference-id="POP_UI_MP_10_01_WINDOW_01_GRD:selections" extract-by="LOTSIZE_CD" default-value="" />
+                        <parameter id="SET_VALUE-to-FROM_QTY" reference-id="POP_UI_MP_10_01_WINDOW_01_GRD:selections" extract-by="FROM_QTY" default-value="" />
+                        <parameter id="SET_VALUE-to-TO_QTY" reference-id="POP_UI_MP_10_01_WINDOW_01_GRD:selections" extract-by="TO_QTY" default-value="" />
+                        <parameter id="SET_VALUE-to-DEFAT_EFFICY_VAL" reference-id="POP_UI_MP_10_01_WINDOW_01_GRD:selections" extract-by="EFFICY" default-value="" />
+                        <parameter id="SET_VALUE-to-ADJT_EFFICY" reference-id="POP_UI_MP_10_01_WINDOW_01_GRD:selections" extract-by="ADJT_EFFICY" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_MP_10_01_WINDOW_01_GRD_SETDATA_MP_06_MAIN_CLOSE">
+                    <component-id>POP_UI_MP_10_01_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_MP_10_01_RST_CPT_01_LOAD">
+                    <service-id>SRV_UI_MP_10_POP_Q1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="ITEM_RES_PREF_MST_ID" reference-id="RST_CPT_01:selections" extract-by="ITEM_RES_PREF_MST_ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_IM_26_04" version="2.0">
+    <component id="POP_UI_IM_26_04_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>PO_CYCL_CALENDAR</title>
+            <width>600</width>
+            <height>310</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_26_04_GRID_01" type="R_GRID">
+        <props>
+            <header-height>55</header-height>
+            <indicator>false</indicator>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>10</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="CALENDAR_ID" title="CALENDAR_ID" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="DESCRIP" title="DESCRIP" type="string">
+                    <width>200</width>
+                    <editable>false</editable>
+                </column>
+                <column id="INV_MGMT_SYSTEM_TP" title="STOCK_MGMT_SYSTEM_TP" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <groups>STOCK_MGMT_SYSTEM</groups>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="GROUP:INVENTORY_MGMT_SYSTEM_TYPE" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="OPERT_BASE_TP" title="OPERT_BASE_TP" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <groups>STOCK_MGMT_SYSTEM</groups>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="GROUP:INVENTORY_SUPPLY_DATE_TYPE" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="PO_CYCL_TP_CD" title="PO_CYCL_TP" type="string">
+                    <width>150</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPT_POP_UI_IM_26_01_CPT_T4_03_06_SET_01">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-PO_CYCL_CALENDAR" reference-id="POP_UI_IM_26_04_GRID_01:selections" extract-by="CALENDAR_ID" default-value="" />
+                        <parameter id="SET_VALUE-to-PO_CYCL_CALENDAR_ID" reference-id="POP_UI_IM_26_04_GRID_01:selections" extract-by="ID" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_VIEW_01" group="A">
+                            <component>COMMON</component>
+                            <key>VIEW_ID</key>
+                            <operator>equal</operator>
+                            <value>UI_IM_25</value>
+                        </condition>
+                        <condition id="CON_RST_TAB_01_ACTIVATE_01" group="A">
+                            <component>RST_TAB_01</component>
+                            <operator>equal</operator>
+                            <value>t2-1</value>
+                        </condition>
+                    </conditions>
+                    <complete>
+                        <operation-call id="OPT_POP_UI_IM_26_04_WINDOW_01_CLOSE_01">
+                            <component-id>POP_UI_IM_26_04_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+                <operation-call id="OPT_POP_UI_IM_26_01_CPT_T4_03_06_SET_02">
+                    <component-id>RST_CPT_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-PO_CYCL_CALENDAR" reference-id="POP_UI_IM_26_04_GRID_01:selections" extract-by="CALENDAR_ID" default-value="" />
+                        <parameter id="SET_VALUE-to-PO_CYCL_CALENDAR_ID" reference-id="POP_UI_IM_26_04_GRID_01:selections" extract-by="ID" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_VIEW_02" group="B">
+                            <component>COMMON</component>
+                            <key>VIEW_ID</key>
+                            <operator>equal</operator>
+                            <value>UI_IM_25</value>
+                        </condition>
+                        <condition id="CON_RST_TAB_01_ACTIVATE_02" group="B">
+                            <component>RST_TAB_01</component>
+                            <operator>equal</operator>
+                            <value>t2-2</value>
+                        </condition>
+                    </conditions>
+                    <complete>
+                        <operation-call id="OPT_POP_UI_IM_26_04_WINDOW_01_CLOSE_02">
+                            <component-id>POP_UI_IM_26_04_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+                <operation-call id="OPT_POP_UI_IM_26_01_CPT_T4_03_06_SET_03">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-PO_CYCL_CALENDAR" reference-id="POP_UI_IM_26_04_GRID_01:selections" extract-by="CALENDAR_ID" default-value="" />
+                        <parameter id="SET_VALUE-to-PO_CYCL_CALENDAR_ID" reference-id="POP_UI_IM_26_04_GRID_01:selections" extract-by="ID" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_VIEW_03">
+                            <component>COMMON</component>
+                            <key>VIEW_ID</key>
+                            <operator>equal</operator>
+                            <value>UI_IM_26</value>
+                        </condition>
+                    </conditions>
+                    <complete>
+                        <operation-call id="OPT_POP_UI_IM_26_04_WINDOW_01_CLOSE_03">
+                            <component-id>POP_UI_IM_26_04_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+                
+                <operation-call id="OPT_POP_UI_IM_26_01_CPT_T4_03_06_SET_04">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-PO_CYCL_CALENDAR" reference-id="POP_UI_IM_26_04_GRID_01:selections" extract-by="CALENDAR_ID" default-value="" />
+                        <parameter id="SET_VALUE-to-PO_CYCL_CALENDAR_ID" reference-id="POP_UI_IM_26_04_GRID_01:selections" extract-by="ID" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_VIEW_04" group="A">
+                            <component>COMMON</component>
+                            <key>VIEW_ID</key>
+                            <operator>equal</operator>
+                            <value>UI_RP_02</value>
+                        </condition>
+                        <condition id="CON_RST_TAB_01_ACTIVATE_04" group="A">
+                            <component>RST_TAB_01</component>
+                            <operator>equal</operator>
+                            <value>t2-1</value>
+                        </condition>
+                    </conditions>
+                    <complete>
+                        <operation-call id="OPT_POP_UI_IM_26_04_WINDOW_01_CLOSE_04">
+                            <component-id>POP_UI_IM_26_04_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+                <operation-call id="OPT_POP_UI_IM_26_01_CPT_T4_03_06_SET_05">
+                    <component-id>RST_CPT_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-PO_CYCL_CALENDAR" reference-id="POP_UI_IM_26_04_GRID_01:selections" extract-by="CALENDAR_ID" default-value="" />
+                        <parameter id="SET_VALUE-to-PO_CYCL_CALENDAR_ID" reference-id="POP_UI_IM_26_04_GRID_01:selections" extract-by="ID" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_VIEW_05" group="B">
+                            <component>COMMON</component>
+                            <key>VIEW_ID</key>
+                            <operator>equal</operator>
+                            <value>UI_RP_02</value>
+                        </condition>
+                        <condition id="CON_RST_TAB_01_ACTIVATE_05" group="B">
+                            <component>RST_TAB_01</component>
+                            <operator>equal</operator>
+                            <value>t2-2</value>
+                        </condition>
+                    </conditions>
+                    <complete>
+                        <operation-call id="OPT_POP_UI_IM_26_04_WINDOW_01_CLOSE_05">
+                            <component-id>POP_UI_IM_26_04_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+                <operation-call id="OPT_POP_UI_IM_26_01_CPT_T4_03_06_SET_06">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-PO_CYCL_CALENDAR" reference-id="POP_UI_IM_26_04_GRID_01:selections" extract-by="CALENDAR_ID" default-value="" />
+                        <parameter id="SET_VALUE-to-PO_CYCL_CALENDAR_ID" reference-id="POP_UI_IM_26_04_GRID_01:selections" extract-by="ID" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_VIEW_06">
+                            <component>COMMON</component>
+                            <key>VIEW_ID</key>
+                            <operator>equal</operator>
+                            <value>UI_RP_03</value>
+                        </condition>
+                    </conditions>
+                    <complete>
+                        <operation-call id="OPT_POP_UI_IM_26_04_WINDOW_01_CLOSE_06">
+                            <component-id>POP_UI_IM_26_04_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_IM_26_Q4">
+                    <service-id>SRV_SP_UI_IM_26_Q4</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

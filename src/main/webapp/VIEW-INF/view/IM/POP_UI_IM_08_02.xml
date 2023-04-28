@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_IM_08_02" version="2.0">
+    <component id="POP_UI_IM_08_02_DATA_01" type="DATA">
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_08_02_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_IM_08_02</title>
+            <width>300</width>
+            <height>300</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_08_02_WINDOW_01_R_GRID_01" type="R_GRID">
+        <props>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="SABC_VAL" title="SABC_VAL" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="PRPSAL_SVC_LV" title="PRPSAL_SVC_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_SET_RST_CPT_01">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-SABC_VAL" reference-id="POP_UI_IM_08_02_WINDOW_01_R_GRID_01:selections" extract-by="SABC_VAL" default-value="" />
+                        <parameter id="SET_VALUE-to-PRPSAL_SVC_LV" reference-id="POP_UI_IM_08_02_WINDOW_01_R_GRID_01:selections" extract-by="PRPSAL_SVC_LV" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="cond1">
+                            <component>DATA_02</component>
+                            <key>ClickLoc</key>
+                            <operator>equal</operator>
+                            <value>RST1_CELLBUTTONCLICK</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_Click_RST1_02">
+                            <component-id>POP_UI_IM_08_02_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_SET_POP_CPT_01">
+                    <component-id>POP_UI_IM_08_01_CPT_T2_06_05</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_IM_08_02_WINDOW_01_R_GRID_01:selections" extract-by="SABC_VAL" />
+                    </parameters>
+                    <conditions>
+                        <condition id="cond1">
+                            <component>DATA_02</component>
+                            <key>ClickLoc</key>
+                            <operator>equal</operator>
+                            <value>RST1_DOUBLECLICK</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_SET_POP_CPT_02">
+                            <component-id>POP_UI_IM_08_01_CPT_T2_07_05</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_IM_08_02_WINDOW_01_R_GRID_01:selections" extract-by="PRPSAL_SVC_LV" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_08_02_WINDOW_01_CLOSE">
+                            <component-id>POP_UI_IM_08_02_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SRC_SP_UI_IM_08_Q3_LODE">
+                    <service-id>SRV_UI_IM_08_Q3</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="LOCAT_CD" reference-id="RST_CPT_01:selections" extract-by="LOCAT_CD" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

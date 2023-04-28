@@ -1,0 +1,74 @@
+<script>
+	content.getCreateComponentCompleteFlag().done(function () {
+	    var grid1 = cm.getComponent('RST_CPT_01');
+		var chart = cm.getComponent("RST_CPT_02");
+	    var gridWrap;
+	    
+	    grid1.onRGridDataFillReady = function (viewId, componentId, gridView, resultData) {
+	        gridWrap = new wingui.util.grid.GridWrap(gridView);
+	        gridWrap.init();
+
+			let returnData = cm.getComponent('SRH_CPT_PRSS_TYPE_01').getValue() !== "SPROC_05" ? resultData.filter(function (data) {
+			return data.CATEGORY !== "REPLSH_ADJ_PO"}) : resultData;
+				
+			return returnData
+	    };
+
+		grid1.onRGridCellClicked = function(viewID, componentID, grid, index) {
+			var gridView = grid1.getActualComponent();
+	        var fixedColumns = gridView.getColumnNames(true,true).filter(function(columnName){
+					                 return !columnName.includes("DAT_") 
+					                 		&& !columnName.includes("CATEGORY_GROUP")
+					                 		&& !columnName.includes("CATEGORY");
+					             });
+	        
+			var itemIndex = index.itemIndex;
+			var chartComponentId = "RST_CPT_02";
+			
+			redrawChart(componentID, chartComponentId, itemIndex, fixedColumns);
+		};
+		
+		grid1.doAfterSetData = function (serviceCallId, data, resultData) {
+	        if (data.length == 0) return;
+	        var gridView = grid1.getActualComponent();
+	        
+	        setFixedHoriznCellStyle(gridView);
+	    };
+
+	});
+
+	function setFixedHoriznCellStyle(gridView) {
+		gridView.addCellStyle('style03', {
+    		'foreground': '#ff0000',
+            'background': '#ffffb6c1',
+    	});
+
+    	var dataProvider = gridView.getDataProvider();
+    	gridView.beginUpdate();
+    	
+    	try {
+    		var locationFixedHorizon = cm.getComponent("DATA_01").getValue("SVC_GET_FIXED_HORIZON_DATA");
+    		var categoryIndex = dataProvider.getFieldIndex("CATEGORY");
+    		
+    		for (var i = 0, j = dataProvider.getRowCount();  i < j; i++) {
+    			var locationCode = dataProvider.getJsonRow(i).LOCAT_CD;
+    			var targetCellIndex = [];
+    			
+    			if (dataProvider.getFieldValues("CATEGORY")[i] == "DUE_IN") {
+    				var fixed_replsh_val = locationFixedHorizon.filter(function(n){
+	    				return n["LOCAT_CD"] == locationCode
+	    				})[0]["FIXED_REPLSH"];
+
+					for (var k = categoryIndex + 1; k < categoryIndex + 1 + fixed_replsh_val; k++) {
+						targetCellIndex.push(k);
+					}
+					gridView.setCellStyles([i], targetCellIndex, "style03");
+	    				
+    			}
+    		}
+    		
+    	} finally {
+    		gridView.endUpdate();
+    	}
+    }
+</script>

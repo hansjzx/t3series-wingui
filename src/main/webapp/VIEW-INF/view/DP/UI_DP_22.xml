@@ -1,0 +1,1450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_DP_22" template="COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:DP/UI_DP_22:DP/UI_DP_POPUP_MS_INIT_VAL_SETTING" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_DEPARTMENT:UI_DP_22_POPUP_MS_INIT_VAL_SETTING" version="2.0">
+    <publish parent="MENU_05_01" open="true" seq="219" />
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="SRH_CPT_CONTAINER_00_INIT">
+                    <component-id>SRH_CPT_CONTAINER_00</component-id>
+                    <operation-id>INIT</operation-id>
+                    <success>
+                        <operation-call id="SRH_CPT_CONTAINER_01_INIT">
+                            <component-id>SRH_CPT_CONTAINER_01</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="SRH_CPT_CONTAINER_02_INIT">
+                            <component-id>SRH_CPT_CONTAINER_02</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="SRH_CPT_CONTAINER_03_INIT">
+                            <component-id>SRH_CPT_CONTAINER_03</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_05" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="SRH_CPT_CONTAINER_00_INIT">
+                    <component-id>SRH_CPT_CONTAINER_00</component-id>
+                    <operation-id>INIT</operation-id>
+                    <success>
+                        <operation-call id="SRH_CPT_CONTAINER_01_INIT">
+                            <component-id>SRH_CPT_CONTAINER_01</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="SRH_CPT_CONTAINER_02_INIT">
+                            <component-id>SRH_CPT_CONTAINER_02</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="SRH_CPT_CONTAINER_03_INIT">
+                            <component-id>SRH_CPT_CONTAINER_03</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_GRID_LOAD">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PLAN_TP</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_02_04" type="COMBOBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SP_UI_DP_00_CONF_Q1_INIT_plantype">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_CONF_Q1_01" value="DP_PLAN_TYPE" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_02" value="DP_PLAN_MONTHLY" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                    </parameters>
+                    <success>
+                        <operation-call id="OPC_op_combo_select_pricetype">
+                            <component-id>SRH_CPT_T1_02_04</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <success>
+                                <operation-call id="OPC_INIT_GRID_LOAD">
+                                    <component-id>RST_CPT_01</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_00_CONF_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+            <operation id="SELECT">
+                <service-call id="OPC_PLAN_TP">
+                    <parameters>
+                        <parameter id="INDEX" value="0" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <height>280</height>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <check-bar>true</check-bar>
+            <fit-style>even</fit-style>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <toolbar use="true">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_DEL_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="RST_CPT_01:SVC_SP_UI_DP_22_D1:IM_DATA" extract-by="SP_UI_DP_22_D1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_UI_DP_22_GRD_01_DELETE_COMPLETE_MSG">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="RST_CPT_01:SVC_SP_UI_DP_22_S1:IM_DATA" extract-by="SP_UI_DP_22_S1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_UI_DP_22_GRD_01_SAVE_COMPLETE_MSG">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="WK_TP_DP_YN" title="WK_TP_DP_YN" type="string">
+                    <width>70</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="SEQ" title="SEQ" type="int">
+                    <width>40</width>
+                    <visible>true</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="ID" title="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="MODULE_ID" title="MODULE_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="WORK_CD" title="WORK_CD" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>true</editable>
+                    <button>true</button>
+                </column>
+                <column id="WORK_NM" title="WORK_NM" type="string">
+                    <width>100</width>
+                    <editable>true</editable>
+                </column>
+                <column id="DESCRIP" title="DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>true</editable>
+                </column>
+                <column id="WORK_TP_ID" title="WORK_TP_ID" type="string">
+                    <width>170</width>
+                    <editable>true</editable>
+                    <lang>true</lang>
+                    <candidate>
+                        <drop-down-count>5</drop-down-count>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_02:LOOKUP_CODE" extract="CONF_TP:DP_WK_TP" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="LINK" title="LINK" type="String">
+                    <width>80</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="LV_MGMT_ID" title="LV_MGMT_ID" type="String">
+                    <width>130</width>
+                    <editable>true</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_01:LOOKUP_CODE2"/>
+                        </values>
+                    </candidate>
+                </column>
+                <column id="CL_LV_MGMT_ID" title="CL_LV_MGMT_ID" type="String">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>true</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_01:LOOKUP_CODE2" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="CL_TP_ID" title="CL_TP_ID" type="String">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>true</editable>
+                    <lang>true</lang>
+                    <candidate>
+                        <drop-down-count>5</drop-down-count>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_02:LOOKUP_CODE" extract="CONF_TP:DP_CL_TP" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="INIT_VAL_TP_ID" title="INIT_VAL_TP_ID" type="String">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                    <lang>true</lang>
+                </column>
+                <column id="INIT_FIXED_LV_MGMT_ID" title="INIT_FIXED_LV_MGMT_ID" type="String">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="INPUT_TP_ID" title="INPUT_TP_ID" type="String">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <lang>true</lang>
+                </column>
+                <column id="CONST_INPUT_YN" title="CONST_INPUT_YN" type="bool">
+                    <width>130</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="INIT_CONST_INPUT_VAL" title="INIT_CONST_INPUT_VAL" type="int">
+                    <width>170</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="INIT_CONST_INPUT_TIME_VAL" title="INIT_CONST_INPUT_TIME_VAL" type="int">
+                    <width>170</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="APPV_CONST_ID" title="APPV_CONST_ID" type="String">
+                    <width>170</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                    <lang>true</lang>
+                </column>
+                <column id="APPV_EVENT_ID" title="APPV_EVENT_ID" type="String">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                    <lang>true</lang>
+                </column>
+                <column id="AUTO_APPV_YN" title="AUTO_APPV_YN" type="bool">
+                    <width>130</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="INIT_AUTO_APPV_VAL" title="INIT_AUTO_APPV_VAL" type="int">
+                    <width>170</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="INIT_AUTO_APPV_TIME_VAL" title="INIT_AUTO_APPV_TIME_VAL" type="int">
+                    <width>170</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="CANC_CONST_ID" title="CANC_CONST_ID" type="String">
+                    <width>170</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                    <candidate>
+                        <drop-down-count>5</drop-down-count>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_02:LOOKUP_CODE" extract="CONF_TP:DP_CANC_CONST_TP" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="CANC_EVENT_ID" title="CANC_EVENT_ID" type="String">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                    <candidate>
+                        <drop-down-count>5</drop-down-count>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_02:LOOKUP_CODE" extract="CONF_TP:DP_CANC_EVT_TP" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="CREATE_BY" title="CREATE_BY" type="string">
+                    <width>50</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="CREATE_DTTM" title="CREATE_DTTM" type="string">
+                    <width>70</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="MODIFY_BY" title="MODIFY_BY" type="string">
+                    <width>50</width>
+                    <editable>false</editable>
+                </column>
+                <column id="MODIFY_DTTM" title="MODIFY_DTTM" type="string">
+                    <width>70</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="button-click">
+                <operation-call id="activate_cont0">
+                    <component-id>SRH_CPT_CONTAINER_00</component-id>
+                    <operation-id>ACTIVATE</operation-id>
+                    <parameters>
+                        <parameter id="ACTIVATE" value="con1_0" />
+                    </parameters>
+                    <conditions>
+                        <condition id="con_Container_00">
+                            <component>RST_CPT_01</component>
+                            <column>WK_TP_DP_YN</column>
+                            <operator>equal</operator>
+                            <value>Y, true</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_SRH_CPT_T1_09_CLICK_SET">
+                            <component-id>SRH_CPT_T1_09</component-id>
+                            <operation-id>SET</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="activate_cont1">
+                    <component-id>SRH_CPT_CONTAINER_01</component-id>
+                    <operation-id>ACTIVATE</operation-id>
+                    <parameters>
+                        <parameter id="ACTIVATE" value="con1_1" />
+                    </parameters>
+                    <conditions>
+                        <condition id="con_Container_01">
+                            <component>RST_CPT_01</component>
+                            <column>WK_TP_DP_YN</column>
+                            <operator>equal</operator>
+                            <value>Y, true</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="op_08_06">
+                            <component-id>SRH_CPT_T1_08_06</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <success>
+                                <operation-call id="OPC_MS_VAL_TP_CPT_02_SELECT">
+                                    <component-id>MS_VAL_TP_CPT_02</component-id>
+                                    <operation-id>SELECT</operation-id>
+                                    <parameters>
+                                        <parameter id="VALUE" value="QTY" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="activate_cont2">
+                    <component-id>SRH_CPT_CONTAINER_02</component-id>
+                    <operation-id>ACTIVATE</operation-id>
+                    <parameters>
+                        <parameter id="ACTIVATE" value="con1_2" />
+                    </parameters>
+                    <conditions>
+                        <condition id="con_Container_02">
+                            <component>RST_CPT_01</component>
+                            <column>WK_TP_DP_YN</column>
+                            <operator>equal</operator>
+                            <value>Y, true</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_SRH_09_06_LOAD">
+                            <component-id>SRH_CPT_T1_09_06</component-id>
+                            <operation-id>SELECT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_09_07_LOAD">
+                            <component-id>SRH_CPT_T1_09_07</component-id>
+                            <operation-id>SELECT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_09_08_LOAD">
+                            <component-id>SRH_CPT_T1_09_08</component-id>
+                            <operation-id>SET</operation-id>
+                            <success>
+                                <operation-call id="OPC_SRH_CPT_T1_09_10_ENABLE2">
+                                    <component-id>SRH_CPT_T1_09_10</component-id>
+                                    <operation-id>ENABLE</operation-id>
+                                    <parameters>
+                                        <parameter id="ENABLE" reference-id="SRH_CPT_T1_09_08" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="OPC_SRH_CPT_T1_09_09_ENABLE2">
+                                    <component-id>SRH_CPT_T1_09_09</component-id>
+                                    <operation-id>ENABLE</operation-id>
+                                    <parameters>
+                                        <parameter id="ENABLE" reference-id="SRH_CPT_T1_09_08" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_09_09_LOAD">
+                            <component-id>SRH_CPT_T1_09_09</component-id>
+                            <operation-id>SET</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_09_10_LOAD">
+                            <component-id>SRH_CPT_T1_09_10</component-id>
+                            <operation-id>SELECT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="activate_cont3">
+                    <component-id>SRH_CPT_CONTAINER_03</component-id>
+                    <operation-id>ACTIVATE</operation-id>
+                    <parameters>
+                        <parameter id="ACTIVATE" value="con1_3" />
+                    </parameters>
+                    <conditions>
+                        <condition id="con_Container_03">
+                            <component>RST_CPT_01</component>
+                            <column>WK_TP_DP_YN</column>
+                            <operator>equal</operator>
+                            <value>Y, true</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_SRH_10_06_LOAD">
+                            <component-id>SRH_CPT_T1_10_06</component-id>
+                            <operation-id>SET</operation-id>
+                            <success>
+                                <operation-call id="OPC_SRH_CPT_T1_10_08_ENABLE2">
+                                    <component-id>SRH_CPT_T1_10_08</component-id>
+                                    <operation-id>ENABLE</operation-id>
+                                    <parameters>
+                                        <parameter id="ENABLE" reference-id="SRH_CPT_T1_10_06" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="OPC_SRH_CPT_T1_10_07_ENABLE2">
+                                    <component-id>SRH_CPT_T1_10_07</component-id>
+                                    <operation-id>ENABLE</operation-id>
+                                    <parameters>
+                                        <parameter id="ENABLE" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_10_07_LOAD">
+                            <component-id>SRH_CPT_T1_10_07</component-id>
+                            <operation-id>SET</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_10_08_LOAD">
+                            <component-id>SRH_CPT_T1_10_08</component-id>
+                            <operation-id>SELECT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_10_09_LOAD">
+                            <component-id>SRH_CPT_T1_10_09</component-id>
+                            <operation-id>SELECT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="activate_cont0_test">
+                    <component-id>SRH_CPT_CONTAINER_00</component-id>
+                    <operation-id>INIT</operation-id>
+                    <conditions>
+                        <condition id="con_Container_00_INIT">
+                            <component>RST_CPT_01</component>
+                            <column>WK_TP_DP_YN</column>
+                            <operator>equal</operator>
+                            <value>N, false</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="activate_cont1_test">
+                    <component-id>SRH_CPT_CONTAINER_01</component-id>
+                    <operation-id>INIT</operation-id>
+                    <conditions>
+                        <condition id="con_Container_01_INIT">
+                            <component>RST_CPT_01</component>
+                            <column>WK_TP_DP_YN</column>
+                            <operator>equal</operator>
+                            <value>N, false</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="activate_cont2_test">
+                    <component-id>SRH_CPT_CONTAINER_02</component-id>
+                    <operation-id>INIT</operation-id>
+                    <conditions>
+                        <condition id="con_Container_02_INIT">
+                            <component>RST_CPT_01</component>
+                            <column>WK_TP_DP_YN</column>
+                            <operator>equal</operator>
+                            <value>N, false</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="activate_cont3_test">
+                    <component-id>SRH_CPT_CONTAINER_03</component-id>
+                    <operation-id>INIT</operation-id>
+                    <conditions>
+                        <condition id="con_Container_03_INIT">
+                            <component>RST_CPT_01</component>
+                            <column>WK_TP_DP_YN</column>
+                            <operator>equal</operator>
+                            <value>N, false</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="REMOVE_ROW">
+                <service-call id="SVC_SP_UI_DP_22_D1">
+                    <service-id>SRV_SET_SP_UI_DP_22_D1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="changes" reference-id="RST_CPT_01:checked" />
+                        <parameter id="P_USER_ID" reference-id="COMMON:loginId" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="INSERT_ROW">
+                <position>above</position>
+                <service-call id="SET_DEFAULT">
+                    <parameters>
+                        <parameter id="SET_DEFAULT-to-MODULE_ID" value="DP" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="SVC_SP_UI_DP_22_S1">
+                    <service-id>SRV_SET_SP_UI_DP_22_S1</service-id>
+                    <service-target>dp</service-target>
+                    <param-empty-check>changes</param-empty-check>
+                    <parameters>
+                        <parameter id="changes" reference-id="RST_CPT_01:changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" default-value="" />
+                        <parameter id="PLAN_TP_ID" reference-id="SRH_CPT_T1_02_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE_DETAIL">
+                <service-call id="SVC_SP_UI_DP_22_S2">
+                    <service-id>SRV_SET_SP_UI_DP_22_S2</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="ID" reference-id="RST_CPT_01:selections" extract-by="ID" default-value="" />
+                        <parameter id="INIT_VAL_TP_ID" reference-id="SRH_CPT_T1_08_06" default-value="" />
+                        <parameter id="INIT_FIXED_LV_MGMT_ID" reference-id="SRH_CPT_T1_08_07" default-value="" />
+                        <parameter id="CONST_INPUT_YN" reference-id="SRH_CPT_T1_10_06" default-value="" />
+                        <parameter id="INIT_CONST_INPUT_VAL" reference-id="SRH_CPT_T1_10_07" default-value="" />
+                        <parameter id="INIT_CONST_INPUT_TIME_VAL" reference-id="SRH_CPT_T1_10_08" default-value="" />
+                        <parameter id="INPUT_TP_ID" reference-id="SRH_CPT_T1_10_09" default-value="" />
+                        <parameter id="APPV_CONST_ID" reference-id="SRH_CPT_T1_09_06" default-value="" />
+                        <parameter id="APPV_EVENT_ID" reference-id="SRH_CPT_T1_09_07" default-value="" />
+                        <parameter id="AUTO_APPV_YN" reference-id="SRH_CPT_T1_09_08" default-value="" />
+                        <parameter id="INIT_AUTO_APPV_VAL" reference-id="SRH_CPT_T1_09_09" default-value="" />
+                        <parameter id="INIT_AUTO_APPV_TIME_VAL" reference-id="SRH_CPT_T1_09_10" default-value="" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" default-value="" />
+                        <parameter id="PLAN_TP_ID" reference-id="SRH_CPT_T1_02_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_22_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_22_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_22_Q1_01" value="" />
+                        <parameter id="SP_UI_DP_22_Q1_02" reference-id="SRH_CPT_T1_02_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_CONTAINER_00" type="CONTAINER">
+        <props>
+            <height>300</height>
+            <group-box>
+                <border-color>#FFFFFF</border-color>
+                <title />
+                <title-position>left</title-position>
+            </group-box>
+            <containers>
+                <container id="con1_0" expand="false" init-render="true" />
+            </containers>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_CONTAINER_01" type="CONTAINER">
+        <props>
+            <height>40</height>
+            <group-box>
+                <border-color>#A2A2A2</border-color>
+                <title>INIT_SETTING</title>
+                <title-position>left</title-position>
+            </group-box>
+            <containers>
+                <container id="con1_1" expand="false" init-render="true" />
+            </containers>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="MS_VAL_TP_CPT_01" type="LABEL">
+        <props>
+            <width>170</width>
+            <lang>true</lang>
+            <init-value>MEASURE_VAL_TP</init-value>
+        </props>
+    </component>
+    <component id="MS_VAL_TP_CPT_02" type="COMBOBOX">
+        <props>
+            <width>170</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>CD</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_MEASURE_VAL_TP_LOAD_when_init">
+                    <component-id>MS_VAL_TP_CPT_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+            <action event-type="select-item">
+                <operation-call id="OPC_UI_DP_22_POPUP_MS_INIT_VAL_WINDOWS_OPEN">
+                    <component-id>UI_DP_22_POPUP_MS_INIT_VAL_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <conditions>
+                        <condition id="CON_MEASURE_QTY">
+                            <component>MS_VAL_TP_CPT_02</component>
+                            <operator>notEqual</operator>
+                            <value>QTY</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_SRH_CPT_T1_08_06_INIT">
+                            <component-id>SRH_CPT_T1_08_06</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_07_INIT">
+                            <component-id>SRH_CPT_T1_08_07</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_SAVE_BUTTON_ENABLE_FALSE">
+                            <component-id>SRH_CPT_T1_10</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_SRH_CPT_T1_08_06_RELOAD_BY_POPUP">
+                    <component-id>SRH_CPT_T1_08_06</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="CON_MEASURE_QTY02">
+                            <component>MS_VAL_TP_CPT_02</component>
+                            <operator>equal</operator>
+                            <value>QTY</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_SAVE_BUTTON_ENABLE_TRUE">
+                            <component-id>SRH_CPT_T1_10</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="true" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_06_RESELECT_BY_POPUP">
+                            <component-id>SRH_CPT_T1_08_06</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="SELECT_ACTION" value="false" />
+                            </parameters>
+                            <success>
+                                <operation-call id="OPC_SRH_CPT_T1_08_07_RELOAD_BY_POPUP">
+                                    <component-id>SRH_CPT_T1_08_07</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                    <success>
+                                        <operation-call id="OPC_SRH_CPT_T1_08_07_RESELECT_BY_POPUP">
+                                            <component-id>SRH_CPT_T1_08_07</component-id>
+                                            <operation-id>SELECT</operation-id>
+                                        </operation-call>
+                                    </success>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SELECT" />
+            <operation id="LOAD">
+                <service-call id="SVC_MS_VAL_TP_DATA_LOAD">
+                    <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_CONF_Q1_01" value="DP_MS_QTY_TP" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_02" value="" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_08_01" type="LABEL">
+        <props>
+            <width>170</width>
+            <lang>true</lang>
+            <init-value>INIT_VAL_TP_ID</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_08_06" type="COMBOBOX">
+        <props>
+            <width>250</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="select-item">
+                <operation-call id="OPC_SRH_CPT_T1_08_07_LOAD_BY_INIT_VAL_TP">
+                    <component-id>SRH_CPT_T1_08_07</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_SRH_08_07_LOAD">
+                            <component-id>SRH_CPT_T1_08_07</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="INDEX" value="0" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SELECT">
+                <service-call id="OPC_combo08_06_SET">
+                    <parameters>
+                        <parameter id="VALUE" reference-id="RST_CPT_01:selections" extract-by="INIT_VAL_TP_ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <reference-service-call id="DATA_02:LOOKUP_CODE" extract="CONF_TP:DP_INIT_VAL_TP" />
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_08_02" type="LABEL">
+        <props>
+            <width>170</width>
+            <lang>true</lang>
+            <init-value>INIT_VAL</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_08_07" type="COMBOBOX">
+        <props>
+            <width>170</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>INIT_VAL_ID</value-id>
+            <text-id>VAL_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="select-item">
+                <operation-call id="OPC_SRH_CPT_T1_08_07_ENABLE">
+                    <component-id>SRH_CPT_T1_08_07</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="false" />
+                    </parameters>
+                    <conditions>
+                        <condition id="con_SRH_CPT_T1_08_07_ENABLE">
+                            <component>SRH_CPT_T1_08_07</component>
+                            <operator>equal</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_SRH_CPT_T1_08_07_ENABLE_02">
+                    <component-id>SRH_CPT_T1_08_07</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="true" />
+                    </parameters>
+                    <conditions>
+                        <condition id="con_SRH_CPT_T1_08_07_ENABLE">
+                            <component>SRH_CPT_T1_08_07</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SELECT">
+                <service-call id="OPC_combo08_07_SET">
+                    <parameters>
+                        <parameter id="VALUE" reference-id="RST_CPT_01:selections" extract-by="INIT_FIXED_LV_MGMT_ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_22_INIT_VALUE_COMBO">
+                    <service-id>SRV_GET_SP_UI_DP_22_INIT_VALUE_COMBO</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="INIT_VAL_TP_ID" reference-id="SRH_CPT_T1_08_06" extract-by="ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_CONTAINER_02" type="CONTAINER">
+        <props>
+            <height>30</height>
+            <group-box>
+                <border-color>#A2A2A2</border-color>
+                <title>APPV_SETTING</title>
+                <title-position>left</title-position>
+            </group-box>
+            <containers>
+                <container id="con1_2" expand="false" init-render="true" />
+            </containers>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_09_01" type="LABEL">
+        <props>
+            <width>150</width>
+            <lang>true</lang>
+            <init-value>APPV_CONST_ID</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_09_06" type="COMBOBOX">
+        <props>
+            <width>280</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_op_combo_LOAD">
+                    <component-id>SRH_CPT_T1_09_06</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SELECT">
+                <service-call id="OPC_combo09_06_SET">
+                    <parameters>
+                        <parameter id="VALUE" reference-id="RST_CPT_01:selections" extract-by="APPV_CONST_ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <reference-service-call id="DATA_02:LOOKUP_CODE" extract="CONF_TP:DP_APPV_CONST_TP" />
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_09_02" type="LABEL">
+        <props>
+            <width>150</width>
+            <lang>true</lang>
+            <init-value>APPV_EVENT_ID</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_09_07" type="COMBOBOX">
+        <props>
+            <width>280</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_combo_APPV_LOAD">
+                    <component-id>SRH_CPT_T1_09_07</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SELECT">
+                <service-call id="OPC_combo09_07_SET">
+                    <parameters>
+                        <parameter id="VALUE" reference-id="RST_CPT_01:selections" extract-by="APPV_EVENT_ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <reference-service-call id="DATA_02:LOOKUP_CODE" extract="CONF_TP:DP_APPV_EVT_TP" />
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_09_03" type="LABEL">
+        <props>
+            <width>170</width>
+            <lang>true</lang>
+            <init-value>AUTO_APPV_YN</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_09_08" type="CHECKBOX">
+        <props>
+            <lang>true</lang>
+            <init-value>false</init-value>
+        </props>
+        <actions>
+            <action event-type="init" />
+            <action event-type="change">
+                <operation-call id="OPC_SRH_CPT_T1_09_10_ENABLE">
+                    <component-id>SRH_CPT_T1_09_10</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" reference-id="SRH_CPT_T1_09_08" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_SRH_CPT_T1_09_09_ENABLE">
+                    <component-id>SRH_CPT_T1_09_09</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" reference-id="SRH_CPT_T1_09_08" />
+                    </parameters>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="OPC_combo09_08_SET">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="AUTO_APPV_YN" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET_S">
+                <service-call id="OPC_combo09_08_SET_S">
+                    <parameters>
+                        <parameter id="SET" value="false" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_09_04" type="LABEL">
+        <props>
+            <width>170</width>
+            <lang>true</lang>
+            <init-value>INIT_AUTO_APPV_VAL</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_09_09" type="INPUTBOX">
+        <props>
+            <width>170</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_AUTO_VAL_INIT">
+                    <component-id>SRH_CPT_T1_09_09</component-id>
+                    <operation-id>SET_S</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="OPC_combo09_09_SET">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="INIT_AUTO_APPV_VAL" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET_S">
+                <service-call id="OPC_combo09_09_SET_S">
+                    <parameters>
+                        <parameter id="SET" value="0" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_09_05" type="LABEL">
+        <props>
+            <width>170</width>
+            <lang>true</lang>
+            <init-value>INIT_AUTO_APPV_TIME_VAL</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_09_10" type="COMBOBOX">
+        <props>
+            <width>170</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <init-value>
+                <option value="0" text="0" />
+                <option value="1" text="1" />
+                <option value="2" text="2" />
+                <option value="3" text="3" />
+                <option value="4" text="4" />
+                <option value="5" text="5" />
+                <option value="6" text="6" />
+                <option value="7" text="7" />
+                <option value="8" text="8" />
+                <option value="9" text="9" />
+                <option value="10" text="10" />
+                <option value="11" text="11" />
+                <option value="12" text="12" />
+                <option value="13" text="13" />
+                <option value="14" text="14" />
+                <option value="15" text="15" />
+                <option value="16" text="16" />
+                <option value="17" text="17" />
+                <option value="18" text="18" />
+                <option value="19" text="19" />
+                <option value="20" text="20" />
+                <option value="21" text="21" />
+                <option value="22" text="22" />
+                <option value="23" text="23" />
+            </init-value>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_AUTO_VAL2_INIT">
+                    <component-id>SRH_CPT_T1_09_10</component-id>
+                    <operation-id>SELECT_S</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SELECT_S">
+                <service-call id="OPC_combo09_10_SELECT_S">
+                    <parameters>
+                        <parameter id="INDEX" value="0" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SELECT">
+                <service-call id="OPC_combo09_10_SELECT">
+                    <parameters>
+                        <parameter id="INDEX" reference-id="RST_CPT_01:selections" extract-by="INIT_AUTO_APPV_TIME_VAL" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_09" type="LABEL">
+        <props>
+            <width>170</width>
+            <lang>true</lang>
+            <init-value>WORK_CD</init-value>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="OPC_SRH_CPT_T1_09_SET">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="WORK_CD" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_10" type="BUTTON">
+        <props>
+            <tooltip>Save</tooltip>
+            <icon>save</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="ORC_RST_CPT_01_SAVE">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SAVE_DETAIL</operation-id>
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_SAVE2_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="RST_CPT_01:SVC_SP_UI_DP_22_S2:IM_DATA" extract-by="SP_UI_DP_22_S2_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_save_detail">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_CONTAINER_03" type="CONTAINER">
+        <props>
+            <height>30</height>
+            <group-box>
+                <border-color>#A2A2A2</border-color>
+                <title>INPUT_SETTING</title>
+                <title-position>left</title-position>
+            </group-box>
+            <containers>
+                <container id="con1_3" expand="false" init-render="true" />
+            </containers>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_10_01" type="LABEL">
+        <props>
+            <width>170</width>
+            <lang>true</lang>
+            <tooltip>Set input limits automatically.</tooltip>
+            <init-value>AUTO_CONST_INPUT_YN</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_10_06" type="CHECKBOX">
+        <props>
+            <lang>true</lang>
+            <init-value>false</init-value>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_10_06_INIT">
+                    <component-id>SRH_CPT_T1_10_06</component-id>
+                    <operation-id>SET_S</operation-id>
+                </operation-call>
+            </action>
+            <action event-type="change">
+                <operation-call id="OPC_SRH_CPT_T1_10_08_ENABLE">
+                    <component-id>SRH_CPT_T1_10_08</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" reference-id="SRH_CPT_T1_10_06" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_SRH_CPT_T1_10_07_ENABLE">
+                    <component-id>SRH_CPT_T1_10_07</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" />
+                    </parameters>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="OPC_combo10_06_SET">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="CONST_INPUT_YN" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET_S">
+                <service-call id="OPC_combo10_06_SET_S">
+                    <parameters>
+                        <parameter id="SET" value="false" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_10_02" type="LABEL">
+        <props>
+            <width>170</width>
+            <lang>true</lang>
+            <init-value>INIT_CONST_INPUT_VAL</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_10_07" type="INPUTBOX">
+        <props>
+            <width>170</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_CONST_INPUT_VAL_INIT">
+                    <component-id>SRH_CPT_T1_10_07</component-id>
+                    <operation-id>SET_S</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="OPC_combo10_07_SET">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="INIT_CONST_INPUT_VAL" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET_S">
+                <service-call id="OPC_combo10_07_SET_S">
+                    <parameters>
+                        <parameter id="SET" value="0" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_10_03" type="LABEL">
+        <props>
+            <width>170</width>
+            <lang>true</lang>
+            <init-value>INIT_CONST_INPUT_TIME_VAL</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_10_08" type="COMBOBOX">
+        <props>
+            <width>170</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <init-value>
+                <option value="0" text="0" />
+                <option value="1" text="1" />
+                <option value="2" text="2" />
+                <option value="3" text="3" />
+                <option value="4" text="4" />
+                <option value="5" text="5" />
+                <option value="6" text="6" />
+                <option value="7" text="7" />
+                <option value="8" text="8" />
+                <option value="9" text="9" />
+                <option value="10" text="10" />
+                <option value="11" text="11" />
+                <option value="12" text="12" />
+                <option value="13" text="13" />
+                <option value="14" text="14" />
+                <option value="15" text="15" />
+                <option value="16" text="16" />
+                <option value="17" text="17" />
+                <option value="18" text="18" />
+                <option value="19" text="19" />
+                <option value="20" text="20" />
+                <option value="21" text="21" />
+                <option value="22" text="22" />
+                <option value="23" text="23" />
+            </init-value>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_CONST_INPUT_VAL2_INIT">
+                    <component-id>SRH_CPT_T1_10_08</component-id>
+                    <operation-id>SELECT_S</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SELECT_S">
+                <service-call id="OPC_combo10_08_SELECT_S">
+                    <parameters>
+                        <parameter id="INDEX" value="0" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SELECT">
+                <service-call id="OPC_combo10_08_SELECT">
+                    <parameters>
+                        <parameter id="INDEX" reference-id="RST_CPT_01:selections" extract-by="INIT_CONST_INPUT_TIME_VAL" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_10_04" type="LABEL">
+        <props>
+            <width>170</width>
+            <lang>true</lang>
+            <tooltip>Set input constraints with or without a task sequence.</tooltip>
+            <init-value>CONST_INPUT_YN</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_10_09" type="COMBOBOX">
+        <props>
+            <width>170</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SRH_CPT_T1_10_09_INIT">
+                    <component-id>SRH_CPT_T1_10_09</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SELECT">
+                <service-call id="OPC_combo10_09_SELECT">
+                    <parameters>
+                        <parameter id="VALUE" reference-id="RST_CPT_01:selections" extract-by="INPUT_TP_ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <reference-service-call id="DATA_02:LOOKUP_CODE" extract="CONF_TP:DP_INPUT_TP" />
+            </operation>
+        </operations>
+    </component>
+    <component id="DATA_02" type="DATA">
+        <actions>
+            <action event-type="meta">
+                <operation-call id="OPC_DATA_02_LOAD">
+                    <component-id>DATA_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="LOOKUP_CODE">
+                    <service-id>SRV_GET_SP_UI_DP_CONF_COMBO</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="DATA_01" type="DATA">
+        <actions>
+            <action event-type="meta">
+                <operation-call id="VIEW_META_LOAD">
+                    <component-id>DATA_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="LOOKUP_CODE2">
+                    <service-id>SRV_GET_SP_UI_DP_00_LV_CD_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="LV_TP" value="S"/>
+                        <parameter id="ACCOUNT_TP" value="SALES"/>
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD_INIT_VAL">
+                <service-call id="GET_ADDITIONAL_INIT_MEASURE_VALUE">
+                    <service-id>SRV_GET_SP_UI_DP_22_Q0</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="WORK_CD" reference-id="SRH_CPT_T1_09" />
+                        <parameter id="PLAN_TP_ID" reference-id="SRH_CPT_T1_02_04" />
+                        <parameter id="MS_VAL_TP_CD" reference-id="MS_VAL_TP_CPT_02" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

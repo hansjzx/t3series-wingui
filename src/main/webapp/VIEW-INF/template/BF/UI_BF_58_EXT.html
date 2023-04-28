@@ -1,0 +1,450 @@
+<script>
+    content.getCreateComponentCompleteFlag().done(function () {
+        var viewId = cm.getComponent("COMMON").getValue("VIEW_ID");
+        var grid = cm.getComponent('RST_CPT_03');
+        var gridView = grid.getActualComponent();
+        var loaddata2 = '';
+        var loadGridData = '';
+        var checkedRows = {};
+        var selectedRow = 0;
+        const arrMax = arr => Math.max(...arr);
+        const arrMin = arr => Math.min(...arr);
+        const arrAvg = arr => arr.reduce((a, b) => a + b, 0) / arr.length;
+        // sort array ascending
+        const asc = arr => arr.sort((a, b) => a - b);
+        const quantile = (arr, q) => {
+            const sorted = asc(arr);
+            const pos = (sorted.length - 1) * q;
+            const base = Math.floor(pos);
+            const rest = pos - base;
+            if (sorted[base + 1] !== undefined) {
+                return sorted[base] + rest * (sorted[base + 1] - sorted[base]);
+            } else {
+                return sorted[base];
+            }
+        };
+
+        /* radio 버튼 클릭 시 차트 refresh */
+        $(document).ready(function () {
+            $(".chart2_col").change(function() {
+                refreshBoxplot();
+            });
+
+            $(".chart1_col").change(function() {
+                refreshChart1();
+            });
+        });
+    
+
+        cm.getComponent("DATA_02").doAfterSetData = function (serviceCallId, data, resultData) {
+            loaddata2 = true;
+            if (loadGridData) {
+                createChart();
+            }
+        }
+    
+        grid.onRGridCellClicked = function(viewId, componentId, grid, index) {
+            selectedRow = index['itemIndex'];
+
+            rangeAreaChart(selectedRow, checkedRows);
+            boxplot(selectedRow, checkedRows);
+        };
+
+        grid.doAfterSetData = function (serviceCallId, data, resultData) {
+            loadGridData = true;
+            checkedRows = {};
+
+            if (loaddata2) {
+                createChart();
+            }
+        };
+
+        /* grid checkbox 클릭 시 */
+        gridView.onItemChecked = function (grid, itemIndex, checked) {
+            checkedRows[itemIndex] = checked;
+            rangeAreaChart(selectedRow, checkedRows);
+            //boxplot(0, checkedRows);
+        };
+
+        gridView.onItemAllChecked = function (grid, checked) {
+            checkedRows = [];
+            rangeAreaChart(selectedRow, checkedRows);
+            //boxplot(0, checkedRows);
+        }
+
+        function refreshChart1() {
+            try {
+                rangeAreaChart(selectedRow, checkedRows);
+            } catch (error) {
+                rangeAreaChart(0, checkedRows);
+                //console.log('Click grid cell first');
+            }
+        }
+        function refreshBoxplot() {
+            try {
+                boxplot(selectedRow, checkedRows);
+            } catch (error) {
+                boxplot(0, checkedRows);
+            }
+        }
+
+        function createChart() {
+            if (loaddata2 & loadGridData) {
+                rangeAreaChart(0, checkedRows);
+                boxplot(0, checkedRows);
+            }
+        }
+
+        function getKeyByValue(object, value) { 
+            return Object.keys(object).filter(key => object[key] === value); 
+        }
+
+        function groupBy(list, keyGetter) {
+            const map = new Map();
+            list.forEach((item) => {
+                const key = keyGetter(item);
+                const collection = map.get(key);
+                if (!collection) {
+                    map.set(key, [item]);
+                } else {
+                    collection.push(item);
+                }
+            });
+            return map;
+        }
+    
+        function getRange(size) {
+            return [...Array(size).keys()].map(key => (key+1).toString());
+        }
+    
+        
+        // Standard deviation
+        function getSD (data) {
+            const m = arrAvg(data);
+            return Math.sqrt(data.reduce(function (sq, n) {
+                    return sq + Math.pow(n - m, 2);
+                }, 0) / (data.length - 1));
+        };
+    
+
+        function boxplot(selectedRow, checkedRows) {
+            var data = cm.getComponent("DATA_02").getValue().SVC_SP_UI_BF_58_CHART_Q1;
+            var bucket = cm.getComponent('RST_CRT_02_02').getActualComponent()[0].id;
+            var chart = cm.getComponent("RST_CPT_02");
+            var grid_data = cm.getComponent("RST_CPT_03").getActualComponent().getDataProvider().getJsonRows();
+            var account_cd = grid_data[selectedRow]['ACCOUNT_CD'];
+            var item_cd = grid_data[selectedRow]['ITEM_CD'];
+            var grouped = '';
+            var category_name = {
+                'Q': ['1Q', '2Q', '3Q', '4Q'],
+                'W': getRange(53),
+                'M': ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                'D': ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
+            };
+            var categories = [];
+            var result_data = [];
+            const Q1 = arr => quantile(arr, .25);
+            const Median = arr => quantile(arr, .50);
+            const Q3 = arr => quantile(arr, .75);
+
+
+            data = data.filter(function(row){
+                return row.ITEM_CD == item_cd & row.ACCOUNT_CD == account_cd}).map(function(row){
+                    return row
+            });
+    
+            if (bucket == 'Y') {
+                grouped = groupBy(data, dt => dt.YYYY);
+            }
+            else if (bucket == 'Q') {
+                grouped = groupBy(data, dt => dt.QTR);
+            }
+            else if (bucket == 'W') {
+                grouped = groupBy(data, dt => dt.ISO_WK);
+            }
+            else if (bucket == 'M') {
+                grouped = groupBy(data, dt => dt.MM);
+            } else if (bucket == 'D') {
+                grouped = groupBy(data, dt => dt.DOW);
+            } 
+    
+            for (var [key, value] of grouped) {
+                var rt_tmp = [];
+                for (var j = 0; j < value.length; j++) {
+                    rt_tmp.push(value[j]['QTY']);
+                }
+                
+                var data_lower = arrMin(rt_tmp);
+                var data_Q1 = Q1(rt_tmp);
+                var data_median = Median(rt_tmp);
+                var data_mean = Math.round(arrAvg(rt_tmp) * 100) / 100;
+                var data_Q3 = Q3(rt_tmp);
+                var data_upper = arrMax(rt_tmp);
+    
+                if (bucket == 'Y') {
+                    categories.push(key);
+                    result_data.push([data_lower, data_Q1, data_median, data_mean, data_Q3, data_upper, rt_tmp]);
+                } else {
+                    categories[parseInt(key, 10)-1] = category_name[bucket][parseInt(key, 10)-1];
+                    result_data[parseInt(key, 10)-1] = [data_lower, data_Q1, data_median, data_mean, data_Q3, data_upper, rt_tmp];
+                }
+            }
+
+            $(chart.widget).kendoChart({
+                legend: {
+                    visible: false
+                },
+                title: {
+                    text: account_cd + ' - ' + item_cd,
+                    font: "bold 16px Arial,Helvetica,sans-serif"
+                },
+                theme: "blueopal",
+                series: [{
+                    type: "boxPlot",
+                    data: result_data,
+                    tooltip: {
+                        visible: true,
+                        format: "<table>" +
+                            "<tr><th colspan='2'>{6:d}</th></tr>" +
+                            "<tr><td>Lower:</td><td>{0:N}</td></tr>" +
+                            "<tr><td>Q1:</td><td>{1:N}</td></tr>" +
+                            "<tr><td>Median:</td><td>{2:N}</td></tr>" +
+                            "<tr><td>Mean:</td><td>{3:N}</td></tr>" +
+                            "<tr><td>Q3:</td><td>{4:N}</td></tr>" +
+                            "<tr><td>Upper:</td><td>{5:N}</td></tr>" +
+                            "</table>"
+                    }
+                }],
+                categoryAxis: {
+                    categories: categories,
+                    majorGridLines: {
+                        visible: false
+                    },
+                    labels: {
+                        rotation: "auto"
+                    }
+                }
+            });
+        }
+    
+        function rangeAreaChart(selectedRow, checkedRows) {
+            var data = cm.getComponent("DATA_02").getValue().SVC_SP_UI_BF_58_CHART_Q1;
+            var bucket = cm.getComponent('RST_CRT_01_02').getActualComponent()[0].id;
+            var chart = cm.getComponent("RST_CPT_01");
+            var grid_data = cm.getComponent("RST_CPT_03").getActualComponent().getDataProvider().getJsonRows();
+            var acct_leaf = grid_data[selectedRow]['ACCT_LEAF_YN'].replace(com.active+"-", "");
+            var item_leaf = grid_data[selectedRow]['ITEM_LEAF_YN'].replace(com.active+"-", "");
+            var step_size = 1;
+            if (bucket == 'W') {
+                step_size = 3;
+            }
+            var checkedLength = Object.keys(checkedRows).length; 
+            var trueCnt = Object.values(checkedRows).filter((v) => v).length;
+            
+            if (checkedLength == 0 | trueCnt == 0) {
+                var account_cd = grid_data[selectedRow]['ACCOUNT_CD'];
+                var item_cd = grid_data[selectedRow]['ITEM_CD'];
+                data = data.filter(function(row){
+                    return row.ITEM_CD == item_cd & row.ACCOUNT_CD == account_cd}).map(function(row){
+                        return row
+                    });
+    
+                var sum_rt = [];
+                //var avg_rt = [];
+                //var std_rt = [];
+                var categories = [];
+                var seriesList = [];
+                var grouped = '';
+                if (bucket == 'Y') {
+                    grouped = groupBy(data, dt => dt.YYYY);
+                } else if (bucket == 'Q') {
+                    grouped = groupBy(data, dt => dt.YYYYQTR)
+                } else if (bucket == 'W') {
+                    grouped = groupBy(data, dt => dt.WK52);
+                } else if (bucket == 'M') {
+                    grouped = groupBy(data, dt => dt.YYYYMM);
+                    
+                } else if (bucket == 'D') {
+                    grouped = groupBy(data, dt => dt.DOW);
+                }
+                for (var [key, value] of grouped) {
+                    var sum_qty = 0;
+                    var tmp_data = [];
+                    for (var j = 0; j < value.length; j++) {
+                        sum_qty += value[j]['QTY'];
+                        tmp_data.push(value[j]['QTY']);
+                    }
+                    sum_rt.push(sum_qty);
+                    //avg_rt.push(sum_qty / value.length);
+                    //std_rt.push(getSD(tmp_data));
+                    
+                    categories.push(key);
+                }
+
+                if (acct_leaf == 'Y' & item_leaf == 'Y') {
+                    var total_std = getSD(sum_rt);
+                    var total_avg = arrAvg(sum_rt);
+                    var sigma = [];
+                    var sum_avg_rt = [];
+                    
+                    for (var n = 1; n < 4; n++) {
+                        sigma = [];
+                        for (var i = 0; i < sum_rt.length; i++) {
+                            var lower_sigma = total_avg - total_std * n;
+                            var upper_sigma = total_avg + total_std * n;
+                            if (lower_sigma < 0) {lower_sigma = 0;}
+                            
+                            sigma.push([Math.round(lower_sigma * 100) / 100, Math.round(upper_sigma * 100) / 100]);
+                            if (n == 3) {sum_avg_rt.push(Math.round(total_avg * 100) / 100);}
+                        }
+                        seriesList.push({'type': 'rangeArea',
+                                         'data': sigma,
+                                         'name': n.toString() + '-sigma',
+                                         'tooltip': {
+                                             'visible':true,
+                                             'template': "+" + n.toString() + "-sigma : #= value.to# <br>" +
+                                                         "-" + n.toString() + "-sigma : #= value.from#"
+                                         }});
+                    }
+                    seriesList.push({'type': 'line',
+                                  'data': sum_avg_rt,
+                                  'name': gI18n.tc("AVG"),
+                                  'tooltip': {
+                                        'visible':true,
+                                        'template': "<table>" +
+                                                    "<tr><th colspan='2'>#= category #</th></tr>" +
+                                                    "<tr><td>#= series.name #:</td><td>#= value #</td></tr>" +
+                                                    "</table>"
+                                    }})
+                }
+
+                seriesList.push({'type': 'line',
+                                  'data': sum_rt,
+                                  'name': gI18n.tc("TOTAL_AMOUNT_QTY"),
+                                  'tooltip': {
+                                        'visible':true,
+                                        'template': "<table>" +
+                                                    "<tr><th colspan='2'>#= category #</th></tr>" +
+                                                    "<tr><td>#= series.name #:</td><td>#= value #</td></tr>" +
+                                                    "</table>"
+                                    }});
+
+                $(chart.widget).kendoChart({
+                    legend: {
+                        position: "right"
+                    },
+                    title: {
+                        text: account_cd + ' - ' + item_cd,
+                        font: "bold 16px Arial,Helvetica,sans-serif"
+                    },
+                    theme: "blueopal",
+                    series: seriesList,
+                    categoryAxis: {
+                        categories: categories,
+                        labels: {
+                            rotation: "45",
+                            step: step_size
+                        },
+                        visible: true
+                    }
+                });
+            } else {
+
+                var item_acct = [];
+                var unique_bucket = [];
+                var seriesList = [];
+                var checkedIndex = getKeyByValue(checkedRows, true);
+    
+                if (bucket == 'Y') {
+                    var buckets = data.map(function(row) {return row['YYYY']});
+                } else if ( bucket == 'Q') {
+                    var buckets = data.map(function(row) {return row['YYYYQTR']});
+                } else if (bucket == 'W') {
+                    var buckets = data.map(function(row) {return row['WK52']});
+                } else if (bucket == 'M') {
+                    var buckets = data.map(function(row) {return row['YYYYMM']});
+                } else if (bucket == 'D') {
+                    var buckets = data.map(function(row) {return row['DOW']});
+                }
+    
+                buckets.forEach((element) => {
+                    if (!unique_bucket.includes(element)) {
+                        unique_bucket.push(element);
+                    }
+                });
+
+                for (var i = 0; i < checkedIndex.length; i++) {
+                    var account_cd = grid_data[parseInt(checkedIndex[i], 10)]['ACCOUNT_CD'];
+                    var item_cd = grid_data[parseInt(checkedIndex[i], 10)]['ITEM_CD']
+                    item_acct.push(account_cd + '//' + item_cd);
+                }
+    
+                for (var i = 0; i < item_acct.length; i++ ) {
+                    var acct_cd = item_acct[i].split('//')[0];
+                    var item_cd = item_acct[i].split('//')[1];
+                    var rt = [];
+                    
+                    qty = data.filter(function(row){
+                        return row.ITEM_CD == item_cd & row.ACCOUNT_CD == acct_cd}).map(function(row) {
+                            return row;
+                        });
+                    var grouped = '';
+    
+                    if (bucket == 'Y') {
+                        grouped = groupBy(qty, dt => dt.YYYY);
+                    } else if (bucket == 'Q') {
+                        grouped = groupBy(qty, dt => dt.YYYYQTR);
+                    } else if (bucket == 'W') {
+                        grouped = groupBy(qty, dt => dt.WK52);
+                    } else if (bucket == 'M') {
+                        grouped = groupBy(qty, dt => dt.YYYYMM);
+                    } else if (bucket == 'D') {
+                        grouped = groupBy(qty, dt => dt.DOW);
+                    }
+                    
+                    for (var [key, value] of grouped) {
+                        var sum_qty = 0;
+                        for (var j = 0; j < value.length; j++) {
+                            sum_qty += value[j]['QTY'];
+                        }         
+                        rt[unique_bucket.indexOf(key)] = sum_qty;
+                    }
+                    seriesList.push({'data': rt, 
+                                     'name': item_acct[i]});
+    
+                }
+                $(chart.widget).kendoChart({
+                    legend: {
+                        position: "top"
+                    },
+                    theme: "blueopal",
+                    seriesDefaults: {
+                        type: "line",
+                        // tooltip: {
+                        //     visible:true,
+                        //     template: "<table>" +
+                        //                 "<tr><th colspan='2'>#= series.name #</th></tr>" +
+                        //                 "<tr><td>DATE:</td><td>#= category #</td></tr>" +
+                        //                 "<tr><td>QTY:</td><td>#= value #</td></tr>" +
+                        //                 "</table>"
+                        // }
+                    },
+                    series: seriesList,
+                    tooltip: {
+                        visible: true,
+                        shared: true
+                    },
+                    categoryAxis: {
+                        categories: unique_bucket,
+                        labels: {
+                            rotation: "45",
+                            step: step_size
+                        },
+                        visible: true
+                    }
+                });
+            }
+        }
+    });
+</script>
+    

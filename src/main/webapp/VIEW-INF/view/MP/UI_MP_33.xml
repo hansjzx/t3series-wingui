@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_MP_33" template="MP/UI_MP_33:MP/UI_MP_33_EXT:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:COMM/COMM_POP_SIM_ADJ_CNFM_PLAN:COMM/COMM_SRH_POP_VER:COMM/COMM_SRH_POP_ITEM:COMM/COMM_SRH_POP_ACCOUNT:COMM/COMM_SRH_POP_VER_CHK:MP/POP_UI_MP_33_01:MP/POP_UI_MP_33_02:MP/POP_UI_MP_33_03" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_VIEW_META:COMM_BTN_EXCEL:COMM_BTN_CNFM_PLAN:COMM_POP_SIM_ADJ_CNFM_PLAN:COMM_BTN_SIM_VER:COMM_SRH_VERSION:COMM_SRH_POP_VER:COMM_SRH_ITEM:COMM_SRH_POP_ITEM:COMM_SRH_ACCOUNT:COMM_SRH_POP_ACCOUNT:COMM_SRH_VERSION_CMP:COMM_SRH_POP_VER_CHK:COMM_SRH_VIEW_HORIZ:POP_UI_MP_33_01:POP_UI_MP_33_02:POP_UI_MP_33_03" version="2.0">
+    <publish parent="MENU_04_03" open="true" seq="290" />
+    <component id="TTL_CPT_03" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_01">
+                    <component-id>SRH_CPT_ITEM_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_02">
+                    <component-id>SRH_CPT_ITEM_NM_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_03">
+                    <component-id>SRH_CPT_ITEM_TP_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_04">
+                    <component-id>SRH_CPT_ACCOUNT_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_05">
+                    <component-id>SRH_CPT_ACCOUNT_NM_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_06">
+                    <component-id>SRH_CPT_CMP_CHECK_01</component-id>
+                    <operation-id>SET</operation-id>
+					<parameters>
+						<parameter id="SET" value="false" />
+					</parameters>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_07">
+                    <component-id>SRH_CPT_SIMUL_VER_ID_CMP_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_08">
+                    <component-id>SRH_CPT_SIMUL_VER_DESC_CMP_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_09">
+                    <component-id>SRH_CPT_PRSS_DESC_CMP_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_10">
+                    <component-id>SRH_CPT_BUCKET_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_11">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_CPT_BUCKET_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>BUCKET</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_BUCKET_04" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <select-index>0</select-index>
+            <value-id>UOM_CD</value-id>
+            <text-id>UOM_NM</text-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="LOAD">
+                <service-call id="SVC_COMM_SRH_BUCKET_LOAD">
+                    <service-id>SRV_COMM_SRH_BUCKET</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="SIMUL_VER_ID" reference-id="SRH_CPT_SIMUL_VER_ID_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DATA_DISP</init-value>
+            <tooltip>MEASURE_DISP_OPT</tooltip>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_04" type="RADIO">
+        <props>
+            <lang>true</lang>
+            <init-value>
+                <option value="N" text="ALL" text-position="right" selected="true" />
+                <option value="Y" text="OMIT" text-position="right" />
+            </init-value>
+        </props>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_01_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="RESULT_SPLIT" type="SPLIT">
+        <props>
+            <position>vertical</position>
+            <splits>
+                <split id="upper_result" collapsible="false" />
+                <split id="down_result" collapsed="false" collapsible="true" resizable="false" size="240" />
+            </splits>
+        </props>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <header-height>50</header-height>
+            <selection-mode>BLOCK</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>true</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <toolbar use="true">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+            </toolbar>
+            <columns>
+                <column id="ORD_ID" title="ORD_ID" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>1</init-group-order>
+                </column>
+                <column id="ACCOUNT_CD" title="ACCOUNT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>2</init-group-order>
+                </column>
+                <column id="ACCOUNT_NM" title="ACCOUNT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>3</init-group-order>
+                </column>
+                <column id="ATTR_01" title="ATTR_01" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>4</init-group-order>
+                </column>
+                <column id="ATTR_02" title="ATTR_02" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>5</init-group-order>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>6</init-group-order>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>7</init-group-order>
+                </column>
+                <column id="ITEM_TP_NM" title="ITEM_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>8</init-group-order>
+                </column>
+                <column id="VER_ORD_ID" title="VER_ORD_ID" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>9</init-group-order>
+                </column>
+                <column id="SIMUL_VER_ID" title="SIMUL_VER" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>10</init-group-order>
+                </column>
+                <column id="LOCAT_SEQ" title="LOCAT_SEQ" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>11</init-group-order>
+                </column>
+                <column id="LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>12</init-group-order>
+                </column>
+                <column id="CATEGORY" title="CATEGORY" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <lang>true</lang>
+                    <background>#FFeeeeee</background>
+                    <header-background>#FFdddddd</header-background>
+                    <fix>true</fix>
+                </column>
+                <column id="DAT2" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <background>#FFFFFFFF</background>
+                    <iteration>
+                        <prefix remove="true">DAT2_</prefix>
+                    </iteration>
+                    <format>###,###,###,###.###</format>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_POP_UI_MP_33_01_WINDOWS_OPEN_01">
+                    <component-id>POP_UI_MP_33_01_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <conditions>
+                        <condition id="COND_01_01">
+                            <on-column>DAT2</on-column>
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>DMND_QTY</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_33_01_RST_CPT_01_LOAD">
+                            <component-id>POP_UI_MP_33_01_RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="VERSION_ID" reference-id="RST_CPT_01:selections" extract-by="SIMUL_VER_ID" default-value="" />
+                                <parameter id="ACCOUNT_CD" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT_CD" default-value="" />
+                                <parameter id="ACCOUNT_NM" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT_NM" default-value="" />
+                                <parameter id="ATTR_01" reference-id="RST_CPT_01:selections" extract-by="ATTR_01" default-value="" />
+                                <parameter id="ATTR_02" reference-id="RST_CPT_01:selections" extract-by="ATTR_02" default-value="" />
+                                <parameter id="ITEM_CD" reference-id="RST_CPT_01:selections" extract-by="ITEM_CD" default-value="" />
+                                <parameter id="ITEM_NM" reference-id="RST_CPT_01:selections" extract-by="ITEM_NM" default-value="" />
+		                        <parameter id="CON_ACCOUNT_CD" reference-id="SRH_CPT_ACCOUNT_CD_04" />
+		                        <parameter id="CON_ACCOUNT_NM" reference-id="SRH_CPT_ACCOUNT_NM_04" />
+		                        <parameter id="CON_ITEM_CD" reference-id="SRH_CPT_ITEM_CD_04" />
+		                        <parameter id="CON_ITEM_NM" reference-id="SRH_CPT_ITEM_NM_04" />
+		                        <parameter id="FROM_DATE" reference-id="SRH_CPT_VIEW_START_04" />
+		                        <parameter id="END_DATE" reference-id="SRH_CPT_VIEW_END_04" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_33_02_WINDOWS_OPEN">
+                    <component-id>POP_UI_MP_33_02_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <conditions>
+                        <condition id="COND_01_02">
+                            <on-column>DAT2</on-column>
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>CH_ARRIVAL_PLAN</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_33_02_RST_CPT_01_LOAD">
+                            <component-id>POP_UI_MP_33_02_RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="VERSION_ID" reference-id="RST_CPT_01:selections" extract-by="SIMUL_VER_ID" default-value="" />
+                                <parameter id="ACCOUNT_CD" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT_CD" default-value="" />
+                                <parameter id="ACCOUNT_NM" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT_NM" default-value="" />
+                                <parameter id="ATTR_01" reference-id="RST_CPT_01:selections" extract-by="ATTR_01" default-value="" />
+                                <parameter id="ATTR_02" reference-id="RST_CPT_01:selections" extract-by="ATTR_02" default-value="" />
+                                <parameter id="ITEM_CD" reference-id="RST_CPT_01:selections" extract-by="ITEM_CD" default-value="" />
+                                <parameter id="ITEM_NM" reference-id="RST_CPT_01:selections" extract-by="ITEM_NM" default-value="" />
+                                <parameter id="LOCAT_NM" reference-id="RST_CPT_01:selections" extract-by="LOCAT_CD" default-value="" />
+                                <parameter id="ARRIVAL_YN" value="Y" />
+                                <parameter id="OTHERS_YN" value="N" />
+                                <parameter id="OTHERS_ACC_YN" value="N" />
+		                        <parameter id="CON_ACCOUNT_CD" reference-id="SRH_CPT_ACCOUNT_CD_04" />
+		                        <parameter id="CON_ACCOUNT_NM" reference-id="SRH_CPT_ACCOUNT_NM_04" />
+		                        <parameter id="CON_ITEM_CD" reference-id="SRH_CPT_ITEM_CD_04" />
+		                        <parameter id="CON_ITEM_NM" reference-id="SRH_CPT_ITEM_NM_04" />
+		                        <parameter id="FROM_DATE" reference-id="SRH_CPT_VIEW_START_04" />
+		                        <parameter id="END_DATE" reference-id="SRH_CPT_VIEW_END_04" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_33_02_WINDOWS_OPEN_02">
+                    <component-id>POP_UI_MP_33_02_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <conditions>
+                        <condition id="COND_01_03">
+                            <on-column>DAT2</on-column>
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>CH_ARRIVAL_OTHERS</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_33_02_RST_CPT_01_LOAD_02">
+                            <component-id>POP_UI_MP_33_02_RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="VERSION_ID" reference-id="RST_CPT_01:selections" extract-by="SIMUL_VER_ID" default-value="" />
+                                <parameter id="ACCOUNT_CD" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT_CD" default-value="" />
+                                <parameter id="ACCOUNT_NM" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT_NM" default-value="" />
+                                <parameter id="ATTR_01" reference-id="RST_CPT_01:selections" extract-by="ATTR_01" default-value="" />
+                                <parameter id="ATTR_02" reference-id="RST_CPT_01:selections" extract-by="ATTR_02" default-value="" />
+                                <parameter id="ITEM_CD" reference-id="RST_CPT_01:selections" extract-by="ITEM_CD" default-value="" />
+                                <parameter id="ITEM_NM" reference-id="RST_CPT_01:selections" extract-by="ITEM_NM" default-value="" />
+                                <parameter id="LOCAT_NM" reference-id="RST_CPT_01:selections" extract-by="LOCAT_CD" default-value="" />
+                                <parameter id="ARRIVAL_YN" value="Y" />
+                                <parameter id="OTHERS_YN" value="Y" />
+                                <parameter id="OTHERS_ACC_YN" value="N" />
+		                        <parameter id="CON_ACCOUNT_CD" reference-id="SRH_CPT_ACCOUNT_CD_04" />
+		                        <parameter id="CON_ACCOUNT_NM" reference-id="SRH_CPT_ACCOUNT_NM_04" />
+		                        <parameter id="CON_ITEM_CD" reference-id="SRH_CPT_ITEM_CD_04" />
+		                        <parameter id="CON_ITEM_NM" reference-id="SRH_CPT_ITEM_NM_04" />
+		                        <parameter id="FROM_DATE" reference-id="SRH_CPT_VIEW_START_04" />
+		                        <parameter id="END_DATE" reference-id="SRH_CPT_VIEW_END_04" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_33_02_WINDOWS_OPEN_03">
+                    <component-id>POP_UI_MP_33_02_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <conditions>
+                        <condition id="COND_01_04">
+                            <on-column>DAT2</on-column>
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>FACTORY_PLAN</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_33_02_RST_CPT_01_LOAD_03">
+                            <component-id>POP_UI_MP_33_02_RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="VERSION_ID" reference-id="RST_CPT_01:selections" extract-by="SIMUL_VER_ID" default-value="" />
+                                <parameter id="ACCOUNT_CD" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT_CD" default-value="" />
+                                <parameter id="ACCOUNT_NM" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT_NM" default-value="" />
+                                <parameter id="ATTR_01" reference-id="RST_CPT_01:selections" extract-by="ATTR_01" default-value="" />
+                                <parameter id="ATTR_02" reference-id="RST_CPT_01:selections" extract-by="ATTR_02" default-value="" />
+                                <parameter id="ITEM_CD" reference-id="RST_CPT_01:selections" extract-by="ITEM_CD" default-value="" />
+                                <parameter id="ITEM_NM" reference-id="RST_CPT_01:selections" extract-by="ITEM_NM" default-value="" />
+                                <parameter id="LOCAT_NM" reference-id="RST_CPT_01:selections" extract-by="LOCAT_CD" default-value="" />
+                                <parameter id="ARRIVAL_YN" value="N" />
+                                <parameter id="OTHERS_YN" value="N" />
+                                <parameter id="OTHERS_ACC_YN" value="N" />
+		                        <parameter id="CON_ACCOUNT_CD" reference-id="SRH_CPT_ACCOUNT_CD_04" />
+		                        <parameter id="CON_ACCOUNT_NM" reference-id="SRH_CPT_ACCOUNT_NM_04" />
+		                        <parameter id="CON_ITEM_CD" reference-id="SRH_CPT_ITEM_CD_04" />
+		                        <parameter id="CON_ITEM_NM" reference-id="SRH_CPT_ITEM_NM_04" />
+		                        <parameter id="FROM_DATE" reference-id="SRH_CPT_VIEW_START_04" />
+		                        <parameter id="END_DATE" reference-id="SRH_CPT_VIEW_END_04" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_33_02_WINDOWS_OPEN_04">
+                    <component-id>POP_UI_MP_33_02_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <conditions>
+                        <condition id="COND_01_05">
+                            <on-column>DAT2</on-column>
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>FACTORY_OTHERS</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_33_02_RST_CPT_01_LOAD_04">
+                            <component-id>POP_UI_MP_33_02_RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="VERSION_ID" reference-id="RST_CPT_01:selections" extract-by="SIMUL_VER_ID" default-value="" />
+                                <parameter id="ACCOUNT_CD" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT_CD" default-value="" />
+                                <parameter id="ACCOUNT_NM" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT_NM" default-value="" />
+                                <parameter id="ATTR_01" reference-id="RST_CPT_01:selections" extract-by="ATTR_01" default-value="" />
+                                <parameter id="ATTR_02" reference-id="RST_CPT_01:selections" extract-by="ATTR_02" default-value="" />
+                                <parameter id="ITEM_CD" reference-id="RST_CPT_01:selections" extract-by="ITEM_CD" default-value="" />
+                                <parameter id="ITEM_NM" reference-id="RST_CPT_01:selections" extract-by="ITEM_NM" default-value="" />
+                                <parameter id="LOCAT_NM" reference-id="RST_CPT_01:selections" extract-by="LOCAT_CD" default-value="" />
+                                <parameter id="ARRIVAL_YN" value="N" />
+                                <parameter id="OTHERS_YN" value="Y" />
+                                <parameter id="OTHERS_ACC_YN" value="Y" />
+		                        <parameter id="CON_ACCOUNT_CD" reference-id="SRH_CPT_ACCOUNT_CD_04" />
+		                        <parameter id="CON_ACCOUNT_NM" reference-id="SRH_CPT_ACCOUNT_NM_04" />
+		                        <parameter id="CON_ITEM_CD" reference-id="SRH_CPT_ITEM_CD_04" />
+		                        <parameter id="CON_ITEM_NM" reference-id="SRH_CPT_ITEM_NM_04" />
+		                        <parameter id="FROM_DATE" reference-id="SRH_CPT_VIEW_START_04" />
+		                        <parameter id="END_DATE" reference-id="SRH_CPT_VIEW_END_04" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_33_02_WINDOWS_OPEN_05">
+                    <component-id>POP_UI_MP_33_02_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <conditions>
+                        <condition id="COND_01_06">
+                            <on-column>DAT2</on-column>
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>GR_ARRIVAL_PLAN</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_33_02_RST_CPT_01_LOAD_05">
+                            <component-id>POP_UI_MP_33_02_RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="VERSION_ID" reference-id="RST_CPT_01:selections" extract-by="SIMUL_VER_ID" default-value="" />
+                                <parameter id="ACCOUNT_CD" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT_CD" default-value="" />
+                                <parameter id="ACCOUNT_NM" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT_NM" default-value="" />
+                                <parameter id="ATTR_01" reference-id="RST_CPT_01:selections" extract-by="ATTR_01" default-value="" />
+                                <parameter id="ATTR_02" reference-id="RST_CPT_01:selections" extract-by="ATTR_02" default-value="" />
+                                <parameter id="ITEM_CD" reference-id="RST_CPT_01:selections" extract-by="ITEM_CD" default-value="" />
+                                <parameter id="ITEM_NM" reference-id="RST_CPT_01:selections" extract-by="ITEM_NM" default-value="" />
+                                <parameter id="LOCAT_NM" reference-id="RST_CPT_01:selections" extract-by="LOCAT_CD" default-value="" />
+                                <parameter id="ARRIVAL_YN" value="Y" />
+                                <parameter id="OTHERS_YN" value="N" />
+                                <parameter id="OTHERS_ACC_YN" value="N" />
+                                <parameter id="GR_YN" value="Y" />
+		                        <parameter id="CON_ACCOUNT_CD" reference-id="SRH_CPT_ACCOUNT_CD_04" />
+		                        <parameter id="CON_ACCOUNT_NM" reference-id="SRH_CPT_ACCOUNT_NM_04" />
+		                        <parameter id="CON_ITEM_CD" reference-id="SRH_CPT_ITEM_CD_04" />
+		                        <parameter id="CON_ITEM_NM" reference-id="SRH_CPT_ITEM_NM_04" />
+		                        <parameter id="FROM_DATE" reference-id="SRH_CPT_VIEW_START_04" />
+		                        <parameter id="END_DATE" reference-id="SRH_CPT_VIEW_END_04" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_33_03_WINDOWS_OPEN">
+                    <component-id>POP_UI_MP_33_03_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <conditions>
+                        <condition id="COND_01_07">
+                            <on-column>DAT2</on-column>
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>PRODUCT_PLAN</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_33_03_RST_CPT_01_LOAD">
+                            <component-id>POP_UI_MP_33_03_RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="VERSION_ID" reference-id="RST_CPT_01:selections" extract-by="SIMUL_VER_ID" default-value="" />
+                                <parameter id="ATTR_01" reference-id="RST_CPT_01:selections" extract-by="ATTR_01" default-value="" />
+                                <parameter id="ATTR_02" reference-id="RST_CPT_01:selections" extract-by="ATTR_02" default-value="" />
+                                <parameter id="ITEM_CD" reference-id="RST_CPT_01:selections" extract-by="ITEM_CD" default-value="" />
+                                <parameter id="ITEM_NM" reference-id="RST_CPT_01:selections" extract-by="ITEM_NM" default-value="" />
+                                <parameter id="LOCAT_NM" reference-id="RST_CPT_01:selections" extract-by="LOCAT_CD" default-value="" />
+		                        <parameter id="CON_ITEM_CD" reference-id="SRH_CPT_ITEM_CD_04" />
+		                        <parameter id="CON_ITEM_NM" reference-id="SRH_CPT_ITEM_NM_04" />
+		                        <parameter id="FROM_DATE" reference-id="SRH_CPT_VIEW_START_04" />
+		                        <parameter id="END_DATE" reference-id="SRH_CPT_VIEW_END_04" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_MP_33_GetMPPsiAnalysis">
+                    <service-id>GetMPPsiAnalysis</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="VERSION_ID" reference-id="SRH_CPT_SIMUL_VER_ID_04" default-value="" />
+                        <parameter id="VERSION_CMP_CHK" reference-id="SRH_CPT_CMP_CHECK_01" default-value="" />
+                        <parameter id="CMP_VERSION_ID" reference-id="SRH_CPT_SIMUL_VER_ID_CMP_04" default-value="" />
+                        <parameter id="ACCOUNT_CD" reference-id="SRH_CPT_ACCOUNT_CD_04" default-value="" />
+                        <parameter id="ACCOUNT_NM" reference-id="SRH_CPT_ACCOUNT_NM_04" default-value="" />
+                        <parameter id="ITEM_CD" reference-id="SRH_CPT_ITEM_CD_04" default-value="" />
+                        <parameter id="ITEM_NM" reference-id="SRH_CPT_ITEM_NM_04" default-value="" />
+                        <parameter id="ITEM_TP_NM" reference-id="SRH_CPT_ITEM_TP_04" default-value="" />
+                        <parameter id="FROM_DATE" reference-id="SRH_CPT_VIEW_START_04" default-value="" />
+                        <parameter id="END_DATE" reference-id="SRH_CPT_VIEW_END_04" default-value="" />
+                        <parameter id="BUCKET_UOM" reference-id="SRH_CPT_BUCKET_04" default-value="" />
+                        <parameter id="OMIT_ROW" reference-id="SRH_CPT_T1_01_04" default-value="N" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET" />
+			<operation id="EXPORT">
+				<export-lookup>true</export-lookup>
+				<relieve-merge>true</relieve-merge>
+			</operation>
+        </operations>
+    </component>
+</view>

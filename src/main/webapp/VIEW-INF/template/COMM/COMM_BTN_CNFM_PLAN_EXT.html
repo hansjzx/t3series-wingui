@@ -1,0 +1,29 @@
+<script>
+	content.getCreateComponentCompleteFlag().done(function () {
+
+		cm.getComponent("BTN_CONFIRM_PLAN").doBeforeOperationCall = function(actionComponentId, targetComponentId, targetOperationId, operationCallId){
+			if (operationCallId === "OPC_RST_CPT_01_CONFIRM_PLAN_02") {
+				var checkedItem = cm.getComponent("RST_CPT_01").getActualComponent().getCheckedItems();
+
+                if (checkedItem.length === 0) {
+                    showDialog(gI18n.tc("WARNING"), gI18n.tc("MSG_5114"), DIALOG_TYPE.ALERT);
+                    return false;
+                }
+
+                if (checkedItem.length > 0) {
+                    var index = checkedItem[0];
+                    var confrmYn = cm.getComponent("RST_CPT_01").getActualComponent().getValues(index).CONFRM_YN;
+
+                    if (confrmYn) {
+                    	showDialog(gI18n.tc("WARNING"), gI18n.tc("MSG_5115"), DIALOG_TYPE.ALERT);
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+
+                return false;
+			}
+		};
+	});
+</script>

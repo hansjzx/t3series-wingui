@@ -1,0 +1,195 @@
+<meta charset="utf-8" />
+<div id="POP_UI_MP_27_20_WINDOWS" class="component_ui window_component">
+	<div class="popup_area">
+		<div id="POP_UI_MP_27_20_DATA_01" class="component_ui"></div>
+		<div id="POP_UI_MP_27_20_START_DATE" class="component_ui"></div>
+		<div id="POP_UI_MP_27_20_TIME_BUCKT" class="component_ui"></div>
+		<div class="centerWrap">
+			<div id="POP_UI_MP_27_20_RST_CPT_01" class="component_ui"></div>
+		</div>
+	</div>
+</div>
+<div id="POP_UI_MP_27_21_WINDOWS" class="component_ui window_component">
+	<div id="POP_UI_MP_27_21_GRID" class="component_ui"></div>
+</div>
+<style>
+	#POP_UI_MP_27_20_RST_CPT_01{margin-top:10px}
+	#POP_UI_MP_27_20_RST_CPT_01 > div {overflow:visible !important;}
+</style>
+<script>
+content.getCreateComponentCompleteFlag().done(function () {
+    var pop_grid = cm.getComponent('POP_UI_MP_27_20_RST_CPT_01');
+    var gridWrap;
+    
+    pop_grid.onRGridDataFillReady = function (viewId, componentId, gridView, resultData) {
+        gridWrap = new wingui.util.grid.GridWrap(gridView);
+        gridWrap.init();
+        
+        return resultData;
+    };
+    
+    pop_grid.doAfterSetData = function (serviceCallId, data, resultData){
+    	if(data.length == 0) return;
+    	var gridView = pop_grid.getActualComponent();
+		
+   		setFixedShppCellStyle(gridView);
+   	};
+});
+
+function setAddMonth(date, month){
+	var calendar_val = wingui.util.date.calendar.newDate(date);
+	var getYear = calendar_val.getFullYear();
+	var getMonth = calendar_val.getMonth();
+	var getDay = calendar_val.getDate();
+	
+	var addMonth = getMonth + month;
+	
+	if (addMonth > 12){
+		getYear = getYear + 1;
+		addMonth = addMonth - 12;
+	}
+	
+	calendar_val.setFullYear(getYear);
+	calendar_val.setMonth(addMonth);
+	calendar_val.setDate(getDay);
+	
+	return calendar_val;
+}
+
+function setAddYear(date, year){
+	var calendar_val = wingui.util.date.calendar.newDate(date);
+	var getYear = calendar_val.getFullYear();
+	var getMonth = calendar_val.getMonth();
+	var getDay = calendar_val.getDate();
+	
+	var addYear = getYear + year;
+	
+	calendar_val.setFullYear(addYear);
+	calendar_val.setMonth(getMonth);
+	calendar_val.setDate(getDay);
+	
+	return calendar_val;
+}
+
+function setFixedShppCellStyle(gridView){
+	gridView.addCellStyle('style03', {
+		'foreground': '#ff000000',
+        'background': '#ffffb6c1',
+        'editable' : false
+	}); // 전체
+	
+	gridView.addCellStyle("style04", {
+		'background' : '#FFFFFFD2',
+		'editable' : false
+	});
+	
+	gridView.addCellStyle("style05", {
+		'background' : '#FFFFFFD2',
+		'editable' : true
+	}); // 보정
+	gridView.addCellStyle("style06", {
+		'foreground': '#ff000000',
+        'background': '#ffffb6c1',
+        'editable' : true
+	}); // 보정
+	
+	
+	var dataProvider = gridView.getDataProvider();
+	var isAdjustPlan = cm.getComponent("DATA_01").getValue("SVC_GET_PLAN_INFO")[0].IS_ADJT;//보정 여부
+	var locationCode = cm.getComponent("POP_UI_MP_27_20_DATA_01").getValue("LOCAT_CD");
+	var roll_shpp_value = cm.getComponent("DATA_01").getValue("SVC_GET_FIXED_HORIZON_DATA").filter(function(n){
+		return n["LOCAT_CD"] == locationCode
+		})[0]["ROLL_FIXED_SHPP"];//롤링구간
+	var adjt_shpp_value = cm.getComponent("DATA_01").getValue("SVC_GET_FIXED_HORIZON_DATA").filter(function(n){
+		return n["LOCAT_CD"] == locationCode
+		})[0]["ADJT_FIXED_SHPP"];//보정구간
+		
+	if (isAdjustPlan == 'N'){
+		adjt_shpp_value = 0;
+	}
+		
+	var planStartDate = cm.getComponent("POP_UI_MP_27_20_START_DATE").getValue();
+	var timeBucket = cm.getComponent("POP_UI_MP_27_20_TIME_BUCKT").getValue();
+	var toDate = wingui.util.date.calendar.toDate(planStartDate);
+	
+	var targetRollingDate = [];//비활성화 대상 날짜 모음
+	var targetAdjustDate = [];
+	
+	for (var j = 0 ; j < roll_shpp_value ; j ++){
+		if (timeBucket == "DAY"){
+			var addDay = wingui.util.date.calendar.addDate(toDate, j);
+			targetRollingDate.push(addDay);
+		} else if (timeBucket == "WEEK"){
+			var addWeek = wingui.util.date.calendar.addDate(toDate, 7*j);
+			targetRollingDate.push(addWeek);
+		} else if (timeBucket == "MONTH"){
+			var addMonth = setAddMonth(toDate, j);
+			targetRollingDate.push(addMonth);
+		} else if (timeBucket == "YEAR"){
+			var addYear = setAddYear(toDate, j);
+			targetRollingDate.push(addYear);
+		} else {
+			continue;
+		}
+	}
+	
+	if ( targetRollingDate.length != 0 ){
+		toDate = targetRollingDate[targetRollingDate.length - 1];
+	}
+	
+	for (var m = 1 ; m <= adjt_shpp_value ; m ++){
+		if (timeBucket == "DAY"){
+			var addDay = wingui.util.date.calendar.addDate(toDate, m);
+			targetAdjustDate.push(addDay);
+		} else if (timeBucket == "WEEK"){
+			var addWeek = wingui.util.date.calendar.addDate(toDate, 7*m);
+			targetAdjustDate.push(addWeek);
+		} else if (timeBucket == "MONTH"){
+			var addMonth = setAddMonth(toDate, m);
+			targetAdjustDate.push(addMonth);
+		} else if (timeBucket == "YEAR"){
+			var addYear = setAddYear(toDate, m);
+			targetAdjustDate.push(addYear);
+		} else {
+			continue;
+		}
+	}
+	
+	var rolling_rows = [];
+	var adjust_rows = [];
+	
+	for (var i = 0 , n = dataProvider.getRowCount() ; i < n ; i ++){
+		var date = dataProvider.getFieldValues("DELIVY_PREDICT_DTTM")[i];
+		var changedDate = wingui.util.date.toDateString(date);
+		for (var k = 0 ; k < targetRollingDate.length ; k ++){
+			var targetDate_val = wingui.util.date.toDateString(targetRollingDate[k]);
+			if (changedDate.includes(targetDate_val)){
+				rolling_rows.push(i);
+			}
+		}
+		for (var p = 0 ; p < targetAdjustDate.length ; p ++){
+			var targetDate_val = wingui.util.date.toDateString(targetAdjustDate[p]);
+			if (changedDate.includes(targetDate_val)){
+				adjust_rows.push(i);
+			}
+		}
+	}
+	
+	var fieldIndex = [];
+	var vehicle = dataProvider.getFieldIndex("VEHICL_TP_ID");
+	var transpQty = dataProvider.getFieldIndex("TRANSP_QTY");
+	var shppPrdtDate = dataProvider.getFieldIndex("SHIPPING_PREDICT_DTTM");
+	fieldIndex.push(vehicle);
+	fieldIndex.push(transpQty);
+	fieldIndex.push(shppPrdtDate);
+	
+	var currentViewId = wingui.util.view.getCurrentViewId();
+	if (currentViewId != 'UI_MP_28'){
+		gridView.setCellStyles(rolling_rows, fieldIndex, "style03");
+		gridView.setCellStyles(adjust_rows, fieldIndex, "style04");
+	} else {
+		gridView.setCellStyles(rolling_rows, fieldIndex, "style06");
+		gridView.setCellStyles(adjust_rows, fieldIndex, "style05");
+	}
+}
+</script>

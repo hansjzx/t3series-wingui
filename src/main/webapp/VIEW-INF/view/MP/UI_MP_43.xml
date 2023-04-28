@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_MP_43" template="CM/UI_CM_16:COMM/COMM_PERSONALIZATION:COMM/COMM_HELP" copyfrom="UI_CM_16:COMM_PREFERENCE:COMM_HELP:COMM_VIEW_META:POP_UI_CM_16_01:POP_UI_CM_16_02:POP_UI_CM_16_03:POP_UI_CM_16_04" version="2.0">
+    <publish parent="MENU_04_02" open="true" seq="40" />
+</view>

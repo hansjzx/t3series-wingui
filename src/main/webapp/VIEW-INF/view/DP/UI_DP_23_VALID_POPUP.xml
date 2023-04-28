@@ -1,0 +1,993 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_DP_23_VALID_POPUP" version="2.0">
+    <component id="UI_DP_23_VALID_WINDOWS" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>VALID_POP</title>
+            <width>900</width>
+            <height>665</height>
+            <visible>false</visible>
+            <modal>false</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_VALID_RST_CPT_01" type="R_GRID">
+        <props>
+            <height>210</height>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <cell-attributes>
+                <cell-attribute id="CA_01">
+                    <conditions>
+                        <condition id="con_01" group="AND">
+                            <column>CNT</column>
+                            <operator>greater</operator>
+                            <value>0</value>
+                        </condition>
+                        <condition id="con_02" group="AND">
+                            <column>CNT</column>
+                            <operator>notEqual</operator>
+                            <value>DP</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="apply_01">
+                            <column>CNT</column>
+                            <attrs>
+                                <foreground>#ffff3333</foreground>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+            </cell-attributes>
+            <toolbar use="false">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_DELETE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="notice" />
+                                <parameter id="msg" value="MSG_0002" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                    <complete>
+                        <operation-call id="OPC_DELETE_SRH_MSG">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </complete>
+                </toolbar-button>
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="notice" />
+                                <parameter id="msg" value="MSG_0001" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                    <complete>
+                        <operation-call id="OPC_SAVE_SRH_MSG">
+                            <component-id>POP_VALID_RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </complete>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="CHECK_CD" title="CHECK_CD" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="CHECK_DESC" title="CHECK_DESC" type="string">
+                    <width>310</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <text-alignment>left</text-alignment>
+                </column>
+                <column id="CNT" title="CNT" type="string">
+                    <width>70</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <background>#FFFFFFFF</background>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-click">
+                <operation-call id="OPC_ITEM_CD_P_LEVEL_ACTIVATE_01">
+                    <component-id>SRH_CPT_CONTAINER_01</component-id>
+                    <operation-id>ACTIVATE</operation-id>
+                    <parameters>
+                        <parameter id="ACTIVATE" value="con_01" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_01">
+                            <column>CHECK_CD</column>
+                            <operator>equal</operator>
+                            <value>ITEM_CD_P_LEVEL</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_VALID_GRID_LOAD_01">
+                            <component-id>POPUP_VALID_RST_CPT_T1_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_ITEM_CD_P_LEVEL_ACTIVATE_02">
+                    <component-id>SRH_CPT_CONTAINER_01</component-id>
+                    <operation-id>ACTIVATE</operation-id>
+                    <parameters>
+                        <parameter id="ACTIVATE" value="con_02" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_01">
+                            <column>CHECK_CD</column>
+                            <operator>equal</operator>
+                            <value>ITEM_LV_CD_P_LEVEL</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_VALID_GRID_LOAD_02">
+                            <component-id>POPUP_VALID_RST_CPT_T2_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_ITEM_CD_P_LEVEL_ACTIVATE_03">
+                    <component-id>SRH_CPT_CONTAINER_01</component-id>
+                    <operation-id>ACTIVATE</operation-id>
+                    <parameters>
+                        <parameter id="ACTIVATE" value="con_03" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_01">
+                            <column>CHECK_CD</column>
+                            <operator>equal</operator>
+                            <value>ACCOUNT_CD_P_LEVEL</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_VALID_GRID_LOAD_03">
+                            <component-id>POPUP_VALID_RST_CPT_T3_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_ITEM_CD_P_LEVEL_ACTIVATE_04">
+                    <component-id>SRH_CPT_CONTAINER_01</component-id>
+                    <operation-id>ACTIVATE</operation-id>
+                    <parameters>
+                        <parameter id="ACTIVATE" value="con_04" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_01" group="OR_01">
+                            <column>CHECK_CD</column>
+                            <operator>equal</operator>
+                            <value>SALES_LV_CD_P_LEVEL</value>
+                        </condition>
+                        <condition id="CON_02" group="OR_02">
+                            <column>CHECK_CD</column>
+                            <operator>equal</operator>
+                            <value>U_AUTHORITY</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_VALID_GRID_LOAD_04">
+                            <component-id>POPUP_VALID_RST_CPT_T4_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <conditions>
+                                <condition id="con_03">
+                                    <column>CHECK_CD</column>
+                                    <operator>equal</operator>
+                                    <value>SALES_LV_CD_P_LEVEL</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_VALID_GRID_LOAD_04_02">
+                            <component-id>POPUP_VALID_RST_CPT_T4_01</component-id>
+                            <operation-id>LOAD_02</operation-id>
+                            <conditions>
+                                <condition id="con_04">
+                                    <column>CHECK_CD</column>
+                                    <operator>equal</operator>
+                                    <value>U_AUTHORITY</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_ITEM_CD_P_LEVEL_ACTIVATE_05">
+                    <component-id>SRH_CPT_CONTAINER_01</component-id>
+                    <operation-id>ACTIVATE</operation-id>
+                    <parameters>
+                        <parameter id="ACTIVATE" value="con_05" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_01" group="OR_01">
+                            <column>CHECK_CD</column>
+                            <operator>equal</operator>
+                            <value>U_I_A_ITEM_CD</value>
+                        </condition>
+                        <condition id="CON_02" group="OR_02">
+                            <column>CHECK_CD</column>
+                            <operator>equal</operator>
+                            <value>U_I_ITEM_CD</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_VALID_GRID_LOAD_05">
+                            <component-id>POPUP_VALID_RST_CPT_T5_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <conditions>
+                                <condition id="CON_03">
+                                    <column>CHECK_CD</column>
+                                    <operator>equal</operator>
+                                    <value>U_I_A_ITEM_CD</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_VALID_GRID_LOAD_05_02">
+                            <component-id>POPUP_VALID_RST_CPT_T5_01</component-id>
+                            <operation-id>LOAD_02</operation-id>
+                            <conditions>
+                                <condition id="CON_04">
+                                    <column>CHECK_CD</column>
+                                    <operator>equal</operator>
+                                    <value>U_I_ITEM_CD</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_ITEM_CD_P_LEVEL_ACTIVATE_06">
+                    <component-id>SRH_CPT_CONTAINER_01</component-id>
+                    <operation-id>ACTIVATE</operation-id>
+                    <parameters>
+                        <parameter id="ACTIVATE" value="con_06" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_01" group="OR_01">
+                            <column>CHECK_CD</column>
+                            <operator>equal</operator>
+                            <value>U_I_A_ACCOUNT_CD</value>
+                        </condition>
+                        <condition id="CON_02" group="OR_02">
+                            <column>CHECK_CD</column>
+                            <operator>equal</operator>
+                            <value>U_A_ACCOUNT_CD</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_VALID_GRID_LOAD_06">
+                            <component-id>POPUP_VALID_RST_CPT_T6_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <conditions>
+                                <condition id="CON_03">
+                                    <column>CHECK_CD</column>
+                                    <operator>equal</operator>
+                                    <value>U_I_A_ACCOUNT_CD</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_VALID_GRID_LOAD_06_02">
+                            <component-id>POPUP_VALID_RST_CPT_T6_01</component-id>
+                            <operation-id>LOAD_02</operation-id>
+                            <conditions>
+                                <condition id="CON_04">
+                                    <column>CHECK_CD</column>
+                                    <operator>equal</operator>
+                                    <value>U_A_ACCOUNT_CD</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_ITEM_CD_P_LEVEL_ACTIVATE_07">
+                    <component-id>SRH_CPT_CONTAINER_01</component-id>
+                    <operation-id>ACTIVATE</operation-id>
+                    <parameters>
+                        <parameter id="ACTIVATE" value="con_07" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_01">
+                            <column>CHECK_CD</column>
+                            <operator>equal</operator>
+                            <value>U_ITEM_LV_CD</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_VALID_GRID_LOAD_07">
+                            <component-id>POPUP_VALID_RST_CPT_T7_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_ITEM_CD_P_LEVEL_ACTIVATE_08">
+                    <component-id>SRH_CPT_CONTAINER_01</component-id>
+                    <operation-id>ACTIVATE</operation-id>
+                    <parameters>
+                        <parameter id="ACTIVATE" value="con_08" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_01">
+                            <column>CHECK_CD</column>
+                            <operator>equal</operator>
+                            <value>U_A_SALES_LV_CD</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_VALID_GRID_LOAD_08">
+                            <component-id>POPUP_VALID_RST_CPT_T8_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_ITEM_CD_P_LEVEL_ACTIVATE_09">
+                    <component-id>SRH_CPT_CONTAINER_01</component-id>
+                    <operation-id>ACTIVATE</operation-id>
+                    <parameters>
+                        <parameter id="ACTIVATE" value="con_09" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_01" group="OR_01">
+                            <column>CHECK_CD</column>
+                            <operator>equal</operator>
+                            <value>U_M_A_ERROR</value>
+                        </condition>
+                        <condition id="CON_02" group="OR_02">
+                            <column>CHECK_CD</column>
+                            <operator>equal</operator>
+                            <value>U_M_I_ERROR</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_VALID_GRID_LOAD_09">
+                            <component-id>POPUP_VALID_RST_CPT_T9_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <conditions>
+                                <condition id="CON_03">
+                                    <column>CHECK_CD</column>
+                                    <operator>equal</operator>
+                                    <value>U_M_A_ERROR</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_VALID_GRID_LOAD_09_02">
+                            <component-id>POPUP_VALID_RST_CPT_T9_01</component-id>
+                            <operation-id>LOAD_02</operation-id>
+                            <conditions>
+                                <condition id="CON_04">
+                                    <column>CHECK_CD</column>
+                                    <operator>equal</operator>
+                                    <value>U_M_I_ERROR</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_ITEM_CD_P_LEVEL_ACTIVATE_10">
+                    <component-id>SRH_CPT_CONTAINER_01</component-id>
+                    <operation-id>ACTIVATE</operation-id>
+                    <parameters>
+                        <parameter id="ACTIVATE" value="con_10" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_01">
+                            <column>CHECK_CD</column>
+                            <operator>equal</operator>
+                            <value>U_AUTH_M_ERROR</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_VALID_GRID_LOAD_10">
+                            <component-id>POPUP_VALID_RST_CPT_T10_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="REFRESH">
+                <service-call id="SVC_SP_UI_DP_35_VALID_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_35_VALID_Q1</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_35_VALID_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_35_VALID_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_35_VALID_Q1_01" value="" />
+                        <parameter id="SP_UI_DP_35_VALID_Q1_01" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_CONTAINER_01" type="CONTAINER">
+        <props>
+            <height>225</height>
+            <group-box>
+                <border-width>0</border-width>
+            </group-box>
+            <containers>
+                <container id="con_01" expand="true" />
+                <container id="con_02" />
+                <container id="con_03" />
+                <container id="con_04" />
+                <container id="con_05" />
+                <container id="con_06" />
+                <container id="con_07" />
+                <container id="con_08" />
+                <container id="con_09" />
+                <container id="con_10" />
+            </containers>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="POPUP_VALID_RST_CPT_T1_01" type="R_GRID">
+        <props>
+            <height>330</height>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_35_Q2_ITEM_CD_P_LV">
+                    <service-id>SRV_GET_SP_UI_DP_35_Q2_ITEM_CD_P_LV</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POPUP_VALID_RST_CPT_T2_01" type="R_GRID">
+        <props>
+            <height>330</height>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_LV_CD" title="ITEM_LV_CD" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_LV_NM" title="ITEM_LV_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_35_Q3_ITEM_LV_CD_P_LV">
+                    <service-id>SRV_GET_SP_UI_DP_35_Q3_ITEM_LV_CD_P_LV</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POPUP_VALID_RST_CPT_T3_01" type="R_GRID">
+        <props>
+            <height>330</height>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ACCOUNT_CD" title="ACCOUNT_CD" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ACCOUNT_NM" title="ACCOUNT_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_35_Q4_ACCOUNT_CD_P_LV">
+                    <service-id>SRV_GET_SP_UI_DP_35_Q4_ACCOUNT_CD_P_LV</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POPUP_VALID_RST_CPT_T4_01" type="R_GRID">
+        <props>
+            <height>330</height>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="SALES_LV_CD" title="SALES_LV_CD" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="SALES_LV_NM" title="SALES_LV_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_35_Q5_SALES_LV_CD_LV">
+                    <service-id>SRV_GET_SP_UI_DP_35_Q5_SALES_LV_CD_LV</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+            <operation id="LOAD_02">
+                <service-call id="SVC_SP_UI_DP_35_VALID_Q6_U_AUTH">
+                    <service-id>SRV_GET_SP_UI_DP_35_VALID_Q6_U_AUTH</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POPUP_VALID_RST_CPT_T5_01" type="R_GRID">
+        <props>
+            <height>330</height>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="USER_ID" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="EMP_NM" title="EMP_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="AUTH_TP_NM" title="AUTH_TP_ID" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_MST_ID" title="ITEM_MST_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ERR_DESC" title="DESCRIP" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_35_Q7_I_A_ITEM_CD">
+                    <service-id>SRV_GET_SP_UI_DP_35_Q7_I_A_ITEM_CD</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_35_Q7_I_A_ITEM_CD_01" value="" />
+                        <parameter id="SP_UI_DP_35_Q7_I_A_ITEM_CD_02" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD_02">
+                <service-call id="SVC_SP_UI_DP_35_Q9_I_ITEM_CD">
+                    <service-id>SRV_GET_SP_UI_DP_35_Q9_I_ITEM_CD</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_35_Q9_I_ITEM_CD_01" value="" />
+                        <parameter id="SP_UI_DP_35_Q9_I_ITEM_CD_02" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POPUP_VALID_RST_CPT_T6_01" type="R_GRID">
+        <props>
+            <height>330</height>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="USER_ID" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="EMP_NM" title="EMP_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="AUTH_TP_NM" title="AUTH_TP_ID" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ACCOUNT_ID" title="ACCOUNT_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ACCOUNT_CD" title="ACCOUNT_CD" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ACCOUNT_NM" title="ACCOUNT_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ERR_DESC" title="DESCRIP" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_35_Q8_I_A_ACCOUNT_CD">
+                    <service-id>SRV_GET_SP_UI_DP_35_Q8_I_A_ACCOUNT_CD</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_35_Q8_I_A_ACCOUNT_CD_01" value="" />
+                        <parameter id="SP_UI_DP_35_Q8_I_A_ACCOUNT_CD_02" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD_02">
+                <service-call id="SVC_SP_UI_DP_35_Q11_A_ACCOUNT_CD">
+                    <service-id>SRV_GET_SP_UI_DP_35_Q11_A_ACCOUNT_CD</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_35_Q11_A_ACCOUNT_CD_01" value="" />
+                        <parameter id="SP_UI_DP_35_Q11_A_ACCOUNT_CD_02" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POPUP_VALID_RST_CPT_T7_01" type="R_GRID">
+        <props>
+            <height>330</height>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="USER_ID" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="EMP_NM" title="EMP_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="AUTH_TP_NM" title="AUTH_TP_ID" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_LV_ID" title="ITEM_LV_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_LV_CD" title="ITEM_LV_CD" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_LV_NM" title="ITEM_LV_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ERR_DESC" title="DESCRIP" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_35_Q10_I_ITEM_LV_CD">
+                    <service-id>SRV_GET_SP_UI_DP_35_Q10_I_ITEM_LV_CD</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_35_Q10_I_ITEM_LV_CD_01" value="" />
+                        <parameter id="SP_UI_DP_35_Q10_I_ITEM_LV_CD_02" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POPUP_VALID_RST_CPT_T8_01" type="R_GRID">
+        <props>
+            <height>330</height>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="USER_ID" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="EMP_NM" title="EMP_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="AUTH_TP_NM" title="AUTH_TP_ID" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="SALES_LV_ID" title="SALES_LV_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="SALES_LV_CD" title="SALES_LV_CD" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="SALES_LV_NM" title="SALES_LV_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ERR_DESC" title="DESCRIP" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_35_Q12_A_SALES_LV_CD">
+                    <service-id>SRV_GET_SP_UI_DP_35_Q12_A_SALES_LV_CD</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_35_Q12_A_SALES_LV_CD_01" value="" />
+                        <parameter id="SP_UI_DP_35_Q12_A_SALES_LV_CD_02" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POPUP_VALID_RST_CPT_T9_01" type="R_GRID">
+        <props>
+            <height>330</height>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="USER_ID" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="EMP_NM" title="EMP_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ERR_DESC" title="DESCRIP" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_35_Q7_I_A_ITEM_CD">
+                    <service-id>SRV_GET_SP_UI_DP_35_Q7_I_A_ITEM_CD</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_35_Q7_I_A_ITEM_CD_01" reference-id="SRH_CPT_T1_02_04" default-value="" />
+                        <parameter id="SP_UI_DP_35_Q7_I_A_ITEM_CD_02" reference-id="SRH_CPT_T1_04_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_35_Q7_I_A_ITEM_CD">
+                    <service-id>SRV_GET_SP_UI_DP_35_Q7_I_A_ITEM_CD</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_35_Q7_I_A_ITEM_CD_01" reference-id="SRH_CPT_T1_02_04" default-value="" />
+                        <parameter id="SP_UI_DP_35_Q7_I_A_ITEM_CD_02" reference-id="SRH_CPT_T1_04_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POPUP_VALID_RST_CPT_T10_01" type="R_GRID">
+        <props>
+            <height>330</height>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="USER_ID" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="EMP_NM" title="EMP_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="AUTH_TP_NM" title="AUTH_TP_ID" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_MST_ID" title="ITEM_MST_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ACCOUNT_MST_ID" title="ACCOUNT_MST_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ACCOUNT_CD" title="ACCOUNT_CD" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ACCOUNT_NM" title="ACCOUNT_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ERR_DESC" title="DESCRIP" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_35_Q7_I_A_ITEM_CD">
+                    <service-id>SRV_GET_SP_UI_DP_35_Q7_I_A_ITEM_CD</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_35_Q7_I_A_ITEM_CD_01" reference-id="SRH_CPT_T1_02_04" default-value="" />
+                        <parameter id="SP_UI_DP_35_Q7_I_A_ITEM_CD_02" reference-id="SRH_CPT_T1_04_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

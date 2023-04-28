@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_BF_13_ITEM_POPUP" version="2.0">
+    <component id="UI_BF_13_ITEM_WINDOWS" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>ITEM_POP</title>
+            <width>540</width>
+            <height>660</height>
+            <visible>false</visible>
+            <modal>false</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="ITEM_POP_SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_LV_CD</init-value>
+        </props>
+    </component>
+    <component id="ITEM_POP_SRH_CPT_T1_01_02" type="COMBOBOX">
+        <props>
+            <width>200</width>
+            <lang>true</lang>
+            <enable>false</enable>
+            <select-index>LAST</select-index>
+            <value-id>LV_CD</value-id>
+            <text-id>LV_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_ITEM_POP_SRH_CPT_T1_01_02_LOAD_default_value">
+                    <component-id>ITEM_POP_SRH_CPT_T1_01_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_ITEM_POP_RST_CPT_01_init">
+                            <component-id>POP_RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+            <action event-type="select-item">
+                <operation-call id="GRID_LOAD">
+                    <component-id>POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="ENABLE" />
+            <operation id="SELECT" />
+            <operation id="LOAD">
+                <service-call id="SVC_SP_BF_ITEM_LV_Q1">
+                    <service-id>SRV_GET_SP_UI_BF_13_ITEM_LV_Q1</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_RST_CPT_01" type="R_GRID">
+        <props>
+            <height>500</height>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <state-bar>false</state-bar>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="ITEM_CD" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_NM" type="string">
+                    <width>150</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="INSERT_DATA_POP_ITEM">
+                    <component-id>DP_DATA_POP_ITEM</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="ITEM_INFO" reference-id="POP_RST_CPT_01:selections" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="op_close_02">
+                    <component-id>UI_BF_13_ITEM_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_BF_13_ITEM_POPUP_Q1">
+                    <service-id>SRV_GET_SP_UI_BF_13_ITEM_POPUP_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="ITEM_LV_CD" reference-id="ITEM_POP_SRH_CPT_T1_01_02" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_RST_CPT_F1_05" type="BUTTON">
+        <props>
+            <name>CLOSE</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_UI_BF_13_ITEM_WINDOWS_CLOSE">
+                    <component-id>UI_BF_13_ITEM_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

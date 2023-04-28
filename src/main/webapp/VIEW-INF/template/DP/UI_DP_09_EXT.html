@@ -1,0 +1,88 @@
+<meta charset="utf-8" />
+<script>
+    content.getCreateComponentCompleteFlag().done(function () {
+        var meta = cm.getComponent('VIEW_META');
+        
+        console.log("hanguls666");        
+        meta.doAfterSetData = function (serviceCallId, data, resultData) {
+            var grid = cm.getComponent('RST_CPT_01');
+            var gridView = grid.getActualComponent();
+            var dataComp = cm.getComponent('DATA_01');
+            var viewId = cm.getComponent("COMMON").getValue("VIEW_ID");
+            console.log("meta doAfterSetData");
+            if (serviceCallId == "PREF_INFO" ){
+                var result = cm.getComponent("VIEW_META").getValue("PREF_INFO").filter(function(row){
+                    return row.fldApplyCd.startsWith("PARENT_ITEM_LV_NM_AD") &&row.fldActiveYn == true
+                })
+                for (var row of result){
+                    console.log("===>",row.fldCd);
+
+                    var paramMap = {
+                    'COL_NM': row.fldCd
+                    };
+                    if (row.fldCd.includes("AD1")) {
+                        dataComp.doOperation("DATA_01", "LOAD_01", paramMap, null, func1, func1) ;
+                    } else if (row.fldCd.includes("AD2")) {
+                        dataComp.doOperation("DATA_01", "LOAD_02", paramMap, null, func1, func1) ;
+                    } else if (row.fldCd.includes("AD3")) {
+                        dataComp.doOperation("DATA_01", "LOAD_03", paramMap, null, func1, func1) ;
+                    }
+                }
+            }			
+        }// function 
+
+        var grid = cm.getComponent('RST_CPT_01');
+        grid.doAfterSetData = function (serviceCallId, data, resultData) {
+            var gridView = grid.getActualComponent();
+
+            var result = cm.getComponent("VIEW_META").getValue("PREF_INFO").filter(function(row){
+                    return row.fldApplyCd.startsWith("PARENT_ITEM_LV_NM_AD") &&row.fldActiveYn == true
+                })
+                for (var row of result){
+                    console.log("===>",row.fldCd);
+                    var acol = gridView.columnByName(row.fldCd);
+                    
+                    acol.lookupDisplay = true;
+                    acol.editor = {
+                                type: "dropDown",
+                                dropDownCount: 5,
+                                domainOnly: true,
+                            } ;
+                    var comboData;
+                    if (row.fldCd.includes("AD1")) {
+                        comboData = cm.getComponent("DATA_01").getValue("SRV_COMBO_AD1")                     
+                    } else if (row.fldCd.includes("AD2")) {
+                        comboData = cm.getComponent("DATA_01").getValue("SRV_COMBO_AD2")
+                    } else if (row.fldCd.includes("AD3")) {
+                        comboData = cm.getComponent("DATA_01").getValue("SRV_COMBO_AD3")
+                    } 
+
+                    if (comboData != null) {
+                        var ids = new Array();
+                        var nms = new Array();
+                        for(var one of comboData) {
+                            var id = one["ID"]
+                            var nm = one["ITEM_LV_NM"]
+                            ids.push(id);
+                            nms.push(nm);
+                        }
+                        console.log("set ids:", ids);
+                        acol.values = ids;
+                        acol.labels = nms;        
+                        gridView.setColumn(acol);
+                    }
+                }
+        };
+        
+        
+        //grid.doBeforeOperationCall = function(actionComponentId, targetComponentId, targetOperationId, operationCallId){
+            
+		//}        
+        
+		
+        function func1(id, opid, param) {
+        };
+        
+
+    });        
+</script>

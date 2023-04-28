@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_MP_26" template="MP/UI_MP_26:COMM/COMM_BTN_CNFM_PLAN_EXT:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:COMM/COMM_POP_SIM_ADJ_CNFM_PLAN:COMM/COMM_SRH_POP_MAIN_VER:COMM/COMM_SRH_POP_PROCESS_STEP" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_VIEW_META:COMM_BTN_EXCEL:COMM_BTN_CNFM_PLAN:COMM_POP_SIM_ADJ_CNFM_PLAN:COMM_SRH_MAIN_VERSION:COMM_SRH_PROCESS_STEP:COMM_SRH_POP_MAIN_VER:COMM_SRH_POP_PROCESS_STEP" version="2.0">
+    <publish parent="MENU_04_03" open="true" seq="260" />
+    <component id="TTL_CPT_03" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_06">
+                    <component-id>SRH_CPT_T1_06_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_01_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_RST_CRT_01_LOAD">
+                            <component-id>RST_CRT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CRT_02_LOAD">
+                            <component-id>RST_CRT_02</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CRT_03_LOAD">
+                            <component-id>RST_CRT_03</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CRT_04_LOAD">
+                            <component-id>RST_CRT_04</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="RESULT_SPLIT" type="SPLIT">
+        <props>
+            <position>vertical</position>
+            <splits>
+                <split id="upper_result" collapsible="false" />
+                <split id="down_result" collapsed="false" collapsible="true" resizable="false" size="550" />
+            </splits>
+        </props>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_06_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>COMP_COUNT</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_06_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+        </props>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <selection-mode>BLOCK</selection-mode>
+            <indicator>true</indicator>
+            <check-bar>true</check-bar>
+            <check-exclusive>true</check-exclusive>
+            <fit-style>none</fit-style>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="MAIN_VER_ID" title="MAIN_VER_ID" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>MAIN_SIMUL_VER</groups>
+                </column>
+                <column id="MAIN_VER_DESCRIP" title="MAIN_VER_DESCRIP" type="string">
+                    <width>140</width>
+                    <editable>false</editable>
+                    <groups>MAIN_SIMUL_VER</groups>
+                </column>
+                <column id="SIMUL_VER_ID" title="SIMULATION_VERSION" type="string">
+                    <width>130</width>
+                    <editable>false</editable>
+                    <groups>MAIN_SIMUL_VER</groups>
+                </column>
+                <column id="SIMUL_VER_DESCRIP" title="DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>MAIN_SIMUL_VER</groups>
+                </column>
+                <column id="ENGINE_EXE" title="ENGINE_RUN" type="bool">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLANNING</groups>
+                </column>
+                <column id="ENGINE_EXE_DTTM" title="ENGINE_RUN_DTTM" type="date">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>PLANNING</groups>
+                </column>
+                <column id="PLAN_POLICY_VER_ID" title="PLAN_POLICY_VERSION" type="string">
+                    <width>130</width>
+                    <editable>false</editable>
+                    <groups>PLANNING</groups>
+                </column>
+                <column id="PLAN_POLICY_DESCRIP" title="PLAN_POLICY_DESCRIP" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <groups>PLANNING</groups>
+                </column>
+                <column id="PREDICT_REVENUE" title="PREDICT_REVENUE" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="PREDICT_COST" title="PREDICT_COST" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="PREDICT_PROFIT" title="PRED_PROFIT" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="AVG_EOH" title="AVG_EOH" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="PREDICT_MOS" title="PREDICT_MOS" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="AVG_STOCK_AMT" title="AVG_INV_AMT" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="UTILIZATION" title="UTILIZATION" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="DMND_QTY" title="DEMAND_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="ON_TIME_QTY" title="ON_TIME_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="LATE_QTY" title="LATE_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="SHORTAGE_QTY" title="SHORTAGE_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="ON_TIME_RATIO" title="ONTIME_RATIO" type="number">
+                    <width>110</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="DELIVY_RATIO" title="DELIVY_RATIO" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="CONFRM_YN" title="CONFRM_YN" type="bool">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_CONFIRM</groups>
+                </column>
+                <column id="CONFRM_DTTM" title="CONFRM_DTTM" type="date">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_CONFIRM</groups>
+                </column>
+                <column id="CONFRM_EMP_ID" title="CONFRM_EMP_ID" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_CONFIRM</groups>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_MP_26_Q1">
+                    <service-id>GetMPComparativeAnalysis</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="MAIN_VERSION_ID" reference-id="SRH_CPT_MAIN_VER_ID_04" />
+                        <parameter id="SIMUL_STEP" reference-id="SRH_CPT_PROCESS_STEP_04" />
+                        <parameter id="COMP_NUM" reference-id="SRH_CPT_T1_06_04" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="EXPORT">
+                <all-columns>true</all-columns>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CRT_01" type="CHART">
+        <props>
+            <title>SNRIO_PRED_LV</title>
+            <height>270</height>
+            <theme>blueopal</theme>
+            <border>
+                <width>1</width>
+                <color>gray</color>
+            </border>
+            <legend>
+                <visible>true</visible>
+                <position>bottom</position>
+            </legend>
+            <tooltip>
+                <visible>true</visible>
+                <format>#,###.##</format>
+            </tooltip>
+            <category-axis>
+                <category id="SIMUL_VER_SEQ">
+                    <rotation>0</rotation>
+                </category>
+            </category-axis>
+            <value-axis>
+                <value id="PREDICT_REVENUE">
+                    <format>#,###.##</format>
+                    <axis-crossing-value>right</axis-crossing-value>
+                    <title>
+                        <text>PRED_REVENUE</text>
+                    </title>
+                </value>
+                <value id="PREDICT_PROFIT">
+                    <format>#,###.##</format>
+                    <axis-crossing-value>left</axis-crossing-value>
+                    <title>
+                        <text>PRED_PROFIT</text>
+                    </title>
+                </value>
+            </value-axis>
+            <serieses>
+                <series id="PREDICT_REVENUE">
+                    <chart-type type="bar" />
+                    <type>double</type>
+                    <criteria-axis>PREDICT_REVENUE</criteria-axis>
+                </series>
+                <series id="PREDICT_PROFIT">
+                    <chart-type type="line" />
+                    <type>double</type>
+                    <criteria-axis>PREDICT_PROFIT</criteria-axis>
+                </series>
+            </serieses>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="RST_CPT_01:SVC_UI_MP_26_Q1" />
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CRT_02" type="CHART">
+        <props>
+            <title>AVG_EOH_PRED_MOS</title>
+            <height>270</height>
+            <theme>default</theme>
+            <border>
+                <width>1</width>
+                <color>gray</color>
+            </border>
+            <legend>
+                <visible>true</visible>
+                <position>bottom</position>
+            </legend>
+            <tooltip>
+                <visible>true</visible>
+                <format>#,###.##</format>
+            </tooltip>
+            <category-axis>
+                <category id="SIMUL_VER_SEQ">
+                    <rotation>0</rotation>
+                </category>
+            </category-axis>
+            <value-axis>
+                <value id="PREDICT_MOS">
+                    <format>#,###.##</format>
+                    <axis-crossing-value>left</axis-crossing-value>
+                    <title>
+                        <text>PRED_MOS</text>
+                    </title>
+                </value>
+                <value id="AVG_EOH">
+                    <format>#,###.##</format>
+                    <axis-crossing-value>right</axis-crossing-value>
+                    <title>
+                        <text>AVG_EOH</text>
+                    </title>
+                </value>
+            </value-axis>
+            <serieses>
+                <series id="AVG_EOH">
+                    <chart-type type="bar">
+                        <stack>false</stack>
+                    </chart-type>
+                    <type>double</type>
+                    <criteria-axis>AVG_EOH</criteria-axis>
+                </series>
+                <series id="PREDICT_MOS">
+                    <chart-type type="line" />
+                    <type>double</type>
+                    <criteria-axis>PREDICT_MOS</criteria-axis>
+                </series>
+            </serieses>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="RST_CPT_01:SVC_UI_MP_26_Q1" />
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CRT_03" type="CHART">
+        <props>
+            <title>UTILIZATION</title>
+            <height>270</height>
+            <theme>metro</theme>
+            <border>
+                <width>1</width>
+                <color>gray</color>
+            </border>
+            <legend>
+                <visible>true</visible>
+                <position>bottom</position>
+            </legend>
+            <tooltip>
+                <visible>true</visible>
+                <format>#,###.##</format>
+            </tooltip>
+            <category-axis>
+                <category id="SIMUL_VER_SEQ">
+                    <rotation>0</rotation>
+                </category>
+            </category-axis>
+            <value-axis>
+                <value id="UTILIZATION">
+                    <format>#,###.##</format>
+                </value>
+            </value-axis>
+            <serieses>
+                <series id="UTILIZATION">
+                    <chart-type type="bar" />
+                    <type>double</type>
+                </series>
+            </serieses>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="RST_CPT_01:SVC_UI_MP_26_Q1" />
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CRT_04" type="CHART">
+        <props>
+            <title>ORDER_DELIVY</title>
+            <height>270</height>
+            <theme>bootstrap</theme>
+            <border>
+                <width>1</width>
+                <color>gray</color>
+            </border>
+            <legend>
+                <visible>true</visible>
+                <position>bottom</position>
+            </legend>
+            <tooltip>
+                <visible>true</visible>
+                <format>#,###.##</format>
+            </tooltip>
+            <category-axis>
+                <category id="SIMUL_VER_SEQ">
+                    <rotation>0</rotation>
+                </category>
+            </category-axis>
+            <value-axis>
+                <value id="ON_TIME_RATIO">
+                    <min>0</min>
+                    <max>110</max>
+                    <axis-crossing-value>left</axis-crossing-value>
+                    <title>
+                        <text>RATIO</text>
+                    </title>
+                </value>
+                <value id="DMND_QTY">
+                    <format>#,###.##</format>
+                    <axis-crossing-value>right</axis-crossing-value>
+                    <title>
+                        <text>QTY</text>
+                    </title>
+                </value>
+            </value-axis>
+            <serieses>
+                <series id="ON_TIME_QTY">
+                    <chart-type type="bar">
+                        <stack>true</stack>
+                    </chart-type>
+                    <type>double</type>
+                    <criteria-axis>DMND_QTY</criteria-axis>
+                </series>
+                <series id="LATE_QTY">
+                    <chart-type type="bar">
+                        <stack>true</stack>
+                    </chart-type>
+                    <type>double</type>
+                    <criteria-axis>DMND_QTY</criteria-axis>
+                </series>
+                <series id="SHORTAGE_QTY">
+                    <chart-type type="bar">
+                        <stack>true</stack>
+                    </chart-type>
+                    <type>double</type>
+                    <criteria-axis>DMND_QTY</criteria-axis>
+                </series>
+                <series id="ON_TIME_RATIO">
+                    <chart-type type="line" />
+                    <type>double</type>
+                    <criteria-axis>ON_TIME_RATIO</criteria-axis>
+                </series>
+                <series id="DELIVY_RATIO">
+                    <chart-type type="line" />
+                    <type>double</type>
+                    <criteria-axis>ON_TIME_RATIO</criteria-axis>
+                </series>
+            </serieses>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="RST_CPT_01:SVC_UI_MP_26_Q1" />
+            </operation>
+        </operations>
+    </component>
+</view>

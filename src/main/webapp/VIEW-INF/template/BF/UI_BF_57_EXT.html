@@ -1,0 +1,90 @@
+<script>
+
+	var isActive_TF = dm.getDataState("VIEW_META").PREF_INFO.RESULT_DATA.filter(function(columnInfo){
+	return columnInfo.fldApplyCd == "IMPORTANCE_TF";
+	}).map(function(columnInfo){ return columnInfo.fldActiveYn});
+	var isActive_RF = dm.getDataState("VIEW_META").PREF_INFO.RESULT_DATA.filter(function(columnInfo){
+		return columnInfo.fldApplyCd == "IMPORTANCE_RF";
+	}).map(function(columnInfo){ return columnInfo.fldActiveYn});
+	var isActive_GB = dm.getDataState("VIEW_META").PREF_INFO.RESULT_DATA.filter(function(columnInfo){
+		return columnInfo.fldApplyCd == "IMPORTANCE_GB";
+	}).map(function(columnInfo){ return columnInfo.fldActiveYn});
+    
+	content.getCreateComponentCompleteFlag().done(function () {
+	    var grid = cm.getComponent('RST_CPT_03');
+        var gridWrap;
+        
+        grid.onRGridDataFillReady = function(viewId, componentId, grid, resultData) {
+            var chart1 = cm.getComponent("RST_CPT_01").getActualComponent();
+            var chart2 = cm.getComponent("RST_CPT_02").getActualComponent();
+			var series = chart1.options.series;
+
+            if (!isActive_GB[0]) {
+				const idx = series.findIndex(function(item) {return item.name === "IMPORTANCE_GB"});
+				if (idx > -1) series.splice(idx, 1);
+			}
+			if (!isActive_RF[0]) {
+				const idx = series.findIndex(function(item) {return item.name === "IMPORTANCE_RF"});
+				if (idx > -1) series.splice(idx, 1);
+			}
+			if (!isActive_TF[0]) {
+				const idx = series.findIndex(function(item) {return item.name === "IMPORTANCE_TF"});
+				if (idx > -1) series.splice(idx, 1);
+			}
+			
+			chart1.setDataSource(resultData);
+            chart2.setDataSource(resultData);
+			chart1.dataSource.sort([{ field: "IMPORTANCE_RF", dir: "desc" }]);
+			chart2.dataSource.sort([{ field: "R_VALUE", dir: "desc" }]);
+
+			chart1.options.categoryAxis.categories = chart1.options.categoryAxis.categories.map(function(row){ return gI18n.tc(row);});
+			chart2.options.categoryAxis.categories = chart2.options.categoryAxis.categories.map(function(row){ return gI18n.tc(row);});
+
+            chart1.redraw();
+            chart2.redraw();
+            return resultData;
+        }
+        /*
+		grid.onRGridCellClicked = function(viewId, componentId, grid, index) {
+            var data = grid.getDataProvider().getJsonRows();
+            var chart1 = cm.getComponent("RST_CPT_01").getActualComponent();
+            var chart2 = cm.getComponent("RST_CPT_02").getActualComponent();
+			
+			if (!isActive_GB[0]) {
+				var series = chart1.options.series;
+				const idx = series.findIndex(function(item) {return item.name === "IMPORTANCE_GB"});
+				if (idx > -1) series.splice(idx, 1);
+			}
+			if (!isActive_RF[0]) {
+				var series = chart1.options.series;
+				const idx = series.findIndex(function(item) {return item.name === "IMPORTANCE_RF"});
+				if (idx > -1) series.splice(idx, 1);
+			}
+			if (!isActive_TF[0]) {
+				var series = chart1.options.series;
+				const idx = series.findIndex(function(item) {return item.name === "IMPORTANCE_TF"});
+				if (idx > -1) series.splice(idx, 1);
+			}
+
+            chart1.setDataSource(data);
+            chart2.setDataSource(data);
+			chart1.dataSource.sort([{ field: "IMPORTANCE_RF", dir: "desc" }]);
+			chart2.dataSource.sort([{ field: "R_VALUE", dir: "desc" }]);
+            chart1.redraw();
+            chart2.redraw();
+		}
+        */
+	});
+
+    cm.getComponent('RST_CPT_03').doBeforeServiceCall = function(paramMap,componentId, operationId, serviceCallId) {
+		paramMap["ENABLE_TF"] = isActive_TF[0];
+		paramMap["ENABLE_RF"] = isActive_RF[0];
+		paramMap["ENABLE_GB"] = isActive_GB[0];
+		var doBeforeServiceCallResult = {
+			result : true,
+			msg : '',
+			paramMap : paramMap
+		};
+		return doBeforeServiceCallResult; // result return
+	}
+</script>

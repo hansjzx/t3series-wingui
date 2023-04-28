@@ -1,0 +1,99 @@
+<script type="text/javascript">
+  let getRemainMpPsiData = async function(gridView) {
+    console.log("getRemainMpPsiData executed...")
+
+    let dataProvider = gridView.getDataProvider();
+    let rowCount = 1000;
+    let hasMoreData = true;
+
+    gridView.showToast(progressSpinner + "Loading data...", true);
+    
+    while(hasMoreData) {
+      let startIndex = dataProvider.getRowCount();
+      let url = baseURI() + 'engine/mp/psi/paging/' + rowCount + "/" + startIndex;
+      let form = new URLSearchParams();
+
+      let psiResult = await axios({
+        method: 'post',
+        url: url,
+        headers: getHeaders({}, true),
+        data: form
+      });
+      
+      if(psiResult.data.RESULT_DATA.length <= 0) {
+        hasMoreData = false;
+      }
+
+      if(hasMoreData) {
+        dataProvider.fillJsonData(psiResult.data.RESULT_DATA, {fillMode: "append"});
+      } else {
+        break;
+      }
+    }
+
+    gridView.hideToast();
+
+    showDialog(gI18n.tc("CONFIRMATION"), gI18n.tc("All data loading is completed."), DIALOG_TYPE.ALERT);
+  }
+
+  content.getCreateComponentCompleteFlag().done(function() {
+    let gridView = cm.getComponent("RST_CPT_01").getActualComponent();
+    if(gridView) {
+      gridView.setStateBar({
+        visible: false  
+      });
+    }
+
+	  cm.getComponent("RST_CPT_01").doAfterSetData = function(srvcCallID, data, resultData) {
+      var grid = cm.getComponent("RST_CPT_01").getActualComponent();
+
+      getRemainMpPsiData(grid)
+
+      grid.addCellStyle("redStyle", {
+        "foreground" : '#FF0000',
+        "readOnly" : true,
+        "editable" : false
+      },true);
+      grid.addCellStyle("blueStyle", {
+        "foreground" : '#d5ffc2',
+        "readOnly" : true,
+        "editable" : false
+      },true);
+      grid.addCellStyle("blackStyle", {
+        "foreground" : '#000000',
+        "readOnly" : true,
+        "editable" : false
+      },true);
+      
+      var columns = grid.getColumns();
+      var categoryNum = grid.getDataSource().getFieldIndex("CATEGORY");
+      var gridGetValue = cm.getComponent("RST_CPT_01").getValue("all");
+      if(gridGetValue) {
+        var gridAll = JSON.parse(gridGetValue);
+
+        for(var i=0; i<gridAll.length; i++) {
+          if(gridAll[i].SIMUL_VER_ID == "DELTA") {
+            for(var j=categoryNum; j<columns.length; j++) {
+              if(getValue(i,j) == 0) {
+                grid.setCellStyle(i ,columns[i].name, "blackStyle");
+              } else if(getValue(i,j) < 0) {
+                if(gridAll[i].CATEGORY == "BACK_ORD") {
+                  grid.setCellStyle(i ,columns[i].name, "blueStyle");
+                }else{
+                  grid.setCellStyle(i ,columns[i].name, "redStyle");
+                }	
+              } else {
+                if(gridAll[i].CATEGORY == "BACK_ORD") {
+                  grid.setCellStyle(i ,columns[i].name, "redStyle");
+                } else {
+                  grid.setCellStyle(i ,columns[i].name, "blueStyle");
+                }	
+              }
+            }
+          }
+        }
+      }
+      				
+	  }//end doAfterSetData	   
+  })
+</script>

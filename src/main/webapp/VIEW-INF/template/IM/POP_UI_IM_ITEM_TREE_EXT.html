@@ -1,0 +1,35 @@
+<script>
+  content.getCreateComponentCompleteFlag().done(function () {
+
+    cm.getComponent('ITEM_TREE_POP_RST_CPT_01').doBeforeServiceCall = function(paramMap, componentId, operationId, serviceCallId) {
+      console.log('init paramMap', paramMap);
+      if(serviceCallId == "SP_UI_DP_00_POPUP_ITEM_TREE_Q1" && cm.getComponent('COMMON').getValue('VIEW_ID').indexOf('DP_') == -1) {
+        paramMap['service'] = 'SRV_GET_SP_UI_IM_00_ITEM_TREE_LV_DATA_Q1';
+        paramMap['target'] = 'mp'
+        console.log('changed paramMap', paramMap);
+      }
+      var doBeforeServiceCallResult = {
+        result : true,
+        msg : '',
+        paramMap : paramMap
+      };
+      return doBeforeServiceCallResult;
+    };
+
+    cm.getComponent('ITEM_POPUP_TREE').doBeforeServiceCall = function(paramMap, componentId, operationId, serviceCallId) {
+      console.log('init paramMap', paramMap);
+      if (serviceCallId == "SRC_SRV_UI_DP_00_POPUP_ITEM_TREE_Q2" && cm.getComponent('COMMON').getValue('VIEW_ID').indexOf('DP_') == -1) {
+        paramMap['service'] = 'SRV_UI_IM_00_POPUP_ITEM_TREE_Q2';
+        paramMap['target'] = 'mp';
+        console.log('changed paramMap', paramMap);
+      }
+      var doBeforeServiceCallResult = {
+        result : true,
+        msg : '',
+        paramMap : paramMap
+      };
+      return doBeforeServiceCallResult;
+    };
+
+  });
+</script>

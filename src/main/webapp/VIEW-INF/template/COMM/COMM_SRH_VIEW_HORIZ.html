@@ -1,0 +1,51 @@
+<meta charset="utf-8" />
+		
+	<!-- Plan Start Date -->
+	<div class="parentCon">
+		<span class="leftCon">
+			<span id="SRH_CPT_VIEW_START_01" class="component_ui"></span>
+			<span id="SRH_CPT_VIEW_START_02" class="component_ui"></span>
+			<span id="SRH_CPT_VIEW_START_03" class="component_ui"></span>
+		</span>
+		<span class="rightCon">
+			<span id="SRH_CPT_VIEW_START_04" class="component_ui"></span>
+			<span id="SRH_CPT_VIEW_START_05" class="component_ui"></span>
+			<span id="SRH_CPT_VIEW_START_06" class="component_ui"></span>
+		</span>
+	</div>
+	
+	<!-- Plan End Date -->
+	<div class="parentCon">
+		<span class="leftCon">
+			<span id="SRH_CPT_VIEW_END_01" class="component_ui"></span>
+			<span id="SRH_CPT_VIEW_END_02" class="component_ui"></span>
+			<span id="SRH_CPT_VIEW_END_03" class="component_ui"></span>
+		</span>
+		<span class="rightCon">
+			<span id="SRH_CPT_VIEW_END_04" class="component_ui"></span>
+			<span id="SRH_CPT_VIEW_END_05" class="component_ui"></span>
+			<span id="SRH_CPT_VIEW_END_06" class="component_ui"></span>
+		</span>
+	</div>
+	
+<script>
+  content.getCreateComponentCompleteFlag().done(function () {
+    var datepicker = cm.getComponent('SRH_CPT_VIEW_START_04')
+    datepicker.widget.data('kendoDatePicker').setOptions({
+      weekNumber: true,
+      month: {
+        weekNumber: $('#week-template').html()
+      }
+    })
+  })
+  
+  content.getCreateComponentCompleteFlag().done(function () {
+    var datepicker = cm.getComponent('SRH_CPT_VIEW_END_04')
+    datepicker.widget.data('kendoDatePicker').setOptions({
+      weekNumber: true,
+      month: {
+        weekNumber: $('#week-template').html()
+      }
+    })
+  })
+</script>

@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_IM_23_01" version="2.0">
+    <component id="POP_TAB_01" type="TAB">
+        <props>
+            <tabs>
+                <tab id="POP_TAB_01-1" title="APPY_SEGMT_SRH_ALGRISM_SELECT" expand="true" init-render="true" />
+                <tab id="POP_TAB_01-2" title="TARGET_LOGIC_SELECT" init-render="true" />
+                <tab id="POP_TAB_01-3" title="CONST_LOGIN_SELECT" init-render="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_01_01" type="RADIO">
+        <props>
+            <name>APPY_LOCAT</name>
+            <lang>true</lang>
+            <option-deployment>vertical</option-deployment>
+            <init-value>
+                <option value="ALL" text="ALL_LOCAT" text-position="right" selected="true" />
+                <option value="SPC" text="SPECIFIC_LOCAT" text-position="right" />
+            </init-value>
+            <value-id>ID</value-id>
+            <text-id>TEXT</text-id>
+            <select-id>USE</select-id>
+        </props>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_GRD" type="R_GRID">
+        <props>
+            <height>250</height>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <toolbar use="false">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right" />
+            </toolbar>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="LOC_DTL_ID" title="LOC_DTL_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="LOCAT_TP" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ACTV_YN" title="ACTV_YN" type="bool">
+                    <width>90</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_MP_O5_10_RST_CPT_01_LOAD">
+                    <service-id>SRV_UI_MP_05_POP_Q1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="CONF_KEY" value="LOC" />
+                        <parameter id="VIEW_ID" reference-id="COMMON:VIEW_ID" />
+                        <parameter id="LOC_CD" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_02_01" type="RADIO">
+        <props>
+            <name>SCENARIO_DECISION_STANDARD</name>
+            <lang>true</lang>
+            <option-deployment>vertical</option-deployment>
+            <init-value>
+                <option value="A" text="SINGLE_SCNRIO" text-position="right" selected="true" />
+                <option value="B" text="LP_OPTIMIZATION" text-position="right" />
+            </init-value>
+            <value-id>ID</value-id>
+            <text-id>TEXT</text-id>
+            <select-id>USE</select-id>
+        </props>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_11_01" type="CHECKBOX">
+        <props>
+            <name>FILL_RATE</name>
+            <name-position>right</name-position>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_11_02" type="INPUTBOX">
+        <props>
+            <width>150</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_11_04" type="RADIO">
+        <props>
+            <lang>true</lang>
+            <init-value>
+                <option value="MAX" text="MAX" text-position="right" selected="true" />
+                <option value="MIN" text="MIN" text-position="right" />
+            </init-value>
+            <value-id>ID</value-id>
+            <text-id>TEXT</text-id>
+            <select-id>USE</select-id>
+        </props>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_12_01" type="CHECKBOX">
+        <props>
+            <name>PRED_MOS</name>
+            <name-position>right</name-position>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_12_02" type="INPUTBOX">
+        <props>
+            <width>150</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_12_04" type="RADIO">
+        <props>
+            <lang>true</lang>
+            <init-value>
+                <option value="MAX" text="MAX" text-position="right" selected="true" />
+                <option value="MIN" text="MIN" text-position="right" />
+            </init-value>
+            <value-id>ID</value-id>
+            <text-id>TEXT</text-id>
+            <select-id>USE</select-id>
+        </props>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_13_01" type="CHECKBOX">
+        <props>
+            <name>STOCK_LV_QTY</name>
+            <name-position>right</name-position>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_13_02" type="INPUTBOX">
+        <props>
+            <width>150</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_13_04" type="RADIO">
+        <props>
+            <lang>true</lang>
+            <init-value>
+                <option value="MAX" text="MAX" text-position="right" selected="true" />
+                <option value="MIN" text="MIN" text-position="right" />
+            </init-value>
+            <value-id>ID</value-id>
+            <text-id>TEXT</text-id>
+            <select-id>USE</select-id>
+        </props>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_14_01" type="CHECKBOX">
+        <props>
+            <name>AVG_INV_AMT</name>
+            <name-position>right</name-position>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_14_02" type="INPUTBOX">
+        <props>
+            <width>150</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_14_04" type="RADIO">
+        <props>
+            <lang>true</lang>
+            <init-value>
+                <option value="MAX" text="MAX" text-position="right" selected="true" />
+                <option value="MIN" text="MIN" text-position="right" />
+            </init-value>
+            <value-id>ID</value-id>
+            <text-id>TEXT</text-id>
+            <select-id>USE</select-id>
+        </props>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_15_01" type="CHECKBOX">
+        <props>
+            <name>STOCK_KEEPING_COST</name>
+            <name-position>right</name-position>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_15_02" type="INPUTBOX">
+        <props>
+            <width>150</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_15_04" type="RADIO">
+        <props>
+            <lang>true</lang>
+            <init-value>
+                <option value="MAX" text="MAX" text-position="right" selected="true" />
+                <option value="MIN" text="MIN" text-position="right" />
+            </init-value>
+            <value-id>ID</value-id>
+            <text-id>TEXT</text-id>
+            <select-id>USE</select-id>
+        </props>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_16_01" type="CHECKBOX">
+        <props>
+            <name>ORDER_COST</name>
+            <name-position>right</name-position>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_16_02" type="INPUTBOX">
+        <props>
+            <width>150</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_16_04" type="RADIO">
+        <props>
+            <lang>true</lang>
+            <init-value>
+                <option value="MAX" text="MAX" text-position="right" selected="true" />
+                <option value="MIN" text="MIN" text-position="right" />
+            </init-value>
+            <value-id>ID</value-id>
+            <text-id>TEXT</text-id>
+            <select-id>USE</select-id>
+        </props>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_17_01" type="CHECKBOX">
+        <props>
+            <name>AIR_COST</name>
+            <name-position>right</name-position>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_17_02" type="INPUTBOX">
+        <props>
+            <width>150</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_17_04" type="RADIO">
+        <props>
+            <lang>true</lang>
+            <init-value>
+                <option value="MAX" text="MAX" text-position="right" selected="true" />
+                <option value="MIN" text="MIN" text-position="right" />
+            </init-value>
+            <value-id>ID</value-id>
+            <text-id>TEXT</text-id>
+            <select-id>USE</select-id>
+        </props>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_18_01" type="CHECKBOX">
+        <props>
+            <name>TOTAL_COST</name>
+            <name-position>right</name-position>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_18_02" type="INPUTBOX">
+        <props>
+            <width>150</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_18_04" type="RADIO">
+        <props>
+            <lang>true</lang>
+            <init-value>
+                <option value="MAX" text="MAX" text-position="right" selected="true" />
+                <option value="MIN" text="MIN" text-position="right" />
+            </init-value>
+            <value-id>ID</value-id>
+            <text-id>TEXT</text-id>
+            <select-id>USE</select-id>
+        </props>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_21_01" type="CHECKBOX">
+        <props>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_21_02" type="INPUTBOX">
+        <props>
+            <width>80</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_21_03" type="COMBOBOX">
+        <props>
+            <width>80</width>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <init-value>
+                <option value="A" text="&lt;" />
+                <option value="B" text="&lt;=" />
+                <option value="C" text="&gt;=" />
+                <option value="D" text="&gt;" />
+            </init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_99_01" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_IM_23_01_WINDOW_01_CPT_99_01_CLICK_01">
+                    <component-id>POP_UI_IM_23_01_WINDOW_01_CPT_99_01</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_IM_23_01_WINDOW_01_CPT_99_01_CLICK_01_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0001" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_23_01_WINDOW_01_CPT_99_01_CLICK_02">
+                            <component-id>RST_CPT_02</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_IM_23_01_WINDOW_01_CPT_99_01_CLICK_03">
+                    <component-id>POP_UI_IM_23_01_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SAVE">
+                <service-call id="SVC_POP_UI_IM_23_01_S_001">
+                    <service-id>SRV_UI_MP_38_S_002</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="P_WRK_TYPE" value="SAVE" />
+                        <parameter id="MAIN_CON_TYP_ID" reference-id="RST_CPT_02:selections" extract-by="MAIN_CON_TYP_ID" />
+                        <parameter id="ITEM_RES_PREF_MST_ID" reference-id="RST_CPT_02:selections" extract-by="ITEM_RES_PREF_MST_ID" />
+                        <parameter id="MAINTENCE_APPCAT_TIME_ID" reference-id="POP_UI_IM_23_01_WINDOW_01_CPT_23_04" />
+                        <parameter id="CONST_PERIOD_VAL" reference-id="POP_UI_IM_23_01_WINDOW_01_CPT_24_04" />
+                        <parameter id="UOM" reference-id="POP_UI_IM_23_01_WINDOW_01_CPT_25_04" />
+                        <parameter id="ACTV_YN" reference-id="POP_UI_IM_23_01_WINDOW_01_CPT_10_04" />
+                        <parameter id="P_USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01_CPT_99_02" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_IM_23_01_WINDOW_01_CPT_99_02_CLICK">
+                    <component-id>POP_UI_IM_23_01_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_UI_IM_23_01_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_IM_23_01</title>
+            <width>470</width>
+            <height>570</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+</view>

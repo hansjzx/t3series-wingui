@@ -1,0 +1,41 @@
+.BGGanttWoBox {
+  clip-path: polygon(-20px 0,calc(100% + 20px) 0,calc(100% + 20px) 100%,100% 100%,calc(100% - 8px) calc(100% - 6px),8px calc(100% - 6px),0 100%,-20px 100%);
+  background: #00000059;
+  position: relative;
+}
+
+.BGGanttWoBox > .basicBox {
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  display: flex;
+  align-items: center;
+  width: calc(100% - 2px);
+  border: none !important;
+  clip-path: polygon(-20px 0,calc(100% + 20px) 0,calc(100% + 20px) 100%,100% 100%,calc(100% - 7px) calc(100% - 6px),7px calc(100% - 6px),0 100%,-20px 100%);
+}
+
+.BGGanttWoBox > .basicBox > .basicBoxText {
+  margin-bottom: 5px;
+}
+
+.BGGanttMilestone, .BGGanttHtmlRightMilestone {
+  position: relative;
+}
+
+.BGGanttLimeMilestoneHover {
+  background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiIHZpZXdCb3g9IjAgMCAyMiAyMiI+DQo8cG9seWdvbiBmaWxsPSJ3aGl0ZSIgcG9pbnRzPSIxMSwyIDIwLDExIDExLDIwIDIsMTEiLz4NCjxwb2x5Z29uIGZpbGw9IiM2RjAiIHBvaW50cz0iMTEsMyAxOSwxMSAxMSwxOSAzLDExIi8+DQo8L3N2Zz4=) !important;
+}
+
+.BTClassReadOnly.BTDate {
+  color: black !important;
+}
+
+.mergeColumn {
+  overflow: visible !important;
+}
+
+.mergeColumn > div {
+  position: sticky;
+  top: 0;
+}

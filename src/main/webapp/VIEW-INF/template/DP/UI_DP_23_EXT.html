@@ -1,0 +1,160 @@
+<script>
+    content.getCreateComponentCompleteFlag().done(function () {
+        var grid = cm.getComponent('RST_CPT_01');
+        var gridWrap;
+        
+        var beforeSvcCall = function(paramMap,componentId, operationId, serviceCallId) {
+    		paramMap = getTarget(paramMap)
+			var doBeforeServiceCallResult = {
+					result : true,
+					msg : '',
+					paramMap : paramMap
+				};
+			console.log("hanguls ===>",componentId, operationId, serviceCallId);
+			return doBeforeServiceCallResult; // result return
+		}// function 
+        
+		
+        var com2 = cm.getComponent("DATA_01")
+        if (com2 != null) {
+	    	com2.doBeforeServiceCall = beforeSvcCall	
+    	}
+      
+        var com3 = cm.getComponent("RST_CPT_T3_06_02")
+        if (com3 != null) {
+	      	com3.doBeforeServiceCall = beforeSvcCall		
+        }
+        
+        var com4=cm.getComponent("RST_CPT_T2_01_03")
+        if (com4 != null) {
+		  	com4.doBeforeServiceCall = beforeSvcCall	
+        }
+        
+        var com5 = cm.getComponent("RST_CPT_T2_04_03")
+        if (com5 != null) {
+        	com5.doBeforeServiceCall = beforeSvcCall
+        }
+        
+        var com6 = cm.getComponent("RST_CPT_T2_05_03")
+        if (com6 != null) {
+        	com6.doBeforeServiceCall = beforeSvcCall	
+        }
+        var com6 = cm.getComponent("RST_CPT_T2_06_03")
+        if (com6 != null) {
+        	com6.doBeforeServiceCall = beforeSvcCall	
+        }
+        
+        var com6 = cm.getComponent("RST_CPT_T4_01_02")
+        if (com6 != null) {
+        	com6.doBeforeServiceCall = beforeSvcCall	
+        }
+        var com6 = cm.getComponent("RST_CPT_T5_01_02")
+        if (com6 != null) {
+        	com6.doBeforeServiceCall = beforeSvcCall	
+        }
+        
+       	cm.getComponent('RST_CPT_01').doBeforeServiceCall = function(paramMap,componentId, operationId, serviceCallId) {
+      		paramMap = getTarget(paramMap)
+			var doBeforeServiceCallResult = {
+				result : true,
+				msg : '',
+				paramMap : paramMap
+			};
+			return doBeforeServiceCallResult; // result return
+		}// function 
+		
+        cm.getComponent('POP_RST_CPT_T1_04_02').doBeforeOperationCall = function(actionComponentId, targetComponentId, targetOperationId, operationCallId){
+			if (operationCallId == "change-to-date") {
+				var toDateStr = cm.getComponent('POP_RST_CPT_T1_04_02').getValue();
+				var varBucket = cm.getComponent('POP_RST_CPT_T1_10_02').getValue();
+				//var orgToDate = dm.getDataState("DATA_03").DATE_CHG.RESULT_DATA[0]["VER_TO_DATE"]
+				
+				if (varBucket == null || varBucket == ""){
+					var bucket = cm.getComponent('POP_RST_CPT_T1_02_02').getValue();					
+					var toDate = wingui.util.date.calendar.toDate(toDateStr); 
+					if(bucket == "M") {
+						var lastMonthDay = wingui.util.date.calendar.getMonthLastDay(toDate);
+						cm.getComponent('POP_RST_CPT_T1_04_02').setValue(wingui.util.date.toDateString(lastMonthDay));
+					} else if(bucket == "PW" || bucket == "W") {
+						var standardWeek = dm.getDataState("DATA_03").DATE_CHG.RESULT_DATA[0]["STD_WEEK"]
+						var bucketEndDate = getNextWeekBucketEndDate(standardWeek, toDate);		
+						//console.log("RESULT=====>",bucketEndDate)		
+						cm.getComponent('POP_RST_CPT_T1_04_02').setValue(wingui.util.date.toDateString(bucketEndDate));
+					}
+				} else {
+					var varDateStr = cm.getComponent('POP_RST_CPT_T1_11_02').getValue();
+					var varDate = wingui.util.date.calendar.toDate(varDateStr); //new Date(varDateStr.replace(/\./g, '-'))
+					var toDate = wingui.util.date.calendar.toDate(toDateStr); 
+					//console.log("select_date :", toDate, " varDate:", varDate)
+					if (varDate > toDate) {
+						showDialog('Check Select Date','must be later than the Partial date.', DIALOG_TYPE.INFO);
+						return true;
+					}
+
+					if(varBucket == "M") {
+						var lastMonthDay = wingui.util.date.calendar.getMonthLastDay(toDate);
+						cm.getComponent('POP_RST_CPT_T1_04_02').setValue(wingui.util.date.toDateString(lastMonthDay));
+					}
+
+				}								
+			}
+			return false;
+		}
+
+    });
+
+	//가장 가까운 다음 주단위 버킷의 마지막날
+	function getNextWeekBucketEndDate(standardWeek, currentDate) {
+		if (standardWeek == null || standardWeek == ""){
+			return currentDate;
+		}
+		var week = 0;
+		switch (standardWeek) {
+			case "Sun" : week = 0;
+				break;
+			case "Mon" : week = 1;
+				break;
+			case "Tue" : week = 2;
+				break;
+			case "Wed" : week = 3;
+				break;
+			case "Thu" : week = 4;
+				break;
+			case "Fri" : week = 5;
+				break;
+			case "Sat" : week = 6;
+				break;
+		}
+ 
+		var nextDate =  new Date(currentDate);
+		//console.log("&&999=====>",week, nextDate)	
+		for(var idx = 0; idx < 7; idx++) {
+			nextDate.setDate(nextDate.getDate() + 1); 
+			//console.log("=====>",nextDate, nextDate.getDate(), nextDate.getDay())	
+			if (nextDate.getDate() == 1){
+				nextDate.setDate(nextDate.getDate() - 1)
+				return nextDate;
+			}
+			if (nextDate.getDay() == week){
+				nextDate.setDate(nextDate.getDate() - 1)
+				return nextDate;
+			}
+		}
+		return currentDate;
+	}
+	
+	function getTarget(paramMap){
+		var planType = cm.getComponent("SRH_CPT_T1_01_04").getValue();	
+		var serverName = paramMap["target"];
+		if ( serverName == "T3SeriesDataServer") {
+			return paramMap;
+		}
+//		console.log("[DEVELOP_LOG] paramMap", paramMap);
+		if (planType == "Y" && paramMap["target"] == serverName){
+//			console.log("[DEVELOP_LOG] dp server if service");
+				paramMap["target"] = serverName+"_Y";				
+		}		
+		return paramMap
+	}
+	
+</script>

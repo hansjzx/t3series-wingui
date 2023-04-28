@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_AD_06" template="AD/UI_AD_06" version="2.0">
+    <publish parent="MENU_90" open="true" seq="60" />
+    <component id="north_title" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LICENSE_CONFIRMATION_INFO</init-value>
+        </props>
+    </component>
+    <component id="north_button" type="BUTTON">
+        <props>
+            <name>CONFIRMATION</name>
+            <tooltip>Confirmation</tooltip>
+            <icon>confirm</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="validate_wait_on">
+                    <component-id>COMMON</component-id>
+                    <operation-id>WAIT-ON</operation-id>
+                    <complete>
+                        <operation-call id="loadNorthGrid">
+                            <component-id>north</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <complete>
+                                <operation-call id="reloadCenterGrid">
+                                    <component-id>center</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                    <complete>
+                                        <operation-call id="validate_wait_off">
+                                            <component-id>COMMON</component-id>
+                                            <operation-id>WAIT-OFF</operation-id>
+                                        </operation-call>
+                                    </complete>
+                                </operation-call>
+                            </complete>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="north" type="R_GRID">
+        <props>
+            <height>200</height>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <groupable>false</groupable>
+            <columns>
+                <column id="SERVER_ID" title="SERVER_ID" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="STATUS" title="STATUS" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="EXPIRE_DATE" title="EXPIRE_DATE" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="MESSAGE" title="MSG" type="string">
+                    <width>500</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="validate_wait_on">
+                    <component-id>COMMON</component-id>
+                    <operation-id>WAIT-ON</operation-id>
+                    <complete>
+                        <operation-call id="getInitLicenseResultInfo">
+                            <component-id>north</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <complete>
+                                <operation-call id="validate_wait_off">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>WAIT-OFF</operation-id>
+                                </operation-call>
+                            </complete>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="getLicenseResultInfoLicenseServer">
+                    <service-id>GetLicenseResultInfo</service-id>
+                    <service-target>LicenseServer</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="center_title" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LICENSE_POSSESSION_INFO</init-value>
+        </props>
+    </component>
+    <component id="center_button" type="BUTTON">
+        <props>
+            <name>IMPORT</name>
+            <tooltip>Import</tooltip>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="LoadGrid2">
+                    <component-id>center</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="center" type="R_GRID">
+        <props>
+            <height>230</height>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <groupable>false</groupable>
+            <columns>
+                <column id="SERVER_ID" title="SERVER_ID" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="VERSION" title="VERSION" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+                <column id="PRODUCT" title="PRODUCT" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="HWADDR" title="HARDWARE_ADDRESS" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="EXPIRE_DATE" title="EXPIRE_DATE" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+                <column id="INSTANCE_COUNT" title="INSTANCE_COUNT" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+                <column id="DIR" title="DIR" type="string">
+                    <width>400</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="getInitLicensePossessionInfo">
+                    <component-id>center</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="getLicensePossessionInfoLicenseServer">
+                    <service-id>GetLicensePossessionInfo</service-id>
+                    <service-target>LicenseServer</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="south_title" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LICENSE_KEY_INFO</init-value>
+        </props>
+    </component>
+    <component id="south_button" type="BUTTON">
+        <props>
+            <name>KEY_GENERATE</name>
+            <tooltip>Key Generate</tooltip>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="LoadTextArea">
+                    <component-id>south</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="south" type="TEXTAREA">
+        <props>
+            <height>200</height>
+            <placeholder>Server License Info</placeholder>
+            <name>SERVER_LICENSE_INFO</name>
+            <name-position>left</name-position>
+            <value-id>SERVER_LICENSE_INFO</value-id>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="getServerLicenseInfoLicenseServer">
+                    <service-id>GetServerLicenseInfo</service-id>
+                    <service-target>LicenseServer</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_BP_22" template="COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:DP/UI_DP_22:DP/UI_DP_POPUP_MS_INIT_VAL_SETTING" 
+                    copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_DEPARTMENT:UI_DP_22_POPUP_MS_INIT_VAL_SETTING:UI_DP_22" version="2.0">
+    <publish parent="MENU_06_01" open="true" seq="219" />
+    
+    <component id="SRH_CPT_T1_02_04" type="COMBOBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SP_UI_DP_00_CONF_Q1_INIT_plantype">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_CONF_Q1_01" value="DP_PLAN_TYPE" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_02" value="DP_PLAN_YEARLY" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                    </parameters>
+                    <success>
+                        <operation-call id="OPC_op_combo_select_pricetype">
+                            <component-id>SRH_CPT_T1_02_04</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <success>
+                                <operation-call id="OPC_INIT_GRID_LOAD">
+                                    <component-id>RST_CPT_01</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_00_CONF_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+            <operation id="SELECT">
+                <service-call id="OPC_PLAN_TP">
+                    <parameters>
+                        <parameter id="INDEX" value="0" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

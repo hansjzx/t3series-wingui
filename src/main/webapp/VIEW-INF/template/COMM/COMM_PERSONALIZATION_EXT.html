@@ -1,0 +1,133 @@
+<script type="text/javascript">
+
+  content.getCreateComponentCompleteFlag().done(function () {
+    let grpCombo = cm.getComponent("POP_COMM_CPT_PERSONALIZATION_CPT_02");
+
+    grpCombo.onComboboxChanged = function (viewId) {  //, componentId, e
+      //console.log("[Develop Log] onComboboxChanged 1 componentId", viewId,componentId);
+      let prefrences = [];
+      let localItem = localStorage.getItem("preference-group");
+      let userName = changeUserName();
+      //let userName = co.username;
+      let value = grpCombo.getValue();
+
+      //console.log("userName",userName, "value", value);
+      if(value === undefined || value.length <= 0){
+        value = ((viewId === "UI_DP_96" || viewId === "UI_DP_96_CHART") ? "DEFAULT" : cm.getComponent("SRH_CPT_T1_04_04").getValue());
+      }
+      let idx = -1;
+      if (localItem !== null && localItem.length > 0) {
+        prefrences = JSON.parse(localItem);
+        for(let i = 0, n = prefrences.length; i < n ; i ++){
+          let row = prefrences[i];
+          if(row.viewId ===  viewId && row.username === userName){
+            prefrences[i].grpCd = value;
+            idx = 0;
+          }
+        }
+      }
+      if(idx === -1){
+        let obj = {};
+        obj.viewId = viewId;
+        obj.grpCd = value;
+        obj.username = userName;
+        prefrences.push(obj);
+      }
+      localStorage.setItem("preference-group", JSON.stringify(prefrences));
+
+    }
+
+    cm.getComponent("DATA_01").doBeforeServiceCall = function(paramMap, componentId, operationId, serviceCallId) {
+      let doBeforeServiceCallResult = {
+        result : true,
+        msg : '',
+        paramMap : paramMap
+      };
+      if(serviceCallId === "SVC_SP_UI_DP_00_PERSONALIZATION_Q1_INIT" || serviceCallId === "SVC_SP_UI_DP_00_PERSONALIZATION_Q1_CHART"
+        || serviceCallId === "SVC_SP_UI_DP_95_DIM" || serviceCallId === "SVC_SP_UI_DP_95_MES"
+      || serviceCallId === "SVC_SP_UI_DP_95_MES_CHART"){
+        doBeforeServiceCallResult.paramMap["SP_UI_DP_00_PERSONALIZATION_Q1_02"] = cm.getComponent("VIEW_META").getValue("grpCd");
+        doBeforeServiceCallResult.paramMap["AUTH_TP"] = cm.getComponent("VIEW_META").getValue("grpCd");
+      }
+
+      return doBeforeServiceCallResult; // result return
+    };
+
+    cm.getComponent("VIEW_META").doBeforeServiceCall = function(paramMap,componentId, operationId, serviceCallId) {
+      let doBeforeServiceCallResult = {
+        result : true,
+        msg : '',
+        paramMap : paramMap
+      };
+      if(serviceCallId === "CROSSTAB_INFO" || serviceCallId === "PREF_INFO"){
+        let psnl = localStorage.getItem("preference-group");
+        let selectGrpCd;
+        let userName = changeUserName ();
+        if(psnl.length > 0 && psnl !== "" && psnl !== undefined) {
+          selectGrpCd = JSON.parse(psnl).filter(function(row){
+            return row.viewId === vo.getId() && row.username === userName
+          })[0];
+        }
+        if (selectGrpCd !== undefined && selectGrpCd.grpCd !== undefined){
+          cm.getComponent("VIEW_META").setValue("grpCd", selectGrpCd.grpCd);
+        } else {
+          //선택한 그룹이 없으면 권한 유형의 값으로 선택됨.
+          let authTp = ((vo.getId() === "UI_DP_96" || vo.getId() === "UI_DP_96_CHART")? "DEFAULT" : cm.getComponent("SRH_CPT_T1_04_04").getValue());
+          cm.getComponent("VIEW_META").setValue("grpCd", authTp);
+          // 개인화로 사용자 그룹을 바꾸지 않았다면 salesman이 넘어갈텐데..
+          // 전체 demand 보고서는 All Demand Target 체크가 되어있으면, default로 넘겨야하지 않을까?
+        }
+        doBeforeServiceCallResult.paramMap["grp-cd"] = cm.getComponent("VIEW_META").getValue("grpCd");
+      }
+
+      return doBeforeServiceCallResult; // result return
+    };
+    //POP_PERSONALIZATION_RST_CPT_01
+    let grid = cm.getComponent("POP_PERSONALIZATION_RST_CPT_01");
+    grid.doAfterSetData = function () { //serviceCallId, data, resultData
+      let gridView = grid.getActualComponent();
+      let aColumn = gridView.columnByField("dataKeyYn");
+      gridView.activateColumnFilters(aColumn, ["false"], true);
+
+    };
+
+    let paramChange = function(paramMap) { // ,componentId, operationId, serviceCallId
+      // console.log("[############] paramChange");
+      // console.log("[############] operationId", operationId);
+
+      let doBeforeServiceCallResult = {
+        result : true,
+        msg : '',
+        paramMap : paramMap
+      };
+      doBeforeServiceCallResult.paramMap["username"] = changeUserName ();
+
+      return doBeforeServiceCallResult;
+    };
+
+
+    let com1 = cm.getComponent("POP_COMM_CPT_PERSONALIZATION_CPT_01");
+    if (com1 != null) {
+      com1.doBeforeServiceCall = paramChange;
+    }
+    let com2 = cm.getComponent("POP_COMM_CPT_PERSONALIZATION_CPT_02")
+    if (com2 != null) {
+      com2.doBeforeServiceCall = paramChange;
+    }
+    let com3 = cm.getComponent("POP_PERSONALIZATION_RST_CPT_01_07")
+    if (com3 != null) {
+      com3.doBeforeServiceCall = paramChange;
+    }
+    let com4 = cm.getComponent("POP_PERSONALIZATION_RST_CPT_01")
+    if (com4 != null) {
+      com4.doBeforeServiceCall = paramChange;
+    }
+
+    function changeUserName () {
+      return (vo.getId() === "UI_DP_96" || vo.getId() === "UI_DP_96_CHART") ?
+        cm.getComponent("COMMON").getValue("loginId") : cm.getComponent("SRH_CPT_T1_02_04").getValue();
+    }
+
+  });
+
+</script>

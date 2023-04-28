@@ -1,0 +1,542 @@
+<script>
+  var vmImportExport;
+
+  vmImportExport = new Vue({
+    el: '#UI_UT_02-contents',
+    i18n: gI18n,
+    data: function () {
+      return {
+        mSelectedModule: undefined,
+        mSelectedTable: undefined,
+
+        mModuleList: undefined,
+        mTableList: undefined,
+
+        mTableDataCount: 0,
+        mTableJobStatus: false,
+
+        mImportOption1: 2,
+        mImportOption2: 0,
+
+        mJobLevel: 0,
+        mJobStep: 0,
+
+        mMultiple: true,
+        mImportable: true,
+        mLowLevelDeleteInclude: false,
+
+        mExportOption1: 0,
+        mExportOption2: 0,
+
+        mSelectedFiles: [],
+
+        // UI status
+        mTreeAreaVisible: false,
+        mImportAreaVisible: false,
+        mCsvExtension: ['.csv'],
+        mTsvExtension: ['.tsv'],
+        mAllowedExtensions: ['.csv'],
+        HIDDEN_OPTION_ON: false,
+
+        // Css class
+        mLevelAnyImported: 'k-i-play',
+        mLevelNoneImported: 'k-i-cancel',
+        mTableImported: 'k-i-check',
+        mTableMandatory: 'k-i-minus-circle',
+        mTableOption: 'k-i-minus-outline',
+        mTableNotImportable: 'k-i-lock',
+
+        // Txt
+        mTotalLabelTxt: gI18n.tc('LABEL_TOTAL_FILE_COUNT'), // 'Total :'
+        mMsgImportDisable: gI18n.tc('ALERT_MSG_IMPORT_DISABLE'), // 'Please import the common tables data first.'
+        mMsgTableDisable: gI18n.tc('ALERT_MSG_TABLE_DISABLE'), // 'Please import the upper level tables data first.'
+        mMsgSaveAndImport: gI18n.tc('ALERT_MSG_SAVE_AND_IMPORT'), // 'Success to save and import.'
+        mMsgServerError: gI18n.tc('ALERT_MSG_SERVER_ERROR'), // 'Fail to request data due to internal server error.'
+        mMsgDeleteWarning: gI18n.tc('ALERT_MSG_DELETE_WARNING'), // 'This option also delete data from lower-level tables.
+        mMsgDeleteConfirm: gI18n.tc('ALERT_MSG_DELETE_CONFIRM'), // 'This import operation deletes data from the corresponding table low-level table. Do you want to confirm the execution of the import operation?'
+        mMsgImportConfirm: gI18n.tc('ALERT_MSG_SAVE_AND_IMPORT_CONFIRM'), // 'Do you want to confirm the execution of the import operation?'
+        mMsgCommTableInvalid: gI18n.tc('ALERT_MSG_COMM_TABLE_INVALID'), // 'The Common table defined in the import schema is not valid. Check with the system administrator before use.'
+
+        // Request URL
+        mUrlGetModuleList: BASE_URL + 'data/bulk/schema/modules',
+        mUrlGetTableList: BASE_URL + 'data/bulk/schema/tables',
+        mUrlGetTableStatus: BASE_URL + 'data/bulk/table/status',
+        mUrlGetPermission: BASE_URL + 'system/users/' + gSessionInfo.getUserId() + '/permissions/' + gGetViewId() + '/' + gOperationType.DELETE,
+
+        // Log
+        mLogEnable: true
+      };
+    },
+    mounted: function () {
+      this.doLoadPermissionData();
+      this.doLoadModulesData();
+    },
+    computed: {
+      mImportCheckStatus1: function () {
+        return this.mImportOption1 === 2;
+      },
+      mImportCheckStatus2: function () {
+        return this.mImportOption2 === 0;
+      },
+      mExportCheckStatus1: function () {
+        return this.mExportOption1 === 0;
+      },
+      mExportCheckStatus2: function () {
+        return this.mExportOption2 === 0;
+      },
+      mSaveAndImportEnable: function () {
+        return !(this.mImportable && this.mTableJobStatus && this.mSelectedFiles.length > 0);
+      },
+      mUrlPostExcelImport: function () {
+        // var user = '?USER_ID=' + gSessionInfo.getUserId();
+        var module = '&JOB_MODULE=' + this.mSelectedModule;
+        var table = '&JOB_TABLE=' + this.mSelectedTable;
+        var option1 = '&IMPORT_OPTION=' + this.mImportOption1;
+        var option2 = '&SEPARATOR_OPTION=' + this.mImportOption2;
+        var level = '&JOB_LEVEL=' + this.mJobLevel;
+        var step = '&JOB_STEP=' + this.mJobStep;
+        var deleteInclude = '&DELETE_INCLUDE=' + this.mLowLevelDeleteInclude;
+        return BASE_URL + 'data/bulk/import/files' + module + table + option1 + option2 + level + step + deleteInclude;
+      },
+      mUrlGetExcelExport: function () {
+        // var user = '?USER_ID=' + gSessionInfo.getUserId();
+        var module = '?JOB_MODULE=' + this.mSelectedModule;
+        var table = '&JOB_TABLE=' + this.mSelectedTable;
+        var option1 = '&EXPORT_OPTION=' + this.mExportOption1;
+        var option2 = '&SEPARATOR_OPTION=' + this.mExportOption2;
+        return BASE_URL + 'data/bulk/export' + module + table + option1 + option2;
+      }
+    },
+    watch: {
+      /**
+       * Fires when change selected module
+       */
+      mSelectedModule: function (val) {
+        this.doLoadTablesData(val);
+      },
+      /**
+       * Fires when change import option2
+       */
+      mImportOption2: function (newVal, oldVal) {
+        // File type filtering
+        this.mAllowedExtensions = newVal === 0 ? this.mCsvExtension : this.mTsvExtension;
+      }
+    },
+    methods: {
+      /**
+       * Fires when click search button
+       */
+      onSearchBtnClick: function () {
+        this.doLoadTablesData(this.mSelectedModule);
+      },
+      /**
+       * Fires when click table item
+       */
+      onTableItemClick: function (tableItem) {
+        this.doInitData();
+
+        if (!tableItem.enable) {
+          this.mSelectedTable = undefined;
+          this.mImportAreaVisible = false;
+          showDialog('Warning', this.mMsgTableDisable.trim(), DIALOG_TYPE.ALERT, true);
+        } else {
+          this.mSelectedTable = tableItem.table;
+          this.mJobLevel = tableItem.level;
+          this.mJobStep = tableItem.step;
+          this.mMultiple = tableItem.multiple;
+          this.mImportAreaVisible = true;
+          this.mImportable = tableItem.importable;
+          this.mLowLevelDeleteInclude = tableItem.lowLevelDeleteInclude;
+          this.doLoadTableStatusData(this.mSelectedTable);
+        }
+      },
+      /**
+       * Fires when click import option item
+       */
+      onClickImportOption1: function (val) {
+        this.mImportOption1 = val;
+
+        // If Delete AND Insert
+        if (val === 3) {
+          showDialog('Warning', this.mMsgDeleteWarning.trim(), DIALOG_TYPE.ALERT, true);
+        }
+      },
+      /**
+       * Fires when click separator option item
+       */
+      onClickImportOption2: function (val) {
+        this.mImportOption2 = val;
+      },
+      /**
+       * Fires when click export option item
+       */
+      onClickExportOption1: function (val) {
+        this.mExportOption1 = val;
+      },
+      /**
+       * Fires when click export separator option item
+       */
+      onClickExportOption2: function (val) {
+        this.mExportOption2 = val;
+      },
+      /**
+       * Fire when click add file button
+       */
+      onClickAddFiles: function () {
+        this.$refs.files.click();
+      },
+      /**
+       * Fires when file select change
+       */
+      onSelectedFilesChange: function () {
+        // If single file mode then clear
+        if (!this.mMultiple) {
+          this.mSelectedFiles = [];
+        }
+
+        var files = this.$refs.files.files;
+
+        for (var i = 0; i < files.length; i++) {
+          this.mSelectedFiles.push(files[i]);
+        }
+
+        // Reset input
+        this.$refs.files.type = 'text';
+        this.$refs.files.type = 'file';
+      },
+      /**
+       * Fires when click remove button
+       */
+      onClickFileRemove: function (index) {
+
+        this.mSelectedFiles.splice(index, 1);
+      },
+      /**
+       * Fires when click save and import button
+       */
+      onClickSaveAndImport: function () {
+        var msgTitle;
+        var msgBody;
+
+        // If Delete AND Insert
+        if (this.mImportOption1 === 3) {
+          msgTitle = 'Warning';
+          msgBody = this.mMsgDeleteConfirm;
+        } else {
+          msgTitle = 'Confirm';
+          msgBody = this.mMsgImportConfirm;
+        }
+
+        // showDialog(msgTitle.trim(), msgBody.trim(), DIALOG_TYPE.CONFIRM)
+        //   .then(
+        //     function (answer) {
+        //       if (answer) {
+                vmImportExport.doSaveAndImport();
+          //     }
+          //   }
+          // );
+      },
+      /**
+       * Initial data
+       */
+      doInitData: function () {
+
+        this.mImportOption1 = 2;
+        this.mImportOption2 = 0;
+        
+        this.mExportOption1 = 0;
+        this.mExportOption2 = 0;
+
+        this.mSelectedFiles = [];
+        this.mTableDataCount = 0;
+        this.mTableJobStatus = true;
+
+        // Reset input
+        if (this.$refs.files !== undefined) {
+          this.$refs.files.type = 'text';
+          this.$refs.files.type = 'file';
+        }
+      },
+      /**
+       * Load permission data
+       */
+      doLoadPermissionData: function () {
+        // Request delete permission data
+        this.requestPermissionData(this);
+      },
+      /**
+       * Load tables data
+       */
+      doLoadModulesData: function () {
+        // Console
+        var logMsg = 'LoadModulesData service start';
+        this.showConsoleLog(logMsg);
+
+        // Request module list data
+        this.requestModuleList(this);
+      },
+      /**
+       * Load tables data
+       */
+      doLoadTablesData: function (val) {
+        // Console
+        var logMsg = 'LoadTablesData service start';
+        this.showConsoleLog(logMsg);
+
+        // Refresh tree view
+        this.mTreeAreaVisible = false;
+
+        // Visible no content view
+        this.mImportAreaVisible = false;
+
+        // Request table list data
+        this.requestTableList(this, val);
+      },
+      /**
+       * Load tables data
+       */
+      doLoadTableStatusData: function (val) {
+        // Console
+        var logMsg = 'LoadTableStatusData service start';
+        this.showConsoleLog(logMsg);
+
+        // Request table list data
+        this.requestTableStatus(this, val);
+      },
+      /**
+       * Save and import files
+       */
+      doSaveAndImport: function () {
+        // Make form data
+        var formData = new FormData();
+
+        for (var i = 0; i < this.mSelectedFiles.length; i++) {
+          var file = this.mSelectedFiles[i];
+
+          formData.append('FILES', file);
+        }
+
+        this.postUploadFiles(this, formData);
+      },
+      /**
+       * Export and download the excel file
+       */
+      doExcelExport: function () {
+        this.requestDownloadFile();
+      },
+      /**
+       * Get delete permission data from request
+       */
+      requestPermissionData: function (vm) {
+        // Request delete permission data
+        axios
+          .get(this.mUrlGetPermission)
+          .then(function (response) {
+            vm.setPermissionData(response.data);
+          })
+          .catch(function (e) {
+            console.error(e);
+          });
+      },
+      /**
+       * Set permission data when get response
+       */
+      setPermissionData: function (data) {
+        // Set hidden option by delete permission data
+        this.HIDDEN_OPTION_ON = data.usability;
+      },
+      /**
+       * Get module list data from request
+       */
+      requestModuleList: function (vm) {
+        // Request module list data
+        axios
+          .get(this.mUrlGetModuleList)
+          .then(function (response) {
+            vm.setModuleList(response.data);
+          })
+          .catch(function (e) {
+            console.error(e);
+          });
+      },
+      /**
+       * Set module list data when get response
+       */
+      setModuleList: function (data) {
+        // Console
+        var logMsg = 'LoadModulesData service end ' + '\n' + JSON.stringify(data);
+        this.showConsoleLog(logMsg, true);
+
+        // Set request data
+        this.mModuleList = data;
+
+        // Set default selected module
+        this.mSelectedModule = this.mModuleList[0];
+      },
+      /**
+       * Get table list data from request
+       */
+      requestTableList: function (vm, module) {
+        // Request table list data
+        axios
+          .get(this.mUrlGetTableList, {
+            params: {
+              JOB_MODULE: module,
+            }
+          })
+          .then(function (response) {
+            if (response.status === gHttpStatus.SUCCESS) {
+              vm.setTableList(response.data);
+            } else if (response.status === gHttpStatus.NO_CONTENT) {
+              showDialog('Warning', vm.mMsgImportDisable.trim(), DIALOG_TYPE.ALERT, true);
+            }
+          })
+          .catch(function (e) {
+            console.error(e);
+            showDialog('Error', vm.mMsgCommTableInvalid.trim(), DIALOG_TYPE.ALERT, true);
+          });
+      },
+      /**
+       * Set table list data when get response
+       */
+      setTableList: function (data) {
+        // Console
+        var logMsg = 'LoadTablesData service end ' + '\n' + JSON.stringify(data);
+        this.showConsoleLog(logMsg, true);
+
+        // Set request data
+        this.mTableList = data;
+
+        // Render tree view
+        this.mTreeAreaVisible = true;
+      },
+      /**
+       * Request table status data
+       */
+      requestTableStatus: function (vm, table) {
+        // Request table status data
+        axios
+          .get(this.mUrlGetTableStatus, {
+            params: {
+              JOB_TABLE: table,
+            }
+          })
+          .then(function (response) {
+            vm.setTableStatus(response.data);
+          })
+          .catch(function (e) {
+            console.error(e);
+          });
+      },
+      /**
+       * Set table status data when get response
+       */
+      setTableStatus: function (data) {
+        // Console
+        var logMsg = 'LoadTableStatusData service end ' + '\n' + JSON.stringify(data);
+        this.showConsoleLog(logMsg, true);
+
+        // Set request data
+        this.mTableDataCount = Intl.NumberFormat().format(data.count);
+        this.mTableJobStatus = data.enable;
+      },
+      /**
+       * Post upload multipart form
+       */
+      postUploadFiles: function (vm, formData) {
+        $('#content').waitMe({
+          effect: 'bouncePulse',
+          text: 'Please Wait...',
+          bg: 'rgba(255,255,255,0.7)',
+          color: ['#000066', '#6666CC', '#993399'],
+          source: ''
+          });
+        
+        // Post files upload
+        axios.post(this.mUrlPostExcelImport,
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then(function (response) {
+            $('#content').waitMe('hide');
+            
+            if (response.data.success) {
+              vm.refreshAfterSaveAndImport(vm);
+            } else {
+              showDialog('Error', response.data.message, DIALOG_TYPE.ALERT, true);
+            }
+          })
+          .catch(function (e) {
+            console.error(e);
+          });
+      },
+      /**
+       * Get excel file download
+       */
+      requestDownloadFile: function () {
+        // Post file download
+        window.open(this.mUrlGetExcelExport);
+      },
+      /**
+       * Get level item css-class
+       */
+      getLevelItemClass: function (levelItem) {
+        // Filter any table is imported status
+        var anyImported = levelItem.filter(function (tableItem) {
+          return tableItem.imported === true;
+        });
+
+        if (anyImported.length > 0) {
+          return this.mLevelAnyImported;
+        } else {
+          return this.mLevelNoneImported;
+        }
+      },
+      /**
+       * Get table item css-class
+       */
+      getTableItemClass: function (tableItem) {
+
+        // There are 3 kinds of status
+        if (!tableItem.importable) {
+          return this.mTableNotImportable;
+        }
+        else if (tableItem.imported) {
+          return this.mTableImported;
+        } else if (tableItem.essential) {
+          return this.mTableMandatory;
+        } else {
+          return this.mTableOption;
+        }
+      },
+      /**
+       * Refresh after save and import
+       */
+      refreshAfterSaveAndImport: function (vm) {
+        // Refresh after confirm
+        showDialog('Success', this.mMsgSaveAndImport.trim(), DIALOG_TYPE.ALERT)
+          .then(
+            function (answer) {
+              if (answer) {
+                vm.mSelectedFiles = [];
+                vm.doInitData();
+                vm.doLoadTablesData(vm.mSelectedModule);
+                // vm.doLoadTableStatusData(vm.mSelectedTable);
+              }
+            }
+          );
+      },
+      /**
+       * Show console log
+       */
+      showConsoleLog: function (logInfo, isFine) {
+        if (this.mLogEnable) {
+          isFine ? console.log(logInfo) : console.log(logInfo);
+        }
+      }
+    }
+  });
+</script>

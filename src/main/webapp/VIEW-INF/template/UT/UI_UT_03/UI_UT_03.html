@@ -1,0 +1,134 @@
+<section id="contentsInner" class="STANDARD UI_UT_03">
+
+  <!-- Vue instance wrapper -->
+  <div id="contents" class="vue-app content_area parentCon">
+    <kendo-splitter :orientation="'horizontal'"
+            :panes="[ { size: '340px', collapsible: true, resizable: false }, {} ]"
+            @resize="doResize"
+            style="height:100%;">
+
+      <!-- Left -->
+      <div class="search_area">
+
+        <!-- Search btn -->
+        <div class='commonBtn_area'>
+          <kendo-button @click="doRefresh"><i class="fa fa-lg fa-refresh"></i></kendo-button>
+          <kendo-button @click="doDataLoad"><i class="fa fa-lg fa-search"></i></kendo-button>
+        </div>
+
+        <!-- Option TAB -->
+        <div class='srhTab_area'>
+          <kendo-tabstrip id="SRH_TAB" style="height: calc(100% - 65px);">
+
+            <!-- TAB Header -->
+            <ul>
+              <li class="k-state-active">
+                <span id="t1-1" v-t="'BASE_OPTION'"></span>
+              </li>
+            </ul>
+
+            <!-- TAB Body -->
+            <div style="height: 100%; display: block;">
+
+              <!-- Module input -->
+              <div class="parentCon">
+
+                <!-- Label -->
+                <span class="leftCon">
+									<span class="kd_labelWrap" v-t="'LABEL_JOB_MODULE'">Job Module</span>
+								</span>
+
+                <!-- Input -->
+                <span class="rightCon">
+                  <input type="text" class="k-textbox" v-model="mJobModule"
+                       @keydown.enter="doDataLoad" style="width: 190px;">
+								</span>
+              </div>
+
+              <br>
+
+              <!-- Table input -->
+              <div class="parentCon">
+
+                <!-- Label -->
+                <span class="leftCon">
+									<span class="kd_labelWrap" v-t="'LABEL_JOB_TABLE'">Job Table</span>
+								</span>
+
+                <!-- Input -->
+                <span class="rightCon">
+                  <input type="text" class="k-textbox" v-model="mJobTable"
+                       @keydown.enter="doDataLoad" style="width: 190px;">
+								</span>
+              </div>
+
+              <br>
+
+              <!-- Status selection -->
+              <div class="parentCon">
+
+                <!-- Label -->
+                <span class="leftCon">
+									<span class="kd_labelWrap" v-t="'LABEL_JOB_STATUS'">Job Status</span>
+								</span>
+
+                <!-- Combo box-->
+                <span class="rightCon">
+                  <kendo-combobox
+                      v-model="mJobStatus"
+                      :data-source="mJobStatusSelection"
+                      :data-text-field="'text'"
+                      :data-value-field="'value'"
+                      :filter="'contains'"
+                      :placeholder="'Select...'">
+                  </kendo-combobox>
+								</span>
+              </div>
+
+              <br>
+
+              <!-- Error selection -->
+              <div class="parentCon">
+
+                <!-- Label -->
+                <span class="leftCon">
+									<span class="kd_labelWrap" v-t="'LABEL_JOB_ERROR'">Job Error</span>
+								</span>
+
+                <!-- Combo box-->
+                <span class="rightCon">
+                  <kendo-combobox
+                      v-model="mJobError"
+                      :data-source="mJobErrorSelection"
+                      :data-text-field="'text'"
+                      :data-value-field="'value'"
+                      :filter="'contains'"
+                      :placeholder="'Select...'">
+                  </kendo-combobox>
+								</span>
+              </div>
+
+            </div>
+
+          </kendo-tabstrip>
+
+        </div>
+      </div>
+
+      <!-- Right -->
+      <div class="result_area">
+        <div class="row" style="height: 100%">
+
+          <!-- RealGrid wrapper -->
+          <div style="height: 100%" class="component_ui wingui_component">
+            <div id="grid" style='width: 1310px; height: 750px;'></div>
+          </div>
+
+        </div>
+      </div>
+
+    </kendo-splitter>
+
+  </div>
+
+</section>

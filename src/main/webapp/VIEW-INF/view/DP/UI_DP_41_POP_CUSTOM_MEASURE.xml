@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_DP_41_POP_CUSTOM_MEASURE" version="2.0">
+    <component id="UI_DP_41_POP_CUSTOM_MEASURE_WINDOWS" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>CUSTOM_MEASURE_POP</title>
+            <width>376</width>
+            <height>571</height>
+            <visible>false</visible>
+            <modal>false</modal>
+            <init-render>true</init-render>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_CONTAINER_00" type="CONTAINER">
+        <props>
+            <containers>
+                <container id="N" expand="true" init-render="true" />
+                <container id="Y" expand="false" init-render="false" />
+            </containers>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="POP_CUSTOM_MEASURE_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+        </props>
+    </component>
+    <component id="POP_CUSTOM_MEASURE_CPT_T1_01_02" type="DATEPICKER">
+        <props>
+            <width>120</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_CUSTOM_MEASURE_CPT_T1_01_03" type="BUTTON">
+        <props>
+            <tooltip>The value is calculated based on the start date on the left.</tooltip>
+            <icon>calculator</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_COMMON_POP_CUSTOM_MEASURE_CPT_T1_01_03_WAIT_ON">
+                    <component-id>COMMON</component-id>
+                    <operation-id>WAIT-ON</operation-id>
+                    <complete>
+                        <operation-call id="OPC_POP_CUSTOM_MEASURE_RST_CPT_01_CREATE">
+                            <component-id>POP_CUSTOM_MEASURE_RST_CPT_01</component-id>
+                            <operation-id>CREATE</operation-id>
+                            <success>
+                                <operation-call id="OPC_POP_CUSTOM_MEASURE_RST_CPT_01_CREATE_SUCCESS_MSG">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Information" />
+                                        <parameter id="msg" reference-data="POP_CUSTOM_MEASURE_RST_CPT_01:SVC_SET_SP_UI_DP_41_POP_S2:IM_DATA" extract-by="SP_UI_DP_41_POP_S2_P_RT_MSG" />
+                                        <parameter id="type" value="info" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                            <complete>
+                                <operation-call id="OPC_COMMON_POP_CUSTOM_MEASURE_CPT_T1_01_03_WAIT_OFF">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>WAIT-OFF</operation-id>
+                                </operation-call>
+                            </complete>
+                        </operation-call>
+                        <operation-call id="OPC_UI_DP_41_POP_CUSTOM_MEASURE_WINDOWS_CLOSE">
+                            <component-id>UI_DP_41_POP_CUSTOM_MEASURE_WINDOWS</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_CUSTOM_MEASURE_CPT_T1_01_07" type="BUTTON">
+        <props>
+            <icon>add</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_CUSTOM_MEASURE_RST_CPT_01_OPERATION_001">
+                    <component-id>POP_CUSTOM_MEASURE_RST_CPT_01</component-id>
+                    <operation-id>INSERT_ROW</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_CUSTOM_MEASURE_CPT_T1_01_08" type="BUTTON">
+        <props>
+            <icon>minus</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_DIALOG_ALERT_DATA_REMOVE">
+                    <component-id>COMMON</component-id>
+                    <operation-id>DIALOG</operation-id>
+                    <parameters>
+                        <parameter id="title" value="Delete" />
+                        <parameter id="msg" value="Are you sure to remove all data?" />
+                        <parameter id="type" value="confirm" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_CHECKED_ROW_COUNT">
+                            <component>POP_CUSTOM_MEASURE_RST_CPT_01</component>
+                            <key>checked_rowCount</key>
+                            <operator>notEqual</operator>
+                            <value>0</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_CUSTOM_MEASURE_RST_CPT_01_OPERATION_002">
+                            <component-id>POP_CUSTOM_MEASURE_CPT_T1_01_08</component-id>
+                            <operation-id>REMOVE_ROW</operation-id>
+                            <success>
+                                <operation-call id="OPC_POP_CUSTOM_MEASURE_RST_CPT_01_DELETE_SUCCESS_MSG">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Information" />
+                                        <parameter id="msg" reference-data="POP_CUSTOM_MEASURE_CPT_T1_01_08:SVC_SET_SP_UI_DP_41_POP_D1:IM_DATA" extract-by="SP_UI_DP_41_POP_D1_P_RT_MSG" />
+                                        <parameter id="type" value="info" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="OPC_POP_CUSTOM_MEASURE_RST_CPT_01_reload_001">
+                                    <component-id>POP_CUSTOM_MEASURE_RST_CPT_01</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                </operation-call>
+                                <operation-call id="OPC_SRH_CPT_T1_01_04_reload_001">
+                                    <component-id>SRH_CPT_T1_01_04</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                    <success>
+                                        <operation-call id="OPC_RST_CPT_01_INIT_FOR_REMOVE_BEFORE_DATA">
+                                            <component-id>RST_CPT_01</component-id>
+                                            <operation-id>INIT</operation-id>
+                                        </operation-call>
+                                    </success>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="REMOVE_ROW">
+                <service-call id="SVC_SET_SP_UI_DP_41_POP_D1">
+                    <service-id>SRV_SET_SP_UI_DP_41_POP_D1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="changes" reference-id="POP_CUSTOM_MEASURE_RST_CPT_01:checked" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_CUSTOM_MEASURE_CPT_T1_01_09" type="BUTTON">
+        <props>
+            <icon>save</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_CUSTOM_MEASURE_RST_CPT_01_OPERATION_003">
+                    <component-id>POP_CUSTOM_MEASURE_RST_CPT_01</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <conditions>
+                        <condition id="CON_CHANGED_ROW_COUNT">
+                            <component>POP_CUSTOM_MEASURE_RST_CPT_01</component>
+                            <key>changed_rowCount</key>
+                            <operator>notEqual</operator>
+                            <value>0</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_CUSTOM_MEASURE_RST_CPT_01_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POP_CUSTOM_MEASURE_RST_CPT_01:SVC_SET_SP_UI_DP_41_POP_S1:IM_DATA" extract-by="SP_UI_DP_41_POP_S1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CUSTOM_MEASURE_RST_CPT_01_Reload_002">
+                            <component-id>POP_CUSTOM_MEASURE_RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_01_04_reload_002">
+                            <component-id>SRH_CPT_T1_01_04</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_CUSTOM_MEASURE_RST_CPT_01" type="R_GRID">
+        <props>
+            <height>427</height>
+            <selection-mode>ROWS</selection-mode>
+            <indicator>false</indicator>
+            <state-bar>false</state-bar>
+            <check-bar>true</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <cell-attributes>
+                <cell-attribute id="ca01">
+                    <conditions>
+                        <condition id="cond01">
+                            <column>DEL_YN</column>
+                            <operator>equal</operator>
+                            <value>N</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="app01">
+                            <column>COL_NM</column>
+                            <attrs>
+                                <background>#22000000</background>
+                                <foreground>#66000000</foreground>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+            </cell-attributes>
+            <toolbar use="false" />
+            <columns>
+                <column id="COL_NM" title="Custom Measure Code" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">false</editable>
+                    <tooltip>DESCRIP</tooltip>
+                    <candidate>
+                        <values>
+                            <value-id>MEASURE_CD</value-id>
+                            <text-id>MEASURE_CD</text-id>
+                            <service-call id="SVC_GET_SP_UI_DP_41_POP_Q0">
+                                <service-id>SRV_GET_SP_UI_DP_41_POP_Q0</service-id>
+                                <service-target>dp</service-target>
+                            </service-call>
+                        </values>
+                    </candidate>
+                </column>
+                <column id="DESCRIP" type="string">
+                    <width>200</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="CAL_YN" type="string">
+                    <width>50</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="DEL_YN" type="string">
+                    <width>50</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="CAL_BASE_DATE" type="string">
+                    <width>50</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-click">
+                <operation-call id="OPC_SRH_CPT_CONTAINER_00_ACTIVATE_001">
+                    <component-id>SRH_CPT_CONTAINER_00</component-id>
+                    <operation-id>ACTIVATE</operation-id>
+                    <parameters>
+                        <parameter id="ACTIVATE" reference-id="POP_CUSTOM_MEASURE_RST_CPT_01:selections" extract-by="CAL_YN" default-value="N" />
+                    </parameters>
+                    <success>
+                        <operation-call id="OPC_POP_CUSTOM_MEASURE_CPT_T1_01_02_SETTING_002">
+                            <component-id>POP_CUSTOM_MEASURE_CPT_T1_01_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_CUSTOM_MEASURE_RST_CPT_01:selections" extract-by="CAL_BASE_DATE" />
+                            </parameters>
+                            <conditions>
+                                <condition id="CON_CAL_YN_IS_Y">
+                                    <column>CAL_YN</column>
+                                    <operator>equal</operator>
+                                    <value>Y</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+            <action event-type="init">
+                <operation-call id="OPC_MEASURE_POP_GRID_LOAD">
+                    <component-id>POP_CUSTOM_MEASURE_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_SRH_CPT_CONTAINER_00_ACTIVATE_002">
+                            <component-id>SRH_CPT_CONTAINER_00</component-id>
+                            <operation-id>ACTIVATE</operation-id>
+                            <parameters>
+                                <parameter id="ACTIVATE" reference-id="POP_CUSTOM_MEASURE_RST_CPT_01:selections" extract-by="CAL_YN" default-value="N" />
+                            </parameters>
+                            <success>
+                                <operation-call id="OPC_POP_CUSTOM_MEASURE_CPT_T1_01_02_SETTING_001">
+                                    <component-id>POP_CUSTOM_MEASURE_CPT_T1_01_02</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="POP_CUSTOM_MEASURE_RST_CPT_01:selections" extract-by="CAL_BASE_DATE" />
+                                    </parameters>
+                                    <conditions>
+                                        <condition id="CON_CAL_YN_IS_Y">
+                                            <column>CAL_YN</column>
+                                            <operator>equal</operator>
+                                            <value>Y</value>
+                                        </condition>
+                                    </conditions>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_GET_SP_UI_DP_41_POP_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_41_POP_Q1</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+            <operation id="INSERT_ROW" />
+            <operation id="SAVE">
+                <service-call id="SVC_SET_SP_UI_DP_41_POP_S1">
+                    <service-id>SRV_SET_SP_UI_DP_41_POP_S1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="changes" reference-id="POP_CUSTOM_MEASURE_RST_CPT_01:changes" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="CREATE">
+                <service-call id="SVC_SET_SP_UI_DP_41_POP_S2">
+                    <service-id>SRV_SET_SP_UI_DP_41_POP_S2</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="COL_NM" reference-id="POP_CUSTOM_MEASURE_RST_CPT_01:selections" extract-by="COL_NM" />
+                        <parameter id="BASE_DATE" reference-id="POP_CUSTOM_MEASURE_CPT_T1_01_02" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

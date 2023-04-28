@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_BP_94" template="COMM/STANDARD:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:DP/UI_DP_COMM:DP/UI_DP_POPUP_USER" 
+                    copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_VIEW_META:UI_DP_POPUP_USER:UI_DP_94" version="2.0">
+    <publish parent="MENU_06_02" open="true" seq="240" />
+    <component id="SRH_CPT_T1_01_04" type="COMBOBOX">
+        <props>
+            <width>205</width>
+            <lang>true</lang>
+            <value-id>ATTR_01</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_LOAD_plantype">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_CONF_Q1_01" value="DP_PLAN_TYPE" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_02" value="DP_PLAN_YEARLY" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                    </parameters>
+                    <success>
+                        <operation-call id="OPC_SELECT_plantype">
+                            <component-id>SRH_CPT_T1_01_04</component-id>
+                            <operation-id>SELECT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+            <action event-type="select-item">
+                <operation-call id="OPC_LOAD_version">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_LOAD_authtype">
+                            <component-id>SRH_CPT_T1_05_04</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="SP_UI_DP_00_EMP_AUTH_TP_Q1_01" reference-id="SRH_CPT_T1_03_04" default-value="admin" />
+                            </parameters>
+                            <success>
+                                <operation-call id="OPC_AUTH_SET">
+                                    <component-id>SRH_CPT_T1_05_04</component-id>
+                                    <operation-id>SELECT</operation-id>
+                                    <parameters>
+                                        <parameter id="INDEX" value="0" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_00_CONF_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+            <operation id="SELECT">
+                <service-call id="OPC_combo1_SET11">
+                    <parameters>
+                        <parameter id="INDEX" value="0" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>    
+</view>

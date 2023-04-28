@@ -1,0 +1,107 @@
+<div id="contentsInner" class="standardTemplate usrgrp">
+	<div class="searchWrap parentCon">
+		<div class="leftCon col-xs-12 col-sm-8 col-md-8 col-lg-9" ><!-- left-side contents-->
+			<div>
+				<span id="search_1_1" class="component_ui"></span>
+				<span id="search_1_2" class="component_ui"></span>
+			</div>
+		</div>
+		<div class="rightCon col-xs-12 col-sm-4 col-md-4 col-lg-3"><!-- right-side contents-->
+			<div>
+				<span id="button_1_1" class="component_ui"></span>
+			</div>
+		</div>
+	</div>
+	<div class="northWrap">
+		<div class="parentCon">
+			<div class="leftCon col-xs-12 col-sm-8 col-md-8 col-lg-9">
+				<span id="north_1_1" class="component_ui"></span>
+				<span id="north_1_2" class="component_ui"></span>
+				<span id="north_1_3" class="component_ui"></span>
+			</div>
+			<div class="rightCon col-xs-12 col-sm-4 col-md-4 col-lg-3">
+				<span id="north_button_1_1" class="component_ui"></span>
+				<span id="north_button_1_2" class="component_ui"></span>
+				<span id="north_button_1_3" class="component_ui"></span>
+			</div>
+		</div>
+		<div id="north" class="component_ui"></div>
+	</div>
+	<div class="southWrap">
+		<div class="parentCon">
+			<div class="leftCon col-xs-12 col-sm-8 col-md-8 col-lg-9">
+				<span id="south_1_1" class="component_ui"></span>
+				<span id="south_1_2" class="component_ui"></span>
+				<span id="south_1_3" class="component_ui"></span>
+			</div>
+			<div class="rightCon col-xs-12 col-sm-4 col-md-4 col-lg-3">
+				<span id="south_button_1_1" class="component_ui"  data-toggle="modal" data-target="#myModal"></span>
+				<span id="south_button_1_2" class="component_ui"></span>
+				<span id="south_button_1_3" class="component_ui"></span>
+			</div>
+		</div>
+		<div id="south" class="component_ui"></div>
+	</div>
+</div>
+
+<!-- Modal start-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="background-color:inherit;border:none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Select Users</h4>
+			</div>
+			<div class="modal-body">
+				<div style="text-align: right; padding-bottom: 5px">
+					<span id="srch_ex0_1_0" class="component_ui"></span>
+					<span id="srch_ex0_1_1" class="component_ui"></span>
+					<span id="srch_ex0_1_2" class="component_ui"></span>
+				</div>
+				<div>
+					<div id="srch_ex0_2_1" class="component_ui"></div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button id="modalClose" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal end-->
+<script>
+	$("#myModal").on("resize", function() {
+		doGridResize();
+	});
+
+	$("#srch_ex0_1_2").on("click", function() {
+		$("#modalClose").trigger("click");
+		addDataFromModalToSouth();
+	});
+
+	function addDataFromModalToSouth() {
+		var selectGrid = cm.getComponent("srch_ex0_2_1").getActualComponent();
+		var selectGridDataProvider = selectGrid.getDataProvider();
+		var checkedItems = selectGrid.getCheckedRows();
+		var checkedItemsRows = [];
+
+		if (checkedItems.length > 0) {
+			$.each(checkedItems, function() {
+				var rowIndex = parseInt(this);
+				var row = selectGridDataProvider.getJsonRow(rowIndex);
+				checkedItemsRows.push(row);
+			});
+		} else {
+			console.log("No row checked");
+		}
+
+		console.log("R_GRID getValue [checked] : \n", checkedItemsRows);
+
+		var userGrid = cm.getComponent("south").getActualComponent();
+		var userGridDataProvider = userGrid.getDataProvider();
+
+		userGridDataProvider.addRows(checkedItemsRows, 0, -1);
+	}
+</script>

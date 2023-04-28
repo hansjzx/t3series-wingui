@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_MP_24" template="COMM/STANDARD:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:COMM/COMM_SRH_POP_VER" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_SRH_VERSION:COMM_SRH_POP_VER:COMM_VIEW_META" version="2.0">
+    <publish parent="MENU_04_02" open="true" seq="50" />
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_01_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <selection-mode>BLOCK</selection-mode>
+            <indicator>false</indicator>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>true</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <toolbar use="true">
+                <toolbar-button operation-id="EXPORT" enable="false" visible="false" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="false" visible="false" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="COPY" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right" />
+            </toolbar>
+            <columns>
+                <column id="MODEL_TYPE" title="MODEL_TYPE" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <init-group-order>1</init-group-order>
+                </column>
+                <column id="VALID_TYPE" title="VALID_TYPE" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <init-group-order>2</init-group-order>
+                </column>
+                <column id="ATTR_NAME" title="ATTR_NAME" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <init-group-order>3</init-group-order>
+                </column>
+                <column id="ATTR_VALUE" title="ATTR_VALUE" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <init-group-order>4</init-group-order>
+                </column>
+                <column id="DATA" title="DATA" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="DESCRIPTION" title="DESCRIP" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_MP_24_GetValidationData">
+                    <service-id>GetValidationData</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

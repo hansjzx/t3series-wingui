@@ -1,0 +1,462 @@
+<script>
+    wingui.util.date.calendar.setFirstDayOfWeek(0);
+
+    content.getCreateComponentCompleteFlag().done(function () {
+        var grid = cm.getComponent('RST_CPT_01');
+        var gridWrap;
+
+        grid.onRGridDataFillReady = function (viewId, componentId, gridView, resultData) {
+            var totalSummaryInfos = [
+                {
+                    columnName: 'TOTAL_SUM',
+                    summaryType: 'sum'
+                }
+            ];
+
+            gridWrap = new wingui.util.grid.GridWrap(gridView);
+            
+			console.log("onRGridDataFillReady.....1");
+            var planType = cm.getComponent('SRH_CPT_T1_00_04').getValue();
+            if (planType == "Y") {
+                console.warn('planType======>',planType);
+                regexp = /\d{4}.\d{2}/;
+	            gridWrap.init(regexp);
+            } else {
+	            gridWrap.init();
+            }
+            console.log("onRGridDataFillReady.....2");
+            gridWrap.setPasteOptions({ noDataEvent: true, noEditEvent: true });
+            gridWrap.setBucketHeaderText(function () { return checkVersionBucket() == 'PW'; });
+
+			console.log("onRGridDataFillReady.....3");
+            gridWrap.addSummaryColumns(null, totalSummaryInfos);
+			
+			console.log("onRGridDataFillReady.....10");
+			setBaselineStyle(gridView);			
+ 			
+            return resultData;
+        };
+
+        grid.doBeforeSetData = function (serviceCallId, data, resultData) {
+            var gridView = grid.getActualComponent();
+
+            wingui.util.grid.filter.saveFilters(gridView, ['CATEGORY']);
+        };
+
+        grid.doAfterSetData = function (serviceCallId, data, resultData) {
+
+			console.log("doAfterSetData.....1");
+            var gridView = grid.getActualComponent();
+    		gridView.addCellStyle("validationStyle", {"background": "#ffFFC7CE", "foreground":"#ff9C0006"});            	                       
+            if(serviceCallId == "EXCEL_IMPORT"){
+				var editMeasures = dm.getDataState("VIEW_META").PSNZ_INFO.RESULT_DATA.filter(function(columnInfo){	 
+					return columnInfo.GRID_ID =="RST_CPT_01" && columnInfo.PIVOT_ITEM_CD =="GROUP-VERTICAL-VALUES" && columnInfo.EDIT_MEASURE;
+				}).map(function(columnInfo){ return columnInfo.FIELD_NM});
+				setValidationCellStyle(gridView, data, "validationStyle", editMeasures, 0,null, false);						
+			}//when excel import
+
+//			var fluctuationRate = ['FLUCTUATION_RATE'];
+//			setValidationCellStyle(gridView, data, "validationStyle", fluctuationRate, 20, 500, true);						
+			
+            var groupMeasureName = getGroupTotalMeasure();
+            var measureNames = getRowTotalMeasures();
+            console.log("doAfterSetData.....2");
+            gridWrap.addSummaryFooter('CATEGORY', groupMeasureName, measureNames);
+
+            window.requestAnimationFrame(function () {
+            	//to seperate            	
+            	//gridWrap.setCellStyleUneditable(null, getDTF().substring(0, 10),null, 'DTF'); // edit ������ �ʹ� ������ ����
+            	setDTFUneditableStyle(gridView);
+            });
+
+			console.log("doAfterSetData.....3");
+            wingui.util.grid.filter.loadFilters(gridView, ['CATEGORY']);
+            wingui.util.grid.sorter.orderBy(gridView, gridView.dataColumns.filter(function (dataColumn) {
+                return dataColumn.fieldName.startsWith('DIMENSION');
+            }).map(function (dataColumn) {
+                return dataColumn.fieldName;
+            }));
+        };
+
+        grid.onRGridColumnHeaderClicked = function (viewId, componentId, gridView, column, rightClicked) {
+            wingui.util.grid.sorter.orderBy(gridView, []);
+        };
+		grid.onRGridCellClicked = function(viewId, componentId, gridView, itemIndex, dataRow, field) {
+				if(viewId =="UI_DP_25_CHART" || viewId == "UI_DP_26_CHART" || viewId =="UI_DP_95_CHART" || viewId =="UI_DP_96_CHART"){
+					console.log("[DEVELOP_LOG] Tab Value",cm.getComponent("RST_CRT_01_01"));	
+					makeChartMeasure(viewId, cm.getComponent("RST_CRT_01_01").getValue());	//UI_DP_25_CHART.html			
+				}
+		}
+        grid.onRGridCellEdited = function(viewId, componentId, gridView, itemIndex, dataRow, field) {
+        	setDTFUneditableStyle(gridView);
+        	
+            gridWrap.setChangedValue(dataRow, field);
+            gridWrap.setDefaultValue(dataRow, field);
+        };
+    });
+
+  //For Measure Copy Function (create dttm 2019.04.17~22) ********************************************************************
+    content.getCreateComponentCompleteFlag().done(function() {
+
+        var com1 = cm.getComponent("MEASURE_COPY_POP_WINDOW_01_CPT_11_01")
+        if (com1 != null) {
+        	com1.onComponentClicked = function() {
+	            copyMeasure(cm.getComponent("RST_CPT_01").getActualComponent()); //gridView
+	        }
+        }
+        
+        var beforeSvcCall = function(paramMap,componentId, operationId, serviceCallId) {
+    		paramMap = getTarget(paramMap)
+			var doBeforeServiceCallResult = {
+					result : true,
+					msg : '',
+					paramMap : paramMap
+				};
+			//console.log("hanguls ===>",componentId, operationId, serviceCallId);
+			return doBeforeServiceCallResult; // result return
+		}// function 
+        
+		
+        var com2 = cm.getComponent("DATA_04")
+        if (com2 != null) {
+	    	com2.doBeforeServiceCall = beforeSvcCall	
+    	}
+      
+        var com3 = cm.getComponent("SRH_CPT_T1_05_04")
+        if (com3 != null) {
+	      	com3.doBeforeServiceCall = beforeSvcCall		
+        }
+        
+        var com4=cm.getComponent("RST_CPT_01_08")
+        if (com4 != null) {
+		  	com4.doBeforeServiceCall = beforeSvcCall	
+        }
+        
+        var com5 = cm.getComponent("RST_CPT_01_09")
+        if (com5 != null) {
+        	com5.doBeforeServiceCall = beforeSvcCall
+        }
+        
+        var com6 = cm.getComponent("RST_CPT_01_10")
+        if (com6 != null) {
+        	com6.doBeforeServiceCall = beforeSvcCall	
+        }
+
+	  
+       	cm.getComponent('RST_CPT_01').doBeforeServiceCall = function(paramMap,componentId, operationId, serviceCallId) {
+      		paramMap = getTarget(paramMap)
+			var doBeforeServiceCallResult = {
+				result : true,
+				msg : '',
+				paramMap : paramMap
+			};
+			
+			//console.log("hanguls===>",paramMap);
+		      /*decimal places check validation (2019-12-17)**************************************************************************/
+			/*
+			if (serviceCallId == 'SVC_SetDemand') { // service call id at operation
+		    	//console.log("[KSH] paramMap", paramMap);
+		    	var grid = cm.getComponent('RST_CPT_01');            
+		    	var gridView = grid.getActualComponent();
+				if (typeof paramMap.changes == "undefined") {            
+			    	gridView.hideToast();
+	                return {
+			    			result : false,msg : '',paramMap : paramMap
+						};
+			    }  
+			    var dataProvider = gridView.getDataProvider();
+			    var dtfNum = dm.getDataState("DATA_03").SVC_LATEST_VER_INIT.RESULT_DATA[0].DTF;		    
+			    var categoryIndex = dataProvider.getFieldIndex("CATEGORY");
+			    var fieldCount = dataProvider.getFieldCount();
+			    var rowIndexes = dataProvider.getAllStateRows().updated;
+			    if(rowIndexes.length == 0){
+			    	rowIndexes = dataProvider.getAllStateRows().created;
+			    	rowIndexes = rowIndexes.filter(function(rowIndex){
+			    		//console.log(gridView.getCellStyle(rowIndex, categoryIndex+dtfNum));
+			    		return gridView.getCellStyle(rowIndex, categoryIndex+dtfNum) == "STYLE_ID_EDIT_MEASURE";
+			    	});	
+			    }
+			    
+			    var rows = rowIndexes.map(function(rowIndex){
+			    	return [rowIndex, dataProvider.getJsonRow(rowIndex)];
+			    });
+			    var unclearRowIndexes = rows.filter(function(row){
+			    	for(var i=categoryIndex+1; i<fieldCount; i++){
+			            var fieldName = dataProvider.getFieldName(i);	
+			            //console.error("hanguls value==>", row[1][fieldName], " cal?:", row[1][fieldName] % 1, "check?:", Math.sign(row[1][fieldName]));
+			            if(fieldName.includes(",VALUE") && Math.sign(row[1][fieldName]) === -1) {
+			            	return true; 
+			            }
+			        }
+			    	return false;
+			    }).map(function(row){
+					return gridView.getItemIndex(row[0])+1;
+			    });
+			    console.log("[KSH] unclearRowIndexes", unclearRowIndexes);
+			    if(unclearRowIndexes.length > 0){
+			    	gridView.hideToast();
+			    	var validation = unclearRowIndexes[0]+' row Index';
+				    if(unclearRowIndexes.length > 1) validation = unclearRowIndexes[0]+' row Index and '+String(unclearRowIndexes.length-1)+' more row(s)';	
+			    	showDialog('Check decimal places', 'Check '+validation, DIALOG_TYPE.INFO);	//(ex) Check 2019.12.01-49 and 2 column(s)		    
+	                return {
+		    			result : false, msg : validation,paramMap : paramMap
+					};			    	
+			    }	    		   
+			}//if	
+			*/
+			return doBeforeServiceCallResult; // result return
+		}// function 
+		
+        
+    });
+
+    function copyMeasure(gridView) {
+    	console.log("/**** copyMeasure (2019.10.24 update log) ****/");
+        var dataProvider = gridView.getDataProvider();
+        var dataColumns = gridView.dataColumns;
+        var rowCount = dataProvider.getRowCount();
+
+        if (rowCount <= 0) { 
+            return;
+        }
+
+        var targetValueFieldOrigin = 'DATE';
+        var fromDate = getDateFromString(cm.getComponent("MEASURE_COPY_POP_WINDOW_01_CPT_01_04").getValue());
+        var toMeasure = cm.getComponent("MEASURE_COPY_POP_WINDOW_01_CPT_02_04");        
+        var toDate = getDateFromString(toMeasure.getValue());  
+        if(toMeasure.dateType == 'month'){
+        	toDate = new Date( toDate.getFullYear(), toDate.getMonth()+1, 0);
+        }
+        var operand = Number(cm.getComponent("MEASURE_COPY_POP_WINDOW_01_CPT_04_04").getValue());
+        var operator = cm.getComponent("MEASURE_COPY_POP_WINDOW_01_CPT_04_03").getValue();
+    	var sourceMeasure = cm.getComponent("MEASURE_COPY_POP_WINDOW_01_CPT_03_04").getValue();
+    	var targetMeasure = cm.getComponent("MEASURE_COPY_POP_WINDOW_01_CPT_05_04").getValue();    	
+//    	console.log("popupValue [fromDate, toDate, operand, operator, sourceMeasure, targetMeasure]", fromDate, toDate, operand, operator, sourceMeasure, targetMeasure);
+    	// get DTF
+        var dateFence = getDateFromString(getDTF());
+        if ((fromDate && fromDate.getTime() < dateFence.getTime()) || !fromDate) {
+            fromDate = dateFence;
+        }
+        
+        var candidateFields = [];
+
+        for (var i = 0, len = dataColumns.length; i < len; i++) {
+            var dataColumn = dataColumns[i];
+            if (dataColumn.columnIdOrg === targetValueFieldOrigin) {
+                candidateFields.push(dataColumn.fieldName);
+            }
+        }
+//		console.log("candidateFields : ", candidateFields);
+        var targetFields = [];
+
+        for (var i = 0, len = candidateFields.length; i < len; i++) {
+            var candidateField = candidateFields[i];
+            var fieldDate = getDateFromString(candidateField);
+
+            if (isTargetField(fromDate, toDate, fieldDate)) {
+                targetFields.push(candidateField);
+            }
+        }
+//		console.log("targetFields : ", targetFields);
+    	var rowSearchOptions = {fields : ['CATEGORY']};
+    	var sourceMeasureIndex, targetMeasureIndex;
+    	var measureCount = dataProvider.getDistinctValues("CATEGORY", rowCount).length;
+
+    	var dimension = dm.getDataState("VIEW_META").PSNZ_INFO.RESULT_DATA.filter(function(row){
+			return row.FIELD_ID.includes("DIMENSION") && gridView.isFiltered(row.FIELD_ID) 
+		}).map(function(row){
+			return row.FIELD_ID
+		});
+//		console.log("[lOG] Filtered dimension",dimension);
+		dataProvider.beginUpdate();
+        try {
+            for (var i = 0; i < rowCount; i = i + measureCount) {
+                //**(2) search data of actived dimension level
+                var filterableResult = true;
+                for(var k=0;k<dimension.length;k++){
+                	var filteredValues = gridView.getActiveColumnFilters(dimension[k], true).map(function(row){
+                		return row.name
+                	});
+//                	console.log("[lOG] filteredValues", filteredValues);
+                	filterableResult = filterableResult * filteredValues.some(function(val){
+                		return dataProvider.getJsonRow(i)[dimension[k]] == val;
+                	});
+                }               
+                if(filterableResult){
+                    rowSearchOptions.startIndex = i;
+                    var sourceMeasureArray= sourceMeasure.includes('+')?sourceMeasure.split('+'):[sourceMeasure];
+//                    console.log("sourceMeasureArray", sourceMeasureArray);
+                    var newData = {};
+    									//targetFields : datecolumns
+                    for (var j = 0, len = targetFields.length; j < len; j++) {
+                        var targetField = targetFields[j];
+//                        console.log("targetFields[",j,"] : ", targetField);
+                        var sourceValue = 0;
+                        for(var k=0; k<sourceMeasureArray.length;k++){
+                        	rowSearchOptions.values = [sourceMeasureArray[k]];
+//                        	console.log("sourceMeasureArray[k]", sourceMeasureArray[k]);
+                            sourceMeasureIndex = dataProvider.searchDataRow(rowSearchOptions);
+//                        	console.log("sourceMeasureIndex", sourceMeasureIndex);
+                            var sourceMeasureData = dataProvider.getJsonRow(sourceMeasureIndex);
+//                            console.log("sourceMeasureData",sourceMeasureData);
+                            sourceValue = sourceValue+ Number(sourceMeasureData[targetField]);
+                        }
+                        switch (operator) {
+                            case 'multiple':
+                                newData[targetField] = sourceValue * operand;
+                                break;
+
+                            case 'divide' :
+                                newData[targetField] = sourceValue / operand;
+                                break;
+
+                            case 'add' :
+                                newData[targetField] = sourceValue + operand;
+                                break;
+
+                            case 'minus' :
+                                newData[targetField] = sourceValue - operand;
+                                break;
+
+                            default:
+                                newData[targetField] = sourceValue;
+                                break;
+                        }
+                    }
+//    				console.log("newData : ", newData);
+                    newData['CATEGORY'] = targetMeasure;
+//                    console.log("targetMeasure : ", targetMeasure);
+                    rowSearchOptions.values = [targetMeasure];
+                    targetMeasureIndex = dataProvider.searchDataRow(rowSearchOptions);
+//    				console.log("targetMeasureIndex : ", targetMeasureIndex);
+                    dataProvider.updateRow(targetMeasureIndex, newData);                	
+                }//if(filterableCount==0 || dimension.length == 0) end
+            }
+        } finally {
+            dataProvider.endUpdate();
+        }
+    }
+
+    function getDateFromString(dateString) {
+        if (dateString) {
+            var temp = dateString.replaceAll(/\D/gi, '');
+            if (temp.length > 6) {
+            	dateString = new Date(temp.substr(0,4) + '-' + temp.substr(4,2) + '-' + temp.substr(6,2));
+            } else {
+            	dateString = new Date(temp.substr(0,4) + '-' + temp.substr(4,2));
+            }
+        }
+        return dateString;
+    }
+
+    function isTargetField(fromDate, toDate, fieldDate) {
+        var result = true;
+
+        if ((fromDate && fieldDate.getTime() < fromDate.getTime())
+            || (toDate && fieldDate.getTime() > toDate.getTime())) {
+            result = false;
+        }
+
+        return result;
+    }    
+    
+    function setDTFUneditableStyle(gridView){
+     	var dataProvider = gridView.getDataProvider();            	 
+    	gridView.beginUpdate();
+    	 try{
+        	 var dateColumnNames = gridView.dataColumns.filter(function (dataColumn) {
+                 return dataColumn.columnIdOrg == 'DATE';
+             }).map(function (dataColumn) {
+                 return dataColumn.name;
+             });        						
+    		var unEditableStyle1_Rows =[];//default     
+    		for(var i=0; i < dataProvider.getRowCount() ; i++){
+   				unEditableStyle1_Rows.push(i);
+    		} 		
+    		var dtfDate = getDateFromString(getDTF());
+    		if(unEditableStyle1_Rows.length){    		
+    			var unEditableStyle1_Fields = dateColumnNames.filter(function(columnName){
+    				return getDateFromString(columnName.replace("DATE_","").substring(0,10)) < dtfDate
+    			});
+    			gridView.setCellStyles(unEditableStyle1_Rows, unEditableStyle1_Fields,'uneditable'); //cellStyle in wingui-custom.js	
+    			//console.log("unEditableStyle1_Fields", unEditableStyle1_Fields);
+    		}
+    	 } finally{
+     		//ENDUPDATE  
+    		 //console.log("setDTFUneditableStyle end", new Date())
+    			gridView.endUpdate();            		 
+     	 }      	
+    }
+	//2019-10-01 make a setValidationCellStyle Function
+    function setValidationCellStyle(gridView, data, validationStyle, measures, lowValue,highValue, equalYN){
+		var validationData = data.map(function(rw){	
+		    var keys = Object.keys(rw).filter(function(key){
+				return key.includes(",VALUE") && measures.includes(rw["CATEGORY"])
+            }).filter(function(key){   
+            	if(equalYN){
+    				if(lowValue !== null && highValue !== null)	//������ �Ѵ� ���� ���
+    					return rw[key] <= lowValue || rw[key] >= highValue
+                	if(lowValue !== null)	//���� ���� ���� ���
+                		return rw[key] <= lowValue
+                	if(highValue !== null)	//���� ���� ���� ���
+                		return rw[key] >= highValue            		
+            	}else{
+    				if(lowValue !== null && highValue !== null)	//������ �Ѵ� ���� ���
+    					return rw[key] < lowValue || rw[key] > highValue
+                	if(lowValue !== null)	
+                		return rw[key] < lowValue
+                	if(highValue !== null)	
+                		return rw[key] > highValue            		            		
+            	}
+				return null
+			});
+		    //console.log("keys", keys);
+			return keys;
+			});
+		var rowsIndex = Object.keys(validationData).filter(function(key){
+		return validationData[key].length
+		});
+		rowsIndex.map(function(Index){
+		if(validationData[Index].length !== 0)
+			gridView.setCellStyles(Index, validationData[Index], validationStyle);						     
+		return;
+		});    	
+    }
+	//2019.10.24 mark a header containing today
+	function setBaselineStyle(gridView){
+		var dataProvider = gridView.getDataProvider();
+		var dates = dataProvider.getFieldNames().filter(function(col){
+			if (!col.startsWith("DATE_")){
+				return false;
+			}
+			var colDate = col.replace("DATE_","").replace(",VALUE","").substring(0,10);
+			return getDateFromString(colDate) <= new Date(); 
+		})
+		
+		var baseColumnName = null;
+		if (dates &&  dates.length) {
+				baseColumnName = dates.reduce( function (previous, current) { 
+				return previous > current ? previous:current;
+			});
+		}
+			
+		if (baseColumnName != null) {	
+			var baselineColumnProperty = gridView.getColumnProperty(baseColumnName, "header");
+			baselineColumnProperty.styles = {"background":"#87CEFA"};
+			baselineColumnProperty.text = baselineColumnProperty.text+" (now)";
+			gridView.setColumnProperty(baseColumnName, "header", baselineColumnProperty);
+		}
+	}	
+	
+	function getTarget(paramMap){
+		var planType = cm.getComponent("SRH_CPT_T1_00_04").getValue();	
+		var serverName = "T3SeriesDemandPlanServer";
+//		console.log("[DEVELOP_LOG] paramMap", paramMap);
+		if (planType == "Y" && paramMap["target"] == serverName){
+//			console.log("[DEVELOP_LOG] dp server if service");
+				paramMap["target"] = serverName+"_Y";				
+		}		
+		return paramMap
+	}
+	
+</script>

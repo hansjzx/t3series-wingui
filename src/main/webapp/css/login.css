@@ -1,0 +1,33 @@
+body, html, #root {
+  height: 100%;
+}
+
+body {
+  overflow-y: auto;
+  opacity: 1 !important;
+  margin: 0;
+  font-family: var(--bs-font-sans-serif);
+  font-size: .875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #f5f7fb;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.bg-login {
+  background: #e8f0fe;
+}
+
+.login {
+  float: right !important;
+  margin: 12px;
+  border: none !important;
+  border-radius: 5px !important;
+  text-align: left;
+}
+
+.card {
+  border: 0
+}

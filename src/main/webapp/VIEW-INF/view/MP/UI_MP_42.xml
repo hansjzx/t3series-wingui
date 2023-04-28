@@ -1,0 +1,1101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_MP_42" template="MP/UI_MP_41:MP/UI_MP_41_EXT:COMM/COMM_REDRAW_CHART_EXT:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:COMM/COMM_POP_SIM_ADJ_CNFM_PLAN:COMM/COMM_SRH_POP_VER:COMM/COMM_SRH_POP_LOCAT:CM/POP_UI_CM_LOCAT:COMM/COMM_SRH_POP_RES" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_BTN_CNFM_PLAN:COMM_POP_SIM_ADJ_CNFM_PLAN:COMM_SRH_VERSION:COMM_SRH_RES:COMM_SRH_POP_VER:COMM_SRH_POP_RES:COMM_SRH_POP_LOCAT:COMM_SRH_LOCAT:COMM_VIEW_META:POP_UI_CM_LOCAT" version="2.0">
+    <publish parent="MENU_04_03" open="true" seq="330" />
+    <component id="DATA_01" type="DATA">
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="TTL_CPT_03" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_06">
+                    <component-id>SRH_CPT_RES_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_07">
+                    <component-id>SRH_CPT_RES_DESCRIP_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_12">
+                    <component-id>SRH_CPT_LOCAT_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_13">
+                    <component-id>SRH_CPT_LOCAT_NM_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_18">
+                    <component-id>SRH_CPT_T1_04_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_19">
+                    <component-id>SRH_CPT_T1_05_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_23">
+                    <component-id>SRH_CPT_T1_08_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_24">
+                    <component-id>SRH_CPT_T1_04_04</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="false" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_25">
+                    <component-id>SRH_CPT_T1_05_04</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="false" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_27">
+                    <component-id>SRH_CPT_T1_05_04</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="false" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_30">
+                    <component-id>SRH_CPT_RES_CD_04</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="true" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_31">
+                    <component-id>SRH_CPT_RES_DESCRIP_04</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="true" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_32">
+                    <component-id>SRH_CPT_RES_CD_05</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="true" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_36">
+                    <component-id>CONTAINER_01</component-id>
+                    <operation-id>ACTIVATE</operation-id>
+                    <parameters>
+                        <parameter id="ACTIVATE" value="con1_1" />
+                    </parameters>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_01_LOAD">
+                    <component-id>RST_CPT_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_RST_CPT_04_LOAD">
+                            <component-id>RST_CPT_04</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_03_LOAD">
+                            <component-id>RST_CPT_03</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="337" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="RESULT_SPLIT" type="SPLIT">
+        <props>
+            <position>vertical</position>
+            <splits>
+                <split id="upper_result" collapsible="false" />
+                <split id="down_result" collapsed="false" collapsible="true" resizable="false" size="250" />
+            </splits>
+        </props>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="CONTAINER_01" type="CONTAINER">
+        <props>
+            <height>90</height>
+            <group-box>
+                <title>CONSUME_LOCAT</title>
+            </group-box>
+            <containers>
+                <container id="con1_1" expand="true" />
+                <container id="con1_2" init-render="true" />
+            </containers>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="CONTAINER_02" type="CONTAINER">
+        <props>
+            <height>90</height>
+            <group-box>
+                <title>SUPPLY_LOCAT</title>
+            </group-box>
+            <containers>
+                <container id="con2_1" expand="true" />
+            </containers>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_08_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>SCH_COND</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_08_04" type="RADIO">
+        <props>
+            <lang>true</lang>
+            <option-deployment>horizontal</option-deployment>
+            <init-value>
+                <option value="P" text="PROD" text-position="right" selected="true" />
+                <option value="T" text="TRANSP" text-position="right" />
+            </init-value>
+        </props>
+        <actions>
+            <action event-type="change">
+                <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_PROD_TYPE_01">
+                    <component-id>SRH_CPT_T1_04_05</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="false" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CHECK_SCH_COND_TP_01">
+                            <component>SRH_CPT_T1_08_04</component>
+                            <operator>equal</operator>
+                            <value>P</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_PROD_TYPE_05">
+                            <component-id>SRH_CPT_T1_04_04</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_PROD_TYPE_06">
+                            <component-id>SRH_CPT_T1_04_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_PROD_TYPE_07">
+                            <component-id>SRH_CPT_T1_05_04</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_PROD_TYPE_08">
+                            <component-id>SRH_CPT_T1_05_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_PROD_TYPE_14">
+                            <component-id>SRH_CPT_RES_CD_04</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="true" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_PROD_TYPE_15">
+                            <component-id>SRH_CPT_RES_CD_05</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="true" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_PROD_TYPE_17">
+                            <component-id>SRH_CPT_RES_DESCRIP_04</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="true" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_PROD_TYPE_20">
+                            <component-id>SRH_CPT_LOCAT_CD_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_PROD_TYPE_21">
+                            <component-id>SRH_CPT_LOCAT_NM_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_TRANSP_TYPE_01">
+                    <component-id>SRH_CPT_T1_04_05</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="true" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CHECK_SCH_COND_TP_01">
+                            <component>SRH_CPT_T1_08_04</component>
+                            <operator>equal</operator>
+                            <value>T</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_TRANSP_TYPE_05">
+                            <component-id>SRH_CPT_T1_04_04</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="true" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_TRANSP_TYPE_06">
+                            <component-id>SRH_CPT_T1_05_04</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="true" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_TRANSP_TYPE_15">
+                            <component-id>SRH_CPT_RES_CD_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_TRANSP_TYPE_16">
+                            <component-id>SRH_CPT_RES_CD_04</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_TRANSP_TYPE_17">
+                            <component-id>SRH_CPT_RES_CD_05</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_TRANSP_TYPE_18">
+                            <component-id>SRH_CPT_RES_CD_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_TRANSP_TYPE_19">
+                            <component-id>SRH_CPT_RES_DESCRIP_04</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_TRANSP_TYPE_20">
+                            <component-id>SRH_CPT_RES_DESCRIP_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_TRANSP_TYPE_23">
+                            <component-id>SRH_CPT_LOCAT_CD_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_08_04_SELECT_TRANSP_TYPE_24">
+                            <component-id>SRH_CPT_LOCAT_NM_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SELECT" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_LOCAT_CD_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_CD</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_LOCAT_CD_04" type="INPUTBOX">
+        <props>
+            <width>147.7</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_LOCAT_CD_05" type="BUTTON">
+        <props>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_SRH_CPT_LOCAT_TP_05_SET_DATA">
+                    <component-id>DATA_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="POSITION" value="CONSUME" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_SRH_CPT_LOCAT_TP_05_CLICK">
+                    <component-id>POP_UI_MP_41_01_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_SRH_CPT_LOCAT_TP_05_CLICK_SUCCESS_01">
+                            <component-id>POP_UI_MP_41_01_WINDOW_01_GRID</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_CPT_LOCAT_NM_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_NM</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_LOCAT_NM_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_04_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_CD</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_04_04" type="INPUTBOX">
+        <props>
+            <width>147.7</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SRH_CPT_T1_04_04_INIT">
+                    <component-id>SRH_CPT_T1_04_04</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="false" />
+                    </parameters>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_04_05" type="BUTTON">
+        <props>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_SRH_CPT_T1_04_05_SET_DATA">
+                    <component-id>DATA_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="POSITION" value="SUPPLY" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_SRH_CPT_T1_04_05_CLICK">
+                    <component-id>POP_UI_MP_41_01_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_SRH_CPT_T1_04_05_CLICK_SUCCESS_01">
+                            <component-id>POP_UI_MP_41_01_WINDOW_01_GRID</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+            <action event-type="init">
+                <operation-call id="OPC_SRH_CPT_T1_04_05_INIT">
+                    <component-id>SRH_CPT_T1_04_05</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="false" />
+                    </parameters>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_NM</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_05_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SRH_CPT_T1_05_04_INIT">
+                    <component-id>SRH_CPT_T1_05_04</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="false" />
+                    </parameters>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="RST_CPT_01" type="CHART">
+        <props>
+            <height>250</height>
+            <theme>bootstrap</theme>
+            <series-width>10</series-width>
+            <legend>
+                <visible>true</visible>
+                <position>bottom</position>
+            </legend>
+            <tooltip>
+                <visible>true</visible>
+                <format>#,###.###</format>
+            </tooltip>
+            <category-axis>
+                <rotation>45</rotation>
+                <category id="DAT">
+                    <format>yyyy-MM-dd</format>
+                    <type>date</type>
+                </category>
+            </category-axis>
+            <value-axis>
+                <value id="QTY">
+                    <format>#,###.###</format>
+                    <axis-crossing-value>left</axis-crossing-value>
+                </value>
+            </value-axis>
+            <serieses>
+                <series id="LOAD_CAPA">
+                    <chart-type type="bar">
+                        <stack>true</stack>
+                    </chart-type>
+                    <type>double</type>
+                    <criteria-axis>QTY</criteria-axis>
+                </series>
+                <series id="AVAIL_CAPA">
+                    <chart-type type="bar">
+                        <stack>true</stack>
+                    </chart-type>
+                    <type>double</type>
+                    <criteria-axis>QTY</criteria-axis>
+                </series>
+                <series id="OVER_LOAD_CAPA">
+                    <chart-type type="bar">
+                        <stack>true</stack>
+                    </chart-type>
+                    <type>double</type>
+                    <criteria-axis>QTY</criteria-axis>
+                </series>
+                <series id="OVR_CAPA_VAL">
+                    <chart-type type="bar">
+                        <stack>true</stack>
+                    </chart-type>
+                    <type>double</type>
+                    <criteria-axis>QTY</criteria-axis>
+                </series>
+            </serieses>
+        </props>
+    </component>
+    <component id="RST_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t2-1" title="LOAD_GRID" expand="true" />
+                <tab id="t2-2" title="OPER_GRID" init-render="true" />
+                <tab id="t2-3" title="DATA" init-render="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="RST_CPT_02" type="R_GRID">
+        <props>
+            <header-height>55</header-height>
+            <selection-mode>BLOCK</selection-mode>
+            <indicator>false</indicator>
+            <check-bar>false</check-bar>
+            <fit-style>none</fit-style>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <group-sort>true</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <toolbar use="false" />
+            <columns>
+                <column id="CONSUME_LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="CONSUME_LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="CONSUME_LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="CONSUME_LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="ACCOUNT_CD" title="ACCOUNT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="ACCOUNT_NM" title="ACCOUNT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="CHANNEL_TP" title="CHANNEL_TP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="INCOTERMS" title="INCOTERMS" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="SUPPLY_LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>SUPPLY</groups>
+                </column>
+                <column id="SUPPLY_LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>SUPPLY</groups>
+                </column>
+                <column id="SUPPLY_LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>SUPPLY</groups>
+                </column>
+                <column id="SUPPLY_LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>SUPPLY</groups>
+                </column>
+                <column id="VEHICL_TP" title="VEHICL_VAL" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="BOD_LEADTIME_PERIOD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="RES_CD" title="RES_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="RES_DESCRIP" title="RES_DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="CATEGORY" title="CATEGORY" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <lang>true</lang>
+                    <background>#FFeeeeee</background>
+                    <header-background>#FFdddddd</header-background>
+                </column>
+                <column id="DAT" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <background>#FFffffff</background>
+                    <iteration>
+                        <prefix remove="true">DAT_</prefix>
+                    </iteration>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_MP_42_GetResource_RST_CPT_02">
+                    <service-id>GetResourceStatus</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="VERSION_ID" reference-id="SRH_CPT_SIMUL_VER_ID_04" />
+                        <parameter id="SCH_COND" reference-id="SRH_CPT_T1_08_04" />
+                        <parameter id="CONSUME_LOCAT_CD" reference-id="SRH_CPT_LOCAT_CD_04" default-value="" />
+                        <parameter id="SUPPLY_LOCAT_CD" reference-id="SRH_CPT_T1_04_04" default-value="" />
+                        <parameter id="RES_CD" reference-id="SRH_CPT_RES_CD_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_03" type="R_GRID">
+        <props>
+            <header-height>55</header-height>
+            <selection-mode>BLOCK</selection-mode>
+            <indicator>false</indicator>
+            <state-bar>false</state-bar>
+            <check-bar>false</check-bar>
+            <fit-style>none</fit-style>
+            <columns>
+                <column id="CONSUME_LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="CONSUME_LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="CONSUME_LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="CONSUME_LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="ACCOUNT_CD" title="ACCOUNT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="ACCOUNT_NM" title="ACCOUNT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="CHANNEL_TP" title="CHANNEL_TP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="INCOTERMS" title="INCOTERMS" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="SUPPLY_LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>SUPPLY</groups>
+                </column>
+                <column id="SUPPLY_LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>SUPPLY</groups>
+                </column>
+                <column id="SUPPLY_LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>SUPPLY</groups>
+                </column>
+                <column id="SUPPLY_LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>SUPPLY</groups>
+                </column>
+                <column id="VEHICL_TP" title="VEHICL_VAL" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="BOD_LEADTIME_PERIOD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="RES_CD" title="RES_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="RES_DESCRIP" title="RES_DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="ITEM_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="STRT_DATE" type="datetime">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                </column>
+                <column id="WORK_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="PO_ID" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="SO_ID" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="IN_QTY" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="COMPL_QTY" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="CATEGORY" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="GRADE" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_MP_42_GetResourceOpInfo">
+                    <service-id>GetResourceOperationInfo</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="VERSION_ID" reference-id="SRH_CPT_SIMUL_VER_ID_04" />
+                        <parameter id="SCH_COND" reference-id="SRH_CPT_T1_08_04" />
+                        <parameter id="CONSUME_LOCAT_CD" reference-id="SRH_CPT_LOCAT_CD_04" default-value="" />
+                        <parameter id="SUPPLY_LOCAT_CD" reference-id="SRH_CPT_T1_04_04" default-value="" />
+                        <parameter id="RES_CD" reference-id="SRH_CPT_RES_CD_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_04" type="R_GRID">
+        <props>
+            <header-height>55</header-height>
+            <selection-mode>BLOCK</selection-mode>
+            <indicator>false</indicator>
+            <state-bar>false</state-bar>
+            <check-bar>false</check-bar>
+            <fit-style>none</fit-style>
+            <columns>
+                <column id="CONSUME_LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="CONSUME_LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="CONSUME_LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="CONSUME_LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="ACCOUNT_CD" title="ACCOUNT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="ACCOUNT_NM" title="ACCOUNT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="CHANNEL_TP" title="CHANNEL_TP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="INCOTERMS" title="INCOTERMS" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>CONSUME</groups>
+                </column>
+                <column id="SUPPLY_LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>SUPPLY</groups>
+                </column>
+                <column id="SUPPLY_LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>SUPPLY</groups>
+                </column>
+                <column id="SUPPLY_LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>SUPPLY</groups>
+                </column>
+                <column id="SUPPLY_LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>SUPPLY</groups>
+                </column>
+                <column id="VEHICL_TP" title="VEHICL_VAL" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="BOD_LEADTIME_PERIOD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="RES_CD" title="RES_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="RES_DESCRIP" title="RES_DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="DAT" title="DATE" type="datetime" sort="asc">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                </column>
+                <column id="INIT_CAPA" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="AVAIL_CAPA" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="OVER_LOAD_CAPA" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="PROD_QTY" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="AVAIL_QTY" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="RST_CPT_02:SVC_UI_MP_42_GetResource_RST_CPT_02" />
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_MP_41_01_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>COMM_SRH_POP_LOCAT</title>
+            <width>530</width>
+            <height>370</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_41_01_WINDOW_01_GRID" type="R_GRID">
+        <props>
+            <header-height>30</header-height>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <filterable>true</filterable>
+                </column>
+                <column id="LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <filterable>true</filterable>
+                </column>
+                <column id="LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="COMM_SRH_POP_LOCAT_WINDOW_01_GRD_SETDATA_07">
+                    <component-id>SRH_CPT_LOCAT_CD_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_MP_41_01_WINDOW_01_GRID:selections" extract-by="LOCAT_CD" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CHECK_POSITION_01">
+                            <component>DATA_01</component>
+                            <key>POSITION</key>
+                            <operator>equal</operator>
+                            <value>CONSUME</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="COMM_SRH_POP_LOCAT_WINDOW_01_GRD_SETDATA_08">
+                            <component-id>SRH_CPT_LOCAT_NM_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_MP_41_01_WINDOW_01_GRID:selections" extract-by="LOCAT_NM" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="COMM_SRH_POP_LOCAT_WINDOW_01_CLOSE">
+                            <component-id>POP_UI_MP_41_01_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="COMM_SRH_POP_LOCAT_WINDOW_01_GRD_SETDATA_09">
+                    <component-id>SRH_CPT_T1_04_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_MP_41_01_WINDOW_01_GRID:selections" extract-by="LOCAT_CD" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CHECK_POSITION_02">
+                            <component>DATA_01</component>
+                            <key>POSITION</key>
+                            <operator>equal</operator>
+                            <value>SUPPLY</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="COMM_SRH_POP_LOCAT_WINDOW_01_GRD_SETDATA_10">
+                            <component-id>SRH_CPT_T1_05_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_MP_41_01_WINDOW_01_GRID:selections" extract-by="LOCAT_NM" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="COMM_SRH_POP_LOCAT_WINDOW_01_CLOSE">
+                            <component-id>POP_UI_MP_41_01_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_COMM_SRH_POP_LOCAT_WINDOW_01_GRD_LOAD">
+                    <service-id>SRV_GET_LOCAT_GRID_LIST</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

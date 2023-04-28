@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_MP_15_03" version="2.0">
+    <component id="POP_TAB_03" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t4-1" title="COMM" expand="true" init-render="true" />
+                <tab id="t4-2" title="PRDUCT_LOCAT" init-render="true" />
+                <tab id="t4-3" title="LONG_DELIVY_MAT" init-render="true" />
+                <tab id="t4-4" title="MIN_ALLOC" init-render="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_00_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_TP_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_00_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_00_11" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_LV</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_00_14" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_00_21" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_CD</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_00_24" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_00_31" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_00_34" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_CD</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_01_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_02_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_TP</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_03_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_04_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>TOTAL_DMND_QTY</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_04_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>number</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>APPY_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_05_04" type="CHECKBOX">
+        <props>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_06_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>MIN_ALLOC_APPY_METHD</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_06_04" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+            <select-id>MIN_ALLOCATION_APPLY_TYPE</select-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_MP_15_03_WINDOW_01_CPT_06_04_INIT_01">
+                    <component-id>POP_UI_MP_15_03_WINDOW_01_CPT_06_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:MIN_ALLOCATION_APPLY_TYPE" />
+            </operation>
+            <operation id="SELECT" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_07_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DMND_BASE_APPY_RATE</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_07_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+            <max>0</max>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_08_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>FIXED_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_08_04" type="CHECKBOX">
+        <props>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_09_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACTV_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_09_04" type="CHECKBOX">
+        <props>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_11_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>TOTAL_LOCAT</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_11_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>number</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_12_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PRDUCT_AVAIL_QTY</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_12_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>number</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_21_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>STOCK_QTY</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_21_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>number</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_22_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>INTRANSIT_QTY</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_22_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>number</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_23_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>MAT_CONSUME_QTY</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_23_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>number</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_31_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>CHANNEL_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_31_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_32_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DEMAND_QTY</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_32_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>number</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_33_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DMND_QTY_RATIO</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_33_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>number</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_34_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LONG_DELIVY_MAT_CONSUME_QTY</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_34_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>number</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_35_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LONG_DELIVY_MAT_CONSUME_RATIO</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_35_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>number</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_36_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PRPSAL_VAL</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_36_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>number</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_37_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>MIN_ALLOC_QTY</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_37_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_99_01" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_MP_15_03_WINDOW_01_CPT_99_01_CLICK_SAVE">
+                    <component-id>POP_UI_MP_15_03_WINDOW_01_CPT_99_01</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_15_03_WINDOW_01_CPT_99_01_CLICK_01_COMPLETE_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POP_UI_MP_15_03_WINDOW_01_CPT_99_01:SVC_POP_UI_MP_15_03_S_001:IM_DATA" extract-by="SP_UI_MP_15_S1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_15_03_WINDOW_01_CPT_99_01_CLICK_02">
+                            <component-id>RST_CPT_02</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_15_03_WINDOW_01_CPT_99_01_CLICK_04">
+                            <component-id>POP_UI_MP_15_03_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SAVE">
+                <service-call id="SVC_POP_UI_MP_15_03_S_001">
+                    <service-id>SRV_UI_MP_15_S1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="CATAGY_VAL" value="CHANNEL" />
+                        <parameter id="PROD_MIX_MIN_MST_ID" reference-id="RST_CPT_02:selections" extract-by="PROD_MIX_MIN_MST_ID" />
+                        <parameter id="PROD_MIX_MIN_DTL_ID" reference-id="RST_CPT_02:selections" extract-by="PROD_MIX_MIN_DTL_ID" />
+                        <parameter id="APPY_YN" reference-id="POP_UI_MP_15_03_WINDOW_01_CPT_05_04" />
+                        <parameter id="MIN_ALLOC_APPY_MTD_ID" reference-id="POP_UI_MP_15_03_WINDOW_01_CPT_06_04" />
+                        <parameter id="DMND_BASE_APPY_RATE" reference-id="POP_UI_MP_15_03_WINDOW_01_CPT_07_04" />
+                        <parameter id="MIN_ALLOC_QTY" reference-id="POP_UI_MP_15_03_WINDOW_01_CPT_37_04" />
+                        <parameter id="FIXED_YN" reference-id="POP_UI_MP_15_03_WINDOW_01_CPT_08_04" />
+                        <parameter id="ACTV_YN" reference-id="POP_UI_MP_15_03_WINDOW_01_CPT_09_04" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_03_WINDOW_01_CPT_99_02" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_MP_15_03_WINDOW_01_CPT_13_02_CLICK">
+                    <component-id>POP_UI_MP_15_03_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

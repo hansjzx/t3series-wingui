@@ -1,0 +1,64 @@
+<script>
+	content.getCreateComponentCompleteFlag().done(function () {
+	    var grid = cm.getComponent('RST_CPT_01');
+	    var gridWrap;
+	    
+	    grid.onRGridDataFillReady = function(viewId, componentId, gridView, resultData) {
+	        gridWrap = new wingui.util.grid.GridWrap(gridView);
+	        gridWrap.init();
+	        
+	        return resultData;
+	    };
+	    
+	    grid.doAfterSetData = function(serviceCallId, data, resultData) {
+	        if (data.length == 0) return;
+	        var gridView = grid.getActualComponent();
+	        var useRowGrouping = cm.getComponent("SRH_CPT_T1_01_04").getValue();
+	        
+	        // Sub Total
+	    	var fieldNames = ["TOTAL_GROUP", "LOCAT_TP_NM", "LOCAT_LV", "LOCAT_CD", "LOCAT_NM"];
+	    	gridView.groupBy(fieldNames);
+	    	
+ 	    	gridView.setRowGroup({
+    		  	summaryMode: "aggregate",
+ 	    		mergeMode: true,
+    		  	sorting: true,
+    		  	mergeExpander: false,
+    			footerCellMerge: true,
+    			expandedAdornments: "footer",
+
+    			levels:[
+    			   {
+    				  footerStyles:{
+    					 background:"#4400FF00",
+    					 fontBold:true,
+    					 textAlignment:"far"
+    				  },
+    				  footerBarStyles:{
+    					 background:"#4400FF00"
+    				  },
+    				  barStyles:{
+    					 background:"#4400FF00"
+    				  }
+    			   }
+    			],
+    			
+   			  	createFooterCallback: function(grid, group) {
+   			  		if (!useRowGrouping) { return false; }
+   			  		
+   					if (group.level === 1) {
+   				    	return true;
+   					} else if (group.level === 5) {
+   				    	return true;
+   				    }
+   				    return false;
+   				}
+    		});
+ 	    	
+ 	    	var footer = gridView.getColumnProperty("ITEM_CD", "footer");
+ 	    	footer.groupText = gI18n.tc("SUM");
+ 	    	gridView.setColumnProperty("ITEM_CD", "footer", footer);
+	    };
+	});
+	
+</script>

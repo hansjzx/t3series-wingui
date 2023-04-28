@@ -1,0 +1,813 @@
+{
+  "groups": [
+    {
+      "name": "account",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Authentication$Account",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$Account"
+    },
+    {
+      "name": "app",
+      "type": "com.zionex.t3series.web.ApplicationProperties",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties"
+    },
+    {
+      "name": "app.authentication",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Authentication",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Authentication getAuthentication() "
+    },
+    {
+      "name": "app.authentication.account",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Authentication$Account",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Authentication.Account getAccount() "
+    },
+    {
+      "name": "app.authentication.login-policy",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Authentication$LoginPolicy",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Authentication.LoginPolicy getLoginPolicy() "
+    },
+    {
+      "name": "app.authentication.password-policy",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Authentication.PasswordPolicy getPasswordPolicy() "
+    },
+    {
+      "name": "app.cache",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Cache",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Cache getCache() "
+    },
+    {
+      "name": "app.layout",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Layout",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Layout getLayout() "
+    },
+    {
+      "name": "app.layout.navigation-bar",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Layout$NavigationBar",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Layout",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Layout.NavigationBar getNavigationBar() "
+    },
+    {
+      "name": "app.service",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Service",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Service getService() "
+    },
+    {
+      "name": "app.service.badge",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Service$Badge",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Service.Badge getBadge() "
+    },
+    {
+      "name": "app.service.file",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Service$File",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Service.File getFile() "
+    },
+    {
+      "name": "app.service.file.category",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Service.File.Category getCategory() "
+    },
+    {
+      "name": "app.session",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Session",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Session getSession() "
+    },
+    {
+      "name": "app.style",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Style",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Style getStyle() "
+    },
+    {
+      "name": "app.view-config",
+      "type": "com.zionex.t3series.web.ApplicationProperties$ViewConfig",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.ViewConfig getViewConfig() "
+    },
+    {
+      "name": "app.view-config.migration",
+      "type": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Migration",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.ViewConfig.Migration getMigration() "
+    },
+    {
+      "name": "app.view-config.publish",
+      "type": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Publish",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.ViewConfig.Publish getPublish() "
+    },
+    {
+      "name": "authentication",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Authentication",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication"
+    },
+    {
+      "name": "authentication.account",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Authentication$Account",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Authentication.Account getAccount() "
+    },
+    {
+      "name": "authentication.login-policy",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Authentication$LoginPolicy",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Authentication.LoginPolicy getLoginPolicy() "
+    },
+    {
+      "name": "authentication.password-policy",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Authentication.PasswordPolicy getPasswordPolicy() "
+    },
+    {
+      "name": "badge",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Service$Badge",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$Badge"
+    },
+    {
+      "name": "cache",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Cache",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Cache"
+    },
+    {
+      "name": "category",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category"
+    },
+    {
+      "name": "file",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Service$File",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File"
+    },
+    {
+      "name": "file.category",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Service.File.Category getCategory() "
+    },
+    {
+      "name": "layout",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Layout",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Layout"
+    },
+    {
+      "name": "layout.navigation-bar",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Layout$NavigationBar",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Layout",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Layout.NavigationBar getNavigationBar() "
+    },
+    {
+      "name": "login-policy",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Authentication$LoginPolicy",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$LoginPolicy"
+    },
+    {
+      "name": "migration",
+      "type": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Migration",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Migration"
+    },
+    {
+      "name": "navigation-bar",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Layout$NavigationBar",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Layout$NavigationBar"
+    },
+    {
+      "name": "password-policy",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "publish",
+      "type": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Publish",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Publish"
+    },
+    {
+      "name": "server",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Server",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Server"
+    },
+    {
+      "name": "service",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Service",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service"
+    },
+    {
+      "name": "service.badge",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Service$Badge",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Service.Badge getBadge() "
+    },
+    {
+      "name": "service.file",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Service$File",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Service.File getFile() "
+    },
+    {
+      "name": "service.file.category",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.Service.File.Category getCategory() "
+    },
+    {
+      "name": "session",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Session",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Session"
+    },
+    {
+      "name": "style",
+      "type": "com.zionex.t3series.web.ApplicationProperties$Style",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Style"
+    },
+    {
+      "name": "view-config",
+      "type": "com.zionex.t3series.web.ApplicationProperties$ViewConfig",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig"
+    },
+    {
+      "name": "view-config.migration",
+      "type": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Migration",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.ViewConfig.Migration getMigration() "
+    },
+    {
+      "name": "view-config.publish",
+      "type": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Publish",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig",
+      "sourceMethod": "public com.zionex.t3series.web.ApplicationProperties.ViewConfig.Publish getPublish() "
+    }
+  ],
+  "properties": [
+    {
+      "name": "account.system-admins",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$Account"
+    },
+    {
+      "name": "app.authentication.account.system-admins",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$Account"
+    },
+    {
+      "name": "app.authentication.cors-allow-url",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication"
+    },
+    {
+      "name": "app.authentication.default-url",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication"
+    },
+    {
+      "name": "app.authentication.initial-password",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication"
+    },
+    {
+      "name": "app.authentication.login-policy.long-term-unvisited-days",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$LoginPolicy"
+    },
+    {
+      "name": "app.authentication.login-policy.max-failure-count",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$LoginPolicy"
+    },
+    {
+      "name": "app.authentication.login-policy.max-password-days",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$LoginPolicy"
+    },
+    {
+      "name": "app.authentication.login-url",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication"
+    },
+    {
+      "name": "app.authentication.password-policy.dcredit",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "app.authentication.password-policy.lcredit",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "app.authentication.password-policy.max-repeat",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "app.authentication.password-policy.min-length",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "app.authentication.password-policy.ocredit",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "app.authentication.password-policy.ucredit",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "app.authentication.password-policy.usable-username",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "app.cache.enable",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Cache"
+    },
+    {
+      "name": "app.languages",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties"
+    },
+    {
+      "name": "app.layout.currency-button",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Layout"
+    },
+    {
+      "name": "app.layout.navigation-bar.minify",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Layout$NavigationBar"
+    },
+    {
+      "name": "app.layout.navigation-bar.position",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Layout$NavigationBar"
+    },
+    {
+      "name": "app.layout.setting-button",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Layout"
+    },
+    {
+      "name": "app.server",
+      "type": "java.util.Map<java.lang.String,com.zionex.t3series.web.ApplicationProperties$Server>",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties"
+    },
+    {
+      "name": "app.service.badge.enable",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$Badge"
+    },
+    {
+      "name": "app.service.badge.interval",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$Badge"
+    },
+    {
+      "name": "app.service.file.category-list",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File"
+    },
+    {
+      "name": "app.service.file.category.excel",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category"
+    },
+    {
+      "name": "app.service.file.category.noticeboard",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category"
+    },
+    {
+      "name": "app.service.file.category.system",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category"
+    },
+    {
+      "name": "app.service.file.category.temporary",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category"
+    },
+    {
+      "name": "app.service.file.external-path",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File"
+    },
+    {
+      "name": "app.service.file.name",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File"
+    },
+    {
+      "name": "app.servlet",
+      "type": "com.zionex.t3series.web.Servlet",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties"
+    },
+    {
+      "name": "app.session.timeout",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Session"
+    },
+    {
+      "name": "app.style.font-faces",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Style"
+    },
+    {
+      "name": "app.style.grid-custom-skin",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Style"
+    },
+    {
+      "name": "app.view-config.migration.backup",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Migration"
+    },
+    {
+      "name": "app.view-config.migration.enable",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Migration"
+    },
+    {
+      "name": "app.view-config.migration.filter",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Migration"
+    },
+    {
+      "name": "app.view-config.migration.indent",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Migration"
+    },
+    {
+      "name": "app.view-config.publish.enable-watch-service",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Publish"
+    },
+    {
+      "name": "authentication.account.system-admins",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$Account"
+    },
+    {
+      "name": "authentication.cors-allow-url",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication"
+    },
+    {
+      "name": "authentication.default-url",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication"
+    },
+    {
+      "name": "authentication.initial-password",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication"
+    },
+    {
+      "name": "authentication.login-policy.long-term-unvisited-days",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$LoginPolicy"
+    },
+    {
+      "name": "authentication.login-policy.max-failure-count",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$LoginPolicy"
+    },
+    {
+      "name": "authentication.login-policy.max-password-days",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$LoginPolicy"
+    },
+    {
+      "name": "authentication.login-url",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication"
+    },
+    {
+      "name": "authentication.password-policy.dcredit",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "authentication.password-policy.lcredit",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "authentication.password-policy.max-repeat",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "authentication.password-policy.min-length",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "authentication.password-policy.ocredit",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "authentication.password-policy.ucredit",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "authentication.password-policy.usable-username",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "badge.enable",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$Badge"
+    },
+    {
+      "name": "badge.interval",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$Badge"
+    },
+    {
+      "name": "cache.enable",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Cache"
+    },
+    {
+      "name": "category.excel",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category"
+    },
+    {
+      "name": "category.noticeboard",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category"
+    },
+    {
+      "name": "category.system",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category"
+    },
+    {
+      "name": "category.temporary",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category"
+    },
+    {
+      "name": "file.category-list",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File"
+    },
+    {
+      "name": "file.category.excel",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category"
+    },
+    {
+      "name": "file.category.noticeboard",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category"
+    },
+    {
+      "name": "file.category.system",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category"
+    },
+    {
+      "name": "file.category.temporary",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category"
+    },
+    {
+      "name": "file.external-path",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File"
+    },
+    {
+      "name": "file.name",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File"
+    },
+    {
+      "name": "layout.currency-button",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Layout"
+    },
+    {
+      "name": "layout.navigation-bar.minify",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Layout$NavigationBar"
+    },
+    {
+      "name": "layout.navigation-bar.position",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Layout$NavigationBar"
+    },
+    {
+      "name": "layout.setting-button",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Layout"
+    },
+    {
+      "name": "login-policy.long-term-unvisited-days",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$LoginPolicy"
+    },
+    {
+      "name": "login-policy.max-failure-count",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$LoginPolicy"
+    },
+    {
+      "name": "login-policy.max-password-days",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$LoginPolicy"
+    },
+    {
+      "name": "migration.backup",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Migration"
+    },
+    {
+      "name": "migration.enable",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Migration"
+    },
+    {
+      "name": "migration.filter",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Migration"
+    },
+    {
+      "name": "migration.indent",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Migration"
+    },
+    {
+      "name": "navigation-bar.minify",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Layout$NavigationBar"
+    },
+    {
+      "name": "navigation-bar.position",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Layout$NavigationBar"
+    },
+    {
+      "name": "password-policy.dcredit",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "password-policy.lcredit",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "password-policy.max-repeat",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "password-policy.min-length",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "password-policy.ocredit",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "password-policy.ucredit",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "password-policy.usable-username",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Authentication$PasswordPolicy"
+    },
+    {
+      "name": "publish.enable-watch-service",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Publish"
+    },
+    {
+      "name": "server.host",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Server"
+    },
+    {
+      "name": "server.id",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Server"
+    },
+    {
+      "name": "server.port",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Server"
+    },
+    {
+      "name": "server.scheme",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Server"
+    },
+    {
+      "name": "service.badge.enable",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$Badge"
+    },
+    {
+      "name": "service.badge.interval",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$Badge"
+    },
+    {
+      "name": "service.file.category-list",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File"
+    },
+    {
+      "name": "service.file.category.excel",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category"
+    },
+    {
+      "name": "service.file.category.noticeboard",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category"
+    },
+    {
+      "name": "service.file.category.system",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category"
+    },
+    {
+      "name": "service.file.category.temporary",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File$Category"
+    },
+    {
+      "name": "service.file.external-path",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File"
+    },
+    {
+      "name": "service.file.name",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Service$File"
+    },
+    {
+      "name": "session.timeout",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Session"
+    },
+    {
+      "name": "style.font-faces",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Style"
+    },
+    {
+      "name": "style.grid-custom-skin",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$Style"
+    },
+    {
+      "name": "view-config.migration.backup",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Migration"
+    },
+    {
+      "name": "view-config.migration.enable",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Migration"
+    },
+    {
+      "name": "view-config.migration.filter",
+      "type": "java.lang.String",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Migration"
+    },
+    {
+      "name": "view-config.migration.indent",
+      "type": "java.lang.Integer",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Migration"
+    },
+    {
+      "name": "view-config.publish.enable-watch-service",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.zionex.t3series.web.ApplicationProperties$ViewConfig$Publish"
+    }
+  ],
+  "hints": []
+}

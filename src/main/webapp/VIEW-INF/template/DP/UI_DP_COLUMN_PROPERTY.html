@@ -1,0 +1,83 @@
+<script>
+  content.getCreateComponentCompleteFlag().done(function () {
+      const viewId = cm.getComponent("COMMON").getValue("VIEW_ID");
+      var gridCompId = "RST_CPT_01";
+      switch (viewId) {
+        case "UI_DP_01" : gridCompId = "RST_CPT_02"; break;
+        case "UI_DP_36" : gridCompId = "RST_CPT_01"; break;
+      }
+
+    const grid = cm.getComponent(gridCompId);
+    grid.onRGridDataFillReady = function (viewId, componentId, gridView, resultData) {
+        switch (viewId) {
+            case "UI_DP_01" : setConfigColumnProperty(gridView); break;
+            case "UI_DP_36" : setPlanPolicyColumnProperty(gridView); break;
+        }
+      return resultData;
+    };
+  });
+function setPlanPolicyColumnProperty(gridView) {
+    gridView.setColumnProperty("POLICY_VAL", "dynamicStyles", function (grid, index, value) {
+        const gubun = grid.getValue(index.itemIndex, "POLICY_CD");
+        const ret = {};
+        switch (gubun) {
+            case "PB" :
+                ret.editor = {
+                    type: "dropDown",
+                    values: ['Y', 'Q', 'M'],
+                    labels: ['Y', 'Q', 'M']
+                }
+                break;
+            case "B" :
+                ret.editor = {
+                    type: "dropDown",
+                    values: ['Q', 'M', 'W','PW', 'D'],
+                    labels: ['Q', 'M', 'W','PW', 'D']
+                }
+                break;
+            case "PB2" :
+                ret.editor = {
+                    type: "dropDown",
+                    values: ['Y', 'Q'],
+                    labels: ['Y', 'Q']
+                }
+                break;
+            default :
+                ret.editor = {
+                    type: "number"
+                }
+                break;
+        }
+        return ret;
+    });
+}
+function setConfigColumnProperty(gridView){
+    gridView.setColumnProperty("ATTR_01", "dynamicStyles", function (grid, index, value) {
+        const gubun = grid.getValue(index.itemIndex, "CONF_GRP_CD");
+        const ret = {};
+        if (gubun == 'DP_DMND_CUSTOM') {
+            //구분값이 T이면 text에디터를 표시
+            ret.editor = {
+                type: "dropDown",
+                values: ['double', 'integer', 'string','boolean','date'],  //, , , boolean, date
+                labels: ['double', 'integer', 'string','boolean','date']
+            }
+        }
+        return ret;
+    });
+    gridView.setColumnProperty("CONF_CD", "dynamicStyles", function (grid, index, value) {
+        const gubun = grid.getValue(index.itemIndex, "CONF_GRP_CD");
+        const ret = {};
+        if (gubun == 'DP_STD_WEEK') {
+            //구분값이 T이면 text에디터를 표시
+            ret.editor = {
+                type: "dropDown",
+                values: ["SUN", 'MON'],
+                labels: ["Sun", 'Mon']
+            }
+        }
+        return ret;
+    });
+
+}
+</script>

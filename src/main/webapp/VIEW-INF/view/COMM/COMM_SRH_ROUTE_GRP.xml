@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="COMM_SRH_ROUTE_GRP" version="2.0">
+    <component id="SRH_ROUTE_GRP_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ROUTE_GRP</init-value>
+        </props>
+    </component>
+    <component id="SRH_ROUTE_GRP_01_04" type="INPUTBOX">
+        <props>
+            <width>150</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SRH_ROUTE_GRP_01_05" type="BUTTON">
+        <props>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_SRH_ROUTE_GRP_WINDOW_01_OPEN">
+                    <component-id>POP_SRH_ROUTE_GRP_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_SRH_ROUTE_GRP_GRID_LOAD">
+                            <component-id>POP_SRH_ROUTE_GRP_GRID</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_ROUTE_GRP_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ROUTE_GRP_DESCRIP</init-value>
+        </props>
+    </component>
+    <component id="SRH_ROUTE_GRP_02_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SRH_ROUTE_GRP_02_05" type="INPUTBOX">
+        <props>
+            <hidden>true</hidden>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    
+    <component id="POP_SRH_ROUTE_GRP_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>ROUTE_GRP</title>
+            <width>660</width>
+            <height>300</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_SRH_ROUTE_GRP_GRID" type="R_GRID">
+        <props>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>true</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="ROUTE_CLASS_VAL" title="ROUTE_CLASS_VAL" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <init-group-order>1</init-group-order>
+                </column>
+                <column id="DESCRIP" title="DESCRIP" type="string">
+                    <width>170</width>
+                    <editable>false</editable>
+                    <init-group-order>2</init-group-order>
+                </column>
+                <column id="ROUTE_CLASS_DTL_ID" title="ROUTE_CLASS_DTL_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="ROUTE_GRP" title="ROUTE_GRP" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ROUTE_GRP_DESCRIP" title="ROUTE_GRP_DESCRIP" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_POP_SRH_ROUTE_GRP_GRID_DBL_CLICK_02">
+                    <component-id>POP_SRH_ROUTE_GRP_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                    <success>
+                        <operation-call id="OPC_SRH_ROUTE_GRP_01_04_SET">
+                            <component-id>SRH_ROUTE_GRP_01_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_SRH_ROUTE_GRP_GRID:selections" extract-by="ROUTE_GRP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_ROUTE_GRP_02_04_SET">
+                            <component-id>SRH_ROUTE_GRP_02_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_SRH_ROUTE_GRP_GRID:selections" extract-by="ROUTE_GRP_DESCRIP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_ROUTE_GRP_02_05_SET">
+                            <component-id>SRH_ROUTE_GRP_02_05</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_SRH_ROUTE_GRP_GRID:selections" extract-by="ROUTE_CLASS_DTL_ID" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_MP_35_02_Q2">
+                    <service-id>SRV_UI_MP_35_POP_Q1</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

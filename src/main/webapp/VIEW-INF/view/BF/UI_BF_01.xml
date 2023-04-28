@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_BF_01" template="DP/STANDARD_SPLIT:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:CM/POP_UI_CM_01" copyfrom="UI_DP_01:COMM_PREFERENCE:COMM_VIEW_META" version="2.0">
+    <publish parent="MENU_07_01" open="true" seq="1" />
+    <component id="SRH_CPT_T1_01_04" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <value-id>CD</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SRH_CPT_T1_01_04_LOAD">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_type_select2">
+                            <component-id>SRH_CPT_T1_01_04</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <success>
+                                <operation-call id="grid1_init_load">
+                                    <component-id>RST_CPT_01</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                    <parameters>
+                                        <parameter id="SP_UI_DP_01_Q1_01" reference-id="SRH_CPT_T1_01_04" default-value="" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SELECT">
+                <service-call id="svc_type_select">
+                    <parameters>
+                        <parameter id="VALUE" value="BF" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_00_CONF_Q1_LOAD">
+                    <service-id>SRV_GET_SP_UI_DP_00_CM_CD_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_CM_CD_Q1_01" value="MODULE_TP" />
+                        <parameter id="SP_UI_DP_00_CM_CD_Q1_02" value="ALL" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

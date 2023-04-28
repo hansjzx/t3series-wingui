@@ -1,0 +1,34 @@
+<script type="text/javascript">
+wingui.util.date.calendar.setFirstDayOfWeek(0);
+
+content.getCreateComponentCompleteFlag().done(function () {
+	var grid = cm.getComponent("RST_CPT_01");
+    grid.doAfterSetData = function (serviceCallId, data, resultData) {    
+    	var gridView = grid.getActualComponent();
+    	var dataProvider = gridView.getDataProvider();
+    	var fields = dataProvider.getFieldNames();
+
+		/*
+    	//control visiblity of leaf level
+    	if(!data.filter(function(row){return (row.ITEM_CD !== '' && row.ITEM_CD !== null)}).length && fields.includes("ITEM_CD")){
+			gridView.setColumnProperty('ITEM_CD','visible',false);
+			gridView.setColumnProperty('ITEM_NM','visible',false);			
+		}
+		if(!data.filter(function(row){return (row.ACCOUNT_CD !== '' && row.ACCOUNT_CD !== null)}).length && fields.includes("ACCOUNT_CD")){
+			gridView.setColumnProperty('ACCOUNT_CD','visible',false);
+			gridView.setColumnProperty('ACCOUNT_NM','visible',false);						
+		}
+		*/
+
+        //sorting
+    	fields = fields.filter(function (field) {
+            return field.includes("GRP_SEQ") && field.includes(",CD");
+        }).sort(function(a, b){
+    		return a-b;
+    	});
+    	wingui.util.grid.sorter.orderBy(gridView, fields);    	
+    };    
+    
+});
+</script>
+

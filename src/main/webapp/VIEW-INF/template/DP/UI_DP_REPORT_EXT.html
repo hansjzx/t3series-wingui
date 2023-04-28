@@ -1,0 +1,618 @@
+<script type="text/javascript">
+
+
+    content.getCreateComponentCompleteFlag().done(function () {
+        var flag;
+        var grid = cm.getComponent("RST_CPT_01");
+        var viewId = vo.getId();
+
+        var cbxBucketType = null;
+        var dtpkApplyScopeFrom = null;
+        var dtpkApplyScopeTo = null;
+        var chartComp = cm.getComponent("RST_CRT_01");
+        var valType = cm.getComponent("SRH_CPT_T1_10_04");
+        if (viewId == "UI_DP_40") {
+            cbxBucketType = cm.getComponent("SRH_CPT_T1_00_04");
+            dtpkApplyScopeFrom = cm.getComponent("SRH_CPT_T1_03_04");
+            dtpkApplyScopeTo = cm.getComponent("SRH_CPT_T1_04_04");
+        } else if (viewId == "UI_DP_31" ) {
+            cbxBucketType = cm.getComponent("SRH_CPT_T1_00_04");
+            dtpkApplyScopeFrom = cm.getComponent("SRH_CPT_T1_02_04");
+            dtpkApplyScopeTo = cm.getComponent("SRH_CPT_T1_03_04");
+        } else {
+            cbxBucketType = cm.getComponent("SRH_CPT_T1_01_04");
+            dtpkApplyScopeFrom = cm.getComponent("SRH_CPT_T1_02_04");
+            dtpkApplyScopeTo = cm.getComponent("SRH_CPT_T1_03_04");
+        }
+        if(viewId == "UI_DP_28"){
+            chartComp = undefined;
+        }
+        var optionsY = {
+            start: "year",
+            depth: "year",
+            format: "yyyy",
+            parseFormats: ["yyyy"]
+        };
+
+        var optionsM = {
+            start: "year",
+            depth: "year",
+            format: "yyyy-MM",
+            parseFormats: ["yyyy-MM"]
+        };
+
+        var optionsW = {
+            start: "month",
+            depth: "month",
+            format: "yyyy-MM-dd",
+            parseFormats: ["yyyy-MM-dd"]
+        }
+        // init chart
+        var maxRateVal = 100;
+        var chartTitle = "";
+        createChart (chartComp, null, dm.getDataState("VIEW_META").PREF_INFO.RESULT_DATA.filter(function(row){
+            return row.crosstabItemCd == "GROUP-VERTICAL-VALUES" && row.fldActiveYn == true
+        }).sort(function(a,b){
+            if(a.fldSeq > b.fldSeq){
+                return 1;
+            }
+            if(a.fldSeq < b.fldSeq){
+                return -1;
+            }
+            return 0
+        }).map(function(row){
+            return {
+                name : gI18n.tc(row.fldApplyCd),
+                type : row.fldCd.includes("RATE")? "line":"column",
+                data: null,
+                axis : row.fldCd.includes("RATE") ? "rate":"val"}
+        }));
+
+        if (cbxBucketType != null) {
+            cbxBucketType.onComboboxChanged = function (viewId, componentID, e) {
+                if (viewId == "UI_DP_28" || viewId == "UI_DP_30" || viewId == "UI_DP_31" || viewId == "UI_DP_40") {
+                    var dtpkApplyScopeFromAct = dtpkApplyScopeFrom.getActualComponent();
+                    var dtpkApplyScopeToAct = dtpkApplyScopeTo.getActualComponent();
+
+                    var bucketType = cbxBucketType.getValue();
+                    console.log("bucketType:" + bucketType);
+                    if ( bucketType == "Y") {
+                        dtpkApplyScopeFrom.dateType = "year";
+                        dtpkApplyScopeTo.dateType = "year";
+                        dtpkApplyScopeFromAct.setOptions(optionsY);
+                        dtpkApplyScopeToAct.setOptions(optionsY);
+                    } else if (bucketType == "M" || bucketType == "Q" ) {
+                        dtpkApplyScopeFrom.dateType = "month";
+                        dtpkApplyScopeTo.dateType = "month";
+                        dtpkApplyScopeFromAct.setOptions(optionsM);
+                        dtpkApplyScopeToAct.setOptions(optionsM);
+                    } else if (bucketType == "W" || bucketType == "PW" || bucketType == "D") {
+                        dtpkApplyScopeFrom.dateType = "day";
+                        dtpkApplyScopeTo.dateType = "day";
+                        dtpkApplyScopeFromAct.setOptions(optionsW);
+                        dtpkApplyScopeToAct.setOptions(optionsW);
+                    }
+                }
+            }
+
+            cbxBucketType.doBeforeOperationCall = function(actionComponentId, targetComponentId, targetOperationId, operationCallId){
+                if (operationCallId == "28_from_date_init" ) {
+                    setFromDateInit();
+                }
+                return true;
+            }
+        }
+
+        cm.getComponent("TTL_CPT_04").doBeforeOperationCall = function(actionComponentId, targetComponentId, targetOperationId, operationCallId){
+            if ( operationCallId == "28_from_date_refresh") {
+                setFromDateInit();
+            }
+            return true;
+        }
+
+
+        dtpkApplyScopeTo.doBeforeOperationCall = function(actionComponentId, targetComponentId, targetOperationId, operationCallId){
+            if(operationCallId == "toDateDatePickerIsChanged"){
+                convertEndOfMonth(dtpkApplyScopeTo, cbxBucketType.getValue());
+                return false;
+            }
+            return true;
+        }
+        function convertEndOfMonth (dtpkApplyScopeTo, bucket) {
+            var val = dtpkApplyScopeTo.getValue();
+            var dateStr = val;
+            if(bucket == "M" || bucket == "Q" || bucket == "Y"){
+                val = val.split('-');
+                var date = new Date(val[0], val[1], 0);
+                var m = (date.getMonth()+1).toString();
+                dateStr = date.getFullYear()+'-'+(m.length == 1? '0' : '')+m+'-'+date.getDate()+'T00:00:00';
+                console.log("[Develop Log] dtpkApplyScopeTo", dateStr, " / m.length",m.length);
+            }
+            cm.getComponent("DATA_01").setValue("END_DATE",dateStr);
+        }
+
+        var beforeSvcCall = function(paramMap,componentId, operationId, serviceCallId) {
+            // report end date datepicker가 1일로 날짜를 전달해줘서 해당월의 마지막날짜로 변경 처리
+            paramMap = changeEndDateParam(paramMap, serviceCallId)
+            var doBeforeServiceCallResult = {
+                result : true,
+                msg : '',
+                paramMap : paramMap
+            };
+            return doBeforeServiceCallResult; // result return
+        }
+
+        grid.doBeforeServiceCall = beforeSvcCall;
+
+        var chart1 = cm.getComponent("RST_CRT_01");
+        if (chart1 != null) {
+            chart1.doBeforeServiceCall = beforeSvcCall;
+        }
+        var chart2 = cm.getComponent("RST_CRT_02");
+        if (chart2 != null) {
+            chart2.doBeforeServiceCall = beforeSvcCall;
+        }
+        var chart3 = cm.getComponent("RST_CRT_03");
+        if (chart3 != null) {
+            chart3.doBeforeServiceCall = beforeSvcCall;
+        }
+        var chart4 = cm.getComponent("RST_CRT_04");
+        if (chart4 != null) {
+            chart4.doBeforeServiceCall = beforeSvcCall;
+        }
+
+
+        function changeEndDateParam(paramMap, serviceCallId) {
+
+          if (serviceCallId == "SVC_SP_UI_DP_28_Q2" || serviceCallId == "SVC_RST_CRT_01_LOAD" || serviceCallId == "SVC_RST_CRT_02_LOAD"
+              || serviceCallId == "SVC_RST_CRT_03_LOAD" || serviceCallId == "SVC_RST_CRT_04_LOAD"
+              || serviceCallId == "SVC_SP_UI_DP_29_Q1" || serviceCallId == "SVC_SP_UI_DP_29_CHART_Q1"
+              || serviceCallId == "SVC_SP_UI_DP_30_Q1" || serviceCallId == "SVC_SP_UI_DP_30_CHART_Q1"
+              || serviceCallId == "SVC_SP_UI_DP_38_Q1" || serviceCallId == "SVC_SP_UI_DP_31_Q2"
+          ) {
+
+              var bucktType = cm.getComponent(serviceCallId== "SVC_SP_UI_DP_31_Q2" ? "SRH_CPT_T1_00_04":"SRH_CPT_T1_01_04").getValue();
+              if (bucktType == "M" || bucktType == "Q" || bucktType == "Y") {
+                  var endDate = paramMap["END_DATE"];
+                  //console.log("endDate==>", endDate)
+                  var lastDate = wingui.util.date.calendar.getMonthLastDay(endDate);
+                  var lastDateStr = wingui.util.date.toDateString(lastDate) +"T00:00:00";
+                  console.log("lastDateStr333==>", lastDateStr)
+                  paramMap["END_DATE"] = lastDateStr;
+              } else {
+                  console.log("not month")
+              }
+          }
+            return paramMap;
+        }
+
+        grid.doAfterSetData = function (srvcCallID, data, resultData) {
+            var viewId = vo.getId();
+            var gridView = grid.getActualComponent();
+            if (viewId == "UI_DP_40") {
+                var dataProvider = gridView.getDataSource();
+                if (dataProvider.getRowCount() > 0) {
+                    window.requestAnimationFrame(function () {
+                        console.log("UI_DP_40 report setCellStyle");
+                        setCellStyle("RST_CPT_01", gridView, dataProvider);
+                    });
+                }
+            } else if (viewId == "UI_DP_31") {
+                gridView.addCellStyle("redStyle", { "background": "#4400ff00"});
+                //console.log("[Develop LOG] data", data, "resultData", resultData);
+                setValidationCellStyle(gridView, data, "redStyle", ["SALES_PLAN_SUPPLY_RATE"], 100 ,null, false);
+            }
+
+            var dateFields = gridView.getColumnNames(true,true).filter(function(row){
+                return row.includes("DATE_");
+            });
+            /* create chart (to do : value sum or average before put data, and create chart)*/
+            var chartSeries = getChartAllSeriesRows(data, dateFields)
+            createChart(chartComp, dateFields, chartSeries);
+        }
+
+        grid.onRGridColumnHeaderClicked = function (viewID, componentID, grid, column, rightClicked) {
+            if (flag) {
+                grid.orderBy([], []);
+                flag = false;
+            }
+        }
+        grid.onRGridCellClicked = function(viewId, componentId, gridView, itemIndex, dataRow, field) {
+            var dataProvider = gridView.getDataProvider();
+            var selectedRowIndex = itemIndex.dataRow;
+            var dateFields = gridView.getColumnNames(true,true).filter(function(row){
+                return row.includes("DATE_");
+            });
+            /* create chart */
+            createChart(chartComp, dateFields, getChartSeriesRows(gridView, dataProvider, selectedRowIndex, dateFields));
+
+        }
+        /* function to make chart */
+      function getChartAllSeriesRows (data, dateFields) {
+        chartTitle = "";
+        if(chartComp == undefined){
+          return;
+        }
+        var chartData = data.reduce(function(rv, x) {
+          var newArray = new Array();
+          for (var i=0, n=dateFields.length; i<n; i++){
+            newArray.push(x[dateFields[i]]);
+          }
+          (rv[x.CATEGORY] = rv[x.CATEGORY] || []).push(newArray);
+          return rv;
+        }, {});
+
+        var chartSeries = new Array();
+        maxRateVal = 100;
+        let measureValues = new Map();
+        let dateCnt = 0;
+        let rateSet = new Set();
+        for (const [key, value] of Object.entries(chartData)) {
+          if(key.includes("RATE")) {
+            rateSet.add(key);
+            continue;
+          }
+          var tmpValue = new Array();
+          for (var i=0, n=value.length;i<n;i++){
+            if(i===0) {
+              dateCnt = value[i].length;
+            }
+            for (var j=0; j<dateCnt; j++){
+              if(tmpValue[j] !== undefined){
+                tmpValue[j] = tmpValue[j] + value[i][j];
+              }else {
+                tmpValue[j] = value[i][j];
+              }
+            }
+          }
+          if(["ANNUAL", "ACT_SALES", "FINAL_DP", "RTF"].includes(key)) {
+            measureValues.set(key, tmpValue);
+          }
+          chartSeries.push({
+            name : gI18n.tc(key),
+            type : "column",
+            data: tmpValue,
+            axis : "val",
+            tooltip : {
+              format : "#,###.##"
+            }
+          });
+        }
+
+        for (let key of rateSet) {
+          let tmpValue = new Array();
+          switch (key) {
+            case "MGMT_PLAN_ACHIEV_RATE" :
+              if(!measureValues.has("ANNUAL")) break;
+              if(!measureValues.has("ACT_SALES")) break;
+              for(let i=0; i<dateCnt;i++) {
+                if(measureValues.get("ANNUAL")[i] === 0) {
+                  tmpValue[i] = 0;
+                  continue;
+                }
+                tmpValue[i] = (1-(measureValues.get("ANNUAL")[i]-measureValues.get("ACT_SALES")[i])/measureValues.get("ANNUAL")[i])*100
+                if(tmpValue[i] > maxRateVal) maxRateVal = tmpValue[i]+10;
+              }
+              break;
+            case "SALES_PLAN_ACHIEV_RATE" :
+              if(!measureValues.has("FINAL_DP")) break;
+              if(!measureValues.has("ACT_SALES")) break;
+              for(let i=0; i<dateCnt;i++) {
+                if(measureValues.get("FINAL_DP")[i] === 0) {
+                  tmpValue[i] = 0;
+                  continue;
+                }
+                tmpValue[i] = (1-(measureValues.get("FINAL_DP")[i]-measureValues.get("ACT_SALES")[i]) / measureValues.get("FINAL_DP")[i])*100
+                if(tmpValue[i] > maxRateVal) maxRateVal = tmpValue[i]+10;
+              }
+              break;
+            case "SALES_PLAN_SUPPLY_RATE" :
+              if(!measureValues.has("RTF")) break;
+              if(!measureValues.has("FINAL_DP")) break;
+              for(let i=0; i<dateCnt;i++) {
+                if(measureValues.get("FINAL_DP")[i].equals(0)) {
+                  tmpValue[i] = 0;
+                  continue;
+                }
+                tmpValue[i] = measureValues.get("RTF")[i]/measureValues.get("FINAL_DP")[i]*100
+                if(tmpValue[i] > maxRateVal) maxRateVal = tmpValue[i]+10;
+              }
+              break;
+          }
+
+          chartSeries.push({
+            name : gI18n.tc(key),
+            type : "line",
+            data: tmpValue,
+            axis : "rate",
+            tooltip : {
+              format : "##.#"
+            }
+          });
+        }
+
+        return chartSeries;
+      }
+        function getChartSeriesRows (gridView, dataProvider, selectedRowIndex, dateFields){
+            if(chartComp == undefined){
+                return;
+            }
+            maxRateVal = 100;
+            var selectedRowData = getSelectedMeasureRows(selectedRowIndex, dataProvider.getValue(selectedRowIndex,"CATEGORY"));
+
+            var jsonRows = dataProvider.getJsonRows(selectedRowData.startItem, selectedRowData.endItem);
+            console.log("[Develop log] jsonRows", jsonRows);
+
+            selectedRowData.startItem = gridView.getItemIndex(selectedRowData.startItem);
+            selectedRowData.endItem = gridView.getItemIndex(selectedRowData.endItem);
+            if(selectedRowData.endItem == -1){
+                var activatedMeasures = gridView.getActiveColumnFilters("CATEGORY", true);
+                selectedRowData.endItem = selectedRowData.startItem + activatedMeasures.length-1;
+            }
+            gridView.setSelection(selectedRowData);
+            var itemKey = jsonRows[0].ITEM;
+            var accountKey = jsonRows[0].ACCOUNT;
+            if(itemKey !== null){
+                chartTitle = gI18n.tc("ITEM_CD")+" : "+itemKey
+            }
+            if(accountKey !== null){
+                if(itemKey !== null){
+                    chartTitle = chartTitle + " & "
+                }
+                chartTitle = chartTitle + gI18n.tc("ACCOUNT_CD")+" : "+accountKey;
+            }
+            var dataRow;
+            var measureName;
+            var isRate;
+            var seriesRows = jsonRows.map(function(row){
+                measureName = row["CATEGORY"];
+                isRate = measureName.includes("RATE");
+                dataRow = new Array();
+                for (var i=0, n =dateFields.length; i<n; i++){
+                    dataRow.push(row[dateFields[i]]);
+                    if(isRate == true && maxRateVal<row[dateFields[i]]){
+                        maxRateVal = row[dateFields[i]]/10*10+10;
+                    }
+                }
+                return {
+                    name : gI18n.tc(measureName), type : isRate? "line":"column",
+                    data: dataRow, aggregate: isRate? "avg":"sum",
+                    axis : isRate? "rate" : "val",
+                    tooltip : {
+                        format : isRate ? "##.#":"#,###.##"
+                    }
+                }
+            });
+//            console.log("[Develop log] seriesRows", seriesRows);
+            return seriesRows;
+        }
+        function getSelectedMeasureRows (selectedRowIndex, selectedMeasure){
+            if(chartComp == undefined){
+                return;
+            }
+            var seq = 0;
+            var prefInfo = dm.getDataState("VIEW_META").PREF_INFO.RESULT_DATA;
+            // get selected column : leaf dimesion
+            var leafDimension = prefInfo.filter(function(row){
+                return row.dimMeasureTp == "DIMENSION" && row.fldActiveYn == true
+            });
+            if(leafDimension == null){
+                leafDimension = "CATEGORY";
+            }else{
+                leafDimension = leafDimension.reduce(function(pre, cur){
+                    return pre.fldSeq > cur.fldSeq ? pre.fldCd : cur.fldCd;
+                });
+            }
+            // get selected rows : categories
+            var measureInfo = prefInfo.filter(function(row){
+                return row.crosstabItemCd == "GROUP-VERTICAL-VALUES" && row.fldActiveYn == true
+            }).sort(function(a,b){
+                if(a.fldSeq > b.fldSeq){
+                    return 1;
+                }
+                if(a.fldSeq < b.fldSeq){
+                    return -1;
+                }
+                return 0
+            }).map(function(row){
+                seq++;
+                row.fldSeq = seq;
+                return row;
+            });
+            var measureCnt = measureInfo.length;
+            var selectedMeasureSeq = measureInfo.filter(function(row){
+                return row.fldCd == selectedMeasure
+            })[0].fldSeq;
+//            console.log("startItem", selectedRowIndex-selectedMeasureSeq+1, "endItem", selectedRowIndex+(measureCnt-selectedMeasureSeq));
+            return {startItem: selectedRowIndex-selectedMeasureSeq+1, endItem: selectedRowIndex+(measureCnt-selectedMeasureSeq), startColumn : leafDimension, style : "rows"};
+        }
+        function createChart (chartComp, dateFields, seriesRows){
+            if (chartComp == undefined){
+                return;
+            }
+            var valueAxis = new Array();
+            var categoryLabelStep = 1;
+            if(dateFields !== null){
+                if (dateFields.length>120){
+                    categoryLabelStep = 8;
+                } else if (dateFields.length>80){
+                    categoryLabelStep = 5;
+                } else if (dateFields.length>40){
+                    categoryLabelStep = 3;
+                } else if (dateFields.length>20){
+                    categoryLabelStep = 2;
+                }
+            }
+            valueAxis.push({
+                name : "val",
+                labels: {
+                    format: "#,###.##"
+                }
+                /*title : {text :  gI18n.tc(valType.getValue() == "Q"?"QTY":"AMT")}*/
+            });
+            for (var i=0, n=seriesRows.length; i<n;i++){
+                if(seriesRows[i].axis == "rate"){
+                    var rateValueAxis = {
+                        name : "rate",
+                        labels: {
+                            format: "##.#",
+                            template : "#:value#%"
+                        }
+                    };
+                    rateValueAxis.max = maxRateVal;
+                    valueAxis.push(rateValueAxis);
+                    break;
+                }
+            }
+
+            $(chartComp.widget).kendoChart({
+                title : chartTitle,
+                series: seriesRows,
+                chartArea: {
+                    height: 250
+                },
+                theme : "flat", //metro
+                tooltip: {
+                    visible: true,
+                    shared: true
+                },
+                categoryAxis: {
+                    categories: dateFields == null ? "" : dateFields.map(function(row){
+                        row = row.replace("DATE_", "");
+                        switch (cbxBucketType.getValue()) {
+                            case "Y" : return row.split("-")[0];    break;
+                            case "Q" : return row.split("-")[0]+"-"+row.split("-")[1];    break;
+                            case "M" : return row.split("-")[0]+"-"+row.split("-")[1];    break;
+                            default : return row.split("-")[1]+"/"+row.split("-")[2];    break;
+                        }
+                    }),
+                    labels : {step : categoryLabelStep}
+                },
+                valueAxes : valueAxis
+            });
+        }
+
+        function setCellStyle(componentID, grid, dataProvider) {
+            var cellBackground = "#88BCE55C";
+            var headerBackground = "#88CEF279";
+
+            grid.addCellStyle("defaultStyle", {
+                "background": '#F9F9F9'
+                , "readOnly": true
+                , "editable": false
+            }, true);
+
+            grid.addCellStyle("cellBack", {
+                "background": cellBackground
+                , "readOnly": true
+                , "editable": false
+            }, true);
+
+            grid.addCellStyle("headBack", {
+                "background": headerBackground
+                , "readOnly": true
+                , "editable": false
+            }, true);
+
+            var dataColumnsDB = TAFFY(grid.dataColumns);
+            var targetColumns = dataColumnsDB().filter({ columnIdOrg: "DATE" }).select("name");
+
+            for (var i = 0; i < targetColumns.length; i++) {
+                // DATE_SUM
+                // DATE_11~01
+                // DATE_SUM-11~01,MEASURE_01
+                if (targetColumns[i].indexOf("SUM") != -1) {
+                    /************************************
+                     * 년 포함일 때, 가져오는 값
+                     * DATE_Sum 2018
+                     * DATE_11 ~ 01
+                     * DATE_Sum 2018-11~01,MEASURE_01
+                     *************************************/
+                    /************************************
+                     * 년 포함하지 않을 때, 가져오는 값
+                     * DATE_SUM
+                     * DATE_11~01
+                     * DATE_SUM-11~01,MEASURE_01
+                     *************************************/
+
+                    var columnName = targetColumns[i];
+                    columnName = columnName.split("-");
+                    columnName = columnName[0];
+
+                    var columnName2 = targetColumns[i];
+                    columnName2 = columnName2.split(",");
+                    columnName2 = columnName2[0];
+                    columnName2 = columnName2.substring(0, 5) + "" + columnName2.substr(9, 5);
+                    //columnName2 = columnName2.substring(0,5) + "" + columnName2.substr(14,5);
+
+                    grid.setColumnProperty(targetColumns[i], "header", { styles: { background: headerBackground } });
+                    grid.setColumnProperty(columnName, "header", { styles: { background: headerBackground } });
+                    grid.setColumnProperty(columnName2, "header", { styles: { background: headerBackground } });
+                }
+
+                var columnDate = targetColumns[i].split("_");
+                columnDate = columnDate[1];
+
+                if (!columnDate || columnDate == null) {
+                    continue;
+                }
+                columnDate = columnDate.substring(0, 3);
+
+                if (columnDate == 'SUM') {
+                    for (var j = 0; j < dataProvider.getRowCount(); j++) {
+                        grid.setCellStyle(j, targetColumns[i], "cellBack");
+                    }
+                } else {
+                    for (var j = 0; j < dataProvider.getRowCount(); j++) {
+                        grid.setCellStyle(j, targetColumns[i], "defaultStyle");
+                    }
+                }
+            }
+        }
+
+        function setFromDateInit(){
+            var toDate = new Date();
+            toDate.setMonth( toDate.getMonth() - 2 );
+            dtpkApplyScopeFrom.setValue(wingui.util.date.toDateString(toDate))
+
+        }
+
+        function setValidationCellStyle(gridView, data, validationStyle, measures, lowValue,highValue, equalYN){
+            var validationData = data.map(function(rw){
+                var keys = Object.keys(rw).filter(function(key){
+                    return key.includes("DATE_") && measures.includes(rw["CATEGORY"])
+                }).filter(function(key){
+                    if(equalYN){
+                        if(lowValue !== null && highValue !== null)
+                            return rw[key] <= lowValue || rw[key] >= highValue
+                        if(lowValue !== null)
+                            return rw[key] <= lowValue
+                        if(highValue !== null)
+                            return rw[key] >= highValue
+                    }else{
+                        if(lowValue !== null && highValue !== null)
+                            return rw[key] < lowValue || rw[key] > highValue
+                        if(lowValue !== null)
+                            return rw[key] < lowValue
+                        if(highValue !== null)
+                            return rw[key] > highValue
+                    }
+                    return null
+                });
+                //console.log("keys", keys);
+                return keys;
+            });
+            var rowsIndex = Object.keys(validationData).filter(function(key){
+                return validationData[key].length
+            });
+
+            rowsIndex.map(function(Index){
+                if(validationData[Index].length !== 0)
+                    gridView.setCellStyles(Index, validationData[Index], validationStyle);
+                return;
+            });
+        }
+
+    });
+
+</script>

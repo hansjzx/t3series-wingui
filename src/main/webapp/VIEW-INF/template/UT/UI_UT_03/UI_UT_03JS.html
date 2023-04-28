@@ -1,0 +1,351 @@
+<script>
+  var vmImportJob;
+  var vmGrid;
+
+  vmImportJob = new Vue({
+    el: '#UI_UT_03-contents',
+    i18n: gI18n,
+    data: function () {
+      return {
+        mJobModule: '',
+        mJobTable: '',
+        mJobStatus: 0,
+        mJobError: 0,
+
+        mData: undefined,
+
+        // Combobox data
+        mJobStatusSelection: [
+          {text: gI18n.tc('SURPLUS_ALL'), value: 0}, // 'ALL'
+          {text: gI18n.tc('SELECT_BOX_STATUS_RUNNING'), value: 1}, // 'Running'
+          {text: gI18n.tc('SELECT_BOX_STATUS_COMPLETE'), value: 2} // 'Complete'
+        ],
+        mJobErrorSelection: [
+          {text: gI18n.tc('SURPLUS_ALL'), value: 0}, // 'ALL'
+          {text: gI18n.tc('SELECT_BOX_STATUS_ERROR'), value: 1}, // 'Error'
+          {text: gI18n.tc('SELECT_BOX_STATUS_SUCCESS'), value: 2} // 'Success'
+        ],
+
+        // Request URL
+        mUrlGetJobHistory: BASE_URL + 'data/bulk/job/history',
+        mUrlGetErrorLogFile: BASE_URL + '/file-storage/file?ID='
+
+      }
+    },
+    mounted: function () {
+    },
+    methods: {
+      /**
+       * Refresh search options
+       */
+      doRefresh: function () {
+        this.mJobModule = '';
+        this.mJobTable = '';
+        this.mJobStatus = 0;
+        this.mJobError = 0;
+      },
+      /**
+       * Load search data
+       */
+      doDataLoad: function () {
+        this.requestJobHistory(this);
+      },
+      /**
+       * Resize the real grid view
+       */
+      doResize: function () {
+        if (vmGrid !== undefined) {
+          vmGrid.gridView.resetSize();
+        }
+      },
+      /**
+       * Get job history data from request
+       */
+      requestJobHistory: function (vm) {
+        vmGrid.gridView.showToast(progressSpinner + 'Loading data...', true);
+
+        // Request module list data
+        axios
+          .get(this.mUrlGetJobHistory, {
+            params: {
+              JOB_MODULE: vmImportJob.mJobModule,
+              JOB_TABLE: vmImportJob.mJobTable,
+              JOB_STATUS: vmImportJob.mJobStatus,
+              JOB_ERROR: vmImportJob.mJobError
+            }
+          })
+          .then(function (response) {
+            if (response.status === gHttpStatus.SUCCESS) {
+              vm.setJobHistory(response.data);
+              vm.mData = response.data;
+            } else if (response.status === gHttpStatus.NO_CONTENT) {
+              vmGrid.dataProvider.clearRows();
+              vm.mData = undefined;
+            }
+          })
+          .catch(function (e) {
+            console.log(e);
+          })
+          .then(function () {
+            vmGrid.gridView.hideToast();
+          });
+      },
+      /**
+       * Set job history data when get response
+       */
+      setJobHistory: function (data) {
+        vmGrid.dataProvider.fillJsonData(data, {count: -1});
+      },
+    }
+  });
+
+  vmGrid = new Vue({
+    el: '#UI_UT_03-grid',
+    i18n: gI18n,
+    data: function () {
+      return {
+        gStyle: {
+          displayOptions: {
+            fitStyle: 'even'
+          }
+        },
+        fields: [
+          {
+            fieldName: 'id'
+          },
+          {
+            fieldName: 'jobModule'
+          },
+          {
+            fieldName: 'jobTable'
+          },
+          {
+            fieldName: 'jobLevel'
+          },
+          {
+            fieldName: 'jobStep'
+          },
+          {
+            fieldName: 'importOption'
+          },
+          {
+            fieldName: 'separatorOption'
+          },
+          {
+            fieldName: 'successSum',
+            dataType: 'number'
+          },
+          {
+            fieldName: 'failSum',
+            dataType: 'number'
+          },
+          {
+            fieldName: 'importBy'
+          },
+          {
+            fieldName: 'startDttm',
+            dataType: 'datetime',
+            datetimeFormat: 'iso'
+          },
+          {
+            fieldName: 'endDttm',
+            dataType: 'datetime',
+            datetimeFormat: 'iso'
+          },
+          {
+            fieldName: 'completeYn'
+          },
+          {
+            fieldName: 'jobDescription'
+          },
+          {
+            fieldName: 'errorFileStorageId'
+          },
+          {
+            fieldName: 'errorFileName'
+          }
+        ],
+        columns: [
+          {
+            name: 'jobModule',
+            fieldName: 'jobModule',
+            header: {
+              text: gI18n.tc('LABEL_JOB_MODULE') // 'Job module'
+            },
+            editable: false,
+            width: 130
+          },
+          {
+            name: 'jobTable',
+            fieldName: 'jobTable',
+            header: {
+              text: gI18n.tc('LABEL_JOB_TABLE') // 'Job table'
+            },
+            editable: false,
+            width: 350
+          },
+          {
+            name: 'importOption',
+            fieldName: 'importOption',
+            header: {
+              text: gI18n.tc('GRID_HEADER_TITLE_TXT_IMPORT_OPTION') // 'Import option'
+            },
+            lookupDisplay: true,
+            values: [
+              0,
+              1,
+              2,
+              3
+            ],
+            labels: [
+              'Add',
+              'Update',
+              'Add OR Update',
+              'Delete AND Insert'
+            ],
+            editable: false,
+            width: 150
+          },
+          {
+            name: 'separatorOption',
+            fieldName: 'separatorOption',
+            header: {
+              text: gI18n.tc('GRID_HEADER_TITLE_TXT_SEPARATOR') // 'Separator'
+            },
+            lookupDisplay: true,
+            values: [
+              0,
+              1
+            ],
+            labels: [
+              'CSV',
+              'TSV'
+            ],
+            editable: false,
+            width: 100
+          },
+          {
+            name: 'successSum',
+            fieldName: 'successSum',
+            header: {
+              text: gI18n.tc('GRID_HEADER_TITLE_TXT_SUCCESS') // 'Success'
+            },
+            styles: {
+              textAlignment: 'far',
+              paddingRight: '5',
+              numberFormat: '0,000,000,000'
+            },
+            editable: false,
+            width: 120
+          },
+          {
+            name: 'failSum',
+            fieldName: 'failSum',
+            header: {
+              text: gI18n.tc('GRID_HEADER_TITLE_TXT_FAIL') // 'Fail'
+            },
+            styles: {
+              textAlignment: 'far',
+              paddingRight: '5',
+              numberFormat: '0,000,000,000',
+              foreground: '#ffff0000'
+            },
+            editable: false,
+            width: 120
+          },
+          {
+            name: 'startDttm',
+            fieldName: 'startDttm',
+            header: {
+              text: gI18n.tc('GRID_HEADER_TITLE_TXT_START') // 'Start'
+            },
+            styles: {
+              textAlignment: 'center',
+              datetimeFormat: 'yyyy/MM/dd HH:mm:ss'
+            },
+            editable: false,
+            width: 180
+          },
+          {
+            name: 'endDttm',
+            fieldName: 'endDttm',
+            header: {
+              text: gI18n.tc('GRID_HEADER_TITLE_TXT_END') // 'End'
+            },
+            styles: {
+              textAlignment: 'center',
+              datetimeFormat: 'yyyy/MM/dd HH:mm:ss'
+            },
+            editable: false,
+            width: 180
+          },
+          {
+            name: 'completeYn',
+            fieldName: 'completeYn',
+            header: {
+              text: gI18n.tc('GRID_HEADER_TITLE_TXT_COMPLETE') // 'Complete'
+            },
+            editable: false,
+            width: 80
+          },
+          {
+            name: 'errorFileName',
+            fieldName: 'errorFileName',
+            header: {
+              text: gI18n.tc('GRID_HEADER_TITLE_TXT_ERROR_LOG') // 'Error log'
+            },
+            styles: {
+              foreground: '#1009f9'
+            },
+            editable: false,
+            width: 350
+          },
+          {
+            name: 'Job description',
+            fieldName: 'jobDescription',
+            header: {
+              text: gI18n.tc('GRID_HEADER_TITLE_TXT_JOB_DESCRIPTION') // 'Job description'
+            },
+            editable: false,
+            width: 350
+          }
+        ]
+      }
+    },
+    methods: {
+      /**
+       * Check the error file data
+       */
+      hasErrorFileLinked: function (urlVal) {
+        var urlParam = {};
+        urlVal.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+          urlParam[key] = value;
+        });
+
+        return urlParam['ID'] > 0;
+      },
+    },
+    mounted: function () {
+      gCreateGridAsync(this).then(function () {
+        vmImportJob.doDataLoad();
+
+        // Url column render
+        vmGrid.gridView.setColumnProperty('errorFileName', 'renderer', {
+          type: 'link',
+          url: vmImportJob.mUrlGetErrorLogFile + '${errorFileStorageId}',
+          requiredFields: 'errorFileStorageId',
+          showUrl: false
+        });
+
+        // Url click event
+        vmGrid.gridView.onLinkableCellClicked = function (grid, index, url) {
+          var hasErrorFile = vmGrid.gridView.getValue(index.itemIndex, index.fieldName);
+
+          if (hasErrorFile) {
+            window.open(url);
+          }
+        };
+      });
+    }
+  });
+</script>

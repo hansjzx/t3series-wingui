@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_BP_95" template="DP/UI_DP_25:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION_DP:COMM/COMM_PERSONALIZATION_EXT:DP/UI_ENTRY_EXT:DP/UI_DP_25_EXT:DP/UI_DP_COMM:DP/UI_DP_POPUP_USER:DP/UI_DP_POPUP_ITEM_TREE_POP:DP/UI_DP_POPUP_ACCOUNT_TREE_POP:DP/UI_DP_POPUP_MEASURE_COPY:DP/UI_DP_25_POPUP_COMMENT:DP/UI_DP_95_EXT" 
+                    copyfrom="COMM_HELP:COMM_PREFERENCE_DP:UI_DP_POPUP_USER:UI_DP_POPUP_ACCOUNT_TREE:UI_DP_POPUP_ITEM_TREE:UI_DP_25_POPUP_MEASURE_COPY:UI_DP_25_POPUP_COMMENT:UI_DP_95" version="2.0">
+    <publish parent="MENU_06_03" open="true" seq="250" />
+
+    <component id="SRH_CPT_T1_00_04" type="COMBOBOX">
+        <props>
+            <width>205</width>
+            <lang>true</lang>
+            <value-id>ATTR_01</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SP_UI_DP_00_CONF_Q1_INIT_plantype">
+                    <component-id>SRH_CPT_T1_00_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_CONF_Q1_01" value="DP_PLAN_TYPE" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_02" value="DP_PLAN_YEARLY" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                    </parameters>
+                    <success>
+                        <operation-call id="OPC_op_combo_select_pricetype">
+                            <component-id>SRH_CPT_T1_00_04</component-id>
+                            <operation-id>SELECT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+            <action event-type="select-item">
+                <operation-call id="OPC_SRH_CPT_T1_01_04_LOAD">
+                    <component-id>DATA_03</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_BUKT_COMBO_LOAD">
+                            <component-id>SRH_CPT_T1_14_04</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <success>
+                                <operation-call id="OPC_BUKT_COMBO_SELECT">
+                                    <component-id>SRH_CPT_T1_14_04</component-id>
+                                    <operation-id>SELECT</operation-id>
+                                    <conditions>
+                                        <condition id="CON_DATA_COMP_VAR">
+                                            <component>DATA_03</component>
+                                            <key>SVC_LATEST_VER_INIT</key>
+                                            <operator>equal</operator>
+                                            <value>empty</value>
+                                            <extract-by>VAR_BUKT</extract-by>
+                                        </condition>
+                                    </conditions>
+                                </operation-call>
+                                <operation-call id="OPC_BUKT_COMBO_SELECT002">
+                                    <component-id>SRH_CPT_T1_14_04</component-id>
+                                    <operation-id>SELECT</operation-id>
+                                    <parameters>
+                                        <parameter id="VALUE" value="PB" />
+                                    </parameters>
+                                    <conditions>
+                                        <condition id="CON_DATA_COMP_VAR2">
+                                            <component>DATA_03</component>
+                                            <key>SVC_LATEST_VER_INIT</key>
+                                            <operator>notEqual</operator>
+                                            <value>empty</value>
+                                            <extract-by>VAR_BUKT</extract-by>
+                                        </condition>
+                                    </conditions>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                        <operation-call id="OPC_VERSION_ID_SET">
+                            <component-id>SRH_CPT_T1_01_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="DATA_03:SVC_LATEST_VER_INIT" extract-by="VER_ID" />
+                            </parameters>
+                            <success>
+                                <operation-call id="OPC_SP_UI_DP_CURRENCY_COMBO_INIT">
+                                    <component-id>SRH_CPT_T1_11_04</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                    <success>
+                                        <operation-call id="OPC_SP_UI_DP_CURRENCY_COMBO_SELECT">
+                                            <component-id>SRH_CPT_T1_11_04</component-id>
+                                            <operation-id>SELECT</operation-id>
+                                        </operation-call>
+                                    </success>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                        <operation-call id="SP_DP_00_EMP_AUTH_TP_Q1_INIT">
+                            <component-id>SRH_CPT_T1_04_04</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="SP_UI_DP_00_EMP_AUTH_TP_Q1_01" reference-id="SRH_CPT_T1_02_04" default-value="" />
+                                <parameter id="SP_UI_DP_00_EMP_AUTH_TP_Q1_02" reference-id="COMMON:VIEW_ID" />
+                            </parameters>
+                            <success>
+                                <operation-call id="OPC_AUTH_SET">
+                                    <component-id>SRH_CPT_T1_04_04</component-id>
+                                    <operation-id>SELECT</operation-id>
+                                    <parameters>
+                                        <parameter id="INDEX" value="0" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_00_CONF_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+            <operation id="SELECT">
+                <service-call id="OPC_combo1_SET11">
+                    <parameters>
+                        <parameter id="INDEX" value="0" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

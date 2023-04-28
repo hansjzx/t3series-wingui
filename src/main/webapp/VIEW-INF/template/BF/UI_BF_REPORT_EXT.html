@@ -1,0 +1,180 @@
+<script>
+content.getCreateComponentCompleteFlag().done(function () {
+    var viewId = cm.getComponent("COMMON").getValue("VIEW_ID");
+    var chartComponentId;
+    var gridComponentId;
+	switch (viewId) {
+		case "UI_BF_50":
+			chartComponentId = "RST_CRT_01";
+			gridComponentId = "RST_CPT_01";
+			break;
+		case "UI_BF_52":
+			chartComponentId = "RST_CPT_02";
+			gridComponentId = "RST_CPT_01";
+			break;
+		case "UI_BF_53":			
+			chartComponentId = "RST_CPT_01";
+			gridComponentId = "RST_CPT_02";
+			break;
+		case "UI_BF_54":
+			chartComponentId = "RST_CPT_01";
+			gridComponentId = "RST_CPT_02";
+		    break;
+		case "UI_BF_55":
+			chartComponentId = "RST_CRT_01";
+			gridComponentId = "RST_CPT_01";
+		    break;
+		default:
+			break;
+	}
+	var chart = cm.getComponent(chartComponentId);
+	var grid  = cm.getComponent(gridComponentId);	
+
+	chart.doAfterSetData = function (serviceCallId, data, resultData) {
+		var chartView = chart.getActualComponent();
+		chartView.options.transitions = "false";
+	    var series = chartView.options.series;
+		if(viewId == "UI_BF_50"){
+			setChartDefaultVisibleSeries(series, resultData);
+			makeChartSeriesColorDynamically(series, "Z_ACT_SALES", "orange");
+		}
+		if(viewId == "UI_BF_53"){
+			var data = grid.getActualComponent().getDataProvider().getJsonRows();
+			console.log('[develop log] data : ', data);
+			makeChartSeriesColorDynamically(series, "BF_QTY", "#428BCA");
+			
+//			chartView.redraw();
+		}
+		if(viewId == "UI_BF_50" || viewId == "UI_BF_52"){
+			changeActualSales(series,"Z_ACT_SALES");
+//		    chartView.redraw();
+		}
+		if(viewId == "UI_BF_54"){
+            changeChartSeriesName(series, "ERROR", ": ERROR", "");
+//		    chartView.redraw();
+		}
+        series.map(function(row){
+            //console.log("[Develop Log] row.tooltip.template", row.tooltip);
+	    	row.tooltip.template = "#= gI18n.tc(series.name) #: #=kendo.toString(value, 'n0')#";
+	    	return row;
+	    });
+		    chartView.redraw();
+
+	};
+	grid.doAfterSetData = function (serviceCallId, data, resultData) {
+		var gridView = grid.getActualComponent();
+		var dataProvider = gridView.getDataProvider();
+		if(viewId == "UI_BF_50") {
+			changeColumnHeaderText(gridView, dataProvider)
+		}
+		else if(viewId == "UI_BF_52") {
+			markBestEngine(gridView, dataProvider);
+		}
+		else if(viewId == "UI_BF_53") {
+		    markFinalFcst(gridView, dataProvider);
+		}
+		else if(viewId == "UI_BF_55") {
+			cm.getComponent(chartComponentId).doOperation(chartComponentId, "LOAD");
+		}
+	};
+
+	// function list
+	function makeChartSeriesColorDynamically(series, keyCode, color) {
+		series.map(function(row){
+	    	if(row._groupValue == keyCode || row.field == keyCode){
+	    		row.color = color;
+	    		row.colorField = "COLOR";
+	    	}
+	    	return row;
+	    	});
+	}
+	function setChartDefaultVisibleSeries(series, resultData) {
+		var ITEM_CD = resultData.RESULT_DATA[0]['ITEM_CD'];
+		var ACCOUNT_CD = resultData.RESULT_DATA[0]['ACCOUNT_CD']
+		var BEST_ENGINE = dm.getDataState('RST_CPT_01').SVC_GET_SP_UI_BF_50_Q1.RESULT_DATA.filter(function(row){
+		return row.ITEM_CD == ITEM_CD & row.ACCOUNT_CD == ACCOUNT_CD & row.SELECT_SEQ == 1
+		}).map(function(row){
+			return row.ENGINE_TP_CD
+		});
+
+		for(var i=0, n=series.length; i<n; i++){
+			if (series[i]._groupValue != BEST_ENGINE & series[i]._groupValue != 'Z_ACT_SALES') {
+				series[i].visible = false;
+			}
+		} 
+	}
+	//specific function : to change a name of actual sales and type of chart, and other names contained ':'
+	function changeActualSales(series, actSalesCode) {
+		series.map(function(row){
+	    	if(row._groupValue == actSalesCode){
+	    		row.type = "bar";
+	    		row.name = row.name.replace("Z_", "");
+	    	}
+	    	row.name = row.name.replace(": ", "_");
+	    	return row
+	    });
+	    // console.log("[KSH] chartView.options.series", chartView.options.series);		
+	}
+	// common function to change a name of series. specifically, it is used to change a name of pivoting Error value of versions.
+	function changeChartSeriesName(series, fieldName, beforeName, afterName) {
+		series.map(function(row){
+	    	if(row.field == fieldName){
+//	    	    console.log("[log] fieldName", fieldName, "row.name",row.name);
+	    		row.name = row.name.replace(beforeName, afterName);
+	    	}
+	    	return row
+	    });
+	}
+	function markBestEngine(gridView, dataProvider){
+		gridView.addCellStyle("style01", {
+			"background": "#FFbfff00"
+		});
+		var bestEngine = dataProvider.getFieldValues("BEST_ENGINE");
+	//		console.log("[KSH] bestEngine",bestEngine);
+
+			for(var i=0, n=bestEngine.length; i<n; i++){
+				if(i==n-1){
+					gridView.setCellStyle(i, bestEngine[i], "style01", true);
+				}else{
+					gridView.setCellStyle(i, bestEngine[i], "style01");
+				}
+
+			}
+	}
+	function markFinalFcst(gridView, dataProvider){
+		gridView.addCellStyle("style02", {
+			"background": "#AA428BCA"
+		});
+		gridView.addCellStyle("style03", {
+			"background": "#AAc6d7ee"
+		});
+        var fieldNames = dataProvider.getFieldNames().filter(function(name){
+            return name.includes("VER_CD_");
+        });
+        for(var i in fieldNames){
+			gridView.setCellStyle(i, fieldNames[i], "style02");
+        }
+        var dataRows = new Array();
+        for (var i = fieldNames.length; i<=dataProvider.getRowCount();i++){
+            dataRows.push(i);
+        }
+        gridView.setCellStyles(dataRows,fieldNames[fieldNames.length-1], "style03");
+
+	}
+	function changeColumnHeaderText(gridView, dataProvider) {		
+		var selectVersion = cm.getComponent("SRH_CPT_T1_01_04").getValue();  //"RULE_01"
+		var selectCriteria = dm.getDataState("SRH_CPT_T1_01_04").SVC_SP_UI_BF_00_VERSION_Q1.RESULT_DATA.filter(function(row){
+			return row.VER_CD == selectVersion 
+		}).map(function(row){
+    		return row.RULE_01
+    	});
+
+		//console.log("[hanguls] selectCriteria",selectCriteria);
+		if (typeof selectCriteria != "undefined" && selectCriteria != null && selectCriteria != "") {
+			aHeader = gridView.getColumnProperty("ACCRY","header");
+			aHeader.text = selectCriteria;
+			gridView.setColumnProperty("ACCRY", "header", aHeader);				
+		}
+	}
+});
+</script>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_IM_06_03" version="2.0">
+    <component id="POP_UI_IM_06_03_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_IM_06_03</title>
+            <width>482</width>
+            <height>550</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_06_03_WINDOW_01_CPT_01_04" type="BUTTON">
+        <props>
+            <icon>add</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_IM_06_03_WINDOW_01_CPT_01_04_CLICK">
+                    <component-id>POP_UI_IM_06_03_WINDOW_01_CPT_01_10</component-id>
+                    <operation-id>INSERT_ROW</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_UI_IM_06_03_WINDOW_01_CPT_01_05" type="BUTTON">
+        <props>
+            <icon>minus</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_IM_06_03_WINDOW_01_CPT_01_05_CLICK">
+                    <component-id>POP_UI_IM_06_03_WINDOW_01_CPT_01_10</component-id>
+                    <operation-id>REMOVE_ROW</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_IM_06_03_WINDOW_01_CPT_01_05_CLICK_01_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POP_UI_IM_06_03_WINDOW_01_CPT_01_10:SVC_POP_UI_IM_06_03_WINDOW_01_CPT_01_10_REMOVE_ROW:IM_DATA" extract-by="SP_UI_IM_06_S2_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPCPOP_UI_IM_06_03_WINDOW_01_CPT_01_05_CLICK_RELOAD">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                    <complete>
+                        <operation-call id="OPCPOP_UI_IM_06_03_WINDOW_01_CPT_01_06">
+                            <component-id>POP_UI_IM_06_03_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_UI_IM_06_03_WINDOW_01_CPT_01_10" type="R_GRID">
+        <props>
+            <height>400</height>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="PO_CYCL_CALENDAR_ID" title="PO_CYCL_CALENDAR_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="STRT_DATE" title="STRT_DATE" type="date">
+                    <width>80</width>
+                    <editable>true</editable>
+                    <format>yyyy-MM-dd</format>
+                    <datepicker>true</datepicker>
+                </column>
+                <column id="END_DATE" title="END_DATE" type="date">
+                    <width>80</width>
+                    <editable>true</editable>
+                    <format>yyyy-MM-dd</format>
+                    <datepicker>true</datepicker>
+                </column>
+                <column id="TRANSFER_DD" title="DIST_DAY" type="int">
+                    <width>60</width>
+                    <editable>true</editable>
+                </column>
+                <column id="ACTV_YN" title="ACTV_YN" type="bool">
+                    <width>100</width>
+                    <editable>true</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_IM_06_Q_003">
+                    <service-id>SRV_UI_IM_06_Q4</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="PO_CYCL_CALENDAR_ID" reference-id="RST_CPT_01:selections" extract-by="ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="SVC_POP_UI_IM_06_03_WINDOW_01_CPT_01_10_SAVE">
+                    <service-id>SRV_UI_IM_06_S2</service-id>
+                    <service-target>mp</service-target>
+                    <param-empty-check>changes</param-empty-check>
+                    <parameters>
+                        <parameter id="WRK_TYPE" value="SAVE" />
+                        <parameter id="PO_CYCL_CALENDAR_ID" reference-id="RST_CPT_01:selections" extract-by="ID" />
+                        <parameter id="changes" reference-id="POP_UI_IM_06_03_WINDOW_01_CPT_01_10:changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="INSERT_ROW" />
+            <operation id="REMOVE_ROW">
+                <service-call id="SVC_POP_UI_IM_06_03_WINDOW_01_CPT_01_10_REMOVE_ROW">
+                    <service-id>SRV_UI_IM_06_S2</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="WRK_TYPE" value="DELETE" />
+                        <parameter id="PO_CYCL_CALENDAR_ID" reference-id="RST_CPT_01:selections" extract-by="ID" />
+                        <parameter id="changes" reference-id="POP_UI_IM_06_03_WINDOW_01_CPT_01_10:checked" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_06_03_WINDOW_01_CPT_30_01" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_IM_06_03_WINDOW_01_CPT_30_01_CLICK_01">
+                    <component-id>POP_UI_IM_06_03_WINDOW_01_CPT_01_10</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_IM_06_03_WINDOW_01_CPT_30_01_CLICK_02">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POP_UI_IM_06_03_WINDOW_01_CPT_01_10:SVC_POP_UI_IM_06_03_WINDOW_01_CPT_01_10_SAVE:IM_DATA" extract-by="SP_UI_IM_06_S2_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_06_03_WINDOW_01_CPT_30_01_CLICK_03">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                    <complete>
+                        <operation-call id="OPC_POP_UI_IM_06_03_WINDOW_01_CPT_30_01_CLICK_04">
+                            <component-id>POP_UI_IM_06_03_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_UI_IM_06_03_WINDOW_01_CPT_30_05" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_IM_06_03_WINDOW_01_CPT_30_05_CLICK_01">
+                    <component-id>POP_UI_IM_06_03_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

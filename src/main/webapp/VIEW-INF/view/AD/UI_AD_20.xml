@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_AD_20" template="COMM/STANDARD:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:COMM/STANDARD_GRID_H_STYLE" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_DEPARTMENT" version="2.0">
+    <publish parent="MENU_90" open="true" seq="200" />
+    <component id="POP_COMM_CPT_HELP_01" type="URL_PAGE">
+        <props>
+            <url>images/price_niro.pdf</url>
+            <height>800</height>
+            <scroll>true</scroll>
+        </props>
+    </component>
+    <component id="TTL_CPT_03" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_SRH_CPT_T1_01_04_INIT">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_SRH_CPT_T1_02_04_INIT">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_SRH_CPT_T1_03_04_INIT">
+                    <component-id>SRH_CPT_T1_03_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_01_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="DATA_01" type="DATA">
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="BASE_OPTION" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <width>80</width>
+            <lang>true</lang>
+            <init-value>JOB_KEY</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="enterLoad">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_01_01" type="BUTTON">
+        <props>
+            <name>Initialize</name>
+            <tooltip>Initialize</tooltip>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="i_wait_on">
+                    <component-id>COMMON</component-id>
+                    <operation-id>WAIT-ON</operation-id>
+                    <complete>
+                        <operation-call id="i_load">
+                            <component-id>RST_CPT_01_01</component-id>
+                            <operation-id>INITIALIZE</operation-id>
+                            <success>
+                                <operation-call id="i_successload">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Success" />
+                                        <parameter id="msg" value="Initialize job schedule Success" />
+                                        <parameter id="type" value="info" />
+                                        <parameter id="modal" value="true" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                            <fail>
+                                <operation-call id="i_failload">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Fail" />
+                                        <parameter id="msg" value="Initialize job schedule Fail" />
+                                        <parameter id="type" value="alert" />
+                                        <parameter id="modal" value="true" />
+                                    </parameters>
+                                </operation-call>
+                            </fail>
+                            <complete>
+                                <operation-call id="i_wait_off">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>WAIT-OFF</operation-id>
+                                </operation-call>
+                            </complete>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="INITIALIZE">
+                <service-call id="SVC_RST_CPT_01_INIT">
+                    <service-id>InitializeJobSchedule</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_01_02" type="BUTTON">
+        <props>
+            <name>Terminate</name>
+            <tooltip>Terminate</tooltip>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="t_wait_on">
+                    <component-id>COMMON</component-id>
+                    <operation-id>WAIT-ON</operation-id>
+                    <complete>
+                        <operation-call id="v_load">
+                            <component-id>RST_CPT_01_02</component-id>
+                            <operation-id>TERMINATE</operation-id>
+                            <success>
+                                <operation-call id="t_successload">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Success" />
+                                        <parameter id="msg" value="terminate job schedule Success" />
+                                        <parameter id="type" value="info" />
+                                        <parameter id="modal" value="true" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                            <fail>
+                                <operation-call id="t_failload">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Fail" />
+                                        <parameter id="msg" value="terminate job schedule Fail" />
+                                        <parameter id="type" value="alert" />
+                                        <parameter id="modal" value="true" />
+                                    </parameters>
+                                </operation-call>
+                            </fail>
+                            <complete>
+                                <operation-call id="t_wait_off">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>WAIT-OFF</operation-id>
+                                </operation-call>
+                            </complete>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="TERMINATE">
+                <service-call id="SVC_RST_CPT_01_TERMINATE">
+                    <service-id>TerminateJobSchedule</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_01_08" type="BUTTON">
+        <props>
+            <name>Pause</name>
+            <tooltip>Pause</tooltip>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="p_wait_on">
+                    <component-id>COMMON</component-id>
+                    <operation-id>WAIT-ON</operation-id>
+                    <complete>
+                        <operation-call id="p_load">
+                            <component-id>RST_CPT_01_08</component-id>
+                            <operation-id>PAUSE</operation-id>
+                            <success>
+                                <operation-call id="p_successload">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Success" />
+                                        <parameter id="msg" value="job pause Success" />
+                                        <parameter id="type" value="info" />
+                                        <parameter id="modal" value="true" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                            <fail>
+                                <operation-call id="p_failload">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Fail" />
+                                        <parameter id="msg" value="job pause Fail" />
+                                        <parameter id="type" value="alert" />
+                                        <parameter id="modal" value="true" />
+                                    </parameters>
+                                </operation-call>
+                            </fail>
+                            <complete>
+                                <operation-call id="p_wait_off">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>WAIT-OFF</operation-id>
+                                </operation-call>
+                            </complete>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="PAUSE">
+                <service-call id="SVC_RST_CPT_01_TERMINATE">
+                    <service-id>PauseJob</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="checked" reference-id="RST_CPT_01:checked" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_01_09" type="BUTTON">
+        <props>
+            <name>Resume</name>
+            <tooltip>Resume</tooltip>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="p_wait_on">
+                    <component-id>COMMON</component-id>
+                    <operation-id>WAIT-ON</operation-id>
+                    <complete>
+                        <operation-call id="r_load">
+                            <component-id>RST_CPT_01_09</component-id>
+                            <operation-id>RESUME</operation-id>
+                            <success>
+                                <operation-call id="r_successload">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Success" />
+                                        <parameter id="msg" value="job resume Success" />
+                                        <parameter id="type" value="info" />
+                                        <parameter id="modal" value="true" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                            <fail>
+                                <operation-call id="r_failload">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Fail" />
+                                        <parameter id="msg" value="job resume Fail" />
+                                        <parameter id="type" value="alert" />
+                                        <parameter id="modal" value="true" />
+                                    </parameters>
+                                </operation-call>
+                            </fail>
+                            <complete>
+                                <operation-call id="r_wait_off">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>WAIT-OFF</operation-id>
+                                </operation-call>
+                            </complete>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="RESUME">
+                <service-call id="SVC_RST_CPT_01_TERMINATE">
+                    <service-id>ResumeJob</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="checked" reference-id="RST_CPT_01:checked" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <indicator>false</indicator>
+            <state-bar>false</state-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="JOB_GROUP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="JOB_KEY" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="JOB_PATTERN" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <fix>true</fix>
+                </column>
+                <column id="JOB_STARTTIME" type="datetime">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+                <column id="JOB_ENDTIME" type="datetime">
+                    <width>120</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="JOB_DESC" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="JOB_AFTER_FIRE_TIME" type="datetime">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+                <column id="JOB_FINAL_FIRE_TIME" type="datetime">
+                    <width>120</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                    <datepicker>true</datepicker>
+                </column>
+                <column id="JOB_PRIOTY" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+                <column id="JOB_EXIST_STATUS" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="JOB_SERVER_ID" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="JOB_SERVICE_ID" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="EXPORT">
+                <file-name />
+            </operation>
+            <operation id="IMPORT">
+                <file-name />
+            </operation>
+            <operation id="REFRESH">
+                <service-call id="SVC_RST_CPT_01_REFRESH">
+                    <url>/system/users</url>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <service-call id="jobLoad">
+                    <service-id>GetJob</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="JOK_KEY" reference-id="SRH_CPT_T1_01_04" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

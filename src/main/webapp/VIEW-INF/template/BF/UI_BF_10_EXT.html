@@ -1,0 +1,10 @@
+<script>
+	content.getCreateComponentCompleteFlag().done(function () {
+	    var chartCompId = "RST_CPT_01";
+	    var valueField = "IMPORTANCE";
+        var chart = cm.getComponent(chartCompId);
+        chart.doAfterSetData = function (serviceCallId, data, resultData) {
+            chart.getActualComponent().dataSource.sort([{ field: valueField, dir: "desc" }]);
+        };
+	});
+</script>

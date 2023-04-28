@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_DP_96_CHART" template="DP/UI_DP_96_CHART:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION_DP:COMM/COMM_PERSONALIZATION_EXT:DP/UI_ENTRY_EXT:DP/UI_DP_25_EXT:DP/UI_DP_COMM:DP/UI_DP_POPUP_USER:DP/UI_DP_POPUP_ITEM_TREE_POP:DP/UI_DP_POPUP_ACCOUNT_TREE_POP:DP/UI_DP_POPUP_MEASURE_COPY:DP/UI_DP_25_POPUP_ATTR"
+                          copyfrom="UI_DP_96:COMM_HELP:COMM_VIEW_META:COMM_PREFERENCE_DP:UI_DP_POPUP_USER:UI_DP_POPUP_ACCOUNT_TREE:UI_DP_POPUP_ITEM_TREE:COMM_VIEW_META:COMM_SRH_ITEM_ATTR_DP:COMM_SRH_ACCT_ATTR_DP" version="2.0">
+    <publish parent="MENU_05_07" open="true" seq="260" />
+    <component id="RESULT_SPLIT" type="SPLIT">
+        <props>
+            <position>vertical</position>
+            <splits>
+                <split id="chart" collapsible="true" resizable="true" size="320" />
+                <split id="grid" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="DATA_05" type="DATA">
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_DATA_05_LOAD">
+                    <component-id>DATA_05</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_00_EMP_AUTH_TP_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_00_EMP_AUTH_TP_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_EMP_AUTH_TP_Q1_01" value="" />
+                        <parameter id="SP_UI_DP_00_EMP_AUTH_TP_Q1_02" reference-id="COMMON:VIEW_ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CRT_01_01" type="COMBOBOX">
+        <props>
+            <width>200</width>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>CD</value-id>
+            <text-id>NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_RST_CRT_01_01_LOAD">
+                    <component-id>RST_CRT_01_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_RST_CRT_01_01_SELECT">
+                            <component-id>RST_CRT_01_01</component-id>
+                            <operation-id>SELECT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+            <action event-type="select-item">
+                <operation-call id="OPC_SELECT_CHART_COMBO">
+                    <component-id>RST_CRT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_GET_CHART_COMBO">
+                    <service-id>SRV_GET_CHART_COMBO</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+            <operation id="SELECT">
+                <service-call id="SVC_RST_CRT_01_01_dEFAULT">
+                    <service-id />
+                    <service-target />
+                    <parameters>
+                        <parameter id="VALUE" value="QTY" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CRT_01" type="CHART">
+        <props>
+            <height>282</height>
+            <theme>metro</theme>
+            <legend>
+                <visible>false</visible>
+                <position>right</position>
+            </legend>
+            <tooltip>
+                <visible>true</visible>
+            </tooltip>
+            <category-axis>
+                <rotation>45</rotation>
+                <category id="DATE">
+                    <format>yyyy-MM-dd</format>
+                    <type>date</type>
+                </category>
+            </category-axis>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_GetDemand2">
+                    <service-id>GetDemand</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="VERSION_ID" reference-id="SRH_CPT_T1_01_04" extract-by="ID" />
+                        <parameter id="PREV_VERSION_ID" reference-id="SRH_CPT_T1_01_04" extract-by="PREV_VER_ID" />
+                        <parameter id="VER_STATUS" reference-id="SRH_CPT_T1_01_04" extract-by="V_STATUS" />
+                        <parameter id="FROM_DATE" reference-id="SRH_CPT_T1_01_04" extract-by="FROM_DATE" />
+                        <parameter id="TO_DATE" reference-id="SRH_CPT_T1_01_04" extract-by="TO_DATE" />
+                        <parameter id="VARIABLE_DATE" reference-id="SRH_CPT_T1_01_04" extract-by="TO_DATE" />
+                        <parameter id="VARIABLE_PREV_DATE" reference-id="SRH_CPT_T1_01_04" extract-by="VAR_PREV_DATE" />
+                        <parameter id="BUKT" reference-id="SRH_CPT_T1_01_04" extract-by="BUKT" />
+                        <!--<parameter id="BUCKET_TP" reference-id="SRH_CPT_T1_01_04" extract-by="BUKT" />-->
+                        <parameter id="BUCKET_TP" reference-id="SRH_CPT_T1_14_04"/>
+                        <parameter id="VARIABLE_BUKT" reference-id="SRH_CPT_T1_01_04" extract-by="VAR_BUKT" />
+                        <parameter id="PRICE_TP_ID" reference-id="SRH_CPT_T1_01_04" extract-by="PRICE_TP_ID" />
+                        <parameter id="CURCY_TP_ID" reference-id="SRH_CPT_T1_01_04" extract-by="CURCY_TP_ID" />
+                        <parameter id="DIM_INFO" reference-id="DATA_01:SVC_SP_UI_DP_95_DIM" />
+                        <parameter id="MES_INFO" reference-id="DATA_01:SVC_SP_UI_DP_95_MES_CHART" />
+                        <parameter id="CURCY_ID" reference-id="SRH_CPT_T1_11_04" extract-by="ID" />
+                        <parameter id="ITEM_LV_YN" value="N" />
+                        <parameter id="ACCT_LV_YN" value="N" />
+                        <parameter id="ITEM_FILTER" reference-id="SRH_CPT_T1_06_04" default-value="" />
+                        <parameter id="ACCOUNT_FILTER" reference-id="SRH_CPT_T1_08_04" default-value="" />
+                        <parameter id="ITEM_CHART_FILTER" reference-id="RST_CPT_01:selections" extract-by="ITEM" />
+                        <parameter id="ACCOUNT_CHART_FILTER" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT" />
+                        <parameter id="MATCH_OPTION" value="WHOLE-WORD" />
+                        <parameter id="UI_ID" reference-id="COMMON:VIEW_ID" />
+                        <parameter id="GRID_ID" value="RST_CPT_01" />
+                        <parameter id="PLAN_TP_ID" reference-id="SRH_CPT_T1_00_04" extract-by="ID" default-value="" />
+                        <parameter id="SM" reference-id="SRH_CPT_T1_00_04" extract-by="SM"/>
+                        <parameter id="LEAF_BUKT_YN" reference-id="SRH_CPT_T1_00_04" extract-by="LEAF_BUKT_YN"/>
+                        <!-- attribute -->
+                        <parameter id="ITEM_ATTR_01" reference-id="SRH_CPT_ATTR_01_04"/>
+                        <parameter id="ITEM_ATTR_02" reference-id="SRH_CPT_ATTR_02_04"/>
+                        <parameter id="ITEM_ATTR_03" reference-id="SRH_CPT_ATTR_03_04"/>
+                        <parameter id="ACCT_ATTR_01" reference-id="SRH_CPT_ATTR_06_04"/>
+                        <parameter id="ACCT_ATTR_02" reference-id="SRH_CPT_ATTR_07_04"/>
+                        <parameter id="ACCT_ATTR_03" reference-id="SRH_CPT_ATTR_08_04"/>
+                        <!-- by checkbox -->
+                        <parameter id="USER_ID" reference-id="SRH_CPT_T1_02_04"  />
+                        <parameter id="AUTH_TP_ID" reference-id="SRH_CPT_T1_04_04" extract-by="ID" />
+                        <parameter id="AUTH_TYPE" reference-id="SRH_CPT_T1_04_04" extract-by="CD" />
+                        <parameter id="AUTH_TYPE_ISLEAF" reference-id="SRH_CPT_T1_04_04" extract-by="LEAF_YN" />
+                        <parameter id="USER_MAP_TYPE" reference-id="SRH_CPT_T1_04_04" extract-by="MAP_TP" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

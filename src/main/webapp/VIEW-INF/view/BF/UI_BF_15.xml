@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_BF_15" template="COMM/STANDARD:BF/UI_BF_16_EXT:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_VIEW_META:COMM_DEPARTMENT" version="2.0">
+    <publish parent="MENU_07_01" open="true" seq="130" />
+    <component id="DATA_01" type="DATA">
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_DATA_01_LOAD">
+                    <component-id>DATA_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="GET_DEFAT_VAL">
+                    <service-id>SRV_GET_SP_UI_BF_15_Q0</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+    </component>
+    <component id="TTL_CPT_05" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_GRID_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="true" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value />
+        </props>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <selection-mode>block</selection-mode>
+            <check-bar>true</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <cell-attributes>
+                <cell-attribute id="ca01">
+                    <conditions>
+                        <condition id="cond01">
+                            <column>ENGINE_TP_CD</column>
+                            <operator>equal</operator>
+                            <value>ML</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="app01">
+                            <column>INPUT_BUKT_CD,ITEM_LV_CD,SALES_LV_CD,BF_DIST_RULE_CD</column>
+                            <attrs>
+                                <editable>false</editable>
+                                <background>#FFF9F9F9</background>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+            </cell-attributes>
+            <toolbar use="true">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_DELETE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="RST_CPT_01:SVC_SET_SP_UI_BF_15_D1:IM_DATA" extract-by="SP_UI_BF_15_D1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_Reload_003">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="RST_CPT_01:SVC_SET_SP_UI_BF_15_S1:IM_DATA" extract-by="SP_UI_BF_15_S1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_Reload_002">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ENGINE_TP_CD" title="ENGINE_TP" type="string">
+                    <width>120</width>
+                    <visible>true</visible>
+                    <editable if-new="true">false</editable>
+                    <lang>true</lang>
+                    <candidate>
+                        <drop-down-count>5</drop-down-count>
+                        <values>
+                            <value-id>CD</value-id>
+                            <text-id>CD_NM</text-id>
+                            <service-call id="dropDown00">
+                                <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                                <service-target>dp</service-target>
+                                <parameters>
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_01" value="BF_ENGINE_TP" />
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_02" value="" />
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                                </parameters>
+                            </service-call>
+                        </values>
+                    </candidate>
+                </column>
+                <column id="DESCRIP" type="string">
+                    <width>150</width>
+                    <editable>true</editable>
+                </column>
+                <column id="SEQ" type="string" sort="asc">
+                    <width>50</width>
+                    <editable>true</editable>
+                </column>
+                <column id="INPUT_HORIZ" title="CF_BF_POLICY_H" type="int">
+                    <width>60</width>
+                    <visible>true</visible>
+                    <editable>true</editable>
+                    <groups>INPUT</groups>
+                </column>
+                <column id="INPUT_BUKT_CD" title="BUCKET" type="string">
+                    <width>70</width>
+                    <visible>true</visible>
+                    <editable>true</editable>
+                    <lang>true</lang>
+                    <groups>INPUT</groups>
+                    <candidate>
+                        <drop-down-count>5</drop-down-count>
+                        <values>
+                            <value-id>CD</value-id>
+                            <text-id>CD_NM</text-id>
+                            <service-call id="dropDown01">
+                                <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                                <service-target>dp</service-target>
+                                <parameters>
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_01" value="BF_BUKT_TP" />
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_02" value="" />
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                                </parameters>
+                            </service-call>
+                        </values>
+                    </candidate>
+                </column>
+                <column id="TARGET_HORIZ" title="CF_BF_POLICY_H" type="int">
+                    <width>60</width>
+                    <visible>true</visible>
+                    <editable>true</editable>
+                    <groups>TARGET</groups>
+                </column>
+                <column id="TARGET_BUKT_CD" title="BUCKET" type="string">
+                    <width>70</width>
+                    <visible>true</visible>
+                    <editable>true</editable>
+                    <lang>true</lang>
+                    <groups>TARGET</groups>
+                    <candidate>
+                        <drop-down-count>5</drop-down-count>
+                        <values>
+                            <value-id>CD</value-id>
+                            <text-id>CD_NM</text-id>
+                            <service-call id="dropDown02">
+                                <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                                <service-target>dp</service-target>
+                                <parameters>
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_01" value="BF_BUKT_TP" />
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_02" value="" />
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                                </parameters>
+                            </service-call>
+                        </values>
+                    </candidate>
+                </column>
+                <column id="SALES_LV_CD" title="SALES_LV_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>true</editable>
+                    <candidate>
+                        <drop-down-count>5</drop-down-count>
+                        <values>
+                            <value-id>CD</value-id>
+                            <text-id>CD_NM</text-id>
+                            <service-call id="dropDown_04">
+                                <service-id>SRV_GET_SP_UI_DP_00_LV_CD_Q1</service-id>
+                                <service-target>dp</service-target>
+                                <parameters>
+                                    <parameter id="LV_TP" value="S"/>
+                                    <parameter id="ACCOUNT_LV_YN" value="Y" />
+                                </parameters>
+                            </service-call>
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ITEM_LV_CD" title="ITEM_LV_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>true</editable>
+                    <candidate>
+                        <drop-down-count>5</drop-down-count>
+                        <values>
+                            <value-id>CD</value-id>
+                            <text-id>CD_NM</text-id>
+                            <service-call id="dropDown_03">
+                                <service-id>SRV_GET_SP_UI_DP_00_LV_CD_Q1</service-id>
+                                <service-target>dp</service-target>
+                                <parameters>
+                                    <parameter id="LV_TP" value="I"/>
+                                </parameters>
+                            </service-call>
+                        </values>
+                    </candidate>
+                </column>
+                <column id="BF_DIST_RULE_CD" title="BF_DIST_RULE" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                    <lang>true</lang>
+                    <candidate>
+                        <drop-down-count>5</drop-down-count>
+                        <values>
+                            <value-id>CD</value-id>
+                            <text-id>CD_NM</text-id>
+                            <service-call id="dropDown02">
+                                <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                                <service-target>dp</service-target>
+                                <parameters>
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_01" value="BF_DIST_RULE_VALUE" />
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_02" value="" />
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                                </parameters>
+                            </service-call>
+                        </values>
+                    </candidate>
+                </column>
+                <column id="VAL_TP" title="BF_VAL_TP" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>true</editable>
+                    <lang>true</lang>
+                    <candidate>
+                        <drop-down-count>2</drop-down-count>
+                        <init-value>
+                            <option value="QTY" text="QTY" />
+                            <option value="AMT" text="AMT" />
+                        </init-value>
+                    </candidate>
+                </column>
+                <column id="ATTR_01" title="ATTRIBUTE_01" type="string">
+                    <width>70</width>
+                    <visible>true</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="ATTR_02" title="ATTRIBUTE_02" type="string">
+                    <width>70</width>
+                    <visible>true</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="ATTR_03" title="ATTRIBUTE_03" type="string">
+                    <width>70</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="ATTR_04" title="ATTRIBUTE_04" type="string">
+                    <width>70</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="ATTR_05" title="ATTRIBUTE_05" type="string">
+                    <width>70</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="ATTR_06" title="ATTRIBUTE_06" type="string">
+                    <width>70</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="ATTR_07" title="ATTRIBUTE_07" type="string">
+                    <width>70</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="ATTR_08" title="ATTRIBUTE_08" type="string">
+                    <width>70</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="ATTR_09" title="ATTRIBUTE_09" type="string">
+                    <width>70</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="ATTR_10" title="ATTRIBUTE_10" type="string">
+                    <width>70</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="CREATE_BY" type="string">
+                    <width>80</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="CREATE_DTTM" type="datetime">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                </column>
+                <column id="MODIFY_BY" type="string">
+                    <width>80</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="MODIFY_DTTM" type="datetime">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_RST_CPT_01_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+            <action event-type="cell-edited">
+                <operation-call id="OPC_RST_CPT_01_CELL_SET_WHEN_ENGINE_TYPE_IS_ML">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-SALES_LV_CD" reference-id="DATA_01:GET_DEFAT_VAL" extract-by="SALES" />
+                        <parameter id="SET_VALUE-to-ITEM_LV_CD" reference-id="DATA_01:GET_DEFAT_VAL" extract-by="ITEM" />
+                        <parameter id="SET_VALUE-to-INPUT_BUKT_CD" reference-id="DATA_01:GET_DEFAT_VAL" extract-by="BUKT" />
+                        <parameter id="SET_VALUE-to-BF_DIST_RULE_CD" reference-id="DATA_01:GET_DEFAT_VAL" extract-by="DIST_RULE_CD" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_RST_CPT_01_WHEN_ENGINE_TYPE_IS_MS">
+                            <component>RST_CPT_01</component>
+                            <on-column>ENGINE_TP_CD</on-column>
+                            <column>ENGINE_TP_CD</column>
+                            <operator>equal</operator>
+                            <value>ML</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_RST_CPT_01_SET_BUCKET_WHEN_FP">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-TARGET_BUKT_CD" reference-id="RST_CPT_01:selections" extract-by="INPUT_BUKT_CD" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_ENGINE_IS_FP">
+                            <on-column>INPUT_BUKT_CD</on-column>
+                            <column>ENGINE_TP_CD</column>
+                            <operator>endsWith</operator>
+                            <value>FP</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="INSERT_ROW">
+                <service-call id="SET_DEFAULT">
+                    <parameters>
+                        <parameter id="SET_DEFAULT-to-TARGET_BUKT_CD" value="W" />
+                        <parameter id="SET_DEFAULT-to-BF_DIST_RULE_CD" value="NN" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="EXPORT">
+                <all-columns>true</all-columns>
+            </operation>
+            <operation id="IMPORT" />
+            <operation id="LOAD">
+                <service-call id="SVC_GET_SP_UI_BF_15_Q1">
+                    <service-id>SRV_GET_SP_UI_BF_15_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="FROM_DATE" reference-id="SRH_CPT_T1_02_04" />
+                        <parameter id="TO_DATE" reference-id="SRH_CPT_T1_03_04" />
+                        <parameter id="LUNAR_SOLAR" reference-id="SRH_CPT_T1_04_04" />
+                        <parameter id="DOW" reference-id="SRH_CPT_T1_05_04" />
+                        <parameter id="HOLIDAY_YN" reference-id="SRH_CPT_T1_06_04" />
+                        <parameter id="QTR" reference-id="SRH_CPT_T1_08_04" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="SVC_SET_SP_UI_BF_15_S1">
+                    <service-id>SRV_SET_SP_UI_BF_15_S1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="changes" reference-id="RST_CPT_01:changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="REMOVE_ROW">
+                <service-call id="SVC_SET_SP_UI_BF_15_D1">
+                    <service-id>SRV_SET_SP_UI_BF_15_D1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="changes" reference-id="RST_CPT_01:checked" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET">
+                <service-call id="SET_VALUE" />
+            </operation>
+        </operations>
+    </component>
+</view>

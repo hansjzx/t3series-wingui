@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="COMM_SRH_ACCT_ATTR_DP" version="2.0">
+    <!--   TAB2 검색조건 추가 START  -->
+    <component id="SRH_ATTR_CONTAINER_02" type="CONTAINER">
+        <props>
+            <height>150</height>
+            <group-box>
+                <title>ACCOUNT_ATTR</title>
+            </group-box>
+            <containers>
+                <container id="con1_2" expand="true" />
+            </containers>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+
+    <component id="SRH_CPT_ATTR_06_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACCOUNT_ATTR_01</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_ATTR_06_04" type="INPUTBOX">
+        <props>
+            <width>205</width>
+            <editable>true</editable>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="OPC_ACCT_ATTR_01_ENTER">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="COMMON_VIEW_IS_NOT_EQUAL">
+                            <component>COMMON</component>
+                            <key>VIEW_ID</key>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+
+    <component id="SRH_CPT_ATTR_07_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACCOUNT_ATTR_02</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_ATTR_07_04" type="INPUTBOX">
+        <props>
+            <width>205</width>
+            <editable>true</editable>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="OPC_ACCT_ATTR_01_ENTER">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="COMMON_VIEW_IS_NOT_EQUAL">
+                            <component>COMMON</component>
+                            <key>VIEW_ID</key>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+
+    <component id="SRH_CPT_ATTR_08_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACCOUNT_ATTR_03</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_ATTR_08_04" type="INPUTBOX">
+        <props>
+            <width>205</width>
+            <editable>true</editable>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="OPC_ACCT_ATTR_01_ENTER">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="COMMON_VIEW_IS_NOT_EQUAL">
+                            <component>COMMON</component>
+                            <key>VIEW_ID</key>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+
+    <!--   TAB2 검색조건 추가 END  -->
+</view>

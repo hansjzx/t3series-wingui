@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_MP_32" template="MP/UI_MP_32:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:COMM/COMM_SRH_POP_SIM_VER:COMM/COMM_SRH_POP_SIM_ITEM:COMM/COMM_SRH_POP_SIM_ITEM2:COMM/COMM_SRH_POP_ACCOUNT:COMM/COMM_SRH_POP_ACCOUNT:COMM/COMM_SRH_POP_RES:MP/POP_UI_MP_32_01" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_VIEW_META:COMM_BTN_EXCEL:COMM_SRH_SIM_VER:COMM_SRH_POP_SIM_VER:COMM_SRH_POP_SIM_ITEM:COMM_SRH_POP_SIM_ITEM2:COMM_SRH_ACCOUNT:COMM_SRH_POP_ACCOUNT:COMM_SRH_RES:COMM_SRH_POP_RES:COMM_SRH_DMND_HORIZ:POP_UI_MP_32_01" version="2.0">
+    <publish parent="MENU_04_03" open="true" seq="230" />
+    <component id="TTL_CPT_03" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_TTL_CPT_03_REFRESH_01">
+                    <component-id>SRH_CPT_ITEM_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_03_REFRESH_02">
+                    <component-id>SRH_CPT_ITEM_NM_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_03_REFRESH_03">
+                    <component-id>SRH_CPT_ACCOUNT_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_03_REFRESH_04">
+                    <component-id>SRH_CPT_ACCOUNT_NM_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_03_REFRESH_05">
+                    <component-id>SRH_CPT_DMND_ID_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_03_REFRESH_06">
+                    <component-id>SRH_CPT_PLAN_LOCAT_TP_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_03_REFRESH_07">
+                    <component-id>SRH_CPT_PLAN_LOCAT_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_03_REFRESH_08">
+                    <component-id>SRH_CPT_PLAN_LOCAT_NM_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_03_REFRESH_09">
+                    <component-id>SRH_CPT_ITEM2_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_03_REFRESH_10">
+                    <component-id>SRH_CPT_ITEM2_NM_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_03_REFRESH_11">
+                    <component-id>SRH_CPT_RES_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_03_REFRESH_12">
+                    <component-id>SRH_CPT_RES_DESCRIP_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_03_REFRESH_13">
+                    <component-id>SRH_CPT_SHORTAGE_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_01_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="337" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_ITEM_CD_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_CD</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_ITEM_CD_04" type="INPUTBOX">
+        <props>
+            <width>147.7</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_ITEM_CD_05" type="BUTTON">
+        <props>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_SRH_CPT_ITEM_CD_05_CLICK">
+                    <component-id>COMM_SRH_POP_SIM_ITEM_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_SRH_CPT_ITEM_CD_05_CLICK_SUCCESS">
+                            <component-id>COMM_SRH_POP_SIM_ITEM_WINDOW_01_GRD</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_ITEM_NM_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_NM</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_ITEM_NM_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_PLAN_LOCAT_NM_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_DMND_ID_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DMND_ID</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_DMND_ID_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_PLAN_LOCAT_TP_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PLAN_LOCAT_TP</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_PLAN_LOCAT_TP_04" type="INPUTBOX">
+        <props>
+            <width>150</width>
+            <editable>true</editable>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_PLAN_LOCAT_TP_05" type="BUTTON">
+        <props>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_MP_32_01_WINDOW_01_OPEN">
+                    <component-id>POP_UI_MP_32_01_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_32_01_WINDOW_01_GRD_LOAD">
+                    <component-id>POP_UI_MP_32_01_WINDOW_01_GRD</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_CPT_PLAN_LOCAT_CD_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PLAN_LOCAT_CD</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_PLAN_LOCAT_CD_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_PLAN_LOCAT_NM_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PLAN_LOCAT_NM</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_ITEM2_CD_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PLAN_ITEM_CD</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_ITEM2_CD_04" type="INPUTBOX">
+        <props>
+            <width>147.7</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_ITEM2_CD_05" type="BUTTON">
+        <props>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_SRH_CPT_ITEM2_CD_05_CLICK">
+                    <component-id>COMM_SRH_POP_SIM_ITEM2_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_SRH_CPT_ITEM2_CD_05_CLICK_SUCCESS">
+                            <component-id>COMM_SRH_POP_SIM_ITEM2_WINDOW_01_GRD</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_ITEM2_NM_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PLAN_ITEM_NM</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_ITEM2_NM_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+		<component id="SRH_CPT_PLAN_START_01" type="LABEL">
+			<props>
+				<lang>true</lang>
+				<init-value>PLAN_START</init-value>
+			</props>
+		</component>
+		<component id="SRH_CPT_PLAN_START_04" type="DATEPICKER">
+			<props>
+				<width>180</width>
+				<editable>true</editable>
+				<lang>true</lang>
+				<date-type>day</date-type>
+				<date-format>yyyy-MM-dd</date-format>
+				<init-value>NONE</init-value>
+			</props>
+			<operations>
+				<operation id="SET" />
+			</operations>
+		</component>
+		<component id="SRH_CPT_PLAN_END_01" type="LABEL">
+			<props>
+				<lang>true</lang>
+				<init-value>PLAN_END</init-value>
+			</props>
+		</component>
+		<component id="SRH_CPT_PLAN_END_04" type="DATEPICKER">
+			<props>
+				<width>180</width>
+				<editable>true</editable>
+				<lang>true</lang>
+				<date-type>day</date-type>
+				<date-format>yyyy-MM-dd</date-format>
+				<init-value>NONE</init-value>
+			</props>
+			<operations>
+				<operation id="SET" />
+			</operations>
+		</component>
+    <component id="SRH_CPT_SHORTAGE_04" type="RADIO">
+        <props>
+            <lang>true</lang>
+            <init-value>
+                <option value="A" text="ALL" text-position="right" selected="true" />
+                <option value="Y" text="SHORTAGE" text-position="right" />
+            </init-value>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <header-height>55</header-height>
+            <selection-mode>BLOCK</selection-mode>
+            <indicator>false</indicator>
+            <check-bar>false</check-bar>
+            <fit-style>none</fit-style>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>true</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <toolbar use="false" />
+            <columns>
+                <column id="PLAN_SEQ" title="SEQ" type="int">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="DMND_ID" title="DMND_ID" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="PO_ID" title="PO_ID" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="DMND_TP_NM" title="DMND_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="DMND_CLASS_NM" title="DMND_CLASS_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="URGENT_ORDER_TP_NM" title="URGENT_ORDER_TP" type="string">
+                    <width>140</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ITEM_DESCRIP" title="ITEM_DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ITEM_TP_NM" title="ITEM_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="DMND_QTY" title="DMND_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="UOM_NM" title="UOM_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="DUE_DATE" title="DUE_DATE" type="date">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="REQUEST_SITE_ID" title="REQUEST_SITE_ID" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="REQUEST_SITE_DESCRIP" title="REQUEST_SITE_DESCRIP" type="string">
+                    <width>160</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="ACCOUNT_CD" title="ACCOUNT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="ACCOUNT_NM" title="ACCOUNT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="CHANNEL_NM" title="CHANNEL_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="INCOTERMS" title="INCOTERMS" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="SALES_PRIC" title="SALES_UNIT_PRIC" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="MARGIN" title="MARGIN" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="CURRENCY" title="CURCY_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>REQUEST_SITE_CUST</groups>
+                </column>
+                <column id="DELIVY_DATE" title="DELIVY_DATE" type="date">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="DAYS_LATE" title="DAYS_LATE" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="DELIVY_QTY" title="DELIVY_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="ON_TIME_QTY" title="ON_TIME_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="LATE_QTY" title="LATE_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="SHORTAGE_QTY" title="SHORTAGE_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="NETTING_QTY" title="NETTING_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="PROBLEM_DESCRIP" title="PROBLEM_DESCRIP" type="string">
+                    <width>400</width>
+                    <editable>false</editable>
+                </column>
+                <column id="DT_TRACKING_LV" title="TRACKING_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_ACTIVITY_ID" title="ACTIVITY_ID" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_RES_CD" title="RES_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_RES_DESCRIP" title="RES_DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_ACTIVITY_TP" title="ACTIVITY_TP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_ITEM_NM" title="ITEM_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_ITEM_DESCRIP" title="DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_ITEM_TP_NM" title="ITEM_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_DELIVY_DATE" title="DELIVY_DATE" type="date">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_DELIVY_QTY" title="DELIVY_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_PRODUCT_START" title="PRODUCTION_START" type="date">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_INWH_DATE" title="INWH_DATE" type="date">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_INWH_QTY" title="INWH_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_WAIT_TIME" title="WAIT_TIME" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_RELEASE_DATE" title="RELEASE_DATE" type="date">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_RELEASE_QTY" title="RELEASE_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>S
+                </column>
+                <column id="DT_STOCK" title="STOCK" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_VEHICL_TP" title="VEHICL_VAL" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_BOD_LEADTIME_PERIOD" title="BOD_LEADTIME_PERIOD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_BOD_LEADTIME" title="BOD_LEADTIME" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+                <column id="DT_NOTE" title="NOTE" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_DETAIL</groups>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="EXPORT">
+                <all-columns>true</all-columns>
+            </operation>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_MP_32_GetPlanDetailAnalysis">
+                    <service-id>GetPlanDetailAnalysis</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="VERSION_ID" reference-id="SRH_CPT_SIMUL_VER_ID_04" default-value="" />
+                        <parameter id="ITEM_CD" reference-id="SRH_CPT_ITEM_CD_04" default-value="" />
+                        <parameter id="ITEM_NM" reference-id="SRH_CPT_ITEM_NM_04" default-value="" />
+                        <parameter id="ACCOUNT_CD" reference-id="SRH_CPT_ACCOUNT_CD_04" default-value="" />
+                        <parameter id="ACCOUNT_NM" reference-id="SRH_CPT_ACCOUNT_NM_04" default-value="" />
+                        <parameter id="DMND_ID" reference-id="SRH_CPT_DMND_ID_04" default-value="" />
+                        <parameter id="FROM_DATE" reference-id="SRH_CPT_FROM_DATE_04" default-value="" />
+                        <parameter id="TO_DATE" reference-id="SRH_CPT_TO_DATE_04" default-value="" />
+                        <parameter id="PLAN_LOCAT_TP" reference-id="SRH_CPT_PLAN_LOCAT_TP_04" default-value="" />
+                        <parameter id="PLAN_LOCAT_CD" reference-id="SRH_CPT_PLAN_LOCAT_CD_04" default-value="" />
+                        <parameter id="PLAN_LOCAT_NM" reference-id="SRH_CPT_PLAN_LOCAT_NM_04" default-value="" />
+                        <parameter id="PLAN_ITEM_CD" reference-id="SRH_CPT_ITEM2_CD_04" default-value="" />
+                        <parameter id="PLAN_ITEM_NM" reference-id="SRH_CPT_ITEM2_NM_04" default-value="" />
+                        <parameter id="RES_CD" reference-id="SRH_CPT_RES_CD_04" default-value="" />
+                        <parameter id="RES_DESCRIP" reference-id="SRH_CPT_RES_DESCRIP_04" default-value="" />
+                        <parameter id="PLAN_START" reference-id="SRH_CPT_PLAN_START_04" default-value="" />
+                        <parameter id="PLAN_END" reference-id="SRH_CPT_PLAN_END_04" default-value="" />
+                        <parameter id="SHORTAGE_YN" reference-id="SRH_CPT_SHORTAGE_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

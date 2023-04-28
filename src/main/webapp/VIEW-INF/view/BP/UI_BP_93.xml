@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_BP_93" template="DP/STANDARD_CB:DP/UI_DP_23_EXT:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:DP/UI_DP_23_CONTROL_POPUP:DP/UI_DP_23_VALID_POPUP:DP/UI_DP_POPUP_MS_INIT_VAL_SETTING" 
+copyfrom="COMM_HELP:COMM_PREFERENCE:UI_DP_93_VER_POPUP:UI_DP_23_VALID_POPUP:UI_DP_22_POPUP_MS_INIT_VAL_SETTING:UI_DP_93" version="2.0">
+    <publish parent="MENU_06_02" open="true" seq="230" />
+    
+    <component id="SRH_CPT_T1_01_04" type="COMBOBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <value-id>ATTR_01</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SP_UI_DP_LATEST_VER_Q1_INIT">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_CONF_Q1_01" value="DP_PLAN_TYPE" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_02" value="DP_PLAN_YEARLY" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                    </parameters>
+                    <success>
+                        <operation-call id="OPC_SP_UI_DP_00_CONF_Q1_INIT_plantype">
+                            <component-id>SRH_CPT_T1_01_04</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="INDEX" value="0" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+            <action event-type="select-item">
+                <operation-call id="ORC_RST_CPT_01_Init_select">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_SP_UI_DP_23_TAB_Q1_SET_select">
+                            <component-id>DATA_01</component-id>
+                            <operation-id>LOAD_TAB1</operation-id>
+                            <parameters>
+                                <parameter id="VERSION_ID" reference-id="SRH_CPT_T1_02_04" default-value="" />
+                                <parameter id="WORK_CD" reference-id="RST_CPT_01:selections" extract-by="WORK_CD" default-value="" />
+                                <parameter id="PLAN_TP_ID" reference-id="SRH_CPT_T1_01_04" extract-by="ID" default-value="" />
+                            </parameters>
+                            <success>
+                                <operation-call id="OPC_RST_TAB_ACTIVATE_TAB1_BY_PLAN_TYPE">
+                                    <component-id>RST_TAB</component-id>
+                                    <operation-id>ACTIVATE</operation-id>
+                                    <parameters>
+                                        <parameter id="ACTIVATE" value="tAP1" />
+                                    </parameters>
+                                    <conditions>
+                                        <condition id="CON_ACTIVATE_RST_TAB3_01" group="AND">
+                                            <component>RST_TAB</component>
+                                            <operator>notEqual</operator>
+                                            <value>tAP1</value>
+                                        </condition>
+                                    </conditions>
+                                </operation-call>
+                                <operation-call id="OPC_GRID_LOAD01">
+                                    <component-id>RST_CPT_01</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                </operation-call>
+                                <operation-call id="ORC_SET_COMP1_select">
+                                    <component-id>RST_CPT_T1_01_02</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="DATA_01:SVC_SP_UI_DP_23_TAB_Q1_INIT" extract-by="VER_ID" default-value="" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="ORC_SET_COMP2_select">
+                                    <component-id>RST_CPT_T1_02_02</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="DATA_01:SVC_SP_UI_DP_23_TAB_Q1_INIT" extract-by="VER_BUCKET" default-value="" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="ORC_SET_COMP3_select">
+                                    <component-id>RST_CPT_T1_02_03_02</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="DATA_01:SVC_SP_UI_DP_23_TAB_Q1_INIT" extract-by="VER_HORIZON" default-value="" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="ORC_SET_COMP4_select">
+                                    <component-id>RST_CPT_T1_04_02</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="DATA_01:SVC_SP_UI_DP_23_TAB_Q1_INIT" extract-by="VER_FROM_DATE" default-value="" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="ORC_SET_COMP5_select">
+                                    <component-id>RST_CPT_T1_04_03</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="DATA_01:SVC_SP_UI_DP_23_TAB_Q1_INIT" extract-by="VER_TO_DATE" default-value="" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="ORC_SET_COMP6_select">
+                                    <component-id>RST_CPT_T1_07_02</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="DATA_01:SVC_SP_UI_DP_23_TAB_Q1_INIT" extract-by="VER_DTF" default-value="" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="ORC_SET_COMP7_select">
+                                    <component-id>RST_CPT_T1_07_03</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="DATA_01:SVC_SP_UI_DP_23_TAB_Q1_INIT" extract-by="VER_DTF_DATE" default-value="" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="SP_PRICE_TYPE_04_SET_SELECT">
+                                    <component-id>PRICE_TYPE_04</component-id>
+                                    <operation-id>SELECT</operation-id>
+                                    <parameters>
+                                        <parameter id="VALUE" reference-id="DATA_01:SVC_SP_UI_DP_23_TAB_Q1_INIT" extract-by="PRICE_TYPE" default-value="" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="SP_CURCY_TYPE_04_SET_SELECT">
+                                    <component-id>CURRENCY_TYPE_04</component-id>
+                                    <operation-id>SELECT</operation-id>
+                                    <parameters>
+                                        <parameter id="VALUE" reference-id="DATA_01:SVC_SP_UI_DP_23_TAB_Q1_INIT" extract-by="CURRENCY_TYPE" default-value="" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="ORC_SET_COMP8_select">
+                                    <component-id>RST_CPT_T1_08_02</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="DATA_01:SVC_SP_UI_DP_23_TAB_Q1_INIT" extract-by="VER_DESCRIP" default-value="" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="OPC_SET_COMP9_why_select">
+                                    <component-id>RST_CPT_T1_05_02</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="DATA_01:SVC_SP_UI_DP_23_TAB_Q1_INIT" extract-by="VER_S_BUCKET" default-value="" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="OPC_SET_COMP10_why_select">
+                                    <component-id>RST_CPT_T1_05_03_02</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="DATA_01:SVC_SP_UI_DP_23_TAB_Q1_INIT" extract-by="VER_S_HORIZON" default-value="" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="OPC_SET_COMP11_why_select">
+                                    <component-id>RST_CPT_T1_06_02</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="DATA_01:SVC_SP_UI_DP_23_TAB_Q1_INIT" extract-by="VER_S_HORIZON_DATE" default-value="" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="ORC_SET_T3_COMP1">
+                                    <component-id>RST_CPT_T4_02_02</component-id>
+                                    <operation-id>SELECT</operation-id>
+                                    <parameters>
+                                        <parameter id="VALUE" reference-id="DATA_01:SVC_SP_UI_DP_23_TAB_Q1_INIT" extract-by="CL_TP_ID" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="ORC_SET_T5_COMP1">
+                                    <component-id>RST_CPT_T5_06_02</component-id>
+                                    <operation-id>SELECT</operation-id>
+                                    <parameters>
+                                        <parameter id="VALUE" reference-id="DATA_01:SVC_SP_UI_DP_23_TAB_Q1_INIT" extract-by="CL_TP_ID" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="ORC_SET_T3_COMP2">
+                                    <component-id>RST_CPT_T4_03_02</component-id>
+                                    <operation-id>SELECT</operation-id>
+                                    <parameters>
+                                        <parameter id="VALUE" reference-id="DATA_01:SVC_SP_UI_DP_23_TAB_Q1_INIT" extract-by="CL_LV_MGMT_ID" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="ORC_SET_T5_COMP2">
+                                    <component-id>RST_CPT_T5_03_02</component-id>
+                                    <operation-id>SELECT</operation-id>
+                                    <parameters>
+                                        <parameter id="VALUE" reference-id="DATA_01:SVC_SP_UI_DP_23_TAB_Q1_INIT" extract-by="CL_LV_MGMT_ID" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_00_CONF_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+            <operation id="SELECT" />
+        </operations>
+    </component>    
+</view>

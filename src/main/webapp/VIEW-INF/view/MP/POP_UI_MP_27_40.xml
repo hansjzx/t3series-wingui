@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_MP_27_40" version="2.0">
+    <component id="POP_UI_MP_27_40_WINDOWS" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>DUE_IN_TRACK</title>
+            <width>1150</width>
+            <height>590</height>
+            <visible>false</visible>
+            <modal>false</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_27_40_RST_CPT_01" type="R_GRID">
+        <props>
+            <height>500</height>
+            <header-height>30</header-height>
+            <selection-mode>BLOCK</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <grid-summary>true</grid-summary>
+            <grid-summary-on-header>true</grid-summary-on-header>
+            <toolbar use="false" />
+            <columns>
+                <column id="LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>80</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ACT_TP_CD" title="ACT_TP_CD" type="string">
+                    <width>60</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ACT_ID" title="ACT_ID" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="DMND_ID" title="DMND_ID" type="string">
+                    <width>130</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="PO_ID" title="PO_ID" type="string">
+                    <width>140</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="DMND_LOCAT_CD" title="DMND_LOCAT_CD" type="string">
+                    <width>80</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="DMND_LOCAT_NM" title="DMND_LOCAT_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ACT_DATE" title="DATE" type="date">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                </column>
+                <column id="ACT_QTY" title="QTY" type="number">
+                    <width>80</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <grid-summary-exp>SUM</grid-summary-exp>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_MP_27_10_RST_CPT_01_LOAD">
+                    <service-id>GetInventoryActivity</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+            <operation id="EXPORT" />
+        </operations>
+    </component>
+</view>

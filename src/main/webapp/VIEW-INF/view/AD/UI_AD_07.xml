@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_AD_07" template="COMM/STANDARD" version="2.0">
+    <publish parent="MENU_90" open="true" seq="70" />
+    <component id="POP_CPT_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>LOCALE_ADD</title>
+            <width>400</width>
+            <height>325</height>
+            <visible>false</visible>
+            <modal>false</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_CPT_01_01" type="R_GRID">
+        <props>
+            <height>243</height>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="true">
+                <toolbar-button operation-id="LOAD" enable="true" visible="true" position="right" tooltip="Load" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" tooltip="Insert Row" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" tooltip="Remove Row">
+                    <success>
+                        <operation-call id="LOADLOCALE_GRID_LOCALE_GRID_TB_REMOVE_ROW">
+                            <component-id>POP_CPT_01_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="LOADcomboBox_LOCALE_GRID_TB_REMOVE_ROW">
+                            <component-id>SRH_CPT_T1_01_05</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="INITLANG_VAL_GRID_LOCALE_GRID_TB_REMOVE_ROW">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_UI_POP_AD_07_01_GRD_01_DELETE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0002" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                    <fail>
+                        <operation-call id="OPC_UI_POP_AD_07_01_GRD_01_DELETE_FAIL_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0004" />
+                            </parameters>
+                        </operation-call>
+                    </fail>
+                </toolbar-button>
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right" tooltip="Save">
+                    <success>
+                        <operation-call id="LOADLOCALE_GRID_LOCALE_GRID_TB_SAVE">
+                            <component-id>POP_CPT_01_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="LOADcomboBox_LOCALE_GRID_TB_SAVE">
+                            <component-id>SRH_CPT_T1_01_05</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_UI_POP_AD_07_01_GRD_01_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0001" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                    <fail>
+                        <operation-call id="OPC_UI_POP_AD_07_01_GRD_01_SAVE_FAIL_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0004" />
+                            </parameters>
+                        </operation-call>
+                    </fail>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="langCd" title="LANG" type="string">
+                    <width>180</width>
+                    <editable>true</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="LOADLOCALE_GRID">
+                    <component-id>POP_CPT_01_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SCV_LOCALE_GET">
+                    <url>/system/lang-packs/language-codes</url>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="SCV_ADD_LOCALE">
+                    <url>/system/lang-packs/language-codes</url>
+                    <method>post</method>
+                    <parameters>
+                        <parameter id="data" reference-id="POP_CPT_01_01:changes" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="INSERT_ROW">
+                <position>below</position>
+                <edit-on-cell>true</edit-on-cell>
+            </operation>
+            <operation id="REMOVE_ROW">
+                <service-call id="SCV_DELETE_LOCALE">
+                    <url>/system/lang-packs/language-codes</url>
+                    <method>delete</method>
+                    <parameters>
+                        <parameter id="data" reference-id="POP_CPT_01_01:checked" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_SRH_CPT_T1_01_05_INIT">
+                    <component-id>SRH_CPT_T1_01_05</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+                <operation-call id="OPC_SRH_CPT_T1_02_06_INIT">
+                    <component-id>SRH_CPT_T1_02_06</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_SRH_CPT_T1_03_06_INIT">
+                    <component-id>SRH_CPT_T1_03_06</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_05" type="BUTTON">
+        <props>
+            <tooltip>Reloads the selected language.</tooltip>
+            <icon>language</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_TTL_CPT_05">
+                    <component-id>TTL_CPT_05</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="LOAD_MENU">
+                            <component-id>COMMON</component-id>
+                            <operation-id>LANG-REFRESH</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_TTL_CPT_05_SUCCESS">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="The language pack was applied successfully." />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                    <fail>
+                        <operation-call id="OPC_TTL_CPT_05_FAIL">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="Failed to apply language pack." />
+                            </parameters>
+                        </operation-call>
+                    </fail>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SCV_RELOAD_LANGUAGE">
+                    <url>/system/lang-packs/:lang-cd/reload</url>
+                    <parameters>
+                        <parameter id="lang-cd" reference-id="SRH_CPT_T1_01_05" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="TTL_CPT_06" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_01_GRID">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_07" type="DATA">
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_TTL_CPT_07_INIT">
+                    <component-id>TTL_CPT_07</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="MENU_ID" value="Language Pack Management" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsible="true" resizable="false" size="300" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+        <operations>
+            <operation id="OPEN">
+                <service-call id="openTarget">
+                    <parameters>
+                        <parameter id="target" value="rst" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="CLOSE">
+                <service-call id="openTarget">
+                    <parameters>
+                        <parameter id="target" value="rst" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="primary" title="BASE_OPTION" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LANG</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_05" type="COMBOBOX">
+        <props>
+            <width>116</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>langCd</value-id>
+            <text-id>langNm</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="LOADcomboBox">
+                    <component-id>SRH_CPT_T1_01_05</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+            <action event-type="select-item">
+                <operation-call id="LOADLANG_VAL_GRID">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SCV_LOCALE_GET">
+                    <url>/system/lang-packs/language-codes</url>
+                    <parameters>
+                        <parameter id="include-all" value="true" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_01_06" type="BUTTON">
+        <props>
+            <name>ADD</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="popup">
+                    <component-id>POP_CPT_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_CPT_T1_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LANG_KEY</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_02_06" type="INPUTBOX">
+        <props>
+            <lang>false</lang>
+            <type>text</type>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="LOADLANG_VAL_GRID">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="lang-cd" reference-id="SRH_CPT_T1_01_05" />
+                        <parameter id="lang-value" reference-id="SRH_CPT_T1_03_06" />
+                    </parameters>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_CPT_T1_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LANG_VALUE</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_03_06" type="INPUTBOX">
+        <props>
+            <lang>false</lang>
+            <type>text</type>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="LOADLANG_VAL_GRID">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="lang-cd" reference-id="SRH_CPT_T1_01_05" />
+                        <parameter id="lang-value" reference-id="SRH_CPT_T1_03_06" />
+                    </parameters>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <selection-mode>block</selection-mode>
+            <check-bar>true</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="true">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="LOADLANG_VAL_GRID">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_UI_AD_07_GRD_01_DELETE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0002" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                    <fail>
+                        <operation-call id="OPC_UI_AD_07_GRD_01_DELETE_FAIL_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0004" />
+                            </parameters>
+                        </operation-call>
+                    </fail>
+                </toolbar-button>
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="LOADLANG_VAL_GRID">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_UI_AD_07_GRD_01_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0001" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                    <fail>
+                        <operation-call id="OPC_UI_AD_07_GRD_01_SAVE_FAIL_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0004" />
+                            </parameters>
+                        </operation-call>
+                    </fail>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="langKey" title="LANG_KEY" type="string" sort="asc">
+                    <width>180</width>
+                    <editable>true</editable>
+                </column>
+                <column id="langCd" title="LANG" type="string">
+                    <width>100</width>
+                    <editable>true</editable>
+                </column>
+                <column id="langValue" title="LANG_VALUE" type="string">
+                    <width>180</width>
+                    <editable>true</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SCV_LANG_GET">
+                    <url>/system/lang-packs</url>
+                    <parameters>
+                        <parameter id="lang-cd" reference-id="SRH_CPT_T1_01_05" />
+                        <parameter id="lang-key" reference-id="SRH_CPT_T1_02_06" />
+                        <parameter id="lang-value" reference-id="SRH_CPT_T1_03_06" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="SCV_LANG_SET">
+                    <url>/system/lang-packs</url>
+                    <method>post</method>
+                    <parameters>
+                        <parameter id="data" reference-id="RST_CPT_01:changes" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="EXPORT">
+                <file-name />
+            </operation>
+            <operation id="IMPORT" />
+            <operation id="INSERT_ROW">
+                <position>below</position>
+            </operation>
+            <operation id="REMOVE_ROW">
+                <service-call id="SCV_DELETE_LANG_KEY">
+                    <url>/system/lang-packs</url>
+                    <method>delete</method>
+                    <parameters>
+                        <parameter id="data" reference-id="RST_CPT_01:checked" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

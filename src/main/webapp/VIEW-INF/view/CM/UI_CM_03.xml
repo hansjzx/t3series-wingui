@@ -1,0 +1,1177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_CM_03" template="CM/UI_CM_03:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:CM/POP_UI_CM_03_01:CM/POP_UI_CM_03_02:CM/POP_UI_CM_03_03:COMM/COMM_SRH_POP_ITEM_CLASS" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_VIEW_META:COMM_SRH_ITEM_CLASS:COMM_SRH_POP_ITEM_CLASS:COMM_BTN_EXCEL:POP_UI_CM_03_01:POP_UI_CM_03_02:POP_UI_CM_03_03" version="2.0">
+    <publish parent="MENU_04_01" open="true" seq="135" />
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_TTL_CPT_04_INIT_01">
+                    <component-id>SRH_ITEM_CLASS_01_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_INIT_02">
+                    <component-id>SRH_ITEM_CLASS_02_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_INIT_03">
+                    <component-id>SRH_CPT_T1_03_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_05" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_GRID_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_RST_BTN_SRH_02">
+                            <component-id>RST_CPT_02</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="DROPDOWN" type="DATA">
+        <actions>
+            <action event-type="meta">
+                <operation-call id="OPC_DROPDOWN_LOAD">
+                    <component-id>DROPDOWN</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="LOOKUP_CODE">
+                    <service-id>SRV_UI_CM_CODE</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="CODE" value="ITEM_SCOPE" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="DATA_01" type="DATA">
+        <operations>
+            <operation id="LOAD" />
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="DATA_03" type="DATA">
+        <actions>
+            <action event-type="meta">
+                <operation-call id="DATA_03_LOAD">
+                    <component-id>DATA_03</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="LOOKUP_CODE">
+                    <service-id>SRV_UI_CM_03_POP_01_Q</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="CONF_KEY" value="004" />
+                        <parameter id="VIEW_ID" value="POP_UI_CM_03_03" />
+                        <parameter id="ITEM_LV_ID" reference-id="DATA_01:ITEM_LV_ID" default-value="" />
+                        <parameter id="ITEM_CLASS" value="" />
+                        <parameter id="LANG_CD" reference-id="COMMON:LANGUAGE_CODE" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="SRH_TAB_01" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ATTR</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_03_04" type="INPUTBOX">
+        <props>
+            <width>190</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="RST_CPT_01_09" type="BUTTON">
+        <props>
+            <name />
+            <icon>save</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_BTN_SAV_01">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_RST_BTN_SAV_SUCCESS_01">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="RST_CPT_01:SVC_UI_CM_03_S_001:IM_DATA" extract-by="SP_UI_CM_03_S1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_01_08" type="BUTTON">
+        <props>
+            <name />
+            <icon>minus</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_01_08_DELETE">
+                    <component-id>COMMON</component-id>
+                    <operation-id>DIALOG</operation-id>
+                    <parameters>
+                        <parameter id="title" value="Confirm" />
+                        <parameter id="msg" value="MSG_5130" />
+                        <parameter id="type" value="confirm" />
+                        <parameter id="modal" value="false" />
+                    </parameters>
+                    <success>
+                        <operation-call id="OPC_RST_BTN_DEL_01">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>REMOVE_ROW</operation-id>
+                            <success>
+                                <operation-call id="OPC_RST_BTN_DEL_SUCCESS_01">
+                                    <component-id>RST_CPT_01</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                </operation-call>
+                                <operation-call id="OPC_RST_CPT_01_REMOVE_ROW_SUCCESS_MSG">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Information" />
+                                        <parameter id="msg" reference-data="RST_CPT_01:SVC_UI_CM_03_S6:IM_DATA" extract-by="SP_UI_CM_03_S6_P_RT_MSG" />
+                                        <parameter id="type" value="info" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_01_07" type="BUTTON">
+        <props>
+            <name />
+            <icon>add</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_01_07_01">
+                    <component-id>POP_UI_CM_03_02_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_07_03">
+                            <component-id>POP_UI_CM_03_02_WINDOW_01_CPT_01_04</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_07_04">
+                            <component-id>POP_UI_CM_03_02_WINDOW_01_CPT_02_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_07_05">
+                            <component-id>POP_UI_CM_03_02_WINDOW_01_CPT_03_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_07_06">
+                            <component-id>DATA_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="CLASS_MST_ID" value="" />
+                                <parameter id="ITEM_SCOPE_MST_ID" value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_07_07">
+                            <component-id>POP_UI_CM_03_02_WINDOW_02_CPT_01_01</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_07_11">
+                            <component-id>POP_UI_CM_03_02_WINDOW_01_CPT_04_03</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_07_12">
+                            <component-id>POP_UI_CM_03_02_WINDOW_01_CPT_05_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_07_15">
+                            <component-id>POP_UI_CM_03_02_WINDOW_01_CPT_08_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="true" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_07_16">
+                            <component-id>popup_tab_02</component-id>
+                            <operation-id>ACTIVATE</operation-id>
+                            <parameters>
+                                <parameter id="ACTIVATE" value="POP_UI_CM_03_02_01" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_07_17">
+                            <component-id>POP_UI_CM_03_02_WINDOW_02_CPT_01_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+        	<header-height>40</header-height>
+            <selection-mode>BLOCK</selection-mode>
+            <fit-style>evenFill</fit-style>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>false</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="ITEM_SCOPE_MST_ID" title="ITEM_SCOPE_MST_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="ITEM_LV_NM" title="ITEM_LV" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <init-group-order>1</init-group-order>
+                </column>
+                <column id="ITEM_CLASS_VAL" title="ITEM_CLASS_VAL" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="DESCRIP" title="DESCRIP" type="string">
+                    <width>150</width>
+                    <editable>true</editable>
+                </column>
+                <column id="CONTINU_PRDUCT_YN" title="CONTINU_PRDUCT_YN" type="bool">
+                    <width>150</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                </column>
+                <column id="PROD_MIX_YN" title="PROD_MIX_YN" type="bool">
+                    <width>100</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                </column>
+                <column id="ACTV_YN" title="ACTV_YN" type="bool">
+                    <width>150</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                </column>
+                <column id="ATTR_01" title="ITEM_ATTR_01" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_01" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_02" title="ITEM_ATTR_02" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_02" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_03" title="ITEM_ATTR_03" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_03" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_04" title="ITEM_ATTR_04" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_04" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_05" title="ITEM_ATTR_05" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_05" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_06" title="ITEM_ATTR_06" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_06" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_07" title="ITEM_ATTR_07" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_07" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_08" title="ITEM_ATTR_08" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_08" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_09" title="ITEM_ATTR_09" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_09" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_10" title="ITEM_ATTR_10" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_10" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_11" title="ITEM_ATTR_11" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_11" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_12" title="ITEM_ATTR_12" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_12" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_13" title="ITEM_ATTR_13" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_13" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_14" title="ITEM_ATTR_14" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_14" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_15" title="ITEM_ATTR_15" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_15" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_16" title="ITEM_ATTR_16" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_16" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_17" title="ITEM_ATTR_17" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_17" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_18" title="ITEM_ATTR_18" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_18" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_19" title="ITEM_ATTR_19" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_19" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ATTR_20" title="ITEM_ATTR_20" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CONVN_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="ATTR_NM:ATTR_20" />
+                        </values>
+                    </candidate>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-click">
+                <operation-call id="OPC_POP_UI_CM_03_06_WINDOW_01_SETDATA_DETAIL_LOAD">
+                    <component-id>RST_CPT_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="REFRESH" />
+            <operation id="EXPORT">
+                <all-columns>true</all-columns>
+            </operation>
+            <operation id="IMPORT" />
+            <operation id="SAVE">
+                <service-call id="SVC_UI_CM_03_S_001">
+                    <service-id>SRV_UI_CM_03_S1</service-id>
+                    <service-target>mp</service-target>
+                    <param-empty-check>changes</param-empty-check>
+                    <parameters>
+                        <parameter id="changes" reference-id="RST_CPT_01:changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_CM_03_Q_001">
+                    <service-id>SRV_UI_CM_03_Q1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="ITEM_LV" reference-id="SRH_ITEM_CLASS_01_04" default-value="" />
+                        <parameter id="CLSS" reference-id="SRH_ITEM_CLASS_02_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="REMOVE_ROW">
+                <service-call id="SVC_UI_CM_03_S6">
+                    <service-id>SRV_UI_CM_03_S6</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="delete" reference-id="RST_CPT_01:checked" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_02_01" type="BUTTON">
+        <props>
+            <icon>file</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_02_01_SAVE">
+                    <component-id>COMMON</component-id>
+                    <operation-id>DIALOG</operation-id>
+                    <parameters>
+                        <parameter id="title" value="Confirm" />
+                        <parameter id="msg" value="MSG_5111" />
+                        <parameter id="type" value="confirm" />
+                        <parameter id="modal" value="false" />
+                    </parameters>
+                    <success>
+                        <operation-call id="OPC_RST_CPT_02_01_CLICK_01">
+                            <component-id>RST_CPT_02_01</component-id>
+                            <operation-id>SAVE</operation-id>
+                            <success>
+                                <operation-call id="OPC_RST_CPT_02_01_CLICK_02">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>MESSAGE</operation-id>
+                                    <parameters>
+                                        <parameter id="msg" reference-data="RST_CPT_02_01:SVC_UI_CM_03_S7:IM_DATA" extract-by="SP_UI_CM_03_BATCH_P_RT_MSG" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SAVE">
+                <service-call id="SVC_UI_CM_03_S7">
+                    <service-id>SRV_UI_CM_03_BATCH</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="all" reference-id="RST_CPT_02:all" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_02_06" type="BUTTON">
+        <props>
+            <icon>add</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_02_06_CLICK_01">
+                    <component-id>POP_UI_CM_03_03_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_RST_CPT_02_06_CLICK_02">
+                            <component-id>POP_UI_CM_03_03_WINDOW_01_CPT_01_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="ITEM_LV_NM" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_02_06_CLICK_03">
+                            <component-id>POP_UI_CM_03_03_WINDOW_01_CPT_02_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="ITEM_CLASS_VAL" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_02_06_CLICK_04">
+                            <component-id>POP_UI_CM_03_03_WINDOW_01_CPT_03_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="DESCRIP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_02_06_CLICK_05">
+                            <component-id>POP_UI_CM_03_03_WINDOW_01_CPT_04_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_02_06_CLICK_06">
+                            <component-id>POP_UI_CM_03_03_WINDOW_01_CPT_05_04</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_02_06_CLICK_07">
+                            <component-id>POP_UI_CM_03_03_WINDOW_01_CPT_06_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_02_06_CLICK_08">
+                            <component-id>POP_UI_CM_03_03_WINDOW_01_CPT_07_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_02_06_CLICK_09">
+                            <component-id>POP_UI_CM_03_03_WINDOW_01_CPT_08_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_02_07" type="BUTTON">
+        <props>
+            <icon>minus</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_02_07_DELETE">
+                    <component-id>COMMON</component-id>
+                    <operation-id>DIALOG</operation-id>
+                    <parameters>
+                        <parameter id="title" value="Confirm" />
+                        <parameter id="msg" value="MSG_5131" />
+                        <parameter id="type" value="confirm" />
+                        <parameter id="modal" value="false" />
+                    </parameters>
+                    <success>
+                        <operation-call id="OPC_RST_CPT_02_07_CLICK_01">
+                            <component-id>RST_CPT_02</component-id>
+                            <operation-id>REMOVE_ROW</operation-id>
+                            <success>
+                                <operation-call id="OPC_RST_CPT_02_REMOVE_SUCCESS_MSG">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Information" />
+                                        <parameter id="msg" reference-data="RST_CPT_02:SVC_RST_CPT_02_REMOVE_ROW:IM_DATA" extract-by="SP_UI_CM_03_S3_P_RT_MSG" />
+                                        <parameter id="type" value="info" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="OPC_RST_CPT_02_REMOVE_SUCCESS_MSG_LOAD">
+                                    <component-id>RST_CPT_02</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_02_08" type="BUTTON">
+        <props>
+            <icon>save</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_02_08_CLICK_01">
+                    <component-id>RST_CPT_02</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_RST_CPT_02_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="RST_CPT_02:SVC_SP_UI_CM_03_S3:IM_DATA" extract-by="SP_UI_CM_03_S3_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_02_SAVE_SUCCESS_MSG_LOAD">
+                            <component-id>RST_CPT_02</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_02" type="R_GRID">
+        <props>
+            <selection-mode>BLOCK</selection-mode>
+            <check-bar>true</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>false</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <cell-attributes>
+                <cell-attribute id="RST_CPT_02_CON_01">
+                    <conditions>
+                        <condition id="RST_CPT_02_cond01">
+                            <column>USE_ATTR_01</column>
+                            <operator>equal</operator>
+                            <value>true</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="RST_CPT_02_app01">
+                            <column>ATTR_01</column>
+                            <attrs>
+                                <editable>true</editable>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="RST_CPT_02_CON_02">
+                    <conditions>
+                        <condition id="RST_CPT_02_cond02">
+                            <column>USE_ATTR_02</column>
+                            <operator>equal</operator>
+                            <value>true</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="RST_CPT_02_app02">
+                            <column>ATTR_02</column>
+                            <attrs>
+                                <editable>true</editable>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="RST_CPT_02_CON_03">
+                    <conditions>
+                        <condition id="RST_CPT_02_cond03">
+                            <column>USE_ATTR_03</column>
+                            <operator>equal</operator>
+                            <value>true</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="RST_CPT_02_app03">
+                            <column>ATTR_03</column>
+                            <attrs>
+                                <editable>true</editable>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="RST_CPT_02_CON_04">
+                    <conditions>
+                        <condition id="RST_CPT_02_cond04">
+                            <column>USE_ATTR_04</column>
+                            <operator>equal</operator>
+                            <value>true</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="RST_CPT_02_app04">
+                            <column>ATTR_04</column>
+                            <attrs>
+                                <editable>true</editable>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="RST_CPT_02_CON_05">
+                    <conditions>
+                        <condition id="RST_CPT_02_cond05">
+                            <column>USE_ATTR_05</column>
+                            <operator>equal</operator>
+                            <value>true</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="RST_CPT_02_app05">
+                            <column>ATTR_05</column>
+                            <attrs>
+                                <editable>true</editable>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="RST_CPT_02_CON_06">
+                    <conditions>
+                        <condition id="RST_CPT_02_cond06">
+                            <column>USE_ATTR_06</column>
+                            <operator>equal</operator>
+                            <value>true</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="RST_CPT_02_app06">
+                            <column>ATTR_06</column>
+                            <attrs>
+                                <editable>true</editable>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="RST_CPT_02_CON_07">
+                    <conditions>
+                        <condition id="RST_CPT_02_cond07">
+                            <column>USE_ATTR_07</column>
+                            <operator>equal</operator>
+                            <value>true</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="RST_CPT_02_app07">
+                            <column>ATTR_07</column>
+                            <attrs>
+                                <editable>true</editable>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="RST_CPT_02_CON_08">
+                    <conditions>
+                        <condition id="RST_CPT_02_cond08">
+                            <column>USE_ATTR_08</column>
+                            <operator>equal</operator>
+                            <value>true</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="RST_CPT_02_app08">
+                            <column>ATTR_08</column>
+                            <attrs>
+                                <editable>true</editable>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="RST_CPT_02_CON_09">
+                    <conditions>
+                        <condition id="RST_CPT_02_cond09">
+                            <column>USE_ATTR_09</column>
+                            <operator>equal</operator>
+                            <value>true</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="RST_CPT_02_app09">
+                            <column>ATTR_09</column>
+                            <attrs>
+                                <editable>true</editable>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="RST_CPT_02_CON_10">
+                    <conditions>
+                        <condition id="RST_CPT_02_cond10">
+                            <column>USE_ATTR_10</column>
+                            <operator>equal</operator>
+                            <value>true</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="RST_CPT_02_app10">
+                            <column>ATTR_10</column>
+                            <attrs>
+                                <editable>true</editable>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+            </cell-attributes>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="ITEM_LV_NM" title="ITEM_LV" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <init-group-order>1</init-group-order>
+                </column>
+                <column id="ITEM_CLASS_VAL" title="ITEM_CLASS_VAL" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <init-group-order>2</init-group-order>
+                </column>
+                <column id="DESCRIP" title="DESCRIP" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <init-group-order>3</init-group-order>
+                </column>
+                <column id="USE_ATTR_01" title="USE_ATTR_01" type="bool">
+                    <width>50</width>
+                    <visible>false</visible>
+                </column>
+                <column id="USE_ATTR_02" title="USE_ATTR_02" type="bool">
+                    <width>50</width>
+                    <visible>false</visible>
+                </column>
+                <column id="USE_ATTR_03" title="USE_ATTR_03" type="bool">
+                    <width>50</width>
+                    <visible>false</visible>
+                </column>
+                <column id="USE_ATTR_04" title="USE_ATTR_04" type="bool">
+                    <width>50</width>
+                    <visible>false</visible>
+                </column>
+                <column id="USE_ATTR_05" title="USE_ATTR_05" type="bool">
+                    <width>50</width>
+                    <visible>false</visible>
+                </column>
+                <column id="USE_ATTR_06" title="USE_ATTR_06" type="bool">
+                    <width>50</width>
+                    <visible>false</visible>
+                </column>
+                <column id="USE_ATTR_07" title="USE_ATTR_07" type="bool">
+                    <width>50</width>
+                    <visible>false</visible>
+                </column>
+                <column id="USE_ATTR_08" title="USE_ATTR_08" type="bool">
+                    <width>50</width>
+                    <visible>false</visible>
+                </column>
+                <column id="USE_ATTR_09" title="USE_ATTR_09" type="bool">
+                    <width>50</width>
+                    <visible>false</visible>
+                </column>
+                <column id="USE_ATTR_10" title="USE_ATTR_10" type="bool">
+                    <width>50</width>
+                    <visible>false</visible>
+                </column>
+                <column id="ATTR_01" title="ITEM_ATTR_01" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ATTR_02" title="ITEM_ATTR_02" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ATTR_03" title="ITEM_ATTR_03" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ATTR_04" title="ITEM_ATTR_04" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ATTR_05" title="ITEM_ATTR_05" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ATTR_06" title="ITEM_ATTR_06" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ATTR_07" title="ITEM_ATTR_07" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ATTR_08" title="ITEM_ATTR_08" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ATTR_09" title="ITEM_ATTR_09" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ATTR_10" title="ITEM_ATTR_10" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_GRP" title="ITEM_GRP" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <button>true</button>
+                </column>
+                <column id="ITEM_GRP_DESCRIP" title="ITEM_GRP_DESCRIP" type="string">
+                    <width>120</width>
+                    <editable>true</editable>
+                </column>
+                <column id="SEQ" title="SEQ" type="int">
+                    <width>80</width>
+                    <editable>true</editable>
+                </column>
+                <column id="ACTV_YN" title="ACTV_YN" type="bool">
+                    <width>80</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="button-click">
+                <operation-call id="OPC_RST_CPT_02_OPEN">
+                    <component-id>POP_UI_CM_03_01_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_RST_CPT_02_SETDATA_DETAIL_POPUP_01">
+                            <component-id>POP_UI_CM_03_01_WINDOW_01_CPT_01_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="RST_CPT_02:selections" extract-by="ITEM_LV_NM" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_02_SETDATA_DETAIL_POPUP_02">
+                            <component-id>POP_UI_CM_03_01_WINDOW_01_CPT_02_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="RST_CPT_02:selections" extract-by="ITEM_CLASS_VAL" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_02_SETDATA_DETAIL_POPUP_03">
+                            <component-id>POP_UI_CM_03_01_WINDOW_01_CPT_03_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="RST_CPT_02:selections" extract-by="DESCRIP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_02_SETDATA_DETAIL_POPUP_04">
+                            <component-id>POP_UI_CM_03_01_WINDOW_01_CPT_04_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_02_SETDATA_DETAIL_POPUP_05">
+                            <component-id>POP_UI_CM_03_01_WINDOW_01_CPT_05_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="RST_CPT_02:selections" extract-by="ITEM_GRP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_02_SETDATA_DETAIL_POPUP_06">
+                            <component-id>POP_UI_CM_03_01_WINDOW_01_CPT_06_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="RST_CPT_02:selections" extract-by="ITEM_GRP_DESCRIP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_02_SETDATA_DETAIL_POPUP_07">
+                            <component-id>POP_UI_CM_03_01_WINDOW_01_CPT_07_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="RST_CPT_02:selections" extract-by="SEQ" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_02_SETDATA_DETAIL_POPUP_08">
+                            <component-id>POP_UI_CM_03_01_WINDOW_01_CPT_08_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="RST_CPT_02:selections" extract-by="ACTV_YN" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_02_SETDATA_DETAIL_POPUP_09">
+                            <component-id>DATA_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="DTL_ID" reference-id="RST_CPT_02:selections" extract-by="ID" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_CM_03_Q_002">
+                    <service-id>SRV_UI_CM_03_Q2</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="ITEM_CLASS_MST_ID" reference-id="RST_CPT_01:selections" extract-by="ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="SVC_SP_UI_CM_03_S3">
+                    <service-id>SRV_UI_CM_03_S3</service-id>
+                    <service-target>mp</service-target>
+                    <param-empty-check>changes</param-empty-check>
+                    <parameters>
+                        <parameter id="WRK_TYPE" value="SAVE" />
+                        <parameter id="changes" reference-id="RST_CPT_02:changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="REMOVE_ROW">
+                <service-call id="SVC_RST_CPT_02_REMOVE_ROW">
+                    <service-id>SRV_UI_CM_03_S3</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="WRK_TYPE" value="DELETE" />
+                        <parameter id="ID" reference-id="RST_CPT_02:checked" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

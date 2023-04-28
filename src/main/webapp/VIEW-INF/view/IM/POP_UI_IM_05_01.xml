@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_IM_05_01" version="2.0">
+    <component id="POP_UI_IM_05_01_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_IM_05_01</title>
+            <width>450</width>
+            <height>740</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1" title="COMM" expand="true" />
+                <tab id="t2" title="STOCK_KEEPING_COST" init-render="true" />
+                <tab id="t3" title="ORDER_COST" init-render="true" />
+            </tabs>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_TP_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_01_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="LOCAT_TP_NM" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_LV</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_02_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="LOCAT_LV" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_CD</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_03_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="LOCAT_CD" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_04_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_04_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="LOCAT_NM" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_CD</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_05_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="ITEM_CD" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_06_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_06_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="ITEM_NM" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_07_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_TP</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_07_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="VAL_03" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_08_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>COV</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_08_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="VAL_01" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_09_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>SABC</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_09_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="VAL_02" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_10_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DIF_GRADE</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_10_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="VAL_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_11_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>UOM_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_11_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="UOM_NM" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_12_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>CURCY_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_12_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="CURCY_CD_ID" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_13_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>FIXED_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_13_04" type="CHECKBOX">
+        <props>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="FIXED_YN" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_14_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACTV_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T1_14_04" type="CHECKBOX">
+        <props>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="ACTV_YN" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T2_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>STD_UTPIC</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T2_01_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="STD_UTPIC" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T2_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>STOCK_KEEPING_COST_RATE</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T2_02_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_IM_05_01_SRH_CPT_T2_02_04_SET_03">
+                    <component-id>POP_UI_IM_05_01_SRH_CPT_T2_02_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="INV_KEEPING_COST_RATE" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T2_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>STOCK_KEEPING_PRPSAL_VAL</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T2_03_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_IM_05_01_SRH_CPT_T2_03_04_SET_03">
+                    <component-id>POP_UI_IM_05_01_SRH_CPT_T2_03_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="INV_KEEPING_PRPSAL_VAL" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T2_04_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>STOCK_KEEPING_VAL</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T2_04_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_IM_05_01_SRH_CPT_T2_04_04_SET_03">
+                    <component-id>POP_UI_IM_05_01_SRH_CPT_T2_04_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="INV_KEEPING_VAL" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T3_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>TRANSP_COST</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T3_02_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="TRANSP_COST" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T3_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>OTHER_COST</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T3_03_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_IM_05_01_SRH_CPT_T3_03_04_SET_03">
+                    <component-id>POP_UI_IM_05_01_SRH_CPT_T3_03_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="OTHER_COST" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T3_04_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ORDER_COST_PRPSAL_VAL</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T3_04_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="ORDER_COST_PRPSAL_VAL" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T3_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ORDER_COST_VAL</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_05_01_SRH_CPT_T3_05_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="ORDER_COST_VAL" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_CPT_CONFIRM" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_IM_05_01_CPT_CONFIRM_SAVE">
+                    <component-id>POP_UI_IM_05_01_CPT_CONFIRM</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_IM_05_01_CPT_CONFIRM_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POP_UI_IM_05_01_CPT_CONFIRM:SVC_SP_UI_IM_05_S1:IM_DATA" extract-by="SP_UI_IM_05_S1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                    <complete>
+                        <operation-call id="OPC_POP_UI_IM_05_01_WINDOW_01_CLOSE">
+                            <component-id>POP_UI_IM_05_01_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_REFRESH">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SAVE">
+                <service-call id="SVC_SP_UI_IM_05_S1">
+                    <service-id>SRV_UI_IM_05_S1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="INV_COST_ID" reference-id="RST_CPT_01:selections" extract-by="INV_COST_ID" />
+                        <parameter id="INV_KEEPING_COST_RATE" reference-id="POP_UI_IM_05_01_SRH_CPT_T2_02_04" />
+                        <parameter id="INV_KEEPING_VAL" reference-id="POP_UI_IM_05_01_SRH_CPT_T2_04_04" />
+                        <parameter id="TRANSP_COST" reference-id="POP_UI_IM_05_01_SRH_CPT_T3_02_04" />
+                        <parameter id="OTHER_COST" reference-id="POP_UI_IM_05_01_SRH_CPT_T3_03_04" />
+                        <parameter id="ORDER_COST_VAL" reference-id="POP_UI_IM_05_01_SRH_CPT_T3_05_04" />
+                        <parameter id="FIXED_YN" reference-id="POP_UI_IM_05_01_SRH_CPT_T1_13_04" />
+                        <parameter id="ACTV_YN" reference-id="POP_UI_IM_05_01_SRH_CPT_T1_14_04" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_05_01_CPT_CANCLE" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_IM_05_01_WINDOW_01_CLOSE">
+                    <component-id>POP_UI_IM_05_01_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_CM_04_07" version="2.0">
+    <component id="POP_UI_CM_04_07_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>DIF_GRADE</title>
+            <width>400</width>
+            <height>200</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_07_WINDOW_01_GRD" type="R_GRID">
+        <props>
+            <selection-mode>rows</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <groupable>false</groupable>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="VIEW_ID" title="VIEW_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="CONF_CD" title="CONF_CD" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="CONF_NM" title="CONF_NM" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+                <column id="PRIORT" title="PRIORITY" type="number">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ACTV_YN" title="ACTV_YN" type="bool">
+                    <visible>false</visible>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="POP_UI_CM_04_07_WINDOW_01_GRD_SETDATA_CM_04_MAIN_01">
+                    <component-id>SRH_CPT_T1_07_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_04_07_WINDOW_01_GRD:selections" extract-by="CONF_NM" />
+                        <parameter id="DIFFTD_CLSS_ID" reference-id="POP_UI_CM_04_07_WINDOW_01_GRD:selections" extract-by="ID" />
+                    </parameters>
+                    <success>
+                        <operation-call id="POP_UI_CM_04_07_WINDOW_01_GRD_SETDATA_CM_04_MAIN_CLOSE">
+                            <component-id>POP_UI_CM_04_07_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_POP_UI_CM_04_07_WINDOW_01_GRD_LOAD">
+                    <service-id>SRV_UI_CM_01_POP_01_Q</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="CONF_KEY" value="011" />
+                        <parameter id="MODULE_CD" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

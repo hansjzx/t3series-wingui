@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_DP_11_CUSTOM_POPUP" version="2.0">
+    <component id="POP_DP_COMM_WINDOWS" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>CUST_POP</title>
+            <width>663</width>
+            <height>680</height>
+            <visible>false</visible>
+            <modal>false</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>CUST_CD</init-value>
+        </props>
+    </component>
+    <component id="POP_SRH_CPT_T1_01_02" type="INPUTBOX">
+        <props>
+            <width>100</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="cp-enterLoad">
+                    <component-id>POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_SRH_CPT_T1_01_03" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>CUST_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_SRH_CPT_T1_01_04" type="INPUTBOX">
+        <props>
+            <width>100</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="cp-enterLoad2">
+                    <component-id>POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_SRH_CPT_T1_01_05" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="op_pop1">
+                    <component-id>POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_SRH_CPT_T1_01_06" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="op_search_init1">
+                    <component-id>POP_SRH_CPT_T1_01_02</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="op_search_init2">
+                    <component-id>POP_SRH_CPT_T1_01_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_SRH_CPT_T1_01_07" type="BUTTON">
+        <props>
+            <name>SELECTION</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="op_pop_sel1">
+                    <component-id>SRH_CPT_T1_04_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_RST_CPT_01:checked" extract-by="CUST_CD" delimiter="|" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_01">
+                            <component>SRH_CPT_T1_10_06</component>
+                            <operator>equal</operator>
+                            <value>SEARCH_SOLD</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="op_pop_sel2">
+                            <component-id>SRH_CPT_T1_05_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_RST_CPT_01:checked" extract-by="CUST_NM" delimiter="|" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="op_pop_sel3">
+                            <component-id>DATA_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SOLD_TO_ID" reference-id="POP_RST_CPT_01:checked" extract-by="ID" delimiter="|" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="op_POP2_sel1">
+                    <component-id>SRH_CPT_T1_06_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_RST_CPT_01:checked" extract-by="CUST_CD" delimiter="|" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_02">
+                            <component>SRH_CPT_T1_10_06</component>
+                            <operator>equal</operator>
+                            <value>SEARCH_SHIP</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="op_POP2_sel2">
+                            <component-id>SRH_CPT_T1_07_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_RST_CPT_01:checked" extract-by="CUST_NM" delimiter="|" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="op_pop_sel3">
+                            <component-id>DATA_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SHIP_TO_ID" reference-id="POP_RST_CPT_01:checked" extract-by="ID" delimiter="|" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="op_POP3_sel1">
+                    <component-id>SRH_CPT_T1_08_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_RST_CPT_01:checked" extract-by="CUST_CD" delimiter="|" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_03" group="AND">
+                            <component>SRH_CPT_T1_10_06</component>
+                            <operator>equal</operator>
+                            <value>SEARCH_BILL</value>
+                        </condition>
+                        <condition id="con_dp_popup_item_close_01_01" group="AND">
+                            <component>POP_RST_CPT_01</component>
+                            <key>CHECKED_ROWCOUNT</key>
+                            <operator>notEqual</operator>
+                            <value>0</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="op_POP3_sel2">
+                            <component-id>SRH_CPT_T1_09_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_RST_CPT_01:checked" extract-by="CUST_NM" delimiter="|" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="op_pop_sel3">
+                            <component-id>DATA_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="BILL_TO_ID" reference-id="POP_RST_CPT_01:checked" extract-by="ID" delimiter="|" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="op_POP4_sel1">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-SOLD_TO_ID" reference-id="POP_RST_CPT_01:checked" extract-by="ID" default-value="" />
+                        <parameter id="SET_VALUE-to-SOLD_TO_CD" reference-id="POP_RST_CPT_01:checked" extract-by="CUST_CD" default-value="" />
+                        <parameter id="SET_VALUE-to-SOLD_TO_NM" reference-id="POP_RST_CPT_01:checked" extract-by="CUST_NM" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_04" group="AND">
+                            <component>SRH_CPT_T1_10_06</component>
+                            <operator>equal</operator>
+                            <value>GRID_SOLD</value>
+                        </condition>
+                        <condition id="con_dp_popup_item_close_01_02" group="AND">
+                            <component>POP_RST_CPT_01</component>
+                            <key>CHECKED_ROWCOUNT</key>
+                            <operator>notEqual</operator>
+                            <value>0</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="op_POP5_sel1">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-SHIP_TO_ID" reference-id="POP_RST_CPT_01:checked" extract-by="ID" default-value="" />
+                        <parameter id="SET_VALUE-to-SHIP_TO_CD" reference-id="POP_RST_CPT_01:checked" extract-by="CUST_CD" default-value="" />
+                        <parameter id="SET_VALUE-to-SHIP_TO_NM" reference-id="POP_RST_CPT_01:checked" extract-by="CUST_NM" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_05" group="AND">
+                            <component>SRH_CPT_T1_10_06</component>
+                            <operator>equal</operator>
+                            <value>GRID_SHIP</value>
+                        </condition>
+                        <condition id="con_dp_popup_item_close_01_03" group="AND">
+                            <component>POP_RST_CPT_01</component>
+                            <key>CHECKED_ROWCOUNT</key>
+                            <operator>notEqual</operator>
+                            <value>0</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="op_POP6_sel1">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-BILL_TO_ID" reference-id="POP_RST_CPT_01:checked" extract-by="ID" default-value="" />
+                        <parameter id="SET_VALUE-to-BILL_TO_CD" reference-id="POP_RST_CPT_01:checked" extract-by="CUST_CD" default-value="" />
+                        <parameter id="SET_VALUE-to-BILL_TO_NM" reference-id="POP_RST_CPT_01:checked" extract-by="CUST_NM" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_06" group="AND">
+                            <component>SRH_CPT_T1_10_06</component>
+                            <operator>equal</operator>
+                            <value>GRID_BILL</value>
+                        </condition>
+                        <condition id="con_dp_popup_item_close_01_04" group="AND">
+                            <component>POP_RST_CPT_01</component>
+                            <key>CHECKED_ROWCOUNT</key>
+                            <operator>notEqual</operator>
+                            <value>0</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="op_close">
+                    <component-id>POP_DP_COMM_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                    <conditions>
+                        <condition id="con_dp_popup_item_close_02">
+                            <component>POP_RST_CPT_01</component>
+                            <key>CHECKED_ROWCOUNT</key>
+                            <operator>notEqual</operator>
+                            <value>0</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_DP_POPUP_CUSTOMER_CLOSE_FAIL_MSG">
+                    <component-id>COMMON</component-id>
+                    <operation-id>DIALOG</operation-id>
+                    <parameters>
+                        <parameter id="title" value="Information" />
+                        <parameter id="msg" value="MSG_0025" />
+                        <parameter id="type" value="info" />
+                    </parameters>
+                    <conditions>
+                        <condition id="con_dp_popup_item_close_03">
+                            <component>POP_RST_CPT_01</component>
+                            <key>CHECKED_ROWCOUNT</key>
+                            <operator>equal</operator>
+                            <value>0</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_RST_CPT_01" type="R_GRID">
+        <props>
+            <height>530</height>
+            <selection-mode>ROWS</selection-mode>
+            <state-bar>false</state-bar>
+            <check-bar>true</check-bar>
+            <check-exclusive>false</check-exclusive>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="ID" title="Customer Id" type="string">
+                    <width>150</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="CUST_CD" title="CUST_CD" type="string">
+                    <width>150</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="CUST_NM" title="CUST_NM" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="COUNTRY_NM" title="COUNTRY_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ADDR" title="ADDR" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="op_pop_sel1_cell">
+                    <component-id>SRH_CPT_T1_04_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_RST_CPT_01:selections" extract-by="CUST_CD" delimiter="|" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_01_cell">
+                            <component>SRH_CPT_T1_10_06</component>
+                            <operator>equal</operator>
+                            <value>SEARCH_SOLD</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="op_pop_sel2_cell">
+                            <component-id>SRH_CPT_T1_05_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_RST_CPT_01:selections" extract-by="CUST_NM" delimiter="|" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="op_pop_sel3_cell">
+                            <component-id>DATA_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SOLD_TO_ID" reference-id="POP_RST_CPT_01:selections" extract-by="ID" delimiter="|" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="op_POP2_sel1_cell">
+                    <component-id>SRH_CPT_T1_06_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_RST_CPT_01:selections" extract-by="CUST_CD" delimiter="|" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_02_cell">
+                            <component>SRH_CPT_T1_10_06</component>
+                            <operator>equal</operator>
+                            <value>SEARCH_SHIP</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="op_POP2_sel2_cell">
+                            <component-id>SRH_CPT_T1_07_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_RST_CPT_01:selections" extract-by="CUST_NM" delimiter="|" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="op_pop_sel3_cell">
+                            <component-id>DATA_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SHIP_TO_ID" reference-id="POP_RST_CPT_01:selections" extract-by="ID" delimiter="|" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="op_POP3_sel1_cell">
+                    <component-id>SRH_CPT_T1_08_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_RST_CPT_01:selections" extract-by="CUST_CD" delimiter="|" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_03_cell">
+                            <component>SRH_CPT_T1_10_06</component>
+                            <operator>equal</operator>
+                            <value>SEARCH_BILL</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="op_POP3_sel2_cell">
+                            <component-id>SRH_CPT_T1_09_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_RST_CPT_01:selections" extract-by="CUST_NM" delimiter="|" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="op_pop_sel3_cell">
+                            <component-id>DATA_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="BILL_TO_ID" reference-id="POP_RST_CPT_01:selections" extract-by="ID" delimiter="|" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="op_POP4_sel1_cell">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-SOLD_TO_ID" reference-id="POP_RST_CPT_01:selections" extract-by="ID" default-value="" />
+                        <parameter id="SET_VALUE-to-SOLD_TO_CD" reference-id="POP_RST_CPT_01:selections" extract-by="CUST_CD" default-value="" />
+                        <parameter id="SET_VALUE-to-SOLD_TO_NM" reference-id="POP_RST_CPT_01:selections" extract-by="CUST_NM" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_04_cell">
+                            <component>SRH_CPT_T1_10_06</component>
+                            <operator>equal</operator>
+                            <value>GRID_SOLD</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="op_POP5_sel1_cell">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-SHIP_TO_ID" reference-id="POP_RST_CPT_01:selections" extract-by="ID" default-value="" />
+                        <parameter id="SET_VALUE-to-SHIP_TO_CD" reference-id="POP_RST_CPT_01:selections" extract-by="CUST_CD" default-value="" />
+                        <parameter id="SET_VALUE-to-SHIP_TO_NM" reference-id="POP_RST_CPT_01:selections" extract-by="CUST_NM" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_05_cell">
+                            <component>SRH_CPT_T1_10_06</component>
+                            <operator>equal</operator>
+                            <value>GRID_SHIP</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="op_POP6_sel1_cell">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-BILL_TO_ID" reference-id="POP_RST_CPT_01:selections" extract-by="ID" default-value="" />
+                        <parameter id="SET_VALUE-to-BILL_TO_CD" reference-id="POP_RST_CPT_01:selections" extract-by="CUST_CD" default-value="" />
+                        <parameter id="SET_VALUE-to-BILL_TO_NM" reference-id="POP_RST_CPT_01:selections" extract-by="CUST_NM" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_06_cell">
+                            <component>SRH_CPT_T1_10_06</component>
+                            <operator>equal</operator>
+                            <value>GRID_BILL</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="op_close_cell">
+                    <component-id>POP_DP_COMM_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SP_UI_DP_00_POPUP_CUSTOMER_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_00_POPUP_CUSTOMER_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_POPUP_CUSTOMER_Q1_1" reference-id="POP_SRH_CPT_T1_01_02" default-value="" />
+                        <parameter id="SP_UI_DP_00_POPUP_CUSTOMER_Q1_2" reference-id="POP_SRH_CPT_T1_01_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

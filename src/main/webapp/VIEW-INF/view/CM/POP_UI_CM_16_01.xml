@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_CM_16_01" version="2.0">
+    <component id="POP_CPT_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>PLAN_SCENARIO</title>
+            <width>500</width>
+            <height>435</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_CPT_04" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>PLAN_POLICY</title>
+            <width>700</width>
+            <height>335</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_CPT_05" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>UI_LINK</title>
+            <width>460</width>
+            <height>500</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_CPT_06" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>EXEC_PROCEDURE</title>
+            <width>400</width>
+            <height>500</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_CPT_01_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="SCENARIO" title="SCENARIO" expand="true" />
+            </tabs>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="POP_CPT_01_CONFIRM" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_01_SAVE">
+                    <component-id>POP_CPT_01_CONFIRM</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <parameters>
+                        <parameter id="MODULE_ID" reference-id="POP_CPT_01_T1_01_02" />
+                        <parameter id="DMND_MODULE_ID" reference-id="POP_CPT_01_T1_00_02" />
+                        <parameter id="DESCRIP" reference-id="POP_CPT_01_T1_03_02" />
+                        <parameter id="ACTV_YN" reference-id="POP_CPT_01_T1_05_02" default-value="Y" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_SAVE_SUCCESS_MSG_02">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="information" />
+                                <parameter id="msg" reference-data="POP_CPT_01_CONFIRM:SVC_SP_UI_CM_16_S1:IM_DATA" extract-by="SP_UI_CM_16_S1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                                <parameter id="modal" value="true" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_LOAD">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <success>
+                                <operation-call id="OPC_POP_CPT_01_CLOSE">
+                                    <component-id>POP_CPT_01</component-id>
+                                    <operation-id>CLOSE</operation-id>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SAVE">
+                <service-call id="SVC_SP_UI_CM_16_S1">
+                    <service-id>SRV_UI_CM_16_S1</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_CPT_01_CANCLE" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_CPT_01_CLOSE">
+                    <component-id>POP_CPT_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_CPT_05_CONFIRM" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_CPT_02_T3_01_02_SET">
+                    <component-id>POP_CPT_02_T3_01_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_CPT_05_01:selections" extract-by="MENU_ID" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_POP_CPT_05_CLOSE">
+                    <component-id>POP_CPT_05</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_CPT_05_CANCLE" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_CPT_05_CLOSE">
+                    <component-id>POP_CPT_05</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_CPT_01_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>MODULE_VAL</init-value>
+        </props>
+    </component>
+    <component id="POP_CPT_01_T1_01_02" type="COMBOBOX">
+        <props>
+            <width>200</width>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>ID</value-id>
+            <text-id sort="asc">COMN_CD</text-id>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DATA_01:SVC_UI_CM_16_Q2_DATA_03_LOAD" extract="KEY_VALUE:MODULE" />
+            </operation>
+            <operation id="SELECT" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_CPT_01_T1_00_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DMND_MODULE_ID</init-value>
+        </props>
+    </component>
+    <component id="POP_CPT_01_T1_00_02" type="COMBOBOX">
+        <props>
+            <width>200</width>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_CPT_01_T1_00_02_INIT_01">
+                    <component-id>POP_CPT_01_T1_00_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+            <operation id="LOAD">
+                <reference-service-call id="DATA_01:SVC_UI_CM_16_Q2_DATA_01_LOAD" extract="GROUP:DEMAND_MODULE_TP" />
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_CPT_01_T1_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>SCENARIO_VER</init-value>
+        </props>
+    </component>
+    <component id="POP_CPT_01_T1_02_02" type="INPUTBOX">
+        <props>
+            <width>200</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_CPT_01_T1_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>SCENARIO_DESCRIP</init-value>
+        </props>
+    </component>
+    <component id="POP_CPT_01_T1_03_02" type="TEXTAREA">
+        <props>
+            <width>194</width>
+            <height>100</height>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_CPT_01_T1_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>SCENARIO_ACTV</init-value>
+        </props>
+    </component>
+    <component id="POP_CPT_01_T1_05_02" type="CHECKBOX">
+        <props>
+            <lang>true</lang>
+            <value-id>ID</value-id>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DATA_01:SVC_UI_CM_15_01_DATA_01_LOAD" extract="KEY_VALUE:PLAN_TYPE" />
+            </operation>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_CPT_04_01" type="R_GRID">
+        <props>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="MODULE" title="MODULE_VAL" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="PLAN_POLICY_VER_ID" title="PLAN_POLICY_VERSION" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="DESCP" title="DESCRIP" type="string">
+                    <width>200</width>
+                    <editable>false</editable>
+                </column>
+                <column id="PLAN_POLICY_VAL_ID" title="PLAN_POLICY_VAL" type="string">
+                    <width>200</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="PLAN_TYPE" title="PLAN_TP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_POP_CPT_07_T6_01_02_SET">
+                    <component-id>POP_CPT_07_T6_01_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_CPT_04_01:selections" extract-by="PLAN_POLICY_VER_ID" />
+                    </parameters>
+                    <conditions>
+                        <condition id="COND_POP_UI_CM_16_01_CLICK_01">
+                            <component>DATA_03</component>
+                            <key>VIEW_ID</key>
+                            <on-column>ID, DESCP</on-column>
+                            <operator>equal</operator>
+                            <value>POP_UI_CM_16_01</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="COMM_POP_CPT_07_T6_01_03_SET">
+                            <component-id>POP_CPT_07_T6_01_03</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_CPT_04_01:selections" extract-by="ID" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_07_T6_02_02_SET">
+                            <component-id>POP_CPT_07_T6_02_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_CPT_04_01:selections" extract-by="DESCP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_04_CLOSE">
+                            <component-id>POP_CPT_04</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_CPT_02_T6_01_02_SET">
+                    <component-id>POP_CPT_02_T6_01_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_CPT_04_01:selections" extract-by="PLAN_POLICY_VER_ID" />
+                    </parameters>
+                    <conditions>
+                        <condition id="COND_POP_UI_CM_16_01_CLICK_02">
+                            <component>DATA_03</component>
+                            <key>VIEW_ID</key>
+                            <on-column>ID, DESCP</on-column>
+                            <operator>notEqual</operator>
+                            <value>POP_UI_CM_16_01</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_CPT_02_T6_01_03_SET">
+                            <component-id>POP_CPT_02_T6_01_03</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_CPT_04_01:selections" extract-by="ID" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_02_T6_02_02_SET">
+                            <component-id>POP_CPT_02_T6_02_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_CPT_04_01:selections" extract-by="DESCP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_04_CLOSE">
+                            <component-id>POP_CPT_04</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_CM_16_Q2_POP_CPT_04_LOAD">
+                    <service-id>SRV_UI_CM_16_Q2</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="Q_TYPE" value="POLICY" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_CPT_05_01" type="R_GRID">
+        <props>
+            <height>390</height>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>false</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <toolbar use="false">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="LOAD" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right" />
+            </toolbar>
+            <columns>
+                <column id="PARENT_MENU_NM" title="MENU_ID" type="string">
+                    <width>60</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <init-group-order>1</init-group-order>
+                </column>
+                <column id="MENU_ID" title="UI_ID" type="string">
+                    <width>200</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="MENU_NM" title="UI_NM" type="string">
+                    <width>200</width>
+                    <editable>false</editable>
+                    <text-alignment>left</text-alignment>
+                    <button>true</button>
+                </column>
+                <column id="MENU_PATH" title="MENU_PATH" type="string">
+                    <width>200</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="button-click">
+                <operation-call id="common_view_open">
+                    <component-id>COMMON</component-id>
+                    <operation-id>VIEW-OPEN</operation-id>
+                    <parameters>
+                        <parameter id="view" reference-id="POP_CPT_05_01:selections" extract-by="MENU_PATH" />
+                        <parameter id="target" value="new" />
+                    </parameters>
+                </operation-call>
+            </action>
+            <action event-type="cell-double-click">
+                <operation-call id="POP_UI_CM_16_02_WINDOW_02_GRD_01_01">
+                    <component-id>POP_UI_CM_16_02_WINDOW_02_GRD_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-PARENT_MENU_NM" reference-id="POP_CPT_05_01:selections" extract-by="PARENT_MENU_NM" default-value="" />
+                        <parameter id="SET_VALUE-to-MENU_ID" reference-id="POP_CPT_05_01:selections" extract-by="MENU_ID" default-value="" />
+                        <parameter id="SET_VALUE-to-MENU_NM" reference-id="POP_CPT_05_01:selections" extract-by="MENU_NM" default-value="" />
+                        <parameter id="SET_VALUE-to-MENU_PATH" reference-id="POP_CPT_05_01:selections" extract-by="MENU_PATH" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_GRD_SET">
+                            <component>DATA_02</component>
+                            <key>VIEW_ID</key>
+                            <operator>equal</operator>
+                            <value>POP_UI_CM_16_02</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="POP_UI_CM_16_02_WINDOW_02_GRD_01_02">
+                    <component-id>POP_UI_CM_16_02_WINDOW_02_GRD_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-PARENT_MENU_NM" reference-id="POP_CPT_05_01:selections" extract-by="PARENT_MENU_NM" default-value="" />
+                        <parameter id="SET_VALUE-to-MENU_ID" reference-id="POP_CPT_05_01:selections" extract-by="MENU_ID" default-value="" />
+                        <parameter id="SET_VALUE-to-MENU_NM" reference-id="POP_CPT_05_01:selections" extract-by="MENU_NM" default-value="" />
+                        <parameter id="SET_VALUE-to-MENU_PATH" reference-id="POP_CPT_05_01:selections" extract-by="MENU_PATH" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_GRD_SET">
+                            <component>DATA_02</component>
+                            <key>VIEW_ID</key>
+                            <operator>equal</operator>
+                            <value>POP_UI_CM_16_04</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_POP_CPT_05_CLOSE">
+                    <component-id>POP_CPT_05</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_CM_16_Q2_POP_CPT_04_LOAD">
+                    <service-id>SRV_UI_CM_16_Q2</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="Q_TYPE" value="UI_ID" />
+                        <parameter id="VAL_01" value="" />
+                        <parameter id="VAL_02" value="" />
+                        <parameter id="LANG_CD" reference-id="COMMON:LANGUAGE_CODE" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_CPT_06_01" type="R_GRID">
+        <props>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="PROC_NM" title="PROCEDURE_NM" type="string">
+                    <width>250</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_POP_CPT_02_T4_01_02_SET_04">
+                    <component-id>POP_CPT_02_T4_01_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_CPT_06_01:selections" extract-by="PROC_NM" />
+                    </parameters>
+                    <conditions>
+                        <condition id="COND_POP_CPT_06_CLICK_01">
+                            <component>DATA_03</component>
+                            <key>VIEW_ID</key>
+                            <operator>notEqual</operator>
+                            <value>POP_UI_CM_16_01</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_CPT_06_CLOSE">
+                            <component-id>POP_CPT_06</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_CPT_07_T4_01_02_SET">
+                    <component-id>POP_CPT_07_T4_01_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_CPT_06_01:selections" extract-by="PROC_NM" />
+                    </parameters>
+                    <conditions>
+                        <condition id="COND_POP_CPT_06_CLICK_02">
+                            <component>DATA_03</component>
+                            <key>VIEW_ID</key>
+                            <operator>equal</operator>
+                            <value>POP_UI_CM_16_01</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_CPT_06_CLOSE">
+                            <component-id>POP_CPT_06</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_CPT_07_T4_01_03_SET">
+                    <component-id>POP_CPT_02_T4_01_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_CPT_06_01:selections" extract-by="PROC_NM" />
+                    </parameters>
+                    <conditions>
+                        <condition id="COND_POP_CPT_06_CLICK_03">
+                            <component>DATA_03</component>
+                            <key>VIEW_ID</key>
+                            <operator>equal</operator>
+                            <value>POP_UI_CM_16_02</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_CPT_06_CLOSE">
+                            <component-id>POP_CPT_06</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_CM_16_Q2_POP_CPT_06_LOAD">
+                    <service-id>SRV_UI_CM_16_Q2</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="Q_TYPE" value="PROC_NM" />
+                        <parameter id="VAL_01" value="" />
+                        <parameter id="VAL_02" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

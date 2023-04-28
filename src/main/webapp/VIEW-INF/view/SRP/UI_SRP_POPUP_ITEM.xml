@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_SRP_POPUP_ITEM" version="2.0">
+    <component id="ITEM_POP_SRH_CPT_T1_01_06" type="COMBOBOX">
+        <props>
+            <width>110</width>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_ITEM_POP_SRH_CPT_T1_01_06_LOAD_INIT_when_search_area">
+                    <component-id>ITEM_POP_SRH_CPT_T1_01_06</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_ITEM_POP_SRH_CPT_T1_01_06_LOAD_SELECT_when_search_area">
+                            <component-id>ITEM_POP_SRH_CPT_T1_01_06</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="VALUE" reference-id="DP_DATA_POP_ITEM:ITEM_LV" />
+                            </parameters>
+                            <conditions>
+                                <condition id="CON_PARENT_ITEM_LV_SELECT_ONE_VALUE_when_search_area">
+                                    <component>DP_DATA_POP_ITEM</component>
+                                    <key>ITEM_LV</key>
+                                    <operator>notEqual</operator>
+                                    <value>empty</value>
+                                </condition>
+                            </conditions>
+                            <success>
+                                <operation-call id="OPC_grid_init3_when_search_area">
+                                    <component-id>ITEM_POP_RST_CPT_01</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                        <operation-call id="OPC_ITEM_POP_SRH_CPT_T1_01_06_LOAD_SELECT_002_when_search_area">
+                            <component-id>ITEM_POP_SRH_CPT_T1_01_06</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="INDEX" value="0" />
+                            </parameters>
+                            <conditions>
+                                <condition id="CON_PARENT_ITEM_LV_SELECT_ALL_VALUE_when_search_area">
+                                    <component>DP_DATA_POP_ITEM</component>
+                                    <key>ITEM_LV</key>
+                                    <operator>equal</operator>
+                                    <value>empty</value>
+                                </condition>
+                            </conditions>
+                            <success>
+                                <operation-call id="OPC_grid_init3_002_when_search_area">
+                                    <component-id>ITEM_POP_RST_CPT_01</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="ENABLE" />
+            <operation id="SELECT" />
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_SRP_00_ITEM_LV_DATA_Q1_002">
+                    <service-id>SRV_GET_SP_UI_SRP_00_ITEM_LV_DATA_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_SRP_00_ITEM_LV_DATA_Q1_01" value="LEAF" />
+                        <parameter id="SP_UI_SRP_00_ITEM_LV_DATA_Q1_02" value="ALL" />
+                        <parameter id="SP_UI_SRP_00_ITEM_LV_DATA_Q1_03" reference-id="DP_DATA_POP_ITEM:SRP_UNIT_MST_ID" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="ITEM_POP_RST_CPT_01" type="R_GRID">
+        <props>
+            <height>480</height>
+            <selection-mode>ROWS</selection-mode>
+            <state-bar>false</state-bar>
+            <check-bar>true</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>200</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string" use-number-comparer="true">
+                    <width>90</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>160</width>
+                    <editable>false</editable>
+                </column>
+                <column id="UOM_CD" title="UOM_CD" type="string">
+                    <width>80</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="UOM_NM" title="UOM_NM" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+                <column id="PARENT_ITEM_LV_NM" title="PARENT_ITEM_LV_NM" type="string">
+                    <width>120</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="IF_YN" title="IF_YN" type="bool">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="USE_YN" title="USE_YN" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="RTS" title="STRT_DATE_SALES" type="string">
+                    <width>110</width>
+                    <editable>false</editable>
+                </column>
+                <column id="EOS" title="END_DATE_SALES" type="string">
+                    <width>110</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="op_pop_sel5">
+                    <component-id>DP_DATA_POP_ITEM</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="ITEM_INFO" reference-id="ITEM_POP_RST_CPT_01:selections" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="op_close_02">
+                    <component-id>UI_DP_POPUP_ITEM_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SP_UI_SRP_00_POPUP_ITEM_Q1">
+                    <service-id>SRV_GET_SP_UI_SRP_00_POPUP_ITEM_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SRP_UNIT_MST_ID" reference-id="DP_DATA_POP_ITEM:SRP_UNIT_MST_ID" />
+                        <parameter id="ITEM_CD" reference-id="ITEM_POP_SRH_CPT_T1_01_02" />
+                        <parameter id="ITEM_NM" reference-id="ITEM_POP_SRH_CPT_T1_01_04" />
+                        <parameter id="ITEM_LV_ID" reference-id="ITEM_POP_SRH_CPT_T1_01_06" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="UI_DP_POPUP_ITEM_WINDOWS" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>ITEM_POP</title>
+            <width>820</width>
+            <height>625</height>
+            <visible>false</visible>
+            <modal>false</modal>
+            <init-render>true</init-render>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="ITEM_POP_SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_CD</init-value>
+        </props>
+    </component>
+    <component id="ITEM_POP_SRH_CPT_T1_01_02" type="INPUTBOX">
+        <props>
+            <width>100</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="OPC_ITEM_POP_SRH_CPT_T1_01_06_LOAD_enter_key_003">
+                    <component-id>ITEM_POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="ITEM_POP_SRH_CPT_T1_01_03" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_NM</init-value>
+        </props>
+    </component>
+    <component id="ITEM_POP_SRH_CPT_T1_01_04" type="INPUTBOX">
+        <props>
+            <width>100</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="OPC_ITEM_POP_SRH_CPT_T1_01_06_LOAD_enter_key_001">
+                    <component-id>ITEM_POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="ITEM_POP_SRH_CPT_T1_01_05" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_LV_CD</init-value>
+        </props>
+    </component>
+    <component id="ITEM_POP_SRH_CPT_T1_01_07" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="op_pop1">
+                    <component-id>ITEM_POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="ITEM_POP_SRH_CPT_T1_01_08" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="op_search_init1">
+                    <component-id>ITEM_POP_SRH_CPT_T1_01_02</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="op_search_init2">
+                    <component-id>ITEM_POP_SRH_CPT_T1_01_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="ITEM_POP_SRH_CPT_T1_01_09" type="BUTTON">
+        <props>
+            <tooltip>selection</tooltip>
+            <icon>mouse-pointer</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="op_pop_sel4">
+                    <component-id>DP_DATA_POP_ITEM</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="ITEM_INFO" reference-id="ITEM_POP_RST_CPT_01:checked" delimiter="|" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="con_dp_popup_item_close_01">
+                            <component>ITEM_POP_RST_CPT_01</component>
+                            <key>CHECKED_ROWCOUNT</key>
+                            <operator>notEqual</operator>
+                            <value>0</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="op_close">
+                    <component-id>UI_DP_POPUP_ITEM_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                    <conditions>
+                        <condition id="con_dp_popup_item_close_02">
+                            <component>ITEM_POP_RST_CPT_01</component>
+                            <key>CHECKED_ROWCOUNT</key>
+                            <operator>notEqual</operator>
+                            <value>0</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_DP_POPUP_ITEM_CLOSE_FAIL_MSG">
+                    <component-id>COMMON</component-id>
+                    <operation-id>DIALOG</operation-id>
+                    <parameters>
+                        <parameter id="title" value="Information" />
+                        <parameter id="msg" value="MSG_0025" />
+                        <parameter id="type" value="info" />
+                    </parameters>
+                    <conditions>
+                        <condition id="con_dp_popup_item_close_03">
+                            <component>ITEM_POP_RST_CPT_01</component>
+                            <key>CHECKED_ROWCOUNT</key>
+                            <operator>equal</operator>
+                            <value>0</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

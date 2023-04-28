@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_MP_ITEM_CLASS" version="2.0">
+    <component id="SRH_POP_ITEM_CLASS_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_MP_ITEM_CLASS</title>
+            <width>800</width>
+            <height>300</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="SRH_POP_ITEM_CLASS_WINDOW_01_GRD" type="R_GRID">
+        <props>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="ITEM_LV_NM" title="ITEM_LV" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_CLASS_VAL" title="ITEM_CLASS_VAL" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="DESCRIP" title="DESCRIP" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="CONTINU_PRDUCT_YN" title="CONTINU_PRDUCT" type="bool">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <header-checkable>false</header-checkable>
+                </column>
+                <column id="PROD_MIX_YN" title="PROD_MIX_YN" type="bool">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <header-checkable>false</header-checkable>
+                </column>
+                <column id="ACTV_YN" title="ACTV_YN" type="bool">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <header-checkable>false</header-checkable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="SRH_POP_ITEM_CLASS_WINDOW_01_GRD_SETDATA_01">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="SRH_POP_ITEM_CLASS_WINDOW_01_GRD:selections" extract-by="ITEM_CLASS_VAL" />
+                    </parameters>
+                    <success>
+                        <operation-call id="SRH_POP_ITEM_CLASS_WINDOW_01_GRD_SETDATA_02">
+                            <component-id>SRH_CPT_T1_03_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="SRH_POP_ITEM_CLASS_WINDOW_01_GRD:selections" extract-by="DESCRIP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="SRH_POP_ITEM_CLASS_WINDOW_01_CLOSE_01">
+                            <component-id>SRH_POP_ITEM_CLASS_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SRH_POP_ITEM_CLASS_WINDOW_01_LOAD">
+                    <service-id>SRV_UI_COMM_DATA_Q</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="DATA_DIV" value="GET_ITEM_CLASS" />
+                        <parameter id="PARAM1" value="" />
+                        <parameter id="PARAM2" value="" />
+                        <parameter id="PARAM3" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_DP_POPUP_ITEM_TREE" version="2.0">
+    <component id="UI_DP_POPUP_ITEM_TREE_WINDOWS" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>ITEM_POP</title>
+            <width>724</width>
+            <height>670</height>
+            <visible>false</visible>
+            <modal>false</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="ITEM_POP_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="left" collapsed="false" collapsible="true" resizable="true" />
+                <split id="right" collapsed="false" collapsible="false" size="70%" />
+            </splits>
+        </props>
+    </component>
+    <component id="ITEM_POP_SPLIT_02" type="SPLIT">
+        <props>
+            <position>vertical</position>
+            <splits>
+                <split id="top" collapsed="false" collapsible="true" resizable="false" />
+                <split id="bottom" collapsed="false" collapsible="false" size="93%" />
+            </splits>
+        </props>
+    </component>
+    <component id="ITEM_TREE_POP_SRH_tree_01_01" type="BUTTON">
+        <props>
+            <tooltip>EXPAND ALL</tooltip>
+            <icon>chevron-circle-down</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_TREE_EXPAND_ALL_I">
+                    <component-id>ITEM_POPUP_TREE</component-id>
+                    <operation-id>EXPAND_ALL</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="ITEM_TREE_POP_SRH_tree_01_02" type="BUTTON">
+        <props>
+            <tooltip>COLLAPSE ALL</tooltip>
+            <icon>chevron-circle-up</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_TREE_COLLAPSE_ALL_I">
+                    <component-id>ITEM_POPUP_TREE</component-id>
+                    <operation-id>COLLAPSE_ALL</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+
+    <component id="ITEM_TREE_POP_SRH_tree_00_02" type="COMBOBOX">
+        <props>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>CD</value-id>
+            <text-id>CD_NM</text-id>
+            <width>190</width>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SP_UI_DP_00_LV_TP_Q1_INIT_I">
+                    <component-id>ITEM_TREE_POP_SRH_tree_00_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_IC_select0">
+                            <component-id>ITEM_TREE_POP_SRH_tree_00_02</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <success>
+                                <operation-call id="loadItemTree">
+                                    <component-id>ITEM_POPUP_TREE</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                    <success>
+                                        <operation-call id="treeSetRoot03">
+                                            <component-id>ITEM_POPUP_TREE</component-id>
+                                            <operation-id>SELECT</operation-id>
+                                            <parameters>
+                                                <parameter id="SELECT_ACTION" value="true" />
+                                                <parameter id="SCROLL_ACTION" value="true" />
+                                                <parameter id="SELECT_ROOT" value="true" />
+                                            </parameters>
+                                        </operation-call>
+                                    </success>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+            <action event-type="select-item">
+                <operation-call id="OPC_SP_UI_DP_00_LV_CD_Q1_INIT2">
+                    <component-id>ITEM_POPUP_TREE</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                                <operation-call id="loadAccTree">
+                                    <component-id>ITEM_POPUP_TREE</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                    <success>
+                                        <operation-call id="treeSetRoot02">
+                                            <component-id>ITEM_POPUP_TREE</component-id>
+                                            <operation-id>SELECT</operation-id>
+                                            <parameters>
+                                                <parameter id="SELECT_ACTION" value="true" />
+                                                <parameter id="SCROLL_ACTION" value="true" />
+                                                <parameter id="SELECT_ROOT" value="true" />
+                                            </parameters>
+                                        </operation-call>
+                                    </success>
+                                </operation-call>
+
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_I_SP_UI_DP_00_LV_TP_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_CONF_Q1_01" value="DP_LV_TP_I" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_02" value="" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SELECT">
+                <service-call id="OPC_combo0_SET">
+                    <parameters>
+                        <parameter id="INDEX" value="0" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+
+    <component id="ITEM_TREE_POP_SRH_CPT_00_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_LV</init-value>
+        </props>
+    </component>
+    <component id="ITEM_TREE_POP_SRH_CPT_00_02" type="INPUTBOX">
+        <props>
+            <width>100</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="OPC_ITEM_TREE_SELECT">
+                    <component-id>ITEM_POPUP_TREE</component-id>
+                    <operation-id>SELECT</operation-id>
+                    <parameters>
+                        <parameter id="TEXT" reference-id="ITEM_TREE_POP_SRH_CPT_00_02" />
+                    </parameters>
+                    <success>
+                        <operation-call id="ip-enterLoad">
+                            <component-id>ITEM_TREE_POP_RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="ITEM_CD" reference-id="ITEM_TREE_POP_SRH_CPT_01_02" default-value="" />
+                                <parameter id="ITEM_NM" reference-id="ITEM_TREE_POP_SRH_CPT_01_04" default-value="" />
+                                <parameter id="ITEM_LV" reference-id="ITEM_POPUP_TREE:selected" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="ITEM_TREE_POP_SRH_CPT_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_CD</init-value>
+        </props>
+    </component>
+    <component id="ITEM_TREE_POP_SRH_CPT_01_02" type="INPUTBOX">
+        <props>
+            <width>100</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="OPC_ITEM_TREE_SELECT_003">
+                    <component-id>ITEM_POPUP_TREE</component-id>
+                    <operation-id>SELECT</operation-id>
+                    <parameters>
+                        <parameter id="TEXT" reference-id="ITEM_TREE_POP_SRH_CPT_00_02" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_ITEM_LV_NOT_EMPTY_01">
+                            <component>ITEM_TREE_POP_SRH_CPT_00_02</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="item_search_01">
+                            <component-id>ITEM_TREE_POP_RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="ITEM_CD" reference-id="ITEM_TREE_POP_SRH_CPT_01_02" default-value="" />
+                                <parameter id="ITEM_NM" reference-id="ITEM_TREE_POP_SRH_CPT_01_04" default-value="" />
+                                <parameter id="ITEM_LV" reference-id="ITEM_POPUP_TREE:selected" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="item_search_003">
+                    <component-id>ITEM_TREE_POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="ITEM_CD" reference-id="ITEM_TREE_POP_SRH_CPT_01_02" default-value="" />
+                        <parameter id="ITEM_NM" reference-id="ITEM_TREE_POP_SRH_CPT_01_04" default-value="" />
+                        <parameter id="ITEM_LV" value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_ITEM_LV_EMPTY_01">
+                            <component>ITEM_TREE_POP_SRH_CPT_00_02</component>
+                            <operator>equal</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_ITEM_TREE_SELECT_013">
+                            <component-id>ITEM_POPUP_TREE</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="VALUE" reference-id="ITEM_TREE_POP_RST_CPT_01:selections" extract-by="PARENT_ITEM_LV_CD" default-value="" />
+                                <parameter id="SELECT_ACTION" value="false" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="ITEM_TREE_POP_SRH_CPT_01_03" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_NM</init-value>
+        </props>
+    </component>
+    <component id="ITEM_TREE_POP_SRH_CPT_01_04" type="INPUTBOX">
+        <props>
+            <width>100</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="OPC_ITEM_TREE_SELECT_004">
+                    <component-id>ITEM_POPUP_TREE</component-id>
+                    <operation-id>SELECT</operation-id>
+                    <parameters>
+                        <parameter id="TEXT" reference-id="ITEM_TREE_POP_SRH_CPT_00_02" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_ITEM_LV_NOT_EMPTY_03">
+                            <component>ITEM_TREE_POP_SRH_CPT_00_02</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="item_search_03">
+                            <component-id>ITEM_TREE_POP_RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="ITEM_CD" reference-id="ITEM_TREE_POP_SRH_CPT_01_02" default-value="" />
+                                <parameter id="ITEM_NM" reference-id="ITEM_TREE_POP_SRH_CPT_01_04" default-value="" />
+                                <parameter id="ITEM_LV" reference-id="ITEM_POPUP_TREE:selected" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="item_search_004">
+                    <component-id>ITEM_TREE_POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="ITEM_CD" reference-id="ITEM_TREE_POP_SRH_CPT_01_02" default-value="" />
+                        <parameter id="ITEM_NM" reference-id="ITEM_TREE_POP_SRH_CPT_01_04" default-value="" />
+                        <parameter id="ITEM_LV" value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_ITEM_LV_EMPTY_03">
+                            <component>ITEM_TREE_POP_SRH_CPT_00_02</component>
+                            <operator>equal</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_ITEM_TREE_SELECT_014">
+                            <component-id>ITEM_POPUP_TREE</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="VALUE" reference-id="ITEM_TREE_POP_RST_CPT_01:selections" extract-by="PARENT_ITEM_LV_CD" default-value="" />
+                                <parameter id="SELECT_ACTION" value="false" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="ITEM_TREE_POP_SRH_CPT_01_05" type="BUTTON">
+        <props>
+            <tooltip>selection</tooltip>
+            <icon>mouse-pointer</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="op_item_tree_select_item_01">
+                    <component-id>DP_DATA_POP_ITEM</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="ITEM_ID" reference-id="ITEM_TREE_POP_RST_CPT_01:checked" extract-by="ID" delimiter="|" default-value="" />
+                        <parameter id="ITEM_CD" reference-id="ITEM_TREE_POP_RST_CPT_01:checked" extract-by="ITEM_CD" delimiter="|" default-value="" />
+                        <parameter id="ITEM_NM" reference-id="ITEM_TREE_POP_RST_CPT_01:checked" extract-by="ITEM_NM" delimiter="|" default-value="" />
+                        <parameter id="ITEM_LV_YN" value="false" />
+                    </parameters>
+                    <conditions>
+                        <condition id="item_con01">
+                            <component>ITEM_TREE_POP_RST_CPT_01</component>
+                            <key>CHECKED_ROWCOUNT</key>
+                            <operator>between</operator>
+                            <value>1,16</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="op_item_tree_select_item_02">
+                    <component-id>DP_DATA_POP_ITEM</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="ITEM_CD" reference-id="ITEM_POPUP_TREE:selected" extract-by="ITEM_LV_CD" default-value="" />
+                        <parameter id="ITEM_NM" reference-id="ITEM_POPUP_TREE:selected" extract-by="ITEM_LV_NM" default-value="" />
+                        <parameter id="ITEM_LV_YN" value="true" />
+                    </parameters>
+                    <conditions>
+                        <condition id="item_con02">
+                            <component>ITEM_TREE_POP_RST_CPT_01</component>
+                            <key>CHECKED_ROWCOUNT</key>
+                            <operator>equal</operator>
+                            <value>0</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="op_item_popup_close1">
+                    <component-id>UI_DP_POPUP_ITEM_TREE_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                    <conditions>
+                        <condition id="con_dp_popup_item_Tree_close_05">
+                            <component>ITEM_TREE_POP_RST_CPT_01</component>
+                            <key>CHECKED_ROWCOUNT</key>
+                            <operator>lessEqual</operator>
+                            <value>16</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_DP_POPUP_item_tree_CLOSE_limit_MSG">
+                    <component-id>COMMON</component-id>
+                    <operation-id>DIALOG</operation-id>
+                    <parameters>
+                        <parameter id="title" value="Information" />
+                        <parameter id="msg" value="can check 16" />
+                        <parameter id="type" value="info" />
+                    </parameters>
+                    <conditions>
+                        <condition id="con_dp_popup_item_Tree_close_04">
+                            <component>ITEM_TREE_POP_RST_CPT_01</component>
+                            <key>CHECKED_ROWCOUNT</key>
+                            <operator>greater</operator>
+                            <value>16</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="ITEM_TREE_POP_SRH_CPT_01_06" type="BUTTON">
+        <props>
+            <tooltip>refresh</tooltip>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="op_item_tree_search_init1">
+                    <component-id>ITEM_TREE_POP_SRH_CPT_01_02</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="op_item_tree_search_init2">
+                    <component-id>ITEM_TREE_POP_SRH_CPT_01_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="op_item_tree_refresh_init">
+                    <component-id>ITEM_POPUP_TREE</component-id>
+                    <operation-id>SELECT</operation-id>
+                    <parameters>
+                        <parameter id="SELECT_ACTION" value="true" />
+                        <parameter id="SCROLL_ACTION" value="true" />
+                        <parameter id="SELECT_ROOT" value="true" />
+                    </parameters>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="ITEM_TREE_POP_SRH_CPT_01_07" type="BUTTON">
+        <props>
+            <tooltip>search</tooltip>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_ITEM_TREE_SELECT_002">
+                    <component-id>ITEM_POPUP_TREE</component-id>
+                    <operation-id>SELECT</operation-id>
+                    <parameters>
+                        <parameter id="TEXT" reference-id="ITEM_TREE_POP_SRH_CPT_00_02" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_ITEM_LV_NOT_EMPTY">
+                            <component>ITEM_TREE_POP_SRH_CPT_00_02</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="item_search">
+                            <component-id>ITEM_TREE_POP_RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="ITEM_CD" reference-id="ITEM_TREE_POP_SRH_CPT_01_02" default-value="" />
+                                <parameter id="ITEM_NM" reference-id="ITEM_TREE_POP_SRH_CPT_01_04" default-value="" />
+                                <parameter id="ITEM_LV" reference-id="ITEM_POPUP_TREE:selected" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="item_search_002">
+                    <component-id>ITEM_TREE_POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="ITEM_CD" reference-id="ITEM_TREE_POP_SRH_CPT_01_02" default-value="" />
+                        <parameter id="ITEM_NM" reference-id="ITEM_TREE_POP_SRH_CPT_01_04" default-value="" />
+                        <parameter id="ITEM_LV" value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_ITEM_LV_EMPTY">
+                            <component>ITEM_TREE_POP_SRH_CPT_00_02</component>
+                            <operator>equal</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_ITEM_TREE_SELECT_012">
+                            <component-id>ITEM_POPUP_TREE</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="VALUE" reference-id="ITEM_TREE_POP_RST_CPT_01:selections" extract-by="PARENT_ITEM_LV_CD" default-value="" />
+                                <parameter id="SELECT_ACTION" value="false" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="ITEM_TREE_POP_RST_CPT_01" type="R_GRID">
+        <props>
+            <selection-mode>ROWS</selection-mode>
+            <state-bar>false</state-bar>
+            <check-bar>true</check-bar>
+            <fit-style>none</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>200</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_CD" type="string" use-number-comparer="true">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_NM" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="PARENT_ITEM_LV_CD" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="PARENT_ITEM_LV_NM" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="UOM_CD" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="UOM_NM" title="UOM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="IF_YN" title="IF_YN" type="bool">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="USE_YN" title="USE_YN" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="STRT_DATE_SALES" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="END_DATE_SALES" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-click">
+                <operation-call id="tree_Item_Select">
+                    <component-id>ITEM_POPUP_TREE</component-id>
+                    <operation-id>SELECT</operation-id>
+                    <parameters>
+                        <parameter id="VALUE" reference-id="ITEM_TREE_POP_RST_CPT_01:selections" extract-by="PARENT_ITEM_LV_CD" />
+                        <parameter id="SELECT_ACTION" value="false" />
+                        <parameter id="SCROLL_ACTION" value="true" />
+                    </parameters>
+                </operation-call>
+            </action>
+            <action event-type="cell-double-click">
+                <operation-call id="pop_item_double_click">
+                    <component-id>DP_DATA_POP_ITEM</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="ITEM_ID" reference-id="ITEM_TREE_POP_RST_CPT_01:selections" extract-by="ID" default-value="" />
+                        <parameter id="ITEM_CD" reference-id="ITEM_TREE_POP_RST_CPT_01:selections" extract-by="ITEM_CD" default-value="" />
+                        <parameter id="ITEM_NM" reference-id="ITEM_TREE_POP_RST_CPT_01:selections" extract-by="ITEM_NM" default-value="" />
+                        <parameter id="ITEM_LV_YN" value="false" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="op_item_popup_close2">
+                    <component-id>UI_DP_POPUP_ITEM_TREE_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SP_UI_DP_00_POPUP_ITEM_TREE_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_00_ITEM_TREE_LV_DATA_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="EMP_NO" reference-id="DP_DATA_POP_ITEM:EMP_NO" />
+                        <parameter id="AUTH_TP_ID" reference-id="DP_DATA_POP_ITEM:AUTH_TP_ID" />
+                        <parameter id="LV_TP_CD" reference-id="ITEM_TREE_POP_SRH_tree_00_02" default-value="I" />                        
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="ITEM_POPUP_TREE" type="TREE">
+        <props>
+            <checkbox>false</checkbox>
+            <value-id>ITEM_LV_CD</value-id>
+            <text-id sort="asc">ITEM_LV_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="select-item">
+                <operation-call id="select_tree_item">
+                    <component-id>ITEM_TREE_POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="ITEM_CD" reference-id="ITEM_TREE_POP_SRH_CPT_01_02" default-value="" />
+                        <parameter id="ITEM_NM" reference-id="ITEM_TREE_POP_SRH_CPT_01_04" default-value="" />
+                        <parameter id="ITEM_LV" reference-id="ITEM_POPUP_TREE:selected" default-value="" />
+                    </parameters>
+                </operation-call>
+            </action>
+            <action event-type="dblclick">
+                <operation-call id="tree_item_double_click">
+                    <component-id>DP_DATA_POP_ITEM</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="ITEM_ID" value="" />
+                        <parameter id="ITEM_CD" reference-id="ITEM_POPUP_TREE:selected" extract-by="ITEM_LV_CD" default-value="" />
+                        <parameter id="ITEM_NM" reference-id="ITEM_POPUP_TREE:selected" extract-by="ITEM_LV_NM" default-value="" />
+                        <parameter id="ITEM_LV_YN" value="Y" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="op_item_popup_close3">
+                    <component-id>UI_DP_POPUP_ITEM_TREE_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="VALIDATE" />
+            <operation id="SELECT" />
+            <operation id="SET" />
+            <operation id="LOAD">
+                <service-call id="SRC_SRV_UI_DP_00_POPUP_ITEM_TREE_Q2">
+                    <service-id>SRV_UI_DP_00_POPUP_ITEM_TREE_Q2</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="TREE_PARENT_ID" value="PARENT_ITEM_LV_ID" />
+                        <parameter id="TREE_KEY_ID" value="ID" />
+                        <parameter id="EMP_NO" reference-id="DP_DATA_POP_ITEM:EMP_NO" />
+                        <parameter id="AUTH_TP_ID" reference-id="DP_DATA_POP_ITEM:AUTH_TP_ID" />
+                        <parameter id="LV_TP_CD" reference-id="ITEM_TREE_POP_SRH_tree_00_02" default-value="I" />                        
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

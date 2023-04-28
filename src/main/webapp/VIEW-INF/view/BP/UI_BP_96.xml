@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_BP_96" template="DP/UI_DP_96:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION_DP:DP/UI_DP_COMM:DP/UI_DP_POPUP_USER:DP/UI_ENTRY_EXT:DP/UI_DP_25_EXT:DP/UI_DP_POPUP_ITEM_TREE_POP:DP/UI_DP_POPUP_ACCOUNT_TREE_POP"
+copyfrom="COMM_HELP:COMM_PREFERENCE_DP:UI_DP_POPUP_ACCOUNT_TREE:UI_DP_POPUP_ITEM_TREE:COMM_VIEW_META:UI_DP_96" version="2.0">
+    <publish parent="MENU_06_03" open="true" seq="260" />
+
+    <component id="SRH_CPT_T1_00_04" type="COMBOBOX">
+        <props>
+            <width>205</width>
+            <lang>true</lang>
+            <value-id>ATTR_01</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SP_UI_DP_00_CONF_Q1_INIT_plantype">
+                    <component-id>SRH_CPT_T1_00_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_CONF_Q1_01" value="DP_PLAN_TYPE" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_02" value="DP_PLAN_YEARLY" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                    </parameters>
+                    <success>
+                        <operation-call id="OPC_op_combo_select_pricetype">
+                            <component-id>SRH_CPT_T1_00_04</component-id>
+                            <operation-id>SELECT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+            <action event-type="select-item">
+                <operation-call id="OPC_SRH_CPT_T1_01_04_LOAD">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_00_CONF_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+            <operation id="SELECT">
+                <service-call id="OPC_combo1_SET11">
+                    <parameters>
+                        <parameter id="INDEX" value="0" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

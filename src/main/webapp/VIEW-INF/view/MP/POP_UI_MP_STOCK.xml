@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_MP_STOCK" version="2.0">
+    <component id="POP_UI_MP_STOCK_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>STOCK</title>
+            <width>1050</width>
+            <height>430</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="COMM_SRH_POP_STOCK_WINDOW_01_GRD" type="R_GRID">
+        <props>
+            <header-height>30</header-height>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="STOCK_PARENT_ID" title="STOCK_PARENT_ID" type="string">
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_MST_ID" title="ITEM_MST_ID" type="string">
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="LOCAT_ITEM_ID" title="LOCAT_ITEM_ID" type="string">
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="LOC_TP" title="LOCAT_TP" type="string">
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>50</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>50</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="STOCK_ID" title="STOCK_ID" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="UOM_ID" title="UOM" type="string">
+                    <width>50</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:UOM" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="LOT_NO" title="LOT_NO" type="string">
+                    <width>60</width>
+                    <editable>false</editable>
+                </column>
+                <column id="QTY" title="QTY" type="string">
+                    <width>50</width>
+                    <editable>false</editable>
+                </column>
+                <column id="INV_TP" title="INV_TP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="COMM_SRH_POP_STOCK_WINDOW_01_CPT_99_01_CLICK_01">
+                    <component-id>POP_UI_MP_19_01_T5_00_00</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-STOCK_PARENT_ID" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="STOCK_PARENT_ID" />
+                        <parameter id="SET_VALUE-to-STOCK_ID" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="STOCK_ID" />
+                        <parameter id="SET_VALUE-to-ITEM_CD" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="ITEM_CD" />
+                        <parameter id="SET_VALUE-to-ITEM_NM" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="ITEM_NM" />
+                        <parameter id="SET_VALUE-to-LOCAT_TP_NM" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="LOCAT_TP_NM" />
+                        <parameter id="SET_VALUE-to-LOCAT_LV" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="LOCAT_LV" />
+                        <parameter id="SET_VALUE-to-LOCAT_CD" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="LOCAT_CD" />
+                        <parameter id="SET_VALUE-to-LOCAT_NM" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="LOCAT_NM" />
+                        <parameter id="SET_VALUE-to-UOM_ID" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="UOM_ID" />
+                        <parameter id="SET_VALUE-to-LOT_NO" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="LOT_NO" />
+                        <parameter id="SET_VALUE-to-INV_QTY" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="QTY" />
+                        <parameter id="SET_VALUE-to-QTY" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="QTY" />
+                        <parameter id="SET_VALUE-to-INV_TP" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="INV_TP" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_CHECK_BTN_ID_01">
+                            <component>DATA_02</component>
+                            <key>BTN_ID</key>
+                            <operator>equal</operator>
+                            <value>POP_UI_MP_19_01</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="COMM_SRH_POP_STOCK_WINDOW_01_CPT_99_01_CLICK_02">
+                            <component-id>POP_UI_MP_STOCK_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="COMM_SRH_POP_STOCK_WINDOW_01_CPT_99_01_CLICK_04">
+                    <component-id>POP_UI_MP_19_02_T5_00_00</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-STOCK_PARENT_ID" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="STOCK_PARENT_ID" />
+                        <parameter id="SET_VALUE-to-STOCK_ID" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="STOCK_ID" />
+                        <parameter id="SET_VALUE-to-ITEM_CD" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="ITEM_CD" />
+                        <parameter id="SET_VALUE-to-ITEM_NM" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="ITEM_NM" />
+                        <parameter id="SET_VALUE-to-LOCAT_TP_NM" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="LOCAT_TP_NM" />
+                        <parameter id="SET_VALUE-to-LOCAT_LV" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="LOCAT_LV" />
+                        <parameter id="SET_VALUE-to-LOCAT_CD" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="LOCAT_CD" />
+                        <parameter id="SET_VALUE-to-LOCAT_NM" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="LOCAT_NM" />
+                        <parameter id="SET_VALUE-to-UOM_ID" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="UOM_ID" />
+                        <parameter id="SET_VALUE-to-LOT_NO" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="LOT_NO" />
+                        <parameter id="SET_VALUE-to-QTY" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="QTY" />
+                        <parameter id="SET_VALUE-to-INV_TP" reference-id="COMM_SRH_POP_STOCK_WINDOW_01_GRD:selections" extract-by="INV_TP" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_CHECK_BTN_ID_01">
+                            <component>DATA_02</component>
+                            <key>BTN_ID</key>
+                            <operator>equal</operator>
+                            <value>POP_UI_MP_19_02</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="COMM_SRH_POP_STOCK_WINDOW_01_CPT_99_01_CLICK_02">
+                            <component-id>POP_UI_MP_STOCK_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_POP_UI_MP_STOCK_WINDOW_01_GRD_LOAD">
+                    <service-id>SRV_SP_UI_MP_19_POP_Q4</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

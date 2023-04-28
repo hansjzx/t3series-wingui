@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_MP_09_04" version="2.0">
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>RES_CD</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_01_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>RES_CD</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_01_05" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <hidden>true</hidden>
+            <lang>true</lang>
+            <value-id>ITEM_RES_CAPA_MST_ID</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>RES_DESCRIP</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_02_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>RES_DESCRIP</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>STRT_DTTM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_03_04" type="DATEPICKER">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+            <init-value>NONE</init-value>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_04_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>END_DTTM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_04_04" type="DATEPICKER">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+            <init-value>NONE</init-value>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_07_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>MIN_LOTSIZE</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_07_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+            <value-id>MIN_LOTSIZE</value-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_MP_09_04_WINDOW_01_CPT_07_04_INIT">
+                    <component-id>POP_UI_MP_09_04_WINDOW_01_CPT_07_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_08_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>MAX_LOTSIZE</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_08_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+            <value-id>MAX_LOTSIZE</value-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_MP_09_04_WINDOW_01_CPT_08_04_INIT">
+                    <component-id>POP_UI_MP_09_04_WINDOW_01_CPT_08_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_09_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>OVR_MIN_LOTSIZE</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_09_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+            <value-id>OVR_MIN_LOTSIZE</value-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_MP_09_04_WINDOW_01_CPT_09_04_INIT">
+                    <component-id>POP_UI_MP_09_04_WINDOW_01_CPT_09_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_10_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>MULTP_LOTSIZE</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_10_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+            <value-id>MULTP_LOTSIZE</value-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_MP_09_04_WINDOW_01_CPT_10_04_INIT">
+                    <component-id>POP_UI_MP_09_04_WINDOW_01_CPT_10_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>TACT_TIME</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_05_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+            <value-id>TACT_TIME</value-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_MP_09_04_WINDOW_01_CPT_05_04_INIT">
+                    <component-id>POP_UI_MP_09_04_WINDOW_01_CPT_05_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_99_01" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_MP_09_04_WINDOW_01_CPT_99_01_CLICK_SAVE">
+                    <component-id>POP_UI_MP_09_04_WINDOW_01_CPT_99_01</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_09_04_WINDOW_01_CPT_99_01_CLICK_01_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POP_UI_MP_09_04_WINDOW_01_CPT_99_01:SVC_POP_UI_MP_09_04_WINDOW_01_CPT_99_01_SAVE:IM_DATA" extract-by="SP_UI_MP_09_POP_S2_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_09_04_WINDOW_01_CPT_99_01_CLICK_02">
+                            <component-id>RST_CPT_02</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_09_04_WINDOW_01_CPT_99_01_CLICK_04">
+                            <component-id>POP_UI_MP_09_04_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SAVE">
+                <service-call id="SVC_POP_UI_MP_09_04_WINDOW_01_CPT_99_01_SAVE">
+                    <service-id>SRV_UI_MP_09_POP_S2</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="ITEM_RES_CAPA_MST_ID" reference-id="POP_UI_MP_09_04_WINDOW_01_CPT_01_05" />
+                        <parameter id="MIN_LOTSIZE" reference-id="POP_UI_MP_09_04_WINDOW_01_CPT_07_04" />
+                        <parameter id="MAX_LOTSIZE" reference-id="POP_UI_MP_09_04_WINDOW_01_CPT_10_04" />
+                        <parameter id="OVR_MIN_LOTSIZE" reference-id="POP_UI_MP_09_04_WINDOW_01_CPT_09_04" />
+                        <parameter id="MULTP_LOTSIZE" reference-id="POP_UI_MP_09_04_WINDOW_01_CPT_08_04" />
+                        <parameter id="TACT_TIME" reference-id="POP_UI_MP_09_04_WINDOW_01_CPT_05_04" />
+                        <parameter id="STRT_DTTM" reference-id="POP_UI_MP_09_04_WINDOW_01_CPT_03_04" />
+                        <parameter id="END_DTTM" reference-id="POP_UI_MP_09_04_WINDOW_01_CPT_04_04" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_MP_09_04_WINDOW_01_CPT_99_02" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_MP_09_04_WINDOW_01_CPT_98_02_CLICK">
+                    <component-id>POP_UI_MP_09_04_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

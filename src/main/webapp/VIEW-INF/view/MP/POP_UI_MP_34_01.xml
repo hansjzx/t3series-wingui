@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_MP_34_01" version="2.0">
+    <component id="POP_UI_MP_34_01_WINDOWS" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>PLAN_PROBLEM</title>
+            <width>1360</width>
+            <height>600</height>
+            <visible>false</visible>
+            <modal>false</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_34_01_RST_CPT_01" type="R_GRID">
+        <props>
+            <height>485</height>
+            <header-height>55</header-height>
+            <selection-mode>BLOCK</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>none</fit-style>
+            <pageable>false</pageable>
+            <grid-summary>true</grid-summary>
+            <grid-summary-on-header>true</grid-summary-on-header>
+            <toolbar use="true">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="SAVE" enable="false" visible="false" position="right" />
+            </toolbar>
+            <columns>
+                <column id="DMND_ID" title="DMND_ID" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="PO_ID" title="PO_ID" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="DUE_DATE" title="DUE_DATE" type="date">
+                    <width>90</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="PROBLEM_VAL" title="PROBLEM_VAL" type="number">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                    <grid-summary-exp>SUM</grid-summary-exp>
+                </column>
+                <column id="PROBLEM_DATE" title="PROBLEM_DATE" type="date">
+                    <width>90</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="PROBLEM_LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="PROBLEM_ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="RES_CODE" title="RES_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+                <column id="DESCRIP" title="DESCRIP" type="string">
+                    <width>600</width>
+                    <editable>false</editable>
+                    <groups>SHORT_LATE_REASON</groups>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_MP_34_01_RST_CPT_01_LOAD">
+                    <service-id>GetPlanProblem</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+            <operation id="EXPORT" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_34_01_CPT_99_01" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_MP_34_01_CPT_99_01_CLICK">
+                    <component-id>POP_UI_MP_34_01_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_UI_MP_34_01_CPT_99_02" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_MP_34_01_CPT_99_02_CLICK">
+                    <component-id>POP_UI_MP_34_01_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

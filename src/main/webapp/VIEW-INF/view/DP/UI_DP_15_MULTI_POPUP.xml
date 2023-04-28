@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_DP_15_MULTI_POPUP" version="2.0">
+    <component id="POP_DP_15_MULTI_WINDOWS" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>Multi Popup</title>
+            <width>810</width>
+            <height>610</height>
+            <visible>false</visible>
+            <modal>false</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POPM_RST_CPT_01_01" type="LABEL">
+        <props>
+            <width>100</width>
+            <lang>true</lang>
+            <init-value>Item</init-value>
+        </props>
+    </component>
+    <component id="POPM_RST_CPT_01_02" type="INPUTBOX">
+        <props>
+            <width>100</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_M_op01">
+                    <component-id>POPM_RST_CPT_01_02</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+            </action>
+            <action event-type="key-enter">
+                <operation-call id="mp-enterLoad">
+                    <component-id>POPM_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" reference-id="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POPM_RST_CPT_01_03" type="BUTTON">
+        <props>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="setEventType3">
+                    <component-id>DP_DATA_POP_ITEM</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="EVENT_TYPE" value="MULTI_POP" />
+                        <parameter id="ITEM_INFO" value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_openWin_mul_item">
+                    <component-id>UI_DP_POPUP_ITEM_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POPM_RST_CPT_01_04" type="INPUTBOX">
+        <props>
+            <width>220</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="mp-enterLoad2">
+                    <component-id>POPM_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POPM_RST_CPT_01_06" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_M_OPC_M_POP_CPT_01_02_INSERTROW_03">
+                    <component-id>POPM_RST_CPT_01_02</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_M_OPC_M_POP_CPT_01_02_INSERTROW_04">
+                    <component-id>POPM_RST_CPT_01_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POPM_RST_CPT_01_07" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_M_OPC_M_POP_CPT_01_02_INSERTROW">
+                    <component-id>POPM_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POPM_RST_CPT_01" type="R_GRID">
+        <props>
+            <height>260</height>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <state-bar>false</state-bar>
+            <check-bar>true</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="KEY_ITEM_ID" title="KEY_ITEM_ID" type="string">
+                    <width>150</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="KEY_ITEM_CD" title="KEY_ITEM_CD" type="string">
+                    <width>150</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="KEY_ITEM_NM" title="KEY_ITEM_NM" type="string">
+                    <width>150</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="GRP" type="string">
+                    <width>120</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                    <iteration>
+                        <prefix remove="true">GRP_</prefix>
+                        <delimiter>-</delimiter>
+                    </iteration>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_RST_CPT_MULTI_POP_01_INIT">
+                    <component-id>POPM_RST_CPT_01</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="REFRESH">
+                <service-call id="SVC_SP_UI_DP_15_Q2">
+                    <service-id>GetItems</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <service-call id="SVC_GetHItemLevel">
+                    <service-id>GetItems</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="ITEM_LV" value="ITEM" />
+                        <parameter id="ITEM_CD" reference-id="POPM_RST_CPT_01_02" default-value="" />
+                        <parameter id="ITEM_NM" reference-id="POPM_RST_CPT_01_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET" />
+        </operations>
+    </component>
+
+    <component id="POPM_RST_CPT_02_02" type="LABEL">
+        <props>
+            <width>100</width>
+            <lang>true</lang>
+            <init-value>Account</init-value>
+        </props>
+    </component>
+    <component id="POPM_RST_CPT_02_03" type="INPUTBOX">
+        <props>
+            <width>100</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POPM_RST_CPT_02_04" type="BUTTON">
+        <props>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="setEventType13">
+                    <component-id>DP_DATA_POP_ACCT</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="EVENT_TYPE" value="MULTI_POP" />
+                        <parameter id="ACCT_INFO" value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_M_openWindow1">
+                    <component-id>UI_DP_POPUP_ACCOUNT_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POPM_RST_CPT_02_05" type="INPUTBOX">
+        <props>
+            <width>220</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POPM_RST_CPT_02_06" type="BUTTON">
+        <props>
+            <width>160</width>
+            <icon>caret-down</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_M_OPC_M_POP_CPT_01_02_INSERTROW">
+                    <component-id>DATA_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <complete>
+                        <operation-call id="OPC_POPM_RST_CPT_02_INSERT_ROW">
+                            <component-id>POPM_RST_CPT_02</component-id>
+                            <operation-id>INSERT_ROW</operation-id>
+                            <conditions>
+                                <condition id="CON_DATA_01_SAVE_CHECK_SUCCESS">
+                                    <component>DATA_01</component>
+                                    <key>SVC_SET_SP_UI_DP_15_POP_S1</key>
+                                    <operator>equal</operator>
+                                    <value>MSG_0003</value>
+                                    <extract-by>SP_UI_DP_15_POP_S1_P_RT_MSG</extract-by>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POPM_RST_CPT_01_SAVE_FAIL_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="DATA_01:SVC_SET_SP_UI_DP_15_POP_S1:SP_UI_DP_15_POP_S1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                            <conditions>
+                                <condition id="CON_DATA_01_SAVE_CHECK_FAIL">
+                                    <component>DATA_01</component>
+                                    <key>SVC_SET_SP_UI_DP_15_POP_S1</key>
+                                    <operator>notEqual</operator>
+                                    <value>MSG_0003</value>
+                                    <extract-by>SP_UI_DP_15_POP_S1_P_RT_MSG</extract-by>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POPM_RST_CPT_02_07" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POPM_RST_CPT_02_INIT_02">
+                    <component-id>POPM_RST_CPT_02</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POPM_RST_CPT_02_08" type="BUTTON">
+        <props>
+            <icon>minus</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_M_OPC_M_POP_CPT_01_02_REMOVE_ROW">
+                    <component-id>POPM_RST_CPT_02</component-id>
+                    <operation-id>REMOVE_ROW</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POPM_RST_CPT_02_09" type="BUTTON">
+        <props>
+            <icon>save</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_M_OPC_M_POP_CPT_01_02_SAVE">
+                    <component-id>POPM_RST_CPT_02</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <conditions>
+                        <condition id="CON_UI_ID_UI_DP_15">
+                            <component>COMMON</component>
+                            <key>VIEW_ID</key>
+                            <operator>startsWith</operator>
+                            <value>UI_DP_15</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POPM_RST_CPT_02_09_save_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POPM_RST_CPT_02:SVC_SP_UI_DP_15_POP_S1:IM_DATA" extract-by="SP_UI_DP_15_S1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SAVE_Success3">
+                            <component-id>POPM_RST_CPT_02</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_M_OPC_M_POP_CPT_01_02_SAVE_0002">
+                    <component-id>POPM_RST_CPT_02</component-id>
+                    <operation-id>SAVE_37</operation-id>
+                    <conditions>
+                        <condition id="CON_UI_ID_UI_DP_37">
+                            <component>COMMON</component>
+                            <key>VIEW_ID</key>
+                            <operator>startsWith</operator>
+                            <value>UI_DP_37</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POPM_RST_CPT_02_09_save_SUCCESS_MSG_0002">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POPM_RST_CPT_02:SVC_SP_UI_DP_37_POP_S1:IM_DATA" extract-by="SP_UI_DP_37_S1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SAVE_Success3_0002">
+                            <component-id>POPM_RST_CPT_02</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POPM_RST_CPT_02" type="R_GRID">
+        <props>
+            <height>175</height>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="USER_ID" type="string">
+                    <width>120</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="AUTH_TP_ID" title="AUTH_TP_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ACCOUNT_ID" title="ACCOUNT_ID" type="string">
+                    <width>120</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="ACCOUNT_CD" title="ACCOUNT_CD" type="string">
+                    <width>80</width>
+                    <visible>true</visible>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ACCOUNT_NM" title="ACCOUNT_NM" type="string">
+                    <width>150</width>
+                    <visible>true</visible>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ITEM_MST_ID" title="ITEM_MST_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>80</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>150</width>
+                    <editable if-new="true">false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_RST_CPT_MULTI_POP_02_INIT">
+                    <component-id>POPM_RST_CPT_02</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="REMOVE_ROW" />
+            <operation id="INSERT_ROW">
+                <service-call id="SET_DEFAULT">
+                    <parameters>
+                        <parameter id="SET_DEFAULT-to-USER_ID" reference-id="SRH_CPT_T1_01_04" />
+                        <parameter id="SET_DEFAULT-to-AUTH_TP_ID" reference-id="SRH_CPT_T1_03_04" extract-by="ID" />
+                        <parameter id="SET_DEFAULT-to-ACCOUNT_ID" reference-id="DATA_01:POP_ACCOUNT_ID" />
+                        <parameter id="SET_DEFAULT-to-ACCOUNT_CD" reference-id="POPM_RST_CPT_02_03" />
+                        <parameter id="SET_DEFAULT-to-ACCOUNT_NM" reference-id="POPM_RST_CPT_02_05" />
+                        <parameter id="SET_DEFAULT-to-ITEM_MST_ID" reference-id="POPM_RST_CPT_01:checked" extract-by="KEY_ITEM_ID:KEY_ITEM_ID" delimiter="," />
+                        <parameter id="SET_DEFAULT-to-ITEM_CD" reference-id="POPM_RST_CPT_01:checked" extract-by="KEY_ITEM_CD:KEY_ITEM_CD" delimiter="," />
+                        <parameter id="SET_DEFAULT-to-ITEM_NM" reference-id="POPM_RST_CPT_01:checked" extract-by="KEY_ITEM_NM:KEY_ITEM_NM" delimiter="," />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="SVC_SP_UI_DP_15_POP_S1">
+                    <service-id>SRV_SET_SP_UI_DP_15_S1</service-id>
+                    <service-target>dp</service-target>
+                    <param-empty-check>changes</param-empty-check>
+                    <parameters>
+                        <parameter id="OPERATOR_ID" reference-id="SRH_CPT_T1_01_04" default-value="" />
+                        <parameter id="AUTH_TYPE" reference-id="SRH_CPT_T1_03_04" extract-by="CD" />
+                        <parameter id="CHANGE_TYPE" value="CHANGE" />
+                        <parameter id="changes" reference-id="POPM_RST_CPT_02:changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE_37">
+                <service-call id="SVC_SP_UI_DP_37_POP_S1">
+                    <service-id>SRV_SET_SP_UI_DP_37_S1</service-id>
+                    <service-target>dp</service-target>
+                    <param-empty-check>changes</param-empty-check>
+                    <parameters>
+                        <parameter id="OPERATOR_ID" reference-id="SRH_CPT_T1_01_04" default-value="" />
+                        <parameter id="AUTH_TYPE" reference-id="SRH_CPT_T1_03_04" extract-by="CD" />
+                        <parameter id="CHANGE_TYPE" value="CHANGE" />
+                        <parameter id="changes" reference-id="POPM_RST_CPT_02:changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="REFRESH" />
+            <operation id="SET" />
+            <operation id="LOAD" />
+        </operations>
+    </component>
+</view>

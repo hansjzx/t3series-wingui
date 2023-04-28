@@ -1,0 +1,12 @@
+.exist-except-schedule-cell-bg, .exist-stock-destination-cell-bg {
+  background: #A9F5F2 !important
+}
+
+.exist-holiday-cell-bg, .not-exist-stock-destination-cell-bg {
+  background: #F78181 !important
+}
+
+.editable-boolean-column {
+  text-align: center;
+  background: #ffffd2;
+}

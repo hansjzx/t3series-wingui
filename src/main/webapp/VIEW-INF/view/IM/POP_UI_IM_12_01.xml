@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_IM_12_01" version="2.0">
+    <component id="POP_UI_IM_12_01_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_IM_12_01</title>
+            <width>1100</width>
+            <height>310</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_12_01_WINDOW_01_R_GRID_01" type="R_GRID">
+        <props>
+            <height>190</height>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="true">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="LOAD" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_POP_UI_IM_12_01_GRD_01_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0001" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="WAHOUS_MST_ID" title="WAHOUS_MST_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                </column>
+                <column id="GLOBAL_PLAN_BOM_ID" title="GLOBAL_PLAN_BOM_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                </column>
+                <column id="TO_LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>FROM_LOCAT</groups>
+                </column>
+                <column id="TO_LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>FROM_LOCAT</groups>
+                </column>
+                <column id="TO_LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>FROM_LOCAT</groups>
+                </column>
+                <column id="TO_LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>FROM_LOCAT</groups>
+                </column>
+                <column id="ACTV_YN" title="ACTV_YN" type="BOOL">
+                    <width>60</width>
+                    <editable>true</editable>
+                    <groups>TO_LOCAT</groups>
+                </column>
+                <column id="FROM_LOCAT_TP_NM" title="FROM_LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>TO_LOCAT</groups>
+                </column>
+                <column id="FROM_LOCAT_LV" title="FROM_LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>TO_LOCAT</groups>
+                </column>
+                <column id="FROM_LOCAT_CD" title="FROM_LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>TO_LOCAT</groups>
+                </column>
+                <column id="FROM_LOCAT_NM" title="FROM_LOCAT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>TO_LOCAT</groups>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SRC_SP_UI_IM_12_Q2_LODE">
+                    <service-id>SRV_UI_IM_12_Q2</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="WAREHOUSE_INV_MST_ID" reference-id="RST_CPT_01:selections" extract-by="ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="SRC_SP_UI_IM_12_S2">
+                    <service-id>SRV_UI_IM_12_S2</service-id>
+                    <service-target>mp</service-target>
+                    <param-empty-check>changes</param-empty-check>
+                    <parameters>
+                        <parameter id="changes" reference-id="POP_UI_IM_12_01_WINDOW_01_R_GRID_01:changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_12_01_CPT_CONFIRM" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_IM_12_01_WINDOW_01_R_GRID_01_SAVE">
+                    <component-id>POP_UI_IM_12_01_WINDOW_01_R_GRID_01</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_IM_12_01_WINDOW_01_CLOSE">
+                            <component-id>POP_UI_IM_12_01_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_UI_IM_12_01_CPT_CANCLE" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_IM_12_01_CPT_CANCLE_CLICK_01">
+                    <component-id>POP_UI_IM_12_01_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

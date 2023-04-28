@@ -1,0 +1,51 @@
+/* grid cell search button */
+.rg-renderer > .normal-row-btn, .rg-renderer > .cell-search-btn,
+.rg-renderer > .normal-row-btn, .rg-renderer > .cell-search-btn-created {
+  display: none;
+}
+
+.rg-data-cell:hover .cell-search-btn {
+  font-size: unset;
+  display: inline-block;
+  padding: 0.07rem 0.2rem;
+  position: absolute;
+  top: 1px;
+  right: 2px;
+  z-index: 1000;
+}
+
+.rg-renderer > .renderer-cell-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 28px;
+  vertical-align: middle;
+}
+
+.editable-text-column-center {
+  text-align: center;
+  background: #ffffd2;
+}
+
+.chart-area {
+  height: 99%;
+}
+
+#chartjs-tooltip.right:after {
+  content:"";
+  position: absolute;
+  top: calc(50% - 7px);
+  right: -6px;
+  border-left: 6px solid rgba(0, 0, 0, 0.75);
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+
+#chartjs-tooltip.left:after {
+  content:"";
+  position: absolute;
+  top: calc(50% - 7px);
+  left: -6px;
+  border-right: 6px solid rgba(0, 0, 0, 0.75);
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}

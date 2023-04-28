@@ -1,0 +1,20 @@
+.offcanvas > .offcanvas-body > .accordion > .accordion-item {
+  background-color: #FFFFFF;
+}
+
+.k-window-titlebar {
+  height: 43px;
+}
+
+.basicBoxText {
+  height: 100%;
+  text-align: center;
+}
+
+.position-absolute {
+  position: fixed !important;
+}
+
+.k-scrollable {
+  overflow: hidden !important;
+}

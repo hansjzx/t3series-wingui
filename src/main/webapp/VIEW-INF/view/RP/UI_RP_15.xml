@@ -1,0 +1,963 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_RP_15" template="RP/UI_RP_15:RP/UI_RP_15_EXT:COMM/COMM_REDRAW_CHART_EXT:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:COMM/COMM_POP_SIM_ADJ_CNFM_PLAN:COMM/COMM_SRH_POP_VER:COMM/COMM_SRH_POP_LOCAT:MP/POP_UI_MP_27_20:MP/POP_UI_MP_27_21:MP/POP_UI_MP_27_30:MP/POP_UI_MP_27_40:DP/UI_DP_COMM:DP/UI_DP_POPUP_ITEM_TREE_POP:IM/POP_UI_IM_ITEM_TREE_EXT" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_BTN_SIM_VER:COMM_BTN_ADJ_PLAN:COMM_BTN_CNFM_PLAN:COMM_POP_SIM_ADJ_CNFM_PLAN:COMM_SRH_VERSION:COMM_SRH_LOCAT:COMM_SRH_ITEM_CDNM:COMM_SRH_POP_VER:COMM_SRH_POP_LOCAT:COMM_SRH_POP_ITEM:POP_UI_MP_27_20:POP_UI_MP_27_21:POP_UI_MP_27_30:POP_UI_MP_27_40:COMM_VIEW_META:COMM_SRH_ITEM_ATTR:UI_DP_POPUP_ITEM_TREE" version="2.0">
+    <publish parent="MENU_03_03" open="true" seq="150" />
+    <component id="DP_DATA_POP_ITEM" type="DATA">
+        <actions>
+            <action event-type="change-data">
+                <operation-call id="pop-item-main-search1">
+                    <component-id>SRH_CPT_ITEM_CD_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="DP_DATA_POP_ITEM:ITEM_CD" extract-by="ITEM_CD" delimiter="|" default-value="" />
+                    </parameters>
+                    <complete>
+                        <operation-call id="pop-item-main-search2">
+                            <component-id>SRH_CPT_ITEM_NM_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="DP_DATA_POP_ITEM:ITEM_NM" extract-by="ITEM_NM" delimiter="|" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="item-set">
+                    <parameters>
+                        <parameter id="ITEM_CD" />
+                        <parameter id="ITEM_NM" />
+                        <parameter id="EVENT_TYPE" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="TTL_CPT_03" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_05">
+                    <component-id>SRH_CPT_LOCAT_TP_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_06">
+                    <component-id>SRH_CPT_LOCAT_LV_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_07">
+                    <component-id>SRH_CPT_LOCAT_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_08">
+                    <component-id>SRH_CPT_LOCAT_NM_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_09">
+                    <component-id>SRH_CPT_ITEM_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_10">
+                    <component-id>SRH_CPT_ITEM_NM_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_11">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_12">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_13">
+                    <component-id>SRH_CPT_T1_03_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="op_search_attr_tab_init1">
+                    <component-id>SRH_CPT_ATTR_01_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="op_search_attr_tab_init2">
+                    <component-id>SRH_CPT_ATTR_02_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="op_search_attr_tab_init3">
+                    <component-id>SRH_CPT_ATTR_03_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="op_search_attr_tab_init4">
+                    <component-id>SRH_CPT_ATTR_04_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="op_search_attr_tab_init5">
+                    <component-id>SRH_CPT_ATTR_05_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="op_search_attr_tab_init6">
+                    <component-id>SRH_CPT_ATTR_06_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_01_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_RST_CPT_02_INIT">
+                            <component-id>RST_CPT_02</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="DATA_01" type="DATA">
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_DATA_01_LOAD_01">
+                    <component-id>DATA_01</component-id>
+                    <operation-id>LOAD_FIXED_HORIZON</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD_FIXED_HORIZON">
+                <service-call id="SVC_GET_FIXED_HORIZON_DATA">
+                    <service-id>SRV_UI_MP_27_Q7</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="RESULT_SPLIT" type="SPLIT">
+        <props>
+            <position>vertical</position>
+            <splits>
+                <split id="upper_result" collapsible="false" />
+                <split id="down_result" collapsed="false" collapsible="true" resizable="false" size="240" />
+            </splits>
+        </props>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+                <tab id="t2-1" title="SCH_ATTR" expand="false" init-render="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <header-height>55</header-height>
+            <selection-mode>BLOCK</selection-mode>
+            <indicator>false</indicator>
+            <check-bar>false</check-bar>
+            <fit-style>none</fit-style>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>true</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <cell-attributes>
+                <cell-attribute id="ca_01">
+                    <conditions>
+                        <condition id="ca_01_cond_01">
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>SHIPPING_PLAN</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="ca_01_app_01">
+                            <column>DAT</column>
+                            <attrs>
+                                <background>#FFF5ECCE</background>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="ca_02">
+                    <conditions>
+                        <condition id="ca_02_cond_01">
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>DMND_QTY</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="ca_02_app_01">
+                            <column>DAT</column>
+                            <attrs>
+                                <background>#FFCEFBC9</background>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="ca_03">
+                    <conditions>
+                        <condition id="ca_03_cond_01">
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>DUE_IN</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="ca_03_app_01">
+                            <column>DAT</column>
+                            <attrs>
+                                <background>#FFF5ECCE</background>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="ca_04">
+                    <conditions>
+                        <condition id="ca_04_cond_01" group="A">
+                            <column>STOCK_MGMT_SYSTEM_TP</column>
+                            <operator>equal</operator>
+                            <value>TARGET_INVENTORY_MGMT_SYSTEM</value>
+                        </condition>
+                        <condition id="ca_04_cond_02" group="A">
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>TARGET_STOCK</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="ca_04_app_01">
+                            <column>DAT</column>
+                            <attrs>
+                                <background>#FFCEECF5</background>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="ca_05">
+                    <conditions>
+                        <condition id="ca_05_cond_01" group="B">
+                            <column>STOCK_MGMT_SYSTEM_TP</column>
+                            <operator>equal</operator>
+                            <value>RULE_BASE_SYSTEM</value>
+                        </condition>
+                        <condition id="ca_05_cond_02" group="B">
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>TARGET_STOCK</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="ca_05_app_01">
+                            <column>DAT</column>
+                            <attrs>
+                                <background>#FFCEECF5</background>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="ca_06">
+                    <conditions>
+                        <condition id="ca_06_cond_01" group="C">
+                            <column>STOCK_MGMT_SYSTEM_TP</column>
+                            <operator>equal</operator>
+                            <value>REORDER_POINT_MGMT_SYSTEM</value>
+                        </condition>
+                        <condition id="ca_06_cond_02" group="C">
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>EOQ</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="ca_06_app_01">
+                            <column>DAT</column>
+                            <attrs>
+                                <background>#FFCEECF5</background>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="ca_07">
+                    <conditions>
+                        <condition id="ca_07_cond_01" group="C">
+                            <column>STOCK_MGMT_SYSTEM_TP</column>
+                            <operator>equal</operator>
+                            <value>REORDER_POINT_MGMT_SYSTEM</value>
+                        </condition>
+                        <condition id="ca_07_cond_02" group="C">
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>ROP</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="ca_07_app_01">
+                            <column>DAT</column>
+                            <attrs>
+                                <background>#FFCEECF5</background>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="ca_08">
+                    <conditions>
+                        <condition id="ca_08_cond_01" group="D">
+                            <column>STOCK_MGMT_SYSTEM_TP</column>
+                            <operator>equal</operator>
+                            <value>MIN_MAX_MGMT_SYSTEM</value>
+                        </condition>
+                        <condition id="ca_08_cond_02" group="D">
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>EOQ</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="ca_08_app_01">
+                            <column>DAT</column>
+                            <attrs>
+                                <background>#FFCEECF5</background>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="ca_09">
+                    <conditions>
+                        <condition id="ca_09_cond_01" group="D">
+                            <column>STOCK_MGMT_SYSTEM_TP</column>
+                            <operator>equal</operator>
+                            <value>MIN_MAX_MGMT_SYSTEM</value>
+                        </condition>
+                        <condition id="ca_09_cond_02" group="D">
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>ROP</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="ca_09_app_01">
+                            <column>DAT</column>
+                            <attrs>
+                                <background>#FFCEECF5</background>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="ca_10">
+                    <conditions>
+                        <condition id="ca_10_cond_01" group="D">
+                            <column>STOCK_MGMT_SYSTEM_TP</column>
+                            <operator>equal</operator>
+                            <value>MIN_MAX_MGMT_SYSTEM</value>
+                        </condition>
+                        <condition id="ca_10_cond_02" group="D">
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>MAX</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="ca_10_app_01">
+                            <column>DAT</column>
+                            <attrs>
+                                <background>#FFCEECF5</background>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+                <cell-attribute id="ca_11">
+                    <conditions>
+                        <condition id="ca_11_cond_01">
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>REPLSH_ADJ_PO</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="ca_11_app_01">
+                            <column>DAT</column>
+                            <attrs>
+                            	<editable>true</editable>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+            </cell-attributes>
+            <toolbar use="true">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_SAVE_SUCCESS_01">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="RST_CPT_01:SVC_SP_UI_RP_15_S1:IM_DATA" extract-by="SP_UI_RP_15_S1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_LOAD_GRID">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="LOCAT_ITEM_ID" title="LOCAT_ITEM_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>1</init-group-order>
+                </column>
+                <column id="LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>2</init-group-order>
+                </column>
+                <column id="LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>3</init-group-order>
+                </column>
+                <column id="LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>4</init-group-order>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>5</init-group-order>
+                </column>
+                <column id="LOCAT_GRP_CD" title="LOCAT_GRP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>6</init-group-order>
+	            </column>
+                <column id="BUSINESS_UNIT" title="BUSINESS_UNIT" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>7</init-group-order>
+                </column>
+               <column id="IN_OUT_FLAG" title="IN_OUT_FLAG" type="string">
+	                    <width>100</width>
+	                    <editable>false</editable>
+                        <init-group-order>8</init-group-order>
+	                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>9</init-group-order>
+                </column>
+                <column id="ITEM_DESCRIP" title="ITEM_DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>10</init-group-order>
+                </column>
+                <column id="ITEM_TP_NM" title="ITEM_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>11</init-group-order>
+                </column>
+                <column id="UOM_NM" title="UOM_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>12</init-group-order>
+                </column>
+                <column id="STOCK_MGMT_SYSTEM_TP" title="STOCK_MGMT_SYSTEM_TP" type="string">
+                    <width>0</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                    <init-group-order>13</init-group-order>
+                </column>
+                <column id="STOCK_MGMT_SYSTEM_TP_NM" title="STOCK_MGMT_SYSTEM_TP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>14</init-group-order>
+                </column>
+                <column id="STOCK_PLACE_STRTGY_NM" title="STOCK_PLACE_STRTGY" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>15</init-group-order>
+                </column>
+                <column id="VAL_01" title="VAL_01" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>16</init-group-order>
+                </column>
+                <column id="VAL_02" title="VAL_02" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>17</init-group-order>
+                </column>
+                <column id="VAL_03" title="VAL_03" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>18</init-group-order>
+                </column>
+                <column id="VAL_04" title="VAL_04" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>19</init-group-order>
+                </column>
+                <column id="VAL_05" title="VAL_05" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>20</init-group-order>
+                </column>
+                <column id="VAL_06" title="VAL_06" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>21</init-group-order>
+                </column>
+                <column id="VAL_07" title="VAL_07" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>22</init-group-order>
+                </column>
+                <column id="VAL_08" title="VAL_08" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>23</init-group-order>
+                </column>
+                <column id="VAL_09" title="VAL_09" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>24</init-group-order>
+                </column>
+                <column id="VAL_10" title="VAL_10" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>25</init-group-order>
+                </column>
+                <column id="VAL_11" title="VAL_11" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>26</init-group-order>
+                </column>
+                <column id="VAL_12" title="VAL_12" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>27</init-group-order>
+                </column>
+                <column id="VAL_13" title="VAL_13" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>28</init-group-order>
+                </column>
+                <column id="VAL_14" title="VAL_14" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>29</init-group-order>
+                </column>
+                <column id="VAL_15" title="VAL_15" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>30</init-group-order>
+                </column>
+                <column id="VAL_16" title="VAL_16" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>31</init-group-order>
+                </column>
+                <column id="VAL_17" title="VAL_17" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>32</init-group-order>
+                </column>
+                <column id="VAL_18" title="VAL_18" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>33</init-group-order>
+                </column>
+                <column id="VAL_19" title="VAL_19" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>34</init-group-order>
+                </column>
+                <column id="VAL_20" title="VAL_20" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>35</init-group-order>
+                </column>
+                <column id="ATTR_01" title="ATTR_01" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>36</init-group-order>
+                </column>
+                <column id="ATTR_02" title="ATTR_02" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>37</init-group-order>
+                </column>
+                <column id="ATTR_03" title="ATTR_03" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>38</init-group-order>
+                </column>
+                <column id="ATTR_04" title="ATTR_04" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>39</init-group-order>
+                </column>
+                <column id="ATTR_05" title="ATTR_05" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>40</init-group-order>
+                </column>
+                <column id="ATTR_06" title="ATTR_06" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>41</init-group-order>
+                </column>
+                <column id="ATTR_07" title="ATTR_07" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>42</init-group-order>
+                </column>
+                <column id="ATTR_08" title="ATTR_08" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>43</init-group-order>
+                </column>
+                <column id="ATTR_09" title="ATTR_09" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>44</init-group-order>
+                </column>
+                <column id="ATTR_10" title="ATTR_10" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>45</init-group-order>
+                </column>
+                <column id="ATTR_11" title="ATTR_11" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>46</init-group-order>
+                </column>
+                <column id="ATTR_12" title="ATTR_12" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>47</init-group-order>
+                </column>
+                <column id="ATTR_13" title="ATTR_13" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>48</init-group-order>
+                </column>
+                <column id="ATTR_14" title="ATTR_14" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>49</init-group-order>
+                </column>
+                <column id="ATTR_15" title="ATTR_15" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>50</init-group-order>
+                </column>
+                <column id="ATTR_16" title="ATTR_16" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>51</init-group-order>
+                </column>
+                <column id="ATTR_17" title="ATTR_17" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>52</init-group-order>
+                </column>
+                <column id="ATTR_18" title="ATTR_18" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>53</init-group-order>
+                </column>
+                <column id="ATTR_19" title="ATTR_19" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>54</init-group-order>
+                </column>
+                <column id="ATTR_20" title="ATTR_20" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>55</init-group-order>
+                </column>
+                <column id="OPERT_BASE_TP_NM" title="OPERT_BASE_TP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>56</init-group-order>
+                </column>
+                <column id="OPERT_TARGET" title="OPERT_TARGET" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>57</init-group-order>
+                </column>
+                <column id="INVTURN" title="INVTURN" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>58</init-group-order>
+                </column>
+                <column id="PREDICT_LV" title="PREDICT_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>59</init-group-order>
+                </column>
+                <column id="TARGET_SVC_LV" title="SFST_SVC_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>60</init-group-order>
+                </column>
+                <column id="LIVE_FILL_RATE" title="LIVE_FILL_RATE" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>61</init-group-order>
+                </column>
+                <column id="PLAN_FILL_RATE" title="PLAN_FILL_RATE" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>62</init-group-order>
+                </column>
+                <column id="ACCOUNT_CD" title="ACCOUNT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>63</init-group-order>
+                </column>
+                <column id="ACCOUNT_NM" title="ACCOUNT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>64</init-group-order>
+                </column>
+                <column id="CATEGORY_GROUP" title="CATEGORY_GROUP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="CATEGORY" title="CATEGORY" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <lang>true</lang>
+                    <fix>true</fix>
+                    <background>#FFeeeeee</background>
+                    <header-background>#FFdddddd</header-background>
+                </column>
+                <column id="DAT" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <background>#FFFFFFFF</background>
+                    <iteration>
+                        <prefix remove="true">DAT_</prefix>
+                    </iteration>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_POP_UI_MP_27_20_WINDOWS_OPEN">
+                    <component-id>POP_UI_MP_27_20_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <conditions>
+                        <condition id="COND_01_01" group="A">
+                            <on-column>DAT</on-column>
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>SHIPPING_PLAN</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_27_20_RST_CPT_01_LOAD">
+                            <component-id>POP_UI_MP_27_20_RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="VERSION_ID" reference-id="SRH_CPT_SIMUL_VER_ID_04" default-value="" />
+                                <parameter id="ITEM_CD" reference-id="RST_CPT_01:selections" extract-by="ITEM_CD" default-value="" />
+                                <parameter id="LOCAT_CD" reference-id="RST_CPT_01:selections" extract-by="LOCAT_CD" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_27_20_DATA_01_DATA_SET">
+                            <component-id>POP_UI_MP_27_20_DATA_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="LOCAT_CD" reference-id="RST_CPT_01:selections" extract-by="LOCAT_CD" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_27_30_WINDOWS_OPEN">
+                    <component-id>POP_UI_MP_27_30_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <conditions>
+                        <condition id="COND_02_01" group="A">
+                            <on-column>DAT</on-column>
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>DMND_QTY</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_27_30_RST_CPT_01_LOAD">
+                            <component-id>POP_UI_MP_27_30_RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="VERSION_ID" reference-id="SRH_CPT_SIMUL_VER_ID_04" default-value="" />
+                                <parameter id="ITEM_CD" reference-id="RST_CPT_01:selections" extract-by="ITEM_CD" default-value="" />
+                                <parameter id="LOCAT_CD" reference-id="RST_CPT_01:selections" extract-by="LOCAT_CD" default-value="" />
+                                <parameter id="ACCOUNT_CD" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT_CD" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_27_40_WINDOWS_OPEN">
+                    <component-id>POP_UI_MP_27_40_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <conditions>
+                        <condition id="COND_03_01" group="A">
+                            <on-column>DAT</on-column>
+                            <column>CATEGORY</column>
+                            <operator>equal</operator>
+                            <value>DUE_IN</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_27_40_RST_CPT_01_LOAD">
+                            <component-id>POP_UI_MP_27_40_RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="VERSION_ID" reference-id="SRH_CPT_SIMUL_VER_ID_04" default-value="" />
+                                <parameter id="LOCAT_CD" reference-id="RST_CPT_01:selections" extract-by="LOCAT_CD" default-value="" />
+                                <parameter id="ITEM_CD" reference-id="RST_CPT_01:selections" extract-by="ITEM_CD" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_RP_15_GetRPSimulationAnalysis">
+                    <service-id>GetRPSimulationAnalysis</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="VERSION_ID" reference-id="SRH_CPT_SIMUL_VER_ID_04" default-value="" />
+                        <parameter id="LOCAT_TP_NM" reference-id="SRH_CPT_LOCAT_TP_04" default-value="" />
+                        <parameter id="LOCAT_LV" reference-id="SRH_CPT_LOCAT_LV_04" default-value="" />
+                        <parameter id="LOCAT_CD" reference-id="SRH_CPT_LOCAT_CD_04" default-value="" />
+                        <parameter id="LOCAT_NM" reference-id="SRH_CPT_LOCAT_NM_04" default-value="" />
+                        <parameter id="ITEM_CD" reference-id="SRH_CPT_ITEM_CD_04" default-value="" />
+                        <parameter id="ITEM_ATTR_01" reference-id="SRH_CPT_ATTR_01_04" default-value="" />
+                        <parameter id="ITEM_ATTR_02" reference-id="SRH_CPT_ATTR_02_04" default-value="" />
+                        <parameter id="ITEM_ATTR_03" reference-id="SRH_CPT_ATTR_03_04" default-value="" />
+                        <parameter id="ITEM_ATTR_04" reference-id="SRH_CPT_ATTR_04_04" default-value="" />
+                        <parameter id="ITEM_ATTR_05" reference-id="SRH_CPT_ATTR_05_04" default-value="" />
+                        <parameter id="ITEM_ATTR_06" reference-id="SRH_CPT_ATTR_06_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="SVC_SP_UI_RP_15_S1">
+                    <service-id>SRV_UI_RP_15_S1</service-id>
+                    <service-target>mp</service-target>
+                    <param-empty-check>changes</param-empty-check>
+                    <parameters>
+                        <parameter id="VERSION_ID" reference-id="SRH_CPT_SIMUL_VER_ID_04" default-value="" />
+                        <parameter id="changes" reference-id="RST_CPT_01:changes" />
+                        <parameter id="reverse_target" value="changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET" />
+            <operation id="EXPORT">
+            	<export-lookup>true</export-lookup>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_02" type="CHART">
+        <props>
+            <height>230</height>
+            <theme>metro</theme>
+            <legend>
+                <visible>true</visible>
+                <position>bottom</position>
+            </legend>
+            <tooltip>
+                <visible>true</visible>
+                <format>#,###.##</format>
+            </tooltip>
+            <category-axis>
+                <rotation>45</rotation>
+                <category id="DAT">
+                    <format>yyyy-MM-dd</format>
+                    <type>date</type>
+                </category>
+            </category-axis>
+            <value-axis>
+                <value id="QTY">
+                    <format>#,###.##</format>
+                    <axis-crossing-value>left</axis-crossing-value>
+                    <title>
+                        <text>QTY</text>
+                    </title>
+                </value>
+                <value id="AMT">
+                    <format>#,###</format>
+                    <axis-crossing-value>right</axis-crossing-value>
+                    <title>
+                        <text>AMT</text>
+                    </title>
+                </value>
+            </value-axis>
+            <serieses>
+                <series id="DMND_QTY">
+                    <chart-type type="line" />
+                    <type>double</type>
+                    <criteria-axis>QTY</criteria-axis>
+                </series>
+                <series id="REPLSH_PLAN">
+                    <chart-type type="bar" />
+                    <type>double</type>
+                    <criteria-axis>QTY</criteria-axis>
+                </series>
+                <series id="EOH">
+                    <chart-type type="line" />
+                    <type>double</type>
+                    <criteria-axis>QTY</criteria-axis>
+                </series>
+                <series id="PREDICT_REVENUE">
+                    <chart-type type="line" />
+                    <type>double</type>
+                    <criteria-axis>AMT</criteria-axis>
+                </series>
+                <series id="STOCK_AMT">
+                    <chart-type type="line" />
+                    <type>double</type>
+                    <criteria-axis>AMT</criteria-axis>
+                </series>
+            </serieses>
+        </props>
+    </component>
+</view>

@@ -1,0 +1,168 @@
+<script>
+	content.getCreateComponentCompleteFlag().done(function () {
+        var viewId = cm.getComponent("COMMON").getValue("VIEW_ID")
+        console.log('[DEV LOG] viewId : ', viewId);
+        switch (viewId) {
+		case "UI_BF_15":
+			gridComponentId = "RST_CPT_01";
+			break;
+		case "UI_BF_16":
+			gridComponentId = "RST_CPT_02";
+			break;
+		default:
+			break;
+        }
+        var grid = cm.getComponent(gridComponentId);
+        var gridWrap;
+
+        grid.onRGridCellEdited = function(viewID, componentID, grid, itemIndex, dataRow, field) {
+            var checkColumns = ["INPUT_FROM_DATE", "INPUT_TO_DATE", "TARGET_FROM_DATE", "TARGET_TO_DATE", "INPUT_HORIZ", 
+                                "INPUT_BUKT_CD", "TARGET_HORIZ", "TARGET_BUKT_CD", "VAL_TP", "ITEM_LV_CD", "SALES_LV_CD"];
+            var dataProvider = grid.getDataProvider();
+            var fieldName = dataProvider.getOrgFieldName(field);
+            var dataColumnDB = TAFFY(grid.dataColumns);
+            var dataColumn = dataColumnDB().filter({fieldName: fieldName}).get()[0];
+            var columnID = dataColumn.columnIdOrg;
+
+//            console.log("itemIndex==>", itemIndex);
+//            console.log("dataRow==>", dataRow);
+//            console.log("columnID==>", columnID);
+
+            if (checkColumns.includes(columnID)) {
+	            var changeValue = dataProvider.getJsonRow(dataRow)[columnID];
+	            //console.log("changeValue==>", changeValue);
+                for (var i = 0; i < dataProvider.getRowCount(); i++) {
+                	grid.setValue(i, columnID, changeValue);
+                }
+            }
+         }
+         if (viewId == "UI_BF_16") {
+            var grid1 = cm.getComponent('RST_CPT_01')
+            grid1.doBeforeServiceCall = function(paramMap,componentId, operationId, serviceCallId) {
+
+                if (serviceCallId == "SVC_CLOSE" || serviceCallId == "SVC_SELECT_BEST_VAL") {
+                    //console.log("doBeforeServiceCall==========", serviceCallId)
+                    var gridView = grid1.getActualComponent();
+                    var dataProvider = gridView.getDataProvider();
+                    for(var i=0; i < dataProvider.getRowCount() ; i++){
+                        var processNo = dataProvider.getValue(i, "PROCESS_NO")
+                        //console.log("processNo===>",processNo)
+                        if (processNo == "990000") {
+                            var criteria = dataProvider.getValue(i, "RULE_01")
+                            //console.log("criteria===>",criteria)
+                            paramMap["SELECT_CRITERIA"] = criteria;
+                        }
+                    }
+                }
+                var doBeforeServiceCallResult = {
+                    result : true,
+                    msg : '',
+                    paramMap : paramMap
+                };
+                return doBeforeServiceCallResult;
+            }
+
+            grid1.doAfterSetData = function (serviceCallId, data, resultData) {
+                if (serviceCallId=="SVC_GET_SP_UI_BF_16_Q1") {
+                    var gridView = grid1.getActualComponent();
+                    var dataProvider = gridView.getDataProvider();
+                    for(var i=0; i < dataProvider.getRowCount() ; i++){
+                        var processNo = dataProvider.getValue(i, "PROCESS_NO");
+                        var status = dataProvider.getValue(i, "CL_STATUS");
+
+                        console.log("processNo===>",processNo, "status===>",status)
+                        if (processNo == "1" && (status == "N" || status == "false")) {
+                            cm.getComponent('RST_CPT_01_02').doOperation(
+                                    'RST_CPT_01_02', 
+                                    "ENABLE", 
+                                    {"ENABLE": false},
+                                    function() {console.log('success');},
+                                    function() {colsole.log('fail');},
+                                    function() {console.log('complete');}
+                                );
+                            cm.getComponent('RST_CPT_01_03').doOperation(
+                                    'RST_CPT_01_03', 
+                                    "ENABLE", 
+                                    {"ENABLE": false},
+                                    function() {console.log('success');},
+                                    function() {colsole.log('fail');},
+                                    function() {console.log('complete');}
+                                );
+                                cm.getComponent('RST_CPT_01_04').doOperation(
+                                    'RST_CPT_01_04', 
+                                    "ENABLE", 
+                                    {"ENABLE": false},
+                                    function() {console.log('success');},
+                                    function() {colsole.log('fail');},
+                                    function() {console.log('complete');}
+                                    );
+                        }
+                        if (parseInt(processNo) > 1 && parseInt(processNo) < 990000) {
+                            if (status == "N" || status == "false") {
+                                cm.getComponent('RST_CPT_01_03').doOperation(
+                                    'RST_CPT_01_03', 
+                                    "ENABLE", 
+                                    {"ENABLE": false},
+                                    function() {console.log('success');},
+                                    function() {colsole.log('fail');},
+                                    function() {console.log('complete');}
+                                );
+                                cm.getComponent('RST_CPT_01_04').doOperation(
+                                'RST_CPT_01_04', 
+                                "ENABLE", 
+                                {"ENABLE": false},
+                                function() {console.log('success');},
+                                function() {colsole.log('fail');},
+                                function() {console.log('complete');}
+                                );
+                            }
+                            else {
+                                cm.getComponent('RST_CPT_01_02').doOperation(
+                                    'RST_CPT_01_02', 
+                                    "ENABLE", 
+                                    {"ENABLE": false},
+                                    function() {console.log('success');},
+                                    function() {colsole.log('fail');},
+                                    function() {console.log('complete');}
+                                );
+                            }
+                        }
+                        if (processNo == "990000") {
+                            if (status == "N" || status == "false") {
+                                cm.getComponent('RST_CPT_01_04').doOperation(
+                                'RST_CPT_01_04', 
+                                "ENABLE", 
+                                {"ENABLE": false},
+                                function() {console.log('success');},
+                                function() {colsole.log('fail');},
+                                function() {console.log('complete');}
+                                );
+                            }
+                            else {
+                                cm.getComponent('RST_CPT_01_03').doOperation(
+                                    'RST_CPT_01_03', 
+                                    "ENABLE", 
+                                    {"ENABLE": false},
+                                    function() {console.log('success');},
+                                    function() {colsole.log('fail');},
+                                    function() {console.log('complete');}
+                                );
+                            }
+                        }
+                        if (processNo == "1000000" && (status == "Y" || status == "true")) {
+                            cm.getComponent('RST_CPT_01_04').doOperation(
+                                'RST_CPT_01_04', 
+                                "ENABLE", 
+                                {"ENABLE": false},
+                                function() {console.log('success');},
+                                function() {colsole.log('fail');},
+                                function() {console.log('complete');}
+                            );
+                        }
+                    }
+                }
+            }
+         }
+	});
+	
+</script>

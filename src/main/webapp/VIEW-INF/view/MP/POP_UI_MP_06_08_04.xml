@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_MP_06_08_04" version="2.0">
+    <component id="POP_UI_MP_06_08_04_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_MP_06_08_04</title>
+            <width>495</width>
+            <height>352</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_06_08_04_WINDOW_01_GRD" type="R_GRID">
+        <props>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>false</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <toolbar use="false">
+                <toolbar-button operation-id="LOAD" enable="true" visible="true" position="right" />
+            </toolbar>
+            <columns>
+                <column id="ID" title="LOCAT_MST_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="ROUTE_CD" title="ROUTE_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <text-alignment>left</text-alignment>
+                    <init-group-order>1</init-group-order>
+                </column>
+                <column id="ROUTE_DESCRIP" title="ROUTE_DESCRIP" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <text-alignment>left</text-alignment>
+                    <init-group-order>2</init-group-order>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="POP_UI_MP_06_08_04_WINDOW_01_GRD_SETDATA_05">
+                    <component-id>POP_UI_MP_06_08_WINDOW_01_CPT_12_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_MP_06_08_04_WINDOW_01_GRD:selections" extract-by="ROUTE_CD" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_MP_06_08_02_WINDOW_01_GRD_SETDATA_06">
+                    <component-id>POP_UI_MP_06_08_WINDOW_01_CPT_13_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_MP_06_08_04_WINDOW_01_GRD:selections" extract-by="ROUTE_DESCRIP" />
+                    </parameters>
+                </operation-call>
+                 <operation-call id="POP_UI_MP_06_08_02_WINDOW_01_GRD_SETDATA_07">
+                    <component-id>POP_UI_MP_06_08_WINDOW_01_CPT_12_06</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_MP_06_08_04_WINDOW_01_GRD:selections" extract-by="ID" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_MP_06_08_04_WINDOW_01_CLOSE">
+                    <component-id>POP_UI_MP_06_08_04_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_POP_UI_MP_06_08_04_WINDOW_01_GRD_LOAD">
+                    <service-id>SRV_UI_MP_08_POP_Q5</service-id>
+                    <service-target>mp</service-target>
+                     <parameters>
+                        <parameter id="LOCAT_MGMT_ID" reference-id="POP_UI_MP_06_08_WINDOW_01_CPT_02_02" default-value="" />
+                        <parameter id="ITEM_MST_ID" reference-id="POP_UI_MP_06_08_WINDOW_01_CPT_06_02" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+
+</view>

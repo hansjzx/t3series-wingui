@@ -1,0 +1,3 @@
+.MuiDialog-container .MuiFormGroup-root {
+  flex-flow: column wrap !important;
+}

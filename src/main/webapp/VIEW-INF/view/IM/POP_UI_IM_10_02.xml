@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_IM_10_02" version="2.0">
+    <component id="POP_UI_IM_10_02_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_IM_10_02</title>
+            <width>330</width>
+            <height>120</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_10_02_WINDOW_01_CPT_01_01" type="RADIO">
+        <props>
+            <lang>true</lang>
+            <init-value>
+                <option value="ALL" text="ALL_APPLY" text-position="right" />
+                <option value="NEW" text="NEW_APPLY" text-position="right" selected="true" />
+            </init-value>
+        </props>
+    </component>
+    <component id="POP_UI_IM_10_02_WINDOW_01_CPT_99_01" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_IM_10_02_WINDOW_01_CPT_99_01_CLICK_01_SUCCESS_02">
+                    <component-id>POP_UI_IM_10_02_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+                <operation-call id="OPC_WAIT_ON">
+                    <component-id>COMMON</component-id>
+                    <operation-id>WAIT-ON</operation-id>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_IM_10_02_WINDOW_01_CPT_99_01_CLICK_01">
+                    <component-id>POP_UI_IM_10_02_WINDOW_01_CPT_99_01</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_IM_10_02_WINDOW_01_CPT_99_01_CLICK_01_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0003" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_SAVE_SUCCESS_MSG_LOAD">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_SAVE_SUCCESS_MSG_INIT">
+                            <component-id>RST_CPT_02</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                    </success>
+                    <complete>
+                        <operation-call id="OPC_WAIT_OFF">
+                            <component-id>COMMON</component-id>
+                            <operation-id>WAIT-OFF</operation-id>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SAVE">
+                <service-call id="SVC_POP_UI_IM_10_02_BATCH_01">
+                    <service-id>SRV_UI_IM_10_BATCH</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="APPLY_POINT_CD" reference-id="POP_UI_IM_10_02_WINDOW_01_CPT_01_01" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_10_02_WINDOW_01_CPT_99_02" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_IM_10_02_WINDOW_01_CPT_99_02_CLICK">
+                    <component-id>POP_UI_IM_10_02_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

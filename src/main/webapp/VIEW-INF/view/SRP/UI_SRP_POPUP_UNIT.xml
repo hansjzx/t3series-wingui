@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_SRP_POPUP_UNIT" version="2.0">
+    <component id="UI_SRP_POPUP_UNIT_WINDOWS" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>UNIT_POP</title>
+            <width>600</width>
+            <height>440</height>
+            <visible>false</visible>
+            <modal>false</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="UNIT_POP_SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>UNIT_CD</init-value>
+        </props>
+    </component>
+    <component id="UNIT_POP_SRH_CPT_T1_01_02" type="INPUTBOX">
+        <props>
+            <width>100</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="ap-enterLoad">
+                    <component-id>USER_POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="UNIT_POP_SRH_CPT_T1_01_03" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>UNIT_NM</init-value>
+        </props>
+    </component>
+    <component id="UNIT_POP_SRH_CPT_T1_01_04" type="INPUTBOX">
+        <props>
+            <width>100</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="ap-enterLoad2">
+                    <component-id>USER_POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="UNIT_POP_SRH_CPT_T1_01_05" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="op_pop1">
+                    <component-id>UNIT_POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="UNIT_POP_SRH_CPT_T1_01_06" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="op_search_init1">
+                    <component-id>UNIT_POP_SRH_CPT_T1_01_02</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="op_search_init2">
+                    <component-id>UNIT_POP_SRH_CPT_T1_01_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="UNIT_POP_RST_CPT_01" type="R_GRID">
+        <props>
+            <height>300</height>
+            <selection-mode>ROWS</selection-mode>
+            <state-bar>false</state-bar>
+            <check-bar>true</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>200</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="SRP_UNIT_CD" title="UNIT_CD" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="SRP_UNIT_NM" title="UNIT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <tooltip>DESCRIP</tooltip>
+                </column>
+                <column id="ACCOUNT_CD" title="ACCOUNT_CD" type="string">
+                    <width>90</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <tooltip>ACCOUNT_NM</tooltip>
+                </column>
+                <column id="ACCOUNT_NM" title="ACCOUNT_NM" type="string">
+                    <width>90</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="DESCRIP" title="DESCRIP" type="string">
+                    <width>120</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="op_pop_sel5">
+                    <component-id>SRP_DATA_POP_UNIT</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="UNIT_INFO" reference-id="UNIT_POP_RST_CPT_01:selections" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="op_close_02">
+                    <component-id>UI_SRP_POPUP_UNIT_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SP_UI_SRP_00_POPUP_UNIT_Q1">
+                    <service-id>SRV_GET_SP_UI_SRP_00_POPUP_UNIT_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="UNIT_CD" reference-id="UNIT_POP_SRH_CPT_T1_01_02" default-value="" />
+                        <parameter id="UNIT_NM" reference-id="UNIT_POP_SRH_CPT_T1_01_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

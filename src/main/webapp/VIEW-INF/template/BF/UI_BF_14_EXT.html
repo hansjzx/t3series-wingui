@@ -1,0 +1,48 @@
+<script>
+	content.getCreateComponentCompleteFlag().done(function () {
+	    var grid = cm.getComponent('RST_CPT_01');
+        grid.doAfterSetData = function (serviceCallId, data, resultData) {            
+            var gridView = grid.getActualComponent();
+            var baselineColumnProperty = gridView.getColumnProperty("APPLY_PCT", "editorOptions");
+			baselineColumnProperty.positiveOnly = true;
+			gridView.setColumnProperty("APPLY_PCT", "editorOptions", baselineColumnProperty);            
+        }
+        
+        /*
+        grid.doBeforeServiceCall = function(paramMap,componentId, operationId, serviceCallId) {
+			if (serviceCallId == "SET_DEFAULT") { // tool bar 의 service는 동작하지 않는듯..
+                console.log("SET_DEFAULT======")
+                var gridView = grid.getActualComponent();
+                var baselineColumnProperty = gridView.getColumnProperty("APPLY_PCT", "editorOptions");
+                baselineColumnProperty.positiveOnly = true;
+                gridView.setColumnProperty("APPLY_PCT", "editorOptions", baselineColumnProperty);
+			};
+
+            var doBeforeServiceCallResult = {
+                result : true,
+                msg : '',
+                paramMap : paramMap
+            }
+            return doBeforeServiceCallResult;
+        }
+        */
+
+        cm.getComponent('VIEW_META').doAfterSetData = function (serviceCallId, data, resultData) {
+            //console.log("doAfterSetData======")
+            var gridView = grid.getActualComponent();
+            var baselineColumnProperty = gridView.getColumnProperty("APPLY_PCT", "editorOptions");
+            baselineColumnProperty.positiveOnly = true;
+            gridView.setColumnProperty("APPLY_PCT", "editorOptions", baselineColumnProperty);
+
+            // from date picker
+            var fromDatePicker = cm.getComponent("SRH_CPT_T1_01_04");
+            var toDate = new Date();
+            toDate.setYear( toDate.getFullYear() - 3 );
+            fromDatePicker.setValue(wingui.util.date.toDateString(toDate))
+        
+        }
+        
+	});
+
+	
+</script>

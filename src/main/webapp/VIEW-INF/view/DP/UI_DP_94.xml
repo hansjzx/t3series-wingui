@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_DP_94" template="COMM/STANDARD:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:DP/UI_DP_COMM:DP/UI_DP_POPUP_USER" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_VIEW_META:UI_DP_POPUP_USER" version="2.0">
+    <publish parent="MENU_05_06" open="true" seq="240" />
+    <component id="DP_DATA_01" type="DATA">
+        <actions>
+            <action event-type="change-data">
+                <operation-call id="op_DP_24_POP_sel2">
+                    <component-id>SRH_CPT_T1_04_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="DP_DATA_01:EMP_INFO" extract-by="EMP_NM" delimiter="" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="op_DP_24_POP_sel1">
+                    <component-id>SRH_CPT_T1_03_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="DP_DATA_01:EMP_INFO" extract-by="USER_ID" delimiter="" default-value="" />
+                    </parameters>
+                    <success>
+                        <operation-call id="op_DP_24_POP_reload">
+                            <component-id>SRH_CPT_T1_05_04</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="SP_UI_DP_00_EMP_AUTH_TP_Q1_01" reference-id="SRH_CPT_T1_03_04" />
+                            </parameters>
+                            <success>
+                                <operation-call id="OPC_op_combo_select">
+                                    <component-id>SRH_CPT_T1_05_04</component-id>
+                                    <operation-id>SELECT</operation-id>
+                                    <parameters>
+                                        <parameter id="INDEX" value="0" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="EMP_INFO" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="op_search_init1">
+                    <component-id>SRH_CPT_T1_03_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="op_search_init2">
+                    <component-id>SRH_CPT_T1_04_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="op_search_init3">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>SELECT</operation-id>
+                </operation-call>
+                <operation-call id="op_search_init4">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>SELECT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_05" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_R_GRID_LOAD_01_01">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD_M</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="DATA_02" type="DATA">
+        <actions>
+            <action event-type="meta">
+                <operation-call id="OPC_DATA_02_INIT">
+                    <component-id>DATA_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="GET_UI_DP_DELEGATION_COUNT">
+                    <service-id>SRV_GET_UI_DP_DELEGATION_COUNT</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="DELEGATION_USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PLAN_TP</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_04" type="COMBOBOX">
+        <props>
+            <width>205</width>
+            <lang>true</lang>
+            <value-id>ATTR_01</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_LOAD_plantype">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_CONF_Q1_01" value="DP_PLAN_TYPE" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_02" value="DP_PLAN_MONTHLY" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                    </parameters>
+                    <success>
+                        <operation-call id="OPC_SELECT_plantype">
+                            <component-id>SRH_CPT_T1_01_04</component-id>
+                            <operation-id>SELECT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+            <action event-type="select-item">
+                <operation-call id="OPC_LOAD_version">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_LOAD_authtype">
+                            <component-id>SRH_CPT_T1_05_04</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="SP_UI_DP_00_EMP_AUTH_TP_Q1_01" reference-id="SRH_CPT_T1_03_04" default-value="admin" />
+                            </parameters>
+                            <success>
+                                <operation-call id="OPC_AUTH_SET">
+                                    <component-id>SRH_CPT_T1_05_04</component-id>
+                                    <operation-id>SELECT</operation-id>
+                                    <parameters>
+                                        <parameter id="INDEX" value="0" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_00_CONF_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+            <operation id="SELECT">
+                <service-call id="OPC_combo1_SET11">
+                    <parameters>
+                        <parameter id="INDEX" value="0" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>VERSION_ID</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_02_04" type="INPUTBOX">
+        <props>
+            <width>205</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>text</type>
+            <value-id>VER_ID</value-id>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_LATEST_VER_INIT">
+                    <service-id>GetVersion</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SERVER_TYPE" value="DP" />
+                        <parameter id="PLAN_TYPE" reference-id="SRH_CPT_T1_01_04" extract-by="CD" default-value="" />
+                        <parameter id="PLAN_TYPE_KEY" reference-id="SRH_CPT_T1_01_04" extract-by="ID" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>USER_ID</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_03_04" type="INPUTBOX">
+        <props>
+            <width>175</width>
+            <lang>false</lang>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_EMP_NO_INIT">
+                    <component-id>SRH_CPT_T1_03_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="OPC_EMP_NO_INIT2">
+                    <component-id>SRH_CPT_T1_03_04</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="false" />
+                    </parameters>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_03_05" type="BUTTON">
+        <props>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_op03_1">
+                    <component-id>SRH_CPT_T1_03_05</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="false" />
+                    </parameters>
+                    <conditions>
+                        <condition id="EXIST_DELEGATION">
+                            <component>DATA_02</component>
+                            <key>GET_UI_DP_DELEGATION_COUNT</key>
+                            <operator>equal</operator>
+                            <value>0</value>
+                            <extract-by>DELEGATION_COUNT</extract-by>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_op03_2">
+                    <component-id>SRH_CPT_T1_03_05</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="true" />
+                    </parameters>
+                    <conditions>
+                        <condition id="EXIST_DELEGATION2">
+                            <component>DATA_02</component>
+                            <key>GET_UI_DP_DELEGATION_COUNT</key>
+                            <operator>notEqual</operator>
+                            <value>0</value>
+                            <extract-by>DELEGATION_COUNT</extract-by>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_op03_3">
+                    <component-id>SRH_CPT_T1_03_05</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="true" />
+                    </parameters>
+                    <conditions>
+                        <condition id="EXIST_DELEGATION3">
+                            <component>COMMON</component>
+                            <key>loginId</key>
+                            <operator>equal</operator>
+                            <value>administrator</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+            <action event-type="click">
+                <operation-call id="OPC_openWindow1">
+                    <component-id>UI_DP_POPUP_USER_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+                <operation-call id="OPC_init1">
+                    <component-id>USER_POP_SRH_CPT_T1_01_02</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="OPC_init2">
+                    <component-id>USER_POP_SRH_CPT_T1_02_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="OPC_init3">
+                    <component-id>USER_POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_04_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>EMP_NM</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_04_04" type="INPUTBOX">
+        <props>
+            <width>205</width>
+            <lang>false</lang>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="LOAD_USER_NAME">
+                    <component-id>SRH_CPT_T1_04_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="LOAD_USER_NAME2">
+                    <component-id>SRH_CPT_T1_04_04</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="false" />
+                    </parameters>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" reference-id="COMMON:loginName" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>AUTH_TP_ID</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_05_04" type="COMBOBOX">
+        <props>
+            <width>205</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>CD</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_LOAD_AUTH">
+                    <component-id>SRH_CPT_T1_05_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_EMP_AUTH_TP_Q1_01" reference-id="COMMON:loginId" />
+                    </parameters>
+                    <success>
+                        <operation-call id="OPC_AUTH_SET">
+                            <component-id>SRH_CPT_T1_05_04</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="INDEX" value="0" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SC_LOAD_authtype">
+                    <service-id>SRV_GET_SP_UI_DP_00_EMP_AUTH_TP_Q1</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+            <operation id="SELECT" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_06_04" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>Next Only</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_06_06" type="CHECKBOX">
+        <props>
+            <lang>true</lang>
+            <init-value>true</init-value>
+        </props>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <fit-style>even</fit-style>
+            <state-bar>false</state-bar>
+            <check-bar>false</check-bar>            
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <toolbar use="false">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_GRID1_LOAD_1">
+                            <component-id>RST_CPT_02</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right" />
+            </toolbar>
+            <columns>
+                <column id="AUTH_TYPE" title="AUTH_TP_NM" type="string">
+                    <width>120</width>
+                    <visible>true</visible>
+                </column>
+                <column id="OPERATOR_ID" type="string">
+                    <width>120</width>
+                    <visible>true</visible>
+                </column>
+                <column id="OPERATOR_NAME" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+                <column id="STATUS" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+                <column id="STATUS_DATE" type="datetime">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD_M">
+                <service-call id="SVC_DP_STATUS_SEARCH">
+                    <service-id>GetStatus</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="AUTH_TYPE" reference-id="SRH_CPT_T1_05_04" />
+                        <parameter id="OPERATOR_ID" reference-id="SRH_CPT_T1_03_04" />
+                        <parameter id="NEXT_ONLY" reference-id="SRH_CPT_T1_06_06" />
+                        <parameter id="VER_CD" reference-id="SRH_CPT_T1_02_04" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

@@ -1,0 +1,8 @@
+#planResultPivot .realpivot {
+  height: 100% !important;
+  width: 100% !important;
+}
+#planResultPivot .realpivot .realpivot-header div.realpivot-value-header-text,
+#planResultPivot .realpivot .realpivot-header div.realpivot-value-header-text span {
+  width: 100px !important
+}

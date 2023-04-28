@@ -1,0 +1,936 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_RP_14" template="RP/UI_RP_14:COMM/COMM_BTN_CNFM_PLAN_EXT:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:COMM/COMM_POP_SIM_ADJ_CNFM_PLAN:COMM/COMM_SRH_POP_MAIN_VER:COMM/COMM_SRH_POP_PROCESS_STEP" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_BTN_CNFM_PLAN:COMM_POP_SIM_ADJ_CNFM_PLAN:COMM_VIEW_META:COMM_BTN_EXCEL:COMM_SRH_MAIN_VERSION:COMM_SRH_PROCESS_STEP:COMM_SRH_POP_MAIN_VER:COMM_SRH_POP_PROCESS_STEP" version="2.0">
+    <publish parent="MENU_03_03" open="true" seq="140" />
+    <component id="TTL_CPT_03" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_11">
+                    <component-id>SRH_CPT_T1_06_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_TTL_CPT_05_CLICK_01">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_TTL_CPT_05_CLICK_02">
+                            <component-id>RST_CRT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_TTL_CPT_05_CLICK_03">
+                            <component-id>RST_CRT_02</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_TTL_CPT_05_CLICK_04">
+                            <component-id>RST_CRT_03</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_TTL_CPT_05_CLICK_05">
+                            <component-id>RST_CRT_04</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_06_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>COMP_COUNT</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_06_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+        </props>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <header-height>55</header-height>
+            <selection-mode>BLOCK</selection-mode>
+            <indicator>true</indicator>
+            <check-bar>true</check-bar>
+            <check-exclusive>true</check-exclusive>
+            <fit-style>none</fit-style>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="MAIN_VER_ID" title="MAIN_VER_ID" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>MAIN_SIMUL_VER</groups>
+                </column>
+                <column id="MAIN_VER_DESCRIP" title="DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>MAIN_SIMUL_VER</groups>
+                </column>
+                <column id="SIMUL_VER_ID" title="SIMUL_VER" type="string">
+                    <width>130</width>
+                    <editable>false</editable>
+                    <groups>MAIN_SIMUL_VER</groups>
+                </column>
+                <column id="SIMUL_VER_DESCRIP" title="DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>MAIN_SIMUL_VER</groups>
+                </column>
+                <column id="SIMUL_VER_SEQ" title="SIMUL_VER_SEQ" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                    <groups>MAIN_SIMUL_VER</groups>
+                </column>
+                <column id="ENGINE_EXE_YN" title="ENGINE_RUN" type="bool">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLANNING</groups>
+                </column>
+                <column id="ENGINE_EXE_DTTM" title="ENGINE_RUN_DTTM" type="date">
+                    <width>110</width>
+                    <editable>false</editable>
+                    <groups>PLANNING</groups>
+                </column>
+                <column id="PLAN_POLICY_VER_ID" title="PLAN_POLICY_VERSION" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>PLANNING</groups>
+                </column>
+                <column id="PLAN_POLICY_DESCRIP" title="PLAN_POLICY_DESCRIP" type="string">
+                    <width>140</width>
+                    <editable>false</editable>
+                    <groups>PLANNING</groups>
+                </column>
+                <column id="STATUS" title="STATUS" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLANNING</groups>
+                </column>
+                <column id="SVC_LV" title="SVC_LV" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_TARGET</groups>
+                </column>
+                <column id="OPERT_TARGET" title="OPERT_TARGET" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_TARGET</groups>
+                </column>
+                <column id="AVG_STOCK_QTY" title="TARGET_STOCK_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_TARGET</groups>
+                </column>
+                <column id="AVG_STOCK_AMT" title="TARGET_STOCK_AMT" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_TARGET</groups>
+                </column>
+                <column id="RST_FILL_RATE" title="FILL_RATE" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="RST_BACK_ORD" title="BACK_ORD" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="RST_PREDICT_LV" title="PREDICT_LV" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="RST_AVG_STOCK_QTY" title="STOCK_LV_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="RST_AVG_STOCK_AMT" title="AVG_INV_AMT" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="RST_KEEPING_COST" title="STOCK_KEEPING_COST" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="RST_ORDER_COST" title="ORDER_COST" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="RST_TRANSP_COST" title="TRANSPORT_COST" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="RST_TOTAL_COST" title="TOTAL_COST" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_RESULT</groups>
+                </column>
+                <column id="CONFRM_YN" title="CONFRM_YN" type="bool">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_CONFIRM</groups>
+                </column>
+                <column id="CONFRM_DTTM" title="CONFRM_DTTM" type="date">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PLAN_CONFIRM</groups>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_RP_14_Q1">
+                    <service-id>GetRPComparativeAnalysis</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="MAIN_VERSION_ID" reference-id="SRH_CPT_MAIN_VER_ID_04" />
+                        <parameter id="SIMUL_STEP" reference-id="SRH_CPT_PROCESS_STEP_04" />
+                        <parameter id="COMP_NUM" reference-id="SRH_CPT_T1_06_04" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="EXPORT">
+                <all-columns>true</all-columns>
+            </operation>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="RST_CRT_01" type="CHART">
+        <props>
+            <title>SNRIO_PRED_LV</title>
+            <height>270</height>
+            <theme>bootstrap</theme>
+            <default-type>bubble</default-type>
+            <border>
+                <width>1</width>
+                <color>gray</color>
+            </border>
+            <legend>
+                <visible>true</visible>
+                <position>bottom</position>
+            </legend>
+            <tooltip>
+                <visible>true</visible>
+            </tooltip>
+            <serieses>
+                <series id="RST_PREDICT_LV">
+                    <chart-type type="bubble" />
+                    <x-field>OPERT_TARGET</x-field>
+                    <y-field>RST_PREDICT_LV</y-field>
+                    <category-field>SIMUL_VER_ID</category-field>
+                </series>
+            </serieses>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="RST_CPT_01:SVC_UI_RP_14_Q1" />
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CRT_02" type="CHART">
+        <props>
+            <title>FILL_RATE</title>
+            <height>270</height>
+            <theme>default</theme>
+            <border>
+                <width>1</width>
+                <color>gray</color>
+            </border>
+            <legend>
+                <visible>false</visible>
+                <position>bottom</position>
+            </legend>
+            <tooltip>
+                <visible>true</visible>
+                <format>0\%</format>
+            </tooltip>
+            <category-axis>
+                <category id="SIMUL_VER_SEQ">
+                    <rotation>0</rotation>
+                </category>
+            </category-axis>
+            <value-axis>
+                <value id="RST_FILL_RATE" />
+            </value-axis>
+            <serieses>
+                <series id="RST_FILL_RATE">
+                    <chart-type type="bar" />
+                    <type>double</type>
+                </series>
+            </serieses>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="RST_CPT_01:SVC_UI_RP_14_Q1" />
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CRT_03" type="CHART">
+        <props>
+            <title>TOTAL_COST</title>
+            <height>270</height>
+            <theme>blueopal</theme>
+            <border>
+                <width>1</width>
+                <color>gray</color>
+            </border>
+            <legend>
+                <visible>true</visible>
+                <position>bottom</position>
+            </legend>
+            <tooltip>
+                <visible>true</visible>
+                <format>#,###.##</format>
+            </tooltip>
+            <category-axis>
+                <category id="SIMUL_VER_SEQ">
+                    <rotation>0</rotation>
+                </category>
+            </category-axis>
+            <value-axis>
+                <value id="RST_TOTAL_COST">
+                    <format>#,###.##</format>
+                </value>
+            </value-axis>
+            <serieses>
+                <series id="RST_ORDER_COST">
+                    <chart-type type="bar">
+                        <stack>true</stack>
+                    </chart-type>
+                    <type>double</type>
+                </series>
+                <series id="RST_KEEPING_COST">
+                    <chart-type type="bar">
+                        <stack>true</stack>
+                    </chart-type>
+                    <type>double</type>
+                </series>
+                <series id="RST_TRANSP_COST">
+                    <chart-type type="line" />
+                    <type>double</type>
+                </series>
+                <series id="RST_TOTAL_COST">
+                    <chart-type type="line" />
+                    <type>double</type>
+                </series>
+            </serieses>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="RST_CPT_01:SVC_UI_RP_14_Q1" />
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CRT_04" type="CHART">
+        <props>
+            <title>STOCK_LV_QTY_AVG_INV_AMT</title>
+            <height>270</height>
+            <theme>metro</theme>
+            <border>
+                <width>1</width>
+                <color>gray</color>
+            </border>
+            <legend>
+                <visible>true</visible>
+                <position>bottom</position>
+            </legend>
+            <tooltip>
+                <visible>true</visible>
+                <format>#,###.##</format>
+            </tooltip>
+            <category-axis>
+                <category id="SIMUL_VER_SEQ">
+                    <rotation>0</rotation>
+                </category>
+            </category-axis>
+            <value-axis>
+                <value id="RST_AVG_STOCK_QTY">
+                    <format>#,###.##</format>
+                    <axis-crossing-value>0</axis-crossing-value>
+                    <title>
+                        <text>QTY</text>
+                    </title>
+                </value>
+                <value id="RST_AVG_STOCK_AMT">
+                    <format>#,###.##</format>
+                    <axis-crossing-value>10000</axis-crossing-value>
+                    <title>
+                        <text>AMT</text>
+                    </title>
+                </value>
+            </value-axis>
+            <serieses>
+                <series id="RST_AVG_STOCK_QTY">
+                    <chart-type type="bar" />
+                    <type>double</type>
+                </series>
+                <series id="RST_AVG_STOCK_AMT">
+                    <chart-type type="line" />
+                    <type>double</type>
+                    <criteria-axis>RST_AVG_STOCK_AMT</criteria-axis>
+                </series>
+            </serieses>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="RST_CPT_01:SVC_UI_RP_14_Q1" />
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_02" type="R_GRID">
+        <props>
+            <height>220</height>
+            <indicator>false</indicator>
+            <check-bar>false</check-bar>
+            <fit-style>none</fit-style>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>true</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <toolbar use="true">
+                <toolbar-button operation-id="EXPORT" enable="false" visible="false" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="false" visible="false" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="COPY" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_RST_CRT_05_LOAD">
+                            <component-id>RST_CRT_05</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CRT_06_LOAD">
+                            <component-id>RST_CRT_06</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CRT_07_LOAD">
+                            <component-id>RST_CRT_07</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CRT_08_LOAD">
+                            <component-id>RST_CRT_08</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+                <toolbar-button operation-id="INSERT_ROW" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_UI_RP_14_GRD_02_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0001" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>1</init-group-order>
+                </column>
+                <column id="LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>2</init-group-order>
+                </column>
+                <column id="LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>3</init-group-order>
+                </column>
+                <column id="LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>4</init-group-order>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>5</init-group-order>
+                </column>
+                <column id="ITEM_DESCRIP" title="ITEM_DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>6</init-group-order>
+                </column>
+                <column id="ITEM_TP_NM" title="ITEM_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>7</init-group-order>
+                </column>
+                <column id="UOM_NM" title="UOM_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>8</init-group-order>
+                </column>
+                <column id="STOCK_MGMT_SYSTEM_TP_NM" title="STOCK_MGMT_SYSTEM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>9</init-group-order>
+                </column>
+                <column id="STOCK_PLACE_STRTGY_NM" title="STOCK_PLACE_STRTGY" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>10</init-group-order>
+                </column>
+                <column id="VAL_01" title="VAL_01" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_02" title="VAL_02" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_03" title="VAL_03" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_04" title="VAL_04" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_05" title="VAL_05" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_06" title="VAL_06" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_07" title="VAL_07" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_08" title="VAL_08" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_09" title="VAL_09" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_10" title="VAL_10" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_11" title="VAL_11" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_12" title="VAL_12" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_13" title="VAL_13" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_14" title="VAL_14" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_15" title="VAL_15" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_16" title="VAL_16" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_17" title="VAL_17" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_18" title="VAL_18" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_19" title="VAL_19" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_20" title="VAL_20" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="SIMUL_VER" title="SIMUL_VER" type="string">
+                    <width>140</width>
+                    <editable>false</editable>
+                </column>
+                <column id="SIMUL_VER_DESCRIP" title="DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="SIMUL_CONFRM_YN" title="CONFRM_YN" type="bool">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LIVE_SHORTAGE_RATE" title="SHOTAGE_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>LIVE</groups>
+                </column>
+                <column id="LIVE_FILL_RATE" title="LIVE_FILL_RATE" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>LIVE</groups>
+                </column>
+                <column id="LIVE_INVTURN" title="INVTURN" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>LIVE</groups>
+                </column>
+                <column id="LIVE_AVG_STOCK_QTY" title="STOCK_LV_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>LIVE</groups>
+                </column>
+                <column id="LIVE_AVG_STOCK_AMT" title="AVG_INV_AMT" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>LIVE</groups>
+                </column>
+                <column id="TARGET_SVC_LV" title="SVC_LV" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>TARGET</groups>
+                </column>
+                <column id="TARGET_OPERT_TARGET" title="OPERT_TARGET" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>TARGET</groups>
+                </column>
+                <column id="TARGET_AVG_STOCK_QTY" title="STOCK_LV_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>TARGET</groups>
+                </column>
+                <column id="TARGET_AVG_STOCK_AMT" title="AVG_INV_AMT" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>TARGET</groups>
+                </column>
+                <column id="PDT_FILL_RATE" title="FILL_RATE" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PREDICT</groups>
+                </column>
+                <column id="PDT_BACK_ORD" title="BACK_ORD" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PREDICT</groups>
+                </column>
+                <column id="PDT_LV" title="PREDICT_LV" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PREDICT</groups>
+                </column>
+                <column id="PDT_AVG_STOCK_QTY" title="STOCK_LV_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PREDICT</groups>
+                </column>
+                <column id="PDT_AVG_STOCK_AMT" title="AVG_INV_AMT" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PREDICT</groups>
+                </column>
+                <column id="PDT_KEEPING_COST" title="STOCK_KEEPING_COST" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PREDICT</groups>
+                </column>
+                <column id="PDT_ORDER_COST" title="ORDER_COST" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PREDICT</groups>
+                </column>
+                <column id="PDT_TRANSP_COST" title="TRANSPORT_COST" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PREDICT</groups>
+                </column>
+                <column id="PDT_TOTAL_COST" title="TOTAL_COST" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>PREDICT</groups>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_RP_14_Q2">
+                    <service-id>GetRPComparativeDetail</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="USER_ID" reference-id="COMMON:loginid" />
+                        <parameter id="UI_ID" reference-id="COMMON:VIEW_ID" />
+                        <parameter id="GRID_ID" value="RST_CPT_01" />
+                        <parameter id="VERSION_ID" reference-id="SRH_CPT_SIMUL_VER_ID_04" default-value="" />
+                        <parameter id="LOCAT_TP_NM" reference-id="SRH_CPT_LOCAT_TP_04" />
+                        <parameter id="LOCAT_LV" reference-id="SRH_CPT_LOCAT_LV_04" />
+                        <parameter id="LOCAT_CD" reference-id="SRH_CPT_LOCAT_CD_04" />
+                        <parameter id="LOCAT_NM" reference-id="SRH_CPT_LOCAT_NM_04" />
+                        <parameter id="ITEM_CD" reference-id="SRH_CPT_ITEM_CD_04" />
+                        <parameter id="DESCRIP" reference-id="SRH_CPT_ITEM_NM_04" />
+                        <parameter id="ITEM_TP_NM" reference-id="SRH_CPT_ITEM_TP_04" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE" />
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="RST_CRT_05" type="CHART">
+        <props>
+            <title>LOCAT_PRED_LV</title>
+            <height>285</height>
+            <theme>blueopal</theme>
+            <default-type>bubble</default-type>
+            <border>
+                <width>1</width>
+                <color>gray</color>
+            </border>
+            <legend>
+                <visible>true</visible>
+                <position>bottom</position>
+            </legend>
+            <tooltip>
+                <visible>true</visible>
+            </tooltip>
+            <serieses>
+                <series id="TARGET_AVG_STOCK_QTY">
+                    <chart-type type="bubble" />
+                    <x-field>TARGET_OPERT_TARGET</x-field>
+                    <y-field>PREDICT_LV</y-field>
+                    <category-field>LOCAT_CD</category-field>
+                </series>
+            </serieses>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="RST_CPT_02:SVC_UI_RP_14_Q2" />
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CRT_06" type="CHART">
+        <props>
+            <title>FILL_RATE</title>
+            <height>285</height>
+            <theme>default</theme>
+            <border>
+                <width>1</width>
+                <color>gray</color>
+            </border>
+            <legend>
+                <visible>false</visible>
+                <position>bottom</position>
+            </legend>
+            <tooltip>
+                <visible>true</visible>
+                <format>0</format>
+            </tooltip>
+            <category-axis>
+                <rotation>0</rotation>
+                <category id="LOCAT_CD" />
+            </category-axis>
+            <value-axis>
+                <value id="PREDICT_FILL_RATE" />
+            </value-axis>
+            <serieses>
+                <series id="PDT_FILL_RATE">
+                    <chart-type type="bar" />
+                    <type>double</type>
+                </series>
+            </serieses>
+            <data-group-id>LOCAT_CD</data-group-id>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="RST_CPT_02:SVC_UI_RP_14_Q2" />
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CRT_07" type="CHART">
+        <props>
+            <title>TOTAL_COST</title>
+            <height>285</height>
+            <theme>blueopal</theme>
+            <border>
+                <width>1</width>
+                <color>gray</color>
+            </border>
+            <legend>
+                <visible>true</visible>
+                <position>bottom</position>
+            </legend>
+            <tooltip>
+                <visible>true</visible>
+                <format>0</format>
+            </tooltip>
+            <category-axis>
+                <rotation>0</rotation>
+                <category id="LOCAT_CD" />
+            </category-axis>
+            <value-axis>
+                <value id="PDT_TOTAL_COST" />
+            </value-axis>
+            <serieses>
+                <series id="PDT_ORDER_COST">
+                    <chart-type type="bar">
+                        <stack>false</stack>
+                    </chart-type>
+                    <type>double</type>
+                </series>
+                <series id="PDT_KEEPING_COST">
+                    <chart-type type="bar">
+                        <stack>false</stack>
+                    </chart-type>
+                    <type>double</type>
+                </series>
+                <series id="PDT_TRANSP_COST">
+                    <chart-type type="line">
+                        <stack>false</stack>
+                    </chart-type>
+                    <type>double</type>
+                </series>
+                <series id="PDT_TOTAL_COST">
+                    <chart-type type="line">
+                        <stack>false</stack>
+                    </chart-type>
+                    <type>double</type>
+                </series>
+            </serieses>
+            <data-group-id>LOCAT_CD</data-group-id>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="RST_CPT_02:SVC_UI_RP_14_Q2" />
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CRT_08" type="CHART">
+        <props>
+            <title>STOCK_LV_QTY_AVG_INV_AMT</title>
+            <height>285</height>
+            <theme>metro</theme>
+            <border>
+                <width>1</width>
+                <color>gray</color>
+            </border>
+            <legend>
+                <visible>true</visible>
+                <position>bottom</position>
+            </legend>
+            <tooltip>
+                <visible>true</visible>
+                <format>0</format>
+            </tooltip>
+            <category-axis>
+                <rotation>0</rotation>
+                <category id="LOCAT_CD" />
+            </category-axis>
+            <value-axis>
+                <value id="PDT_AVG_STOCK_QTY">
+                    <format>#,###.##</format>
+                    <axis-crossing-value>0</axis-crossing-value>
+                    <title>
+                        <text>QTY</text>
+                    </title>
+                </value>
+                <value id="PDT_AVG_STOCK_AMT">
+                    <axis-crossing-value>10000</axis-crossing-value>
+                    <title>
+                        <text>AMT</text>
+                    </title>
+                </value>
+            </value-axis>
+            <serieses>
+                <series id="PDT_AVG_STOCK_QTY">
+                    <chart-type type="bar" />
+                    <type>double</type>
+                </series>
+                <series id="PDT_AVG_STOCK_AMT">
+                    <chart-type type="line" />
+                    <type>double</type>
+                    <criteria-axis>PDT_AVG_STOCK_AMT</criteria-axis>
+                </series>
+            </serieses>
+            <data-group-id>LOCAT_CD</data-group-id>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="RST_CPT_02:SVC_UI_RP_14_Q2" />
+            </operation>
+        </operations>
+    </component>
+</view>

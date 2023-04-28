@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_MP_06_10" version="2.0">
+    <component id="POP_UI_MP_06_10_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_MP_06_10</title>
+            <width>400</width>
+            <height>457</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_TAB_04" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t6-1" title="LOCAT_INFO" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="POP_UI_MP_06_10_WINDOW_01_CPT_12_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>APPY</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_06_10_WINDOW_01_CPT_12_04" type="RADIO">
+        <props>
+            <lang>true</lang>
+            <init-value>
+                <option value="ALL" text="ALL_APPLY" text-position="right" />
+                <option value="PARTIAL" text="PARTIAL_APPLY" text-position="right" selected="true" />
+            </init-value>
+        </props>
+        <actions>
+            <action event-type="change">
+                <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_12_04_ENABLE">
+                    <component-id>POP_UI_MP_06_10_WINDOW_01_CPT_12_04</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="APPLY_POINT" value="ALL" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_POP_UI_MP_06_10_WINDOW_01_CPT_12_04_ALL">
+                            <component>POP_UI_MP_06_10_WINDOW_01_CPT_12_04</component>
+                            <operator>equal</operator>
+                            <value>ALL</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_12_04_CHANGE_03_SUCCESS_01">
+                            <component-id>POP_UI_MP_06_10_WINDOW_01_CPT_00_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_12_04_CHANGE_03_SUCCESS_02">
+                            <component-id>POP_BUNDLE_LOCAT_TP_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_12_04_CHANGE_03_SUCCESS_03">
+                            <component-id>POP_BUNDLE_LOCAT_LV_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_12_04_CHANGE_03_SUCCESS_04">
+                            <component-id>POP_BUNDLE_LOCAT_CD_04</component-id>
+                            <operation-id>INIT</operation-id>
+                            <parameters>
+                                <parameter id="INIT" value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_12_04_CHANGE_03_SUCCESS_05">
+                            <component-id>POP_BUNDLE_LOCAT_TP_05</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_00_04_CHANGE_03_SUCCESS_06">
+                            <component-id>POP_UI_MP_06_10_WINDOW_01_CPT_23_05</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_12_04_CHANGE_03_SUCCESS_07">
+                            <component-id>POP_BUNDLE_LOCAT_NM_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_12_04_CHANGE_03_SUCCESS_11">
+                            <component-id>POP_UI_MP_06_10_WINDOW_01_CPT_00_04</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_12_04_ENABLE2">
+                    <component-id>POP_UI_MP_06_10_WINDOW_01_CPT_12_04</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="APPLY_POINT" value="PARTIAL" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_POP_UI_MP_06_10_WINDOW_01_CPT_12_04_PARTIAL">
+                            <component>POP_UI_MP_06_10_WINDOW_01_CPT_12_04</component>
+                            <operator>equal</operator>
+                            <value>PARTIAL</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_12_04_CHANGE_03_SUCCESS_15">
+                            <component-id>POP_UI_MP_06_10_WINDOW_01_CPT_00_04</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="true" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_12_04_CHANGE_03_SUCCESS_16">
+                            <component-id>POP_UI_MP_06_10_WINDOW_01_CPT_00_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="true" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_12_04_CHANGE_03_SUCCESS_17">
+                            <component-id>POP_BUNDLE_LOCAT_TP_05</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="true" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_06_10_WINDOW_01_CPT_00_04" type="CHECKBOX">
+        <props>
+            <name>LOCAT_REGISTRY</name>
+            <name-position>right</name-position>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="change">
+                <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_00_04_CHANGE_01">
+                    <component-id>POP_BUNDLE_LOCAT_TP_05</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" reference-id="POP_UI_MP_06_10_WINDOW_01_CPT_00_04" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_POP_UI_MP_06_10_WINDOW_01_CPT_00_04_CHG_01">
+                            <component>POP_UI_MP_06_10_WINDOW_01_CPT_00_04</component>
+                            <operator>equal</operator>
+                            <value>true</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_00_04_ENABLE_FALSE">
+                    <component-id>POP_BUNDLE_LOCAT_TP_05</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="false" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_FALSE">
+                            <component>POP_UI_MP_06_10_WINDOW_01_CPT_00_04</component>
+                            <operator>equal</operator>
+                            <value>false</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_BUNDLE_LOCAT_TP_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_TP_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_BUNDLE_LOCAT_TP_04" type="INPUTBOX">
+        <props>
+            <width>176.6</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>LOCAT_TP</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="LOAD" />
+        </operations>
+    </component>
+    <component id="POP_BUNDLE_LOCAT_TP_05" type="BUTTON">
+        <props>
+            <width>30</width>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_BUNDLE_LOCAT_WINDOW_01_OPEN">
+                    <component-id>POP_BUNDLE_LOCAT_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_BUNDLE_LOCAT_GRD_LOAD">
+                            <component-id>POP_BUNDLE_LOCAT_GRD</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_BUNDLE_LOCAT_LV_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_LV</init-value>
+        </props>
+    </component>
+    <component id="POP_BUNDLE_LOCAT_LV_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>LOCAT_LV</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="LOAD" />
+        </operations>
+    </component>
+    <component id="POP_BUNDLE_LOCAT_CD_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_CD</init-value>
+        </props>
+    </component>
+    <component id="POP_BUNDLE_LOCAT_CD_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_BUNDLE_LOCAT_NM_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_BUNDLE_LOCAT_NM_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>LOCAT_NM</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="LOAD" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_06_10_WINDOW_01_CPT_09_04" type="CHECKBOX">
+        <props>
+            <name>OVERWRITE_EXIST_DATA</name>
+            <name-position>right</name-position>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_06_10_WINDOW_01_CPT_99_01" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_99_01_CLICK_03_COMPLETE_02">
+                    <component-id>POP_UI_MP_06_10_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+                <operation-call id="OPC_WAIT_ON">
+                    <component-id>COMMON</component-id>
+                    <operation-id>WAIT-ON</operation-id>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_99_01_CLICK_01">
+                    <component-id>POP_UI_MP_06_10_WINDOW_01_CPT_99_01</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_99_01_CLICK_03_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0003" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                    <complete>
+                        <operation-call id="OPC_WAIT_OFF">
+                            <component-id>COMMON</component-id>
+                            <operation-id>WAIT-OFF</operation-id>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SAVE">
+                <service-call id="SVC_POP_UI_MP_06_10_S_003">
+                    <service-id>SRV_UI_MP_06_BATCH</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="APPLY_POINT" reference-id="POP_UI_MP_06_10_WINDOW_01_CPT_12_04" />
+                        <parameter id="CHECK_LOCAT" reference-id="POP_UI_MP_06_10_WINDOW_01_CPT_00_04" />
+                        <parameter id="LOCAT_MGMT_ID" reference-id="POP_BUNDLE_LOCAT_DATA_01:LOC_MGMT_ID" />
+                        <parameter id="OVERWRITE_DATA_YN" reference-id="POP_UI_MP_06_10_WINDOW_01_CPT_09_04" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_MP_06_10_WINDOW_01_CPT_99_02" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_MP_06_10_WINDOW_01_CPT_99_02_CLICK">
+                    <component-id>POP_UI_MP_06_10_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

@@ -1,0 +1,142 @@
+.offcanvas > .offcanvas-body > .accordion > .accordion-item {
+  background-color: #ffffff;
+}
+
+.search-cond a {
+  top: 14px !important
+}
+
+/* divisible='Y' downtime background */
+.BGGanttMark20 {
+  margin-top: 4px !important;
+  margin-bottom: -19px!important;
+  height: 14px!important;
+  background-color: #ffffcc;
+  border: 1px solid #0000004f;
+  border-top: 0;
+
+  position: relative;
+  z-index: 102;
+}
+
+.BGGanttMark21 {
+  margin-top: 7px !important;
+  margin-bottom: -29px!important;
+  height: 21px!important;
+  background-color: #ffffcc;
+  border: 1px solid #0000004f;
+  border-top: 0;
+
+  position: relative;
+  z-index: 102;
+}
+
+.BGGanttMark22 {
+  margin-top: 10px !important;
+  margin-bottom: -39px !important;
+  height: 28px !important;
+  background-color: #ffffcc;
+  border: 1px solid #0000004f;
+  border-top: 0;
+
+  position: relative;
+  z-index: 102;
+}
+
+.BGGanttMark23 {
+  margin-top: 13px !important;
+  margin-bottom: -49px !important;
+  height: 35px !important;
+  background-color: #ffffcc;
+  border: 1px solid #0000004f;
+  border-top: 0;
+
+  position: relative;
+  z-index: 102;
+}
+
+.BGGanttMark24 {
+  margin-top: 16px !important;
+  margin-bottom: -59px !important;
+  height: 42px !important;
+  background-color: #ffffcc;
+  border: 1px solid #0000004f;
+  border-top: 0;
+
+  position: relative;
+  z-index: 102;
+}
+
+.BGGanttMark25 {
+  margin-top: 19px !important;
+  margin-bottom: -69px !important;
+  height: 49px !important;
+  background-color: #ffffcc;
+  border: 1px solid #0000004f;
+  border-top: 0;
+
+  position: relative;
+  z-index: 102;
+}
+
+.BGGanttMark26 {
+  margin-top: 22px !important;
+  margin-bottom: -79px !important;
+  height: 56px !important;
+  background-color: #ffffcc;
+  border: 1px solid #0000004f;
+  border-top: 0;
+
+  position: relative;
+  z-index: 102;
+}
+
+.BGGanttMark27 {
+  margin-top: 25px !important;
+  margin-bottom: -89px !important;
+  height: 63px !important;
+  background-color: #ffffcc;
+  border: 1px solid #0000004f;
+  border-top: 0;
+
+  position: relative;
+  z-index: 102;
+}
+
+/* downtime background */
+.BGGanttBackRow.BGGanttBack20 {
+  background-color: #ffffcc;
+}
+
+/* frozen zone background */
+.BGGanttBackRow.BGGanttBack11, .BGGanttBack.BGGanttBack11 {
+  background-color: #f0feee;
+}
+
+.BGGanttBaseIn.BGGanttBoxIn.BGGanttNoneIn > .basicBox {
+  position: relative;
+}
+
+.BGGanttBaseIn.BGGanttBoxIn.BGGanttNoneIn > .basicBox > div {
+  position:absolute;
+  z-index: 104;
+}
+
+.BGGanttBaseIn.BGGanttBoxIn.BGGanttNoneIn > .basicBox > .lateYnMark {
+  width: 8px;
+  height: 8px;
+  right: 0;
+}
+
+.BGGanttBaseIn.BGGanttBoxIn.BGGanttNoneIn > .basicBox > .lateYnMark > div {
+  width: 4px;
+  height: 8px;
+}
+
+.BGGanttBaseIn.BGGanttBoxIn.BGGanttJCIn > div {
+  border: 1px solid #0000004f;
+}
+
+#headerUnitDropdown .dropdown-toggle:after {
+  display: none !important;
+}

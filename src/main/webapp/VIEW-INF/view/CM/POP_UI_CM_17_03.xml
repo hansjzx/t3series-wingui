@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<views>
+    <view id="POP_UI_CM_17_03_01" version="2.0">
+        <component id="POP_UI_CM_17_03_01_WINDOW" type="WINDOW">
+            <props>
+                <lang>true</lang>
+                <title>NEW_MAIN_VER</title>
+                <width>390</width>
+                <height>420</height>
+                <visible>false</visible>
+                <modal>true</modal>
+            </props>
+            <operations>
+                <operation id="OPEN" />
+                <operation id="CLOSE" />
+            </operations>
+        </component>
+        <component id="POP_UI_CM_17_03_01_01" type="LABEL">
+            <props>
+                <lang>true</lang>
+                <init-value>SCENARIO_VER</init-value>
+            </props>
+        </component>
+        <component id="POP_UI_CM_17_03_01_02" type="INPUTBOX">
+            <props>
+                <width>170</width>
+                <editable>false</editable>
+                <lang>true</lang>
+                <value-id>VAL</value-id>
+            </props>
+            <actions>
+                <action event-type="dblclick">
+                    <operation-call id="OPC_POP_CPT_02_OPEN">
+                        <component-id>POP_UI_CM_17_03_02_WINDOW</component-id>
+                        <operation-id>OPEN</operation-id>
+                        <success>
+                            <operation-call id="OPC_POP_CPT_02_01_LOAD">
+                                <component-id>POP_UI_CM_17_03_02_GRID</component-id>
+                                <operation-id>LOAD</operation-id>
+                            </operation-call>
+                        </success>
+                    </operation-call>
+                </action>
+            </actions>
+            <operations>
+                <operation id="LOAD">
+                    <reference-service-call id="DATA_01:SVC_UI_CM_17_Q1_DATA_01_LOAD" extract="CONTROL_ITEM:PLAN_SNRIO_MGMT_MST_VER_ID" />
+                </operation>
+                <operation id="SET" />
+            </operations>
+        </component>
+        <component id="POP_UI_CM_17_03_01_03" type="INPUTBOX">
+            <props>
+                <hidden>true</hidden>
+                <lang>true</lang>
+            </props>
+            <operations>
+                <operation id="SET" />
+            </operations>
+        </component>
+        <component id="POP_UI_CM_17_03_01_04" type="BUTTON">
+            <props>
+                <name>...</name>
+                <tooltip>INPUT_POP_OPEN</tooltip>
+                <lang>true</lang>
+            </props>
+            <actions>
+                <action event-type="click">
+                    <operation-call id="OPC_POP_CPT_02_OPEN">
+                        <component-id>POP_UI_CM_17_03_02_WINDOW</component-id>
+                        <operation-id>OPEN</operation-id>
+                        <success>
+                            <operation-call id="OPC_POP_CPT_02_01_LOAD">
+                                <component-id>POP_UI_CM_17_03_02_GRID</component-id>
+                                <operation-id>LOAD</operation-id>
+                            </operation-call>
+                        </success>
+                    </operation-call>
+                </action>
+            </actions>
+        </component>
+        <component id="POP_UI_CM_17_03_01_05" type="LABEL">
+            <props>
+                <lang>true</lang>
+                <init-value>DP_VER</init-value>
+            </props>
+        </component>
+        <component id="POP_UI_CM_17_03_01_06" type="COMBOBOX">
+            <props>
+                <width>200</width>
+                <editable>false</editable>
+                <lang>true</lang>
+                <select-index>0</select-index>
+                <value-id>ID</value-id>
+                <text-id>VER_ID</text-id>
+            </props>
+            <operations>
+                <operation id="LOAD">
+                    <service-call id="SVC_UI_CM_17_POP_Q1">
+                        <service-id>SRV_COMM_SRH_DMND_VER</service-id>
+                        <service-target>mp</service-target>
+                        <parameters>
+                            <parameter id="SNRIO_MST_ID" reference-id="POP_UI_CM_17_03_01_03" />
+                            <parameter id="PLAN_TP_ID" value="" />
+                            <parameter id="CL_YN" value="Y" />
+                        </parameters>
+                    </service-call>
+                </operation>
+            </operations>
+        </component>
+        <component id="POP_UI_CM_17_03_01_09" type="LABEL">
+            <props>
+                <lang>true</lang>
+                <init-value>SCENARIO_VER_DESCRIP</init-value>
+            </props>
+        </component>
+        <component id="POP_UI_CM_17_03_01_10" type="TEXTAREA">
+            <props>
+                <width>195</width>
+                <height>100</height>
+                <lang>true</lang>
+                <value-id>VAL</value-id>
+            </props>
+            <operations>
+                <operation id="LOAD">
+                    <reference-service-call id="DATA_01:SVC_UI_CM_17_Q1_DATA_01_LOAD" extract="CONTROL_ITEM:PLAN_SNRIO_MGMT_MST_DESCP" />
+                </operation>
+                <operation id="SET" />
+            </operations>
+        </component>
+        <component id="POP_UI_CM_17_03_01_11" type="LABEL">
+            <props>
+                <lang>true</lang>
+                <init-value>MAIN_VER_DESCRIP</init-value>
+            </props>
+        </component>
+        <component id="POP_UI_CM_17_03_01_12" type="TEXTAREA">
+            <props>
+                <width>195</width>
+                <height>100</height>
+                <lang>true</lang>
+                <value-id>VAL</value-id>
+            </props>
+            <operations>
+                <operation id="LOAD">
+                    <reference-service-call id="DATA_01:SVC_UI_CM_17_Q1_DATA_01_LOAD" extract="CONTROL_ITEM:PLAN_SNRIO_MGMT_MST_DESCP" />
+                </operation>
+                <operation id="SET" />
+            </operations>
+        </component>
+        <component id="POP_UI_CM_17_03_01_CONFIRM" type="BUTTON">
+            <props>
+                <name>OK</name>
+                <lang>true</lang>
+            </props>
+            <actions>
+                <action event-type="click">
+                    <operation-call id="OPC_POP_UI_CM_17_03_01_CONFIRM_SAVE">
+                        <component-id>POP_UI_CM_17_03_01_CONFIRM</component-id>
+                        <operation-id>SAVE</operation-id>
+                        <parameters>
+                            <parameter id="MODULE_ID" reference-id="RST_CPT_T1_S1_01_02" default-value="" />
+                            <parameter id="VER_DESCRIP" reference-id="POP_UI_CM_17_03_01_12" default-value="" />
+                            <parameter id="PLAN_SNRIO_MGMT_MST_ID" reference-id="POP_UI_CM_17_03_01_03" default-value="" />
+                            <parameter id="DP_CONBD_MAIN_VER_MST_ID" reference-id="POP_UI_CM_17_03_01_06" default-value="" />
+                            <parameter id="USER_ID" reference-id="COMMON:loginId" default-value="" />
+                        </parameters>
+                        <conditions>
+                            <condition id="OPC_RST_CPT_01_SAVE_FAIL_COND_01">
+                                <component>POP_UI_CM_17_03_01_02</component>
+                                <operator>notequal</operator>
+                                <value>empty</value>
+                                <msg>MSG_5120</msg>
+                            </condition>
+                        </conditions>
+                        <success>
+                            <operation-call id="OPC_RST_CPT_01_SAVE_SUCCESS_MSG_02">
+                                <component-id>COMMON</component-id>
+                                <operation-id>DIALOG</operation-id>
+                                <parameters>
+                                    <parameter id="title" value="Information" />
+                                    <parameter id="msg" reference-data="POP_UI_CM_17_03_01_CONFIRM:SVC_SP_UI_CM_17_S1:IM_DATA" extract-by="SP_UI_CM_17_S1_P_RT_MSG" />
+                                    <parameter id="type" value="info" />
+                                </parameters>
+                            </operation-call>
+                            <operation-call id="OPC_DATA_01_LOAD">
+                                <component-id>DATA_01</component-id>
+                                <operation-id>LOAD</operation-id>
+                                <parameters>
+                                    <parameter id="Q_TYPE" value="MAIN_INFO" />
+                                    <parameter id="MODULE_ID" reference-id="RST_CPT_T1_S1_01_02" default-value="" />
+                                    <parameter id="SNRIO_VER_ID" reference-id="POP_UI_CM_17_03_01_02" default-value="" />
+                                </parameters>
+                                <success>
+                                    <operation-call id="OPC_POP_CPT_01_CLOSE">
+                                        <component-id>POP_UI_CM_17_03_01_WINDOW</component-id>
+                                        <operation-id>CLOSE</operation-id>
+                                    </operation-call>
+                                    <operation-call id="OPC_RST_CPT_T1_S1_02_02_LOAD">
+                                        <component-id>RST_CPT_T1_S1_02_02</component-id>
+                                        <operation-id>LOAD</operation-id>
+                                    </operation-call>
+                                    <operation-call id="OPC_RST_CPT_T1_S1_03_02_LOAD">
+                                        <component-id>RST_CPT_T1_S1_03_02</component-id>
+                                        <operation-id>LOAD</operation-id>
+                                    </operation-call>
+                                    <operation-call id="OPC_RST_CPT_T1_S1_04_02_LOAD">
+                                        <component-id>RST_CPT_T1_S1_04_02</component-id>
+                                        <operation-id>LOAD</operation-id>
+                                    </operation-call>
+                                    <operation-call id="OPC_RST_CPT_T1_S1_04_03_LOAD">
+                                        <component-id>RST_CPT_T1_S1_04_03</component-id>
+                                        <operation-id>LOAD</operation-id>
+                                    </operation-call>
+                                    <operation-call id="OPC_RST_CPT_T1_S1_05_02_LOAD">
+                                        <component-id>RST_CPT_T1_S1_05_02</component-id>
+                                        <operation-id>LOAD</operation-id>
+                                    </operation-call>
+                                    <operation-call id="OPC_RST_CPT_T1_S1_06_02_LOAD">
+                                        <component-id>RST_CPT_T1_S1_06_02</component-id>
+                                        <operation-id>LOAD</operation-id>
+                                    </operation-call>
+                                    <operation-call id="OPC_RST_CPT_T1_S1_08_02_LOAD">
+                                        <component-id>RST_CPT_T1_S1_00_02</component-id>
+                                        <operation-id>LOAD</operation-id>
+                                        <success>
+                                            <operation-call id="OPC_RST_CPT_01_LOAD">
+                                                <component-id>RST_CPT_01</component-id>
+                                                <operation-id>LOAD</operation-id>
+                                            </operation-call>
+                                        </success>
+                                    </operation-call>
+                                    <operation-call id="OPC_RST_CPT_T1_S1_09_02_LOAD">
+                                        <component-id>RST_CPT_T1_S1_09_02</component-id>
+                                        <operation-id>LOAD</operation-id>
+                                    </operation-call>
+                                    <operation-call id="OPC_RST_CPT_T1_S1_10_02_LOAD">
+                                        <component-id>RST_CPT_T1_S1_10_02</component-id>
+                                        <operation-id>LOAD</operation-id>
+                                    </operation-call>
+                                </success>
+                            </operation-call>
+                        </success>
+                    </operation-call>
+                </action>
+            </actions>
+            <operations>
+                <operation id="SAVE">
+                    <service-call id="SVC_SP_UI_CM_17_S1">
+                        <service-id>SRV_UI_CM_17_S1</service-id>
+                        <service-target>mp</service-target>
+                    </service-call>
+                </operation>
+            </operations>
+        </component>
+        <component id="POP_UI_CM_17_03_01_CANCLE" type="BUTTON">
+            <props>
+                <name>CANCEL</name>
+                <lang>true</lang>
+            </props>
+            <actions>
+                <action event-type="click">
+                    <operation-call id="OPC_POP_CPT_01_CLOSE">
+                        <component-id>POP_UI_CM_17_03_01_WINDOW</component-id>
+                        <operation-id>CLOSE</operation-id>
+                    </operation-call>
+                </action>
+            </actions>
+        </component>
+    </view>
+    <view id="POP_UI_CM_17_03_02" version="2.0">
+        <component id="POP_UI_CM_17_03_02_WINDOW" type="WINDOW">
+            <props>
+                <lang>true</lang>
+                <title>SCENARIO</title>
+                <width>460</width>
+                <height>440</height>
+                <visible>false</visible>
+                <modal>true</modal>
+            </props>
+            <operations>
+                <operation id="OPEN" />
+                <operation id="CLOSE" />
+            </operations>
+        </component>
+        <component id="POP_UI_CM_17_03_02_GRID" type="R_GRID">
+            <props>
+                <check-bar>false</check-bar>
+                <fit-style>evenFill</fit-style>
+                <pageable>false</pageable>
+                <toolbar use="false" />
+                <columns>
+                    <column id="SNRIO_VER_ID" title="SCENARIO_VER_ID" type="string">
+                        <width>120</width>
+                        <editable>false</editable>
+                    </column>
+                    <column id="DESCRIP" title="DESCRIP" type="string">
+                        <width>220</width>
+                        <editable>false</editable>
+                    </column>
+                    <column id="ID" title="ID" type="string">
+                        <visible>false</visible>
+                    </column>
+                </columns>
+            </props>
+            <actions>
+                <action event-type="cell-double-click">
+                    <operation-call id="OPC_POP_CPT_01_01_02_SET">
+                        <component-id>POP_UI_CM_17_03_01_02</component-id>
+                        <operation-id>SET</operation-id>
+                        <parameters>
+                            <parameter id="SET" reference-id="POP_UI_CM_17_03_02_GRID:selections" extract-by="SNRIO_VER_ID" />
+                        </parameters>
+                    </operation-call>
+                    <operation-call id="OPC_POP_CPT_01_01_03_SET">
+                        <component-id>POP_UI_CM_17_03_01_03</component-id>
+                        <operation-id>SET</operation-id>
+                        <parameters>
+                            <parameter id="SET" reference-id="POP_UI_CM_17_03_02_GRID:selections" extract-by="ID" />
+                        </parameters>
+                        <success>
+                            <operation-call id="OPC_POP_UI_CM_17_03_01_06_LOAD">
+                                <component-id>POP_UI_CM_17_03_01_06</component-id>
+                                <operation-id>LOAD</operation-id>
+                            </operation-call>
+                        </success>
+                    </operation-call>
+                    <operation-call id="OPC_POP_CPT_01_02_02_SET">
+                        <component-id>POP_UI_CM_17_03_01_10</component-id>
+                        <operation-id>SET</operation-id>
+                        <parameters>
+                            <parameter id="SET" reference-id="POP_UI_CM_17_03_02_GRID:selections" extract-by="DESCRIP" />
+                        </parameters>
+                    </operation-call>
+                    <operation-call id="OPC_POP_CPT_02_CLOSE">
+                        <component-id>POP_UI_CM_17_03_02_WINDOW</component-id>
+                        <operation-id>CLOSE</operation-id>
+                    </operation-call>
+                </action>
+            </actions>
+            <operations>
+                <operation id="LOAD">
+                    <service-call id="SVC_UI_CM_17_Q1_POP_CPT_02_01_LOAD">
+                        <service-id>SRV_UI_CM_17_Q1</service-id>
+                        <service-target>mp</service-target>
+                        <parameters>
+                            <parameter id="Q_TYPE" value="SNRIO_VER" />
+                            <parameter id="MODULE_ID" reference-id="RST_CPT_T1_S1_01_02" default-value="" />
+                        </parameters>
+                    </service-call>
+                </operation>
+            </operations>
+        </component>
+    </view>
+</views>

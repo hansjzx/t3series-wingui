@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_DP_22_POPUP_MS_INIT_VAL_SETTING" version="2.0">
+    <component id="UI_DP_22_POPUP_MS_INIT_VAL_WINDOWS" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>INIT_SETTING</title>
+            <width>291</width>
+            <height>207</height>
+            <visible>false</visible>
+            <modal>true</modal>
+            <init-render>true</init-render>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="MS_INIT_VAL_POP_WINDOW_01_CPT_00_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>MEASURE_VAL_TP</init-value>
+        </props>
+    </component>
+    <component id="MS_INIT_VAL_POP_WINDOW_01_CPT_00_04" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>QTY</init-value>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="MS_INIT_VAL_POP_WINDOW_01_CPT_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>INIT_VAL_TP</init-value>
+        </props>
+    </component>
+    <component id="MS_INIT_VAL_POP_WINDOW_01_CPT_01_04" type="COMBOBOX">
+        <props>
+            <width>250</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_DATA_01_LOAD_INIT_VAL">
+                    <component-id>DATA_01</component-id>
+                    <operation-id>LOAD_INIT_VAL</operation-id>
+                    <success>
+                        <operation-call id="OPC_MS_INIT_VAL_POP_WINDOW_01_CPT_00_04_INIT">
+                            <component-id>MS_INIT_VAL_POP_WINDOW_01_CPT_00_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="DATA_01:GET_ADDITIONAL_INIT_MEASURE_VALUE" extract-by="MS_VAL_TP_NM" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_MS_INIT_VAL_POP_WINDOW_01_CPT_01_04_LOAD_WHEN_INIT">
+                            <component-id>MS_INIT_VAL_POP_WINDOW_01_CPT_01_04</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <success>
+                                <operation-call id="OPC_MS_INIT_VAL_POP_WINDOW_01_CPT_01_04_SELECT">
+                                    <component-id>MS_INIT_VAL_POP_WINDOW_01_CPT_01_04</component-id>
+                                    <operation-id>SELECT</operation-id>
+                                    <parameters>
+                                        <parameter id="SELECT_ACTION" value="false" />
+                                    </parameters>
+                                    <success>
+                                        <operation-call id="OPC_MS_INIT_VAL_POP_WINDOW_01_CPT_02_01_LOAD">
+                                            <component-id>MS_INIT_VAL_POP_WINDOW_01_CPT_02_04</component-id>
+                                            <operation-id>LOAD</operation-id>
+                                            <success>
+                                                <operation-call id="OPC_MS_INIT_VAL_POP_WINDOW_01_CPT_02_01_SELECT">
+                                                    <component-id>MS_INIT_VAL_POP_WINDOW_01_CPT_02_04</component-id>
+                                                    <operation-id>SELECT</operation-id>
+                                                </operation-call>
+                                            </success>
+                                        </operation-call>
+                                    </success>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+            <action event-type="select-item">
+                <operation-call id="OPC_MS_INIT_VAL_POP_WINDOW_01_CPT_02_04_LOAD_BY_INIT_VAL_TP">
+                    <component-id>MS_INIT_VAL_POP_WINDOW_01_CPT_02_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_MS_INIT_VAL_POP_WINDOW_01_CPT_02_04_LOAD">
+                            <component-id>MS_INIT_VAL_POP_WINDOW_01_CPT_02_04</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="INDEX" value="0" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="ENABLE" />
+            <operation id="SELECT">
+                <service-call id="OPC_MS_INIT_VAL_POP_WINDOW_01_CPT_01_04_SET">
+                    <parameters>
+                        <parameter id="VALUE" reference-id="DATA_01:GET_ADDITIONAL_INIT_MEASURE_VALUE" extract-by="INIT_VAL_TP_ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <reference-service-call id="DATA_02:LOOKUP_CODE" extract="CONF_TP:DP_INIT_VAL_TP" />
+            </operation>
+        </operations>
+    </component>
+    <component id="MS_INIT_VAL_POP_WINDOW_01_CPT_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>INIT_VAL</init-value>
+        </props>
+    </component>
+    <component id="MS_INIT_VAL_POP_WINDOW_01_CPT_02_04" type="COMBOBOX">
+        <props>
+            <width>170</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>INIT_VAL_ID</value-id>
+            <text-id>VAL_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="select-item">
+                <operation-call id="OPC_MS_INIT_VAL_POP_WINDOW_01_CPT_02_04_ENABLE">
+                    <component-id>MS_INIT_VAL_POP_WINDOW_01_CPT_02_04</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="false" />
+                    </parameters>
+                    <conditions>
+                        <condition id="con_MS_INIT_VAL_POP_WINDOW_01_CPT_02_04_ENABLE">
+                            <component>MS_INIT_VAL_POP_WINDOW_01_CPT_02_04</component>
+                            <operator>equal</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_MS_INIT_VAL_POP_WINDOW_01_CPT_02_04_ENABLE_02">
+                    <component-id>MS_INIT_VAL_POP_WINDOW_01_CPT_02_04</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" reference-id="DATA_01:GET_ADDITIONAL_INIT_MEASURE_VALUE" extract-by="MASTER_YN" />
+                    </parameters>
+                    <conditions>
+                        <condition id="con_MS_INIT_VAL_POP_WINDOW_01_CPT_02_04_ENABLE">
+                            <component>MS_INIT_VAL_POP_WINDOW_01_CPT_02_04</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SELECT">
+                <service-call id="OPC_MS_INIT_VAL_POP_WINDOW_01_CPT_02_04_SET">
+                    <parameters>
+                        <parameter id="VALUE" reference-id="DATA_01:GET_ADDITIONAL_INIT_MEASURE_VALUE" extract-by="INIT_VAL_ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_22_INIT_VALUE_COMBO">
+                    <service-id>SRV_GET_SP_UI_DP_22_INIT_VALUE_COMBO</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="INIT_VAL_TP_ID" reference-id="MS_INIT_VAL_POP_WINDOW_01_CPT_01_04" extract-by="ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="MS_INIT_VAL_POP_WINDOW_01_CPT_11_01" type="BUTTON">
+        <props>
+            <icon>save</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_MS_INIT_VAL_POP_WINDOW_01_CPT_11_01_SAVE">
+                    <component-id>MS_INIT_VAL_POP_WINDOW_01_CPT_11_01</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_UI_DP_22_POPUP_MS_INIT_VAL_WINDOWS_CLOSE_when_save">
+                            <component-id>UI_DP_22_POPUP_MS_INIT_VAL_WINDOWS</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_MS_VAL_TP_RESELECT_QTY">
+                            <component-id>MS_VAL_TP_CPT_02</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="VALUE" value="QTY" />
+                            </parameters>
+                            <conditions>
+                                <condition id="CON_UI_ID_IS_UI_DP_22_1">
+                                    <component>COMMON</component>
+                                    <key>VIEW_ID</key>
+                                    <operator>equal</operator>
+                                    <value>UI_DP_22_1</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="ENABLE" />
+            <operation id="SAVE">
+                <service-call id="SVC_SP_UI_DP_22_1_S0">
+                    <service-id>SRV_SET_SP_UI_DP_22_1_S0</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="WORK_CD" reference-id="DATA_01:GET_ADDITIONAL_INIT_MEASURE_VALUE" extract-by="WORK_CD" />
+                        <parameter id="PLAN_TP_ID" reference-id="DATA_01:GET_ADDITIONAL_INIT_MEASURE_VALUE" extract-by="PLAN_TP_ID" />
+                        <parameter id="MS_VAL_TP_CD" reference-id="DATA_01:GET_ADDITIONAL_INIT_MEASURE_VALUE" extract-by="MS_VAL_TP_CD" />
+                        <parameter id="INIT_VAL_TP_ID" reference-id="MS_INIT_VAL_POP_WINDOW_01_CPT_01_04" />
+                        <parameter id="INIT_VAL_ID" reference-id="MS_INIT_VAL_POP_WINDOW_01_CPT_02_04" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="MS_INIT_VAL_POP_WINDOW_01_CPT_11_05" type="BUTTON">
+        <props>
+            <icon>close</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_UI_DP_22_POPUP_MS_INIT_VAL_WINDOWS_CLOSE">
+                    <component-id>UI_DP_22_POPUP_MS_INIT_VAL_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                    <success>
+                        <operation-call id="OPC_MS_VAL_TP_RESELECT_QTY_002">
+                            <component-id>MS_VAL_TP_CPT_02</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="VALUE" value="QTY" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

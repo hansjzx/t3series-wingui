@@ -1,0 +1,267 @@
+<script>
+	content.getCreateComponentCompleteFlag().done(function () {
+	    var grid = cm.getComponent('RST_CPT_01');
+	    var grid1 = cm.getComponent('RST_CPT_01');
+		var chart = cm.getComponent("RST_CPT_02");
+	    var gridWrap;
+	    
+	    grid.onRGridDataFillReady = function (viewId, componentId, gridView, resultData) {
+	        gridWrap = new wingui.util.grid.GridWrap(gridView);
+	        gridWrap.init();
+	        
+	        setNegativeValueCellStyle(gridView);
+	        
+	        return resultData;
+	    };
+	    
+	    grid.doAfterSetData = function (serviceCallId, data, resultData) {
+	        if (data.length == 0) return;
+	        var gridView = grid.getActualComponent();
+	        
+	        setFixedHoriznCellStyle(gridView);
+	        setNegativeValueCellStyle(gridView);
+	        
+	        gridView.addCellStyle('style01', {
+	    		'foreground': '#ffff0000',
+                'background': '#ffffffff'
+	    	});
+	    	
+	    	gridView.addCellStyle('style02', {
+	    		'foreground': '#ff000000',
+                'background': '#ffffffff'
+	    	});
+	        
+	        gridWrap.setRows('LOCAT_CD', 'ITEM_CD', 'CATEGORY');
+	        
+	        gridWrap.setValueChanger('PRDUCT_PLAN', function (dataProvider, rows, field) {
+	            var fieldName = dataProvider.getFieldName(field);
+	            
+	            var fieldNames = gridWrap.dateColumnNames.filter(function (dateColumnName) {
+	                return dateColumnName > fieldName;
+	            });
+	            
+				var SHIPPING_index = rows.SHIPPING_SCHEDULED.index;
+	            var SHIPPING_row = dataProvider.getJsonRow(SHIPPING_index);
+	            var SHIPPING_value = SHIPPING_row[fieldName];
+	            
+	            var BOH_index = rows.BOH.index;
+	            var BOH_row = dataProvider.getJsonRow(BOH_index);
+	            var BOH_value = BOH_row[fieldName];
+	            
+	            var DUE_IN_index = rows.DUE_IN.index;
+	            var DUE_IN_row = dataProvider.getJsonRow(DUE_IN_index);
+	            var DUE_IN_value = DUE_IN_row[fieldName];
+	            
+	            var PRDUCT_PLAN_index = rows.PRDUCT_PLAN.index;
+	            var PRDUCT_PLAN_row = dataProvider.getJsonRow(PRDUCT_PLAN_index);
+	            var PRDUCT_PLAN_value = PRDUCT_PLAN_row[fieldName];
+	            
+	            var EOH_index = rows.EOH.index;
+	            var EOH_row = dataProvider.getJsonRow(EOH_index);
+	            var EOH_value = EOH_row[fieldName];
+	            var EOH_Qty = BOH_value + PRDUCT_PLAN_value - SHIPPING_value;
+	            
+	            dataProvider.setValue(DUE_IN_index, fieldName, PRDUCT_PLAN_value);
+	            dataProvider.setValue(EOH_index, fieldName, EOH_Qty);
+	            
+	            if (EOH_Qty < 0) {
+	            	gridView.setCellStyles(EOH_index, fieldName, 'style01');
+	            } else {
+	            	gridView.setCellStyles(EOH_index, fieldName, 'style02');
+	            }
+	            
+	            gridWrap.setChangedValue(BOH_index, field + 1);
+	        });
+	        
+	        gridWrap.setValueChanger('BOH', function (dataProvider, rows, field) {
+	            var fieldName = dataProvider.getFieldName(field);
+	            var preFieldName = dataProvider.getFieldName(field - 1);
+	            
+	            var fieldNames = gridWrap.dateColumnNames.filter(function (dateColumnName) {
+	                return dateColumnName > fieldName;
+	            });
+	            
+	            var EOH_index = rows.EOH.index;
+	            var EOH_row = dataProvider.getJsonRow(EOH_index);
+	            var pre_EOH_value = EOH_row[preFieldName];
+	            
+	            var DUE_IN_index = rows.DUE_IN.index;
+	            var DUE_IN_row = dataProvider.getJsonRow(DUE_IN_index);
+	            var DUE_IN_value = DUE_IN_row[fieldName];
+	            
+				var SHIPPING_index = rows.SHIPPING_SCHEDULED.index;
+	            var SHIPPING_row = dataProvider.getJsonRow(SHIPPING_index);
+	            var SHIPPING_value = SHIPPING_row[fieldName];
+	            
+	            var BOH_index = rows.BOH.index;
+	            dataProvider.setValue(BOH_index, fieldName, pre_EOH_value);
+	            
+	            var EOH_Qty = pre_EOH_value + DUE_IN_value - SHIPPING_value;
+	            dataProvider.setValue(EOH_index, fieldName, EOH_Qty);
+	            
+	            if (pre_EOH_value < 0) {
+	            	gridView.setCellStyles(BOH_index, fieldName, 'style01');
+	            } else {
+	            	gridView.setCellStyles(BOH_index, fieldName, 'style02');
+	            }
+            	
+            	if (EOH_Qty < 0) {
+	            	gridView.setCellStyles(EOH_index, fieldName, 'style01');
+	            } else {
+	            	gridView.setCellStyles(EOH_index, fieldName, 'style02');
+	            }
+	            
+	            if (fieldNames.length > 0) {
+	            	gridWrap.setChangedValue(BOH_index, field + 1);	
+	            }
+	        });
+	    };
+
+		grid1.onRGridCellClicked = function(viewID, componentID, grid, index) {
+			var gridView = grid1.getActualComponent();
+	        var fixedColumns = gridView.getColumnNames(true,true).filter(function(columnName){
+					                 return !columnName.includes("DAT_") 
+					                 		&& !columnName.includes("CATEGORY_GROUP")
+					                 		&& !columnName.includes("CATEGORY");
+					             });
+	        
+			var itemIndex = index.itemIndex;
+			var chartComponentId = "RST_CPT_02";
+			
+			redrawChart(componentID, chartComponentId, itemIndex, fixedColumns);
+		};
+	    
+	    function setFixedHoriznCellStyle(gridView) {
+	    	gridView.addCellStyle('style03', {
+	    		'foreground': '#ff000000',
+                'background': '#ffffb6c1',
+                'editable' : false
+	    	}); // ����
+	    	gridView.addCellStyle("style04", {
+	    		'background' : '#FFFFFFD2',
+	    		'editable' : false
+	    	}); // ����
+	    	gridView.addCellStyle("style05", {
+	    		'background' : '#FFFFFFD2',
+	    		'editable' : true
+	    	}); // ����
+	    	gridView.addCellStyle("style06", {
+	    		'foreground': '#ff000000',
+                'background': '#ffffb6c1',
+                'editable' : false
+	    	});
+	    	
+	    	var dataProvider = gridView.getDataProvider();
+	    	gridView.beginUpdate();
+	    	
+	    	try {
+	    		var locationFixedHorizon = cm.getComponent("DATA_01").getValue("SVC_GET_FIXED_HORIZON_DATA");
+	    		var isAdjustPlan = cm.getComponent("DATA_01").getValue("SVC_GET_PLAN_INFO")[0].IS_ADJT;
+	    		var categoryIndex = dataProvider.getFieldIndex("CATEGORY");
+	    		
+				for (var i = 0, j = dataProvider.getRowCount();  i < j; i++) {
+					var locationCode = dataProvider.getJsonRow(i).LOCAT_CD
+					var targetProdIndex = [];
+					var targetShppIndex = [];
+					
+					var roll_fixed_shpp_val = locationFixedHorizon.filter(function(n){
+	    				return n["LOCAT_CD"] == locationCode
+	    			})[0]["ROLL_FIXED_SHPP"];
+					
+					var adjt_fixed_shpp_val = locationFixedHorizon.filter(function(n){
+	    				return n["LOCAT_CD"] == locationCode
+	    			})[0]["ADJT_FIXED_SHPP"];
+					
+					var roll_fixed_prod_val = locationFixedHorizon.filter(function(n){
+	    				return n["LOCAT_CD"] == locationCode
+	    			})[0]["ROLL_FIXED_PROD"];
+					
+	    			var adjt_fixed_prod_val = locationFixedHorizon.filter(function(n){
+	    				return n["LOCAT_CD"] == locationCode
+	    			})[0]["ADJT_FIXED_PROD"];
+					
+					if (isAdjustPlan == "N") {
+						adjt_fixed_shpp_val = 0;
+						adjt_fixed_prod_val = 0;
+					}
+					
+	    			if (dataProvider.getFieldValues("CATEGORY")[i] == "PRDUCT_PLAN") {
+		    			if (isAdjustPlan == 'N') {
+		    				for (var k = categoryIndex + 1; k < categoryIndex + 1 + roll_fixed_prod_val; k++) {
+		    					targetProdIndex.push(k);
+		    				}
+		    				gridView.setCellStyles([i], targetProdIndex, "style06");
+		    				
+		    			} else {
+		    				var rollHorizon = categoryIndex + 1 + roll_fixed_prod_val;
+		    				for (var l = categoryIndex + 1; l < rollHorizon; l++) {
+		    					targetProdIndex.push(l);
+		    				}
+		    				gridView.setCellStyles([i], targetProdIndex, "style03");
+		    				
+		    				targetProdIndex = [];
+		    				for (var m = rollHorizon; m < rollHorizon + adjt_fixed_prod_val; m++) {
+		    					targetProdIndex.push(m);
+		    				}
+		    				gridView.setCellStyles([i], targetProdIndex, "style05");
+		    			}
+		    			
+	    			} else if (dataProvider.getFieldValues("CATEGORY")[i] == "SHIPPING_SCHEDULED") {
+	    				var rollHorizon = categoryIndex + 1 + roll_fixed_shpp_val;
+	    				for (var l = categoryIndex + 1; l < rollHorizon; l++) {
+	    					targetShppIndex.push(l);
+	    				}
+	    				gridView.setCellStyles([i], targetShppIndex, "style06");
+	    				
+	    				targetShppIndex = [];
+	    				for (var m = rollHorizon; m < rollHorizon + adjt_fixed_shpp_val; m++) {
+	    					targetShppIndex.push(m);
+	    				}
+	    				gridView.setCellStyles([i], targetShppIndex, "style04");
+	    			}
+	    		}
+				
+	    	} finally {
+	    		gridView.endUpdate();
+	    	}
+	    }
+	    
+	    function setNegativeValueCellStyle(gridView) {
+	    	gridView.addCellStyle('style04', {
+	    		'foreground': '#ffff0000',
+                'background': '#ffffffff'
+	    	});
+	    	
+	    	gridView.beginUpdate();
+	    	
+	    	try {
+	    		var dataProvider = gridView.getDataProvider();
+				var categoryFieldIndex = dataProvider.getFieldIndex("CATEGORY");
+				
+				for (var i = 0, n = dataProvider.getRowCount(); i < n; i++) {
+					if (dataProvider.getFieldValues("CATEGORY")[i] == "BOH" || dataProvider.getFieldValues("CATEGORY")[i] == "EOH") {
+						for (var j = categoryFieldIndex + 1; j < dataProvider.getFieldCount(); j++) {
+							var dataRow = dataProvider.getJsonRow(i);
+							var fieldName = dataProvider.getFieldName(j);
+				            var value = dataRow[fieldName];
+				            
+				            if (value < 0) {
+				            	gridView.setCellStyles(i, j, "style04");
+				            }
+						}
+					}
+				}
+				
+	    	} finally {
+	    		gridView.endUpdate();
+	    	}
+	    }
+	    
+	    grid.onRGridCellEdited = function(viewId, componentId, gridView, itemIndex, dataRow, field) {
+	        gridWrap.setChangedValue(dataRow, field);
+	        gridWrap.setDefaultValue(dataRow, field);
+	        setFixedHoriznCellStyle(gridView);
+	    };
+	 
+	});
+</script>

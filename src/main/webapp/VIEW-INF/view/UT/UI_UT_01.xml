@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_UT_01" template="UT/UI_UT_01/UI_UT_01:UT/UI_UT_01/UI_UT_01JS:UT/UI_UT_01/UI_UT_01CSS" include="vue" version="2.0">
+    <publish parent="MENU_UTIL" open="true" seq="1" />
+</view>

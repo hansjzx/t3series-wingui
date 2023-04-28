@@ -1,0 +1,130 @@
+<script>
+	content.getCreateComponentCompleteFlag().done(function () {
+	    var grid_02 = cm.getComponent('RST_CPT_02');
+	    var gridWrap;
+	    
+	    grid_02.onRGridDataFillReady = function (viewId, componentId, gridView, resultData) {
+	        gridWrap = new wingui.util.grid.GridWrap(gridView);
+	        gridWrap.init();
+	        
+	        return resultData;
+	    };
+	    
+	    grid_02.doAfterSetData = function (serviceCallId, data, resultData) {
+	        if (data.length == 0) return;
+	        var gridView = grid_02.getActualComponent();
+	        
+	        setFixedHoriznCellStyle(gridView);
+	    };
+	});
+	
+	content.getCreateComponentCompleteFlag().done(function () {
+	    var grid1 = cm.getComponent('RST_CPT_01');
+		var grid2 = cm.getComponent('RST_CPT_02');
+		var chart = cm.getComponent("RST_CPT_03");
+	    var gridWrap;
+	    
+	    grid1.onRGridDataFillReady = function (viewId, componentId, gridView, resultData) {
+	        gridWrap = new wingui.util.grid.GridWrap(gridView);
+	        gridWrap.init();
+	        
+	        return resultData;
+	    };
+	    
+	    grid1.doAfterSetData = function (serviceCallId, data, resultData) {
+	        if (data.length == 0) return;
+	        var gridView = grid1.getActualComponent();
+	        
+	        setFixedHoriznCellStyle(gridView);
+	    };
+
+		grid1.onRGridCellClicked = function(viewID, componentID, grid, index) {
+			var gridView = grid1.getActualComponent();
+	        var fixedColumns = gridView.getColumnNames(true,true).filter(function(columnName){
+					                 return !columnName.includes("DAT_") 
+					                 		&& !columnName.includes("CATEGORY_GROUP")
+					                 		&& !columnName.includes("CATEGORY");
+					             });
+	        
+			var itemIndex = index.itemIndex;
+			var chartComponentId = "RST_CPT_03";
+			
+			redrawChart(componentID, chartComponentId, itemIndex, fixedColumns);
+		};
+
+		grid2.onRGridCellClicked = function(viewID, componentID, grid, index) {
+			var gridView = grid2.getActualComponent();
+	        var fixedColumns = gridView.getColumnNames(true,true).filter(function(columnName){
+					                 return !columnName.includes("DAT_") 
+					                 		&& !columnName.includes("CATEGORY_GROUP")
+					                 		&& !columnName.includes("CATEGORY");
+					             });
+
+			var itemIndex = index.itemIndex;
+			var chartComponentId = "RST_CPT_03";
+			
+			redrawChart(componentID, chartComponentId, itemIndex, fixedColumns);
+		};
+		
+	});
+	
+	function setFixedHoriznCellStyle(gridView) {
+		gridView.addCellStyle('style03', {
+    		'foreground': '#ff000000',
+            'background': '#ffffb6c1',
+    		'editable' : false
+    	});
+		
+    	gridView.addCellStyle("style05", {
+    		'background': '#FFFFFFD2',
+    		'editable' : true
+    	});
+    	
+    	var dataProvider = gridView.getDataProvider();
+    	gridView.beginUpdate();
+    	
+    	try {
+    		var locationFixedHorizon = cm.getComponent("DATA_01").getValue("SVC_GET_FIXED_HORIZON_DATA");
+    		var isAdjustPlan = cm.getComponent("DATA_01").getValue("SVC_GET_PLAN_INFO")[0].IS_ADJT;
+    		var categoryIndex = dataProvider.getFieldIndex("CATEGORY");
+    		
+    		for (var i = 0, j = dataProvider.getRowCount(); i < j; i++) {
+    			var locationCode = dataProvider.getJsonRow(i).SUPPLY_LOCAT_CD;
+    			var targetCellIndex = [];
+    			
+    			if (dataProvider.getFieldValues("CATEGORY")[i] == "TRANSPORT_PLAN") {
+    				var roll_fixed_prod_val = locationFixedHorizon.filter(function(n){
+	    				return n["LOCAT_CD"] == locationCode
+	    				})[0]["ROLL_FIXED_SHPP"];
+    				
+	    			var adjt_fixed_prod_val = locationFixedHorizon.filter(function(n){
+	    				return n["LOCAT_CD"] == locationCode
+	    				})[0]["ADJT_FIXED_SHPP"];
+    				
+	    			if (isAdjustPlan == 'N') {
+	    				for (var k = categoryIndex + 1; k < categoryIndex + 1 + roll_fixed_prod_val; k++) {
+	    					targetCellIndex.push(k);
+	    				}
+	    				gridView.setCellStyles([i], targetCellIndex, "style03");
+	    				
+	    			} else {
+	    				var rollHorizon = categoryIndex + 1 + roll_fixed_prod_val;
+	    				for (var l = categoryIndex + 1; l < rollHorizon; l++) {
+	    					targetCellIndex.push(l);
+	    				}
+	    				gridView.setCellStyles([i], targetCellIndex, "style03");
+	    				
+	    				targetCellIndex = [];
+	    				for (var m = rollHorizon; m < rollHorizon + adjt_fixed_prod_val; m++) {
+	    					targetCellIndex.push(m);
+	    				}
+	    				gridView.setCellStyles([i], targetCellIndex, "style05");
+	    			}
+    			}
+    		}
+    		
+    	} finally {
+    		gridView.endUpdate();
+    	}
+    }
+</script>

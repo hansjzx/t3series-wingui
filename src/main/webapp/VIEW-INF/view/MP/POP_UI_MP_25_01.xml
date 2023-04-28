@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_MP_25_01" version="2.0">
+    <component id="POP_UI_MP_25_01_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>REQUEST_SITE_ID</title>
+            <width>530</width>
+            <height>380</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_25_01_WINDOW_01_GRD" type="R_GRID">
+        <props>
+            <header-height>30</header-height>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="LOCAT_MST_ID" title="LOCAT_MST_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="LOCAT_TP_ID" title="LOCAT_TP_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="LOCAT_ID" title="LOCAT_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="LOCAT_MGMT_ID" title="LOCAT_MGMT_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <filterable>true</filterable>
+                </column>
+                <column id="LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <filterable>true</filterable>
+                </column>
+                <column id="LOCAT_CD" title="LOCAT_CD" type="string" sort="asc">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="POP_UI_MP_25_01_WINDOW_01_GRD_SETDATA_07">
+                    <component-id>SRH_CPT_T1_05_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_MP_25_01_WINDOW_01_GRD:selections" extract-by="LOCAT_CD" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_MP_25_01_WINDOW_01_GRD_SETDATA_08">
+                    <component-id>SRH_CPT_T1_06_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_MP_25_01_WINDOW_01_GRD:selections" extract-by="LOCAT_NM" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_MP_25_01_WINDOW_01_CLOSE">
+                    <component-id>POP_UI_MP_25_01_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_POP_UI_MP_25_01_WINDOW_01_GRD_LOAD">
+                    <service-id>SRV_GET_LOCAT_GRID_LIST</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

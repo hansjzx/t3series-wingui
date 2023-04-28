@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="COMM_SRH_ITEM_ATTR" version="2.0">
+    <!--   TAB2 검색조건 추가 START  -->
+    <component id="SRH_CPT_ATTR_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_ATTR_01</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_ATTR_01_04" type="INPUTBOX">
+        <props>
+            <width>205</width>
+            <editable>true</editable>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="OPC_ACCT_ATTR_01_ENTER">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="COMMON_VIEW_IS_NOT_EQUAL">
+                            <component>COMMON</component>
+                            <key>VIEW_ID</key>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+
+    <component id="SRH_CPT_ATTR_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_ATTR_02</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_ATTR_02_04" type="INPUTBOX">
+        <props>
+            <width>205</width>
+            <editable>true</editable>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="OPC_ACCT_ATTR_01_ENTER">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="COMMON_VIEW_IS_NOT_EQUAL">
+                            <component>COMMON</component>
+                            <key>VIEW_ID</key>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+
+    <component id="SRH_CPT_ATTR_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_ATTR_03</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_ATTR_03_04" type="INPUTBOX">
+        <props>
+            <width>205</width>
+            <editable>true</editable>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="OPC_ACCT_ATTR_01_ENTER">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="COMMON_VIEW_IS_NOT_EQUAL">
+                            <component>COMMON</component>
+                            <key>VIEW_ID</key>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+
+    <component id="SRH_CPT_ATTR_04_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_ATTR_04</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_ATTR_04_04" type="INPUTBOX">
+        <props>
+            <width>205</width>
+            <editable>true</editable>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="OPC_ACCT_ATTR_01_ENTER">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="COMMON_VIEW_IS_NOT_EQUAL">
+                            <component>COMMON</component>
+                            <key>VIEW_ID</key>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+
+    <component id="SRH_CPT_ATTR_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_ATTR_05</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_ATTR_05_04" type="INPUTBOX">
+        <props>
+            <width>205</width>
+            <editable>true</editable>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="OPC_ACCT_ATTR_01_ENTER">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="COMMON_VIEW_IS_NOT_EQUAL">
+                            <component>COMMON</component>
+                            <key>VIEW_ID</key>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+
+    <component id="SRH_CPT_ATTR_06_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_ATTR_06</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_ATTR_06_04" type="INPUTBOX">
+        <props>
+            <width>205</width>
+            <editable>true</editable>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="OPC_ACCT_ATTR_01_ENTER">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="COMMON_VIEW_IS_NOT_EQUAL">
+                            <component>COMMON</component>
+                            <key>VIEW_ID</key>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+
+    <component id="SRH_ATTR_CONTAINER_01" type="CONTAINER">
+        <props>
+            <height>200</height>
+            <group-box>
+                <title>CM_ITEM_ATTR</title>
+            </group-box>
+            <containers>
+                <container id="con1_1" expand="true" />
+            </containers>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <!--   TAB2 검색조건 추가 END  -->
+</view>

@@ -1,0 +1,46 @@
+<script>
+content.getCreateComponentCompleteFlag().done(function () {
+    var grid = cm.getComponent('RST_CPT_01');
+    var acctPopup = cm.getComponent('DP_DATA_POP_ACCT');
+    var itemPopup = cm.getComponent('DP_DATA_POP_ITEM');
+    
+    var checkBeforeOperation = function (sourceComponentId, targetComponentId, targetOperationId, actionParamMap) {
+    	//console.log("##sourceComponentId:::::",sourceComponentId);
+    	//console.log("##targetComponentId:::::",targetComponentId);
+    	//console.log("##targetOperationId:::::",targetOperationId);
+    	
+    	if (sourceComponentId  == 'RST_CPT_01' && targetOperationId == 'SET') {
+	        var gridView = grid.getActualComponent();
+	        var current = gridView.getCurrent();
+	        var targetRow = current.dataRow;
+	        
+	        var createRows = gridView.getDataSource().getAllStateRows().created;
+
+	        //console.log("##targetRow:::::",targetRow, "createRows:::",createRows);
+	        //console.log("##indexof=>",createRows.indexOf(targetRow)); //indexOf
+	        
+	        if (createRows.includes(targetRow) || targetRow == -1){
+	        	console.log("##true");
+		        return true;
+	        }
+	        
+        	console.log("##false");
+	        return false;
+    	} 
+    	console.log('##out');
+        return true;
+        
+    };
+    
+    
+    acctPopup.doBeforeOperation = function (sourceComponentId, targetComponentId, targetOperationId, actionParamMap){
+    	return checkBeforeOperation(sourceComponentId, targetComponentId, targetOperationId, actionParamMap);
+    }
+    itemPopup.doBeforeOperation = function (sourceComponentId, targetComponentId, targetOperationId, actionParamMap){
+    	return checkBeforeOperation(sourceComponentId, targetComponentId, targetOperationId, actionParamMap);
+    }
+
+    
+    
+});
+</script>

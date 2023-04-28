@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_CM_13_02" version="2.0">
+    <component id="POP_UI_CM_13_02_DATA_01" type="DATA">
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_TTL_CPT_06_INIT">
+                    <component-id>POP_UI_CM_13_02_DATA_01</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_13_02_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_CM_13_02</title>
+            <width>550</width>
+            <height>530</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_13_02_WINDOW_01_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="POP_UI_CM_13_02_WINDOW_01_TAB_01" title="COMM" expand="true" init-render="true" />
+                <tab id="POP_UI_CM_13_02_WINDOW_01_TAB_02" title="PALLET_LAYER_LOC_LIMIT" expand="false" init-render="true" />
+            </tabs>
+        </props>
+        <actions>
+            <action event-type="activate-tab">
+                <operation-call id="OPC_ACTIVE_TAB">
+                    <component-id>POP_UI_CM_13_02_WINDOW_02_CPT_01_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="cond_01">
+                            <component>POP_LOAD_CAPA_04</component>
+                            <operator>equal</operator>
+                            <value>Pallet Layer/Location Limit</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="POP_SRH_LOCAT_TP_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>LOCAT_TP_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_SRH_LOCAT_TP_04" type="INPUTBOX">
+        <props>
+            <width>176.6</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_SRH_LOCAT_TP_05" type="BUTTON">
+        <props>
+            <width>30</width>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_CM_04_01_WINDOW_01_CPT_01_05_CLICK">
+                    <component-id>POP_SRH_LOCAT_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_CM_04_01_WINDOW_01_CPT_01_05_CLICK_01">
+                            <component-id>POP_COMM_LOCAT_WINDOW_01_GRD</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_SRH_LOCAT_LV_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>LOCAT_LV</init-value>
+        </props>
+    </component>
+    <component id="POP_SRH_LOCAT_LV_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_SRH_LOCAT_CD_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_CD</init-value>
+        </props>
+    </component>
+    <component id="POP_SRH_LOCAT_CD_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_SRH_LOCAT_NM_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_SRH_LOCAT_NM_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_WAHOUS_TP_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>WAREHOUSE_TP</init-value>
+        </props>
+    </component>
+    <component id="POP_WAHOUS_TP_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_WAHOUS_TP_05" type="BUTTON">
+        <props>
+            <width>26.39</width>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="POP_UI_CM_13_02_WINDOW_01_CPT_05_05_CLICK">
+                    <component-id>POP_WAHOUS_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_CM_13_02_WINDOW_01_CPT_05_05_CLICK_01">
+                            <component-id>COMM_POP_WAHOUS_GRD</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_WAHOUS_NM_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>WAREHOUSE_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_WAHOUS_NM_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_LOAD_CAPA_01" type="LABEL">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <init-value>LOAD_CAPA_MGMT_BASE</init-value>
+        </props>
+    </component>
+    <component id="POP_LOAD_CAPA_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_CAPA_LIMIT_VAL_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>CAPA_LIMIT_VAL</init-value>
+        </props>
+    </component>
+    <component id="POP_CAPA_LIMIT_VAL_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_13_02_WINDOW_01_CPT_09_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACTV_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_13_02_WINDOW_01_CPT_09_04" type="CHECKBOX">
+        <props>
+            <lang>true</lang>
+            <init-value>true</init-value>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_13_02_WINDOW_01_07" type="BUTTON">
+        <props>
+            <icon>add</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_CM_13_02_WINDOW_01_07_01">
+                    <component-id>POP_UI_CM_13_02_WINDOW_02_CPT_01_01</component-id>
+                    <operation-id>INSERT_ROW</operation-id>
+                    <conditions>
+                        <condition id="CON_POP_UI_CM_13_02_WINDOW_01_CPT_07_04_VAL">
+                            <component>POP_LOAD_CAPA_04</component>
+                            <operator>equal</operator>
+                            <value>Pallet Layer/Location Limit</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="POP_UI_CM_13_02_WINDOW_01_07_CON_MESSAGE_01">
+                    <component-id>COMMON</component-id>
+                    <operation-id>DIALOG</operation-id>
+                    <parameters>
+                        <parameter id="title" value="Information" />
+                        <parameter id="msg" value="MSG_5018" />
+                        <parameter id="type" value="info" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_POP_UI_CM_13_02_WINDOW_01_CPT_07_04_VAL_02" group="AND">
+                            <component>POP_LOAD_CAPA_04</component>
+                            <operator>notEqual</operator>
+                            <value>Pallet Layer/Location Limit</value>
+                        </condition>
+                        <condition id="CON_POP_UI_CM_13_02_WINDOW_01_CPT_05_04_VAL_02" group="AND">
+                            <component>POP_WAHOUS_TP_04</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="POP_UI_CM_13_02_WINDOW_01_07_CON_MESSAGE_02">
+                    <component-id>COMMON</component-id>
+                    <operation-id>DIALOG</operation-id>
+                    <parameters>
+                        <parameter id="title" value="Information" />
+                        <parameter id="msg" value="MSG_5019" />
+                        <parameter id="type" value="info" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_POP_UI_CM_13_02_WINDOW_01_CPT_05_04_VAL">
+                            <component>POP_WAHOUS_TP_04</component>
+                            <operator>equal</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_UI_CM_13_02_WINDOW_01_08" type="BUTTON">
+        <props>
+            <icon>minus</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_CM_13_02_WINDOW_01_08_01">
+                    <component-id>POP_UI_CM_13_02_WINDOW_02_CPT_01_01</component-id>
+                    <operation-id>REMOVE_ROW</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_CM_13_02_WINDOW_01_08_DELETE_SUCCESS">
+                            <component-id>POP_UI_CM_13_02_WINDOW_02_CPT_01_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_CM_13_02_WINDOW_01_08_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POP_UI_CM_13_02_WINDOW_01_08:POP_UI_CM_13_02_WINDOW_02_CPT_01_01_REMOVE_ROW:IM_DATA" extract-by="SP_UI_CM_13_POP_02_S2_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_UI_CM_13_02_WINDOW_02_CPT_01_01" type="R_GRID">
+        <props>
+            <height>330</height>
+            <header-height>30</header-height>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="MGMT_ID" title="MGMT_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                </column>
+                <column id="SRC_ID" title="SRC_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                </column>
+                <column id="DTL_ID" title="DTL_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                </column>
+                <column id="WAREHOUSE_TP" title="WAREHOUSE_TP" type="string">
+                    <width>150</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="WAREHOUSE_TP_NM" title="WAREHOUSE_NM" type="string">
+                    <width>150</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="LOAD_CAPA_MGMT_BASE" title="LOAD_CAPA_MGMT_BASE" type="string">
+                    <width>200</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="PALLET_LAYER" title="PALLET_LAYER" type="int">
+                    <width>150</width>
+                    <editable>true</editable>
+                </column>
+                <column id="LIMIT_VAL" title="LOCATIONS_LIMIT" type="int">
+                    <width>150</width>
+                    <editable>true</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SC_RST_CPT_01_LOAD">
+                    <service-id>SRV_UI_CM_13_POP_03_Q</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="ID" reference-id="POP_WAHOUS_DATA_COMP_01:WAREHOUSE_ID" default-value="" />
+                        <parameter id="LOCAT_MGMT_ID" reference-id="POP_LOCAT_DATA_COMP_01:LOC_MGMT_ID" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="REMOVE_ROW">
+                <service-call id="POP_UI_CM_13_02_WINDOW_02_CPT_01_01_REMOVE_ROW">
+                    <service-id>SRV_UI_CM_13_POP_02_S2</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="checked" reference-id="POP_UI_CM_13_02_WINDOW_02_CPT_01_01:checked" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" default-value="" />
+                        <parameter id="WRK_TYPE" value="DELETE" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET" />
+            <operation id="INSERT_ROW">
+                <service-call id="SET_DEFAULT">
+                    <parameters>
+                        <parameter id="SET_DEFAULT-to-WAREHOUSE_TP" reference-id="POP_WAHOUS_DATA_COMP_01:WAREHOUSE_TP" />
+                        <parameter id="SET_DEFAULT-to-WAREHOUSE_TP_NM" reference-id="POP_WAHOUS_DATA_COMP_01:WAREHOUSE_TP_NM" />
+                        <parameter id="SET_DEFAULT-to-LOAD_CAPA_MGMT_BASE" reference-id="POP_WAHOUS_DATA_COMP_01:LOAD_CAPA_MGMT_BASE" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="WRITE" permission-type="UPDATE">
+                <service-call id="SC_SRV_UI_CM_13_S_503_SAVE">
+                    <service-id>SRV_UI_CM_13_POP_02_S2</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="WRK_TYPE" value="SAVE" />
+                        <parameter id="WH_MGMT_DTL_ID" default-value="" />
+                        <parameter id="LOCAT_MGMT_ID" reference-id="POP_LOCAT_DATA_COMP_01:LOC_MGMT_ID" />
+                        <parameter id="WAREHOUSE_TP_ID" reference-id="POP_WAHOUS_DATA_COMP_01:WAREHOUSE_ID" />
+                        <parameter id="changes" reference-id="POP_UI_CM_13_02_WINDOW_02_CPT_01_01:changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                        <parameter id="ID" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_CM_13_02_WINDOW_01_CPT_11_01" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_CM_13_02_WINDOW_01_CPT_11_01_CLICK_01">
+                    <component-id>POP_UI_CM_13_02_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_CM_13_02_WINDOW_01_CPT_11_01_CLICK_02_SUCCESS">
+                            <component-id>POP_UI_CM_13_02_WINDOW_01_CPT_11_01</component-id>
+                            <operation-id>SAVE</operation-id>
+                            <success>
+                                <operation-call id="OPC_POP_UI_CM_13_02_WINDOW_01_CPT_11_01_CLICK_02_SUCCESS_01">
+                                    <component-id>POP_UI_CM_13_02_WINDOW_02_CPT_01_01</component-id>
+                                    <operation-id>WRITE</operation-id>
+                                    <conditions>
+                                        <condition id="COND_POP_UI_CM_13_02_WINDOW_01_CLICK_02_SUCCESS">
+                                            <component>POP_UI_CM_13_02_WINDOW_01_CPT_07_04</component>
+                                            <operator>equal</operator>
+                                            <value>Pallet Layer/Location Limit</value>
+                                        </condition>
+                                    </conditions>
+                                </operation-call>
+                                <operation-call id="OPC_POP_UI_CM_13_02_WINDOW_01_CPT_11_01_CLICK_02_SUCCESS_02">
+                                    <component-id>RST_CPT_01</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                </operation-call>
+                                <operation-call id="OPC_POP_UI_CM_13_02_WINDOW_01_CPT_11_01_CLICK_02_SUCCESS_02_MSG">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Information" />
+                                        <parameter id="msg" reference-data="POP_UI_CM_13_02_WINDOW_01_CPT_11_01:SRV_UI_CM_13_POP_02_S1:IM_DATA" extract-by="SP_UI_CM_13_POP_02_S1_P_RT_MSG" />
+                                        <parameter id="type" value="info" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SAVE">
+                <service-call id="SRV_UI_CM_13_POP_02_S1">
+                    <service-id>SRV_UI_CM_13_POP_02_S1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="WRK_TYPE" value="SAVE" />
+                        <parameter id="WH_MGMT_ID" value="" />
+                        <parameter id="LOCAT_MGMT_ID" reference-id="POP_LOCAT_DATA_COMP_01:LOC_MGMT_ID" />
+                        <parameter id="WAREHOUSE_TP_ID" reference-id="POP_WAHOUS_DATA_COMP_01:WAREHOUSE_ID" />
+                        <parameter id="CAPA_LIMIT_VAL" reference-id="POP_CAPA_LIMIT_VAL_04" />
+                        <parameter id="ACTV_YN" reference-id="POP_UI_CM_13_02_WINDOW_01_CPT_09_04" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_CM_13_02_WINDOW_01_CPT_11_05" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_SRH_CPT_T1_11_05_CLICK">
+                    <component-id>POP_UI_CM_13_02_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

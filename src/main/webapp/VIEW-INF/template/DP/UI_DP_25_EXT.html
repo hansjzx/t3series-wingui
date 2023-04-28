@@ -1,0 +1,78 @@
+<script type="text/javascript">
+//#################################################################
+//SRP, DP Entry 
+//
+function getRowTotalMeasures(){
+	/***********************************************************************
+		-- UI_DP_9* : SP_UI_DP_95_MES
+		-- UI_DP_2* : SP_UI_DP_00_PERSONALIZATION_Q1
+		-- necessary columns : LEVEL_CD, MEASURE_CD or FIELD_NM
+	**********************************************************************/
+	// 1. get service call ID by View ID
+	var svcCallId = "SVC_SP_UI_DP_95_MES";
+	var extrctCode = "MEASURE_CD";
+	var isDpEngineView = cm.getComponent("COMMON").getValue("VIEW_ID").includes("UI_DP_2");
+	if(isDpEngineView){
+		svcCallId = "SVC_SP_UI_DP_00_PERSONALIZATION_Q1_INIT";
+		extrctCode = "FIELD_NM"
+	}
+	// 2. get measure value of DATA_01 Component (activated levels)
+	var activatedLevelMeasures = cm.getComponent("DATA_01").getValue()[svcCallId].filter(function(row){
+		var measureCode = row[extrctCode];
+		if(measureCode == null){
+			return false;
+		}else if (row.LEVEL_CD == null){
+			return false;
+		}else if (row.ACTV_YN == false){
+			return false;
+		}
+		return measureCode.slice(-3) == "QTY" && (!measureCode.includes("PR"));
+	});
+	// 3. get qty of authority type
+	var authType = cm.getComponent("VIEW_META").getValue()["AUTH_TP"];	
+	// 4. if qty of same level is none, set footer by activated level measures (refer 2.)	
+	var sameValue = activatedLevelMeasures.filter(function(row){
+		return row.LEVEL_CD == authType;
+	}).map(function(row){
+		return row[extrctCode];
+	});
+	var otherValues = activatedLevelMeasures.map(function(row){
+		return row[extrctCode];
+	});
+	return sameValue.length > 0 ? sameValue : otherValues;
+}
+
+function getGroupTotalMeasure(measureNames){
+	return measureNames[0];
+}
+
+function checkSumColumn(columnName){
+	return columnName.endsWith(',VALUE') || columnName.endsWith('_SUM')
+}
+function checkVersionBucket(){
+    var viewBuck = cm.getComponent("SRH_CPT_T1_14_04").getValue();
+    if (viewBuck && viewBuck == "PB") {
+        var versionInfo = getVersionInfo (cm.getComponent("COMMON").getValue("VIEW_ID"));
+        if (versionInfo != null) {
+            return versionInfo['BUKT'];
+        } else {
+            return 'PW';
+        }
+    }else {
+        return viewBuck;
+    }
+}
+function getDTF(){
+    var versionInfo = getVersionInfo (cm.getComponent("COMMON").getValue("VIEW_ID"));
+    if (versionInfo) {
+        var dateTimeFence =  versionInfo['DTF_DATE'];
+        return dateTimeFence;
+    }		
+    	return;
+}
+function getStartDate(){
+    return getVersionInfo (cm.getComponent("COMMON").getValue("VIEW_ID"))['FROM_DATE'];
+}
+//#################################################################
+
+</script>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_CM_15_01" template="CM/POP_UI_CM_15_01" version="2.0">
+    <component id="POP_UI_CM_15_01_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>VERSION</title>
+            <width>900</width>
+            <height>340</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_VER_RST_CPT_01" type="R_GRID">
+        <props>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>false</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="MODULE_CD" title="MODULE_CD" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="MODULE_NM" title="MODULE_VAL" type="string" sort="asc">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <text-alignment>center</text-alignment>
+                    <init-group-order>1</init-group-order>
+                </column>
+                <column id="PLAN_POLICY_VER_ID" title="PLAN_POLICY_VERSION" type="string" sort="asc">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <text-alignment>center</text-alignment>
+                </column>
+                <column id="DESCP" title="DESCRIP" type="string">
+                    <width>180</width>
+                    <editable>false</editable>
+                    <text-alignment>left</text-alignment>
+                </column>
+                <column id="PLAN_TYPE" title="PLAN_TP" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <text-alignment>left</text-alignment>
+                    <lang>true</lang>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_POP_UI_CM_15_01_WINDOW_01_CLOSE">
+                    <component-id>POP_UI_CM_15_01_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                    <success>
+                        <operation-call id="OPC_SRH_CPT_T1_01_04_SET">
+                            <component-id>SRH_CPT_T1_01_04</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="TEXT" reference-id="POP_VER_RST_CPT_01:selections" extract-by="MODULE_CD" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_02_04_SET">
+                            <component-id>SRH_CPT_T1_02_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_VER_RST_CPT_01:selections" extract-by="PLAN_POLICY_VER_ID" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_03_04_SET">
+                            <component-id>SRH_CPT_T1_03_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_VER_RST_CPT_01:selections" extract-by="DESCP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_06_01_SET">
+                            <component-id>SRH_CPT_T1_06_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_VER_RST_CPT_01:selections" extract-by="ID" />
+                            </parameters>
+                            <success>
+                                <operation-call id="OPC_DATA_02_LOAD_02">
+                                    <component-id>DATA_02</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                    <success>
+                                        <operation-call id="OPC_RST_CPT_TREE_LOAD_02">
+                                            <component-id>RST_CPT_TREE</component-id>
+                                            <operation-id>LOAD</operation-id>
+                                            <success>
+                                                <operation-call id="OPC_RST_CPT_PP_NAME_SET_02">
+                                                    <component-id>RST_CPT_PP_NAME</component-id>
+                                                    <operation-id>SET</operation-id>
+                                                    <parameters>
+                                                        <parameter id="SET" reference-id="SRH_CPT_T1_02_04" />
+                                                    </parameters>
+                                                </operation-call>
+                                                <operation-call id="OPC_RST_CPT_PP_MODULE_SET_02">
+                                                    <component-id>RST_CPT_PP_MODULE</component-id>
+                                                    <operation-id>SET</operation-id>
+                                                    <parameters>
+                                                        <parameter id="SET" reference-id="SRH_CPT_T1_06_02" />
+                                                    </parameters>
+                                                    <success>
+                                                        <operation-call id="OPC_RST_CPT_TREE_SELECT_01">
+                                                            <component-id>RST_CPT_TREE</component-id>
+                                                            <operation-id>SELECT</operation-id>
+                                                            <parameters>
+                                                                <parameter id="VALUE" value="PP_CON_01" />
+                                                                <parameter id="SELECT_ACTION" value="true" />
+                                                                <parameter id="SCROLL_ACTION" value="true" />
+                                                            </parameters>
+                                                        </operation-call>
+                                                    </success>
+                                                </operation-call>
+                                            </success>
+                                        </operation-call>
+                                    </success>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_06_02_SET">
+                            <component-id>SRH_CPT_T1_06_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_VER_RST_CPT_01:selections" extract-by="MODULE_NM" />
+                            </parameters>
+                            <success>
+                                <operation-call id="OPC_RST_CPT_CONT_ACTIVE_02">
+                                    <component-id>RST_CPT_CONT</component-id>
+                                    <operation-id>ACTIVATE</operation-id>
+                                    <parameters>
+                                        <parameter id="ACTIVATE" value="PP_CON_01" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_CM_15_02_RST_LOAD">
+                    <service-id>SRV_UI_CM_15_Q2</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="MODULE_ID" reference-id="SRH_CPT_T1_01_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="SVC_UI_CM_15_S1">
+                    <service-id>SRV_UI_CM_15_S1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="MODULE_ID" reference-id="SRH_CPT_T1_01_04" />
+                        <parameter id="PLAN_POLICY_DESCP" reference-id="POP_VER_RST_CPT_01:selections" extract-by="DESCP" />
+                        <parameter id="ACTV_YN" value="true" />
+                        <parameter id="PLANNING_TYPE" value="true" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

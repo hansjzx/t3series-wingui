@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_MP_27_30" version="2.0">
+    <component id="POP_UI_MP_27_30_WINDOWS" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>DMND_ORDER_TRACK</title>
+            <width>1500</width>
+            <height>695</height>
+            <visible>false</visible>
+            <modal>false</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_27_30_RST_CPT_01" type="R_GRID">
+        <props>
+            <height>580</height>
+            <header-height>55</header-height>
+            <selection-mode>BLOCK</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>none</fit-style>
+            <pageable>false</pageable>
+            <grid-summary>true</grid-summary>
+            <grid-summary-on-header>true</grid-summary-on-header>
+            <toolbar use="true">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="SAVE" enable="false" visible="false" position="right" />
+            </toolbar>
+            <columns>
+                <column id="DMND_ID" title="DMND_ID" type="string">
+                    <width>120</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ACTV_YN" title="ACTV_YN" type="bool">
+                    <width>70</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="DMND_TP_NM" title="DMND_TP_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="DMND_CLASS_NM" title="DMND_CLASS_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="URGENT_ORDER_TP_NM" title="URGENT_ORDER_TP" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="REQUEST_SITE_ID" title="REQUEST_SITE_ID" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="REQUEST_SITE_DESCRIP" title="REQUEST_SITE_DESCRIP" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>80</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>200</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ACCOUNT_CD" title="ACCOUNT_CD" type="string">
+                    <width>80</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="ACCOUNT_NM" title="ACCOUNT_NM" type="string">
+                    <width>150</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="DMND_QTY" title="DMND_QTY" type="number">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                    <grid-summary-exp>SUM</grid-summary-exp>
+                </column>
+                <column id="NETTING_QTY" title="NETTING_QTY" type="number">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>DMND_INFO</groups>
+                    <grid-summary-exp>SUM</grid-summary-exp>
+                </column>
+                <column id="DUE_DATE" title="DUE_DATE" type="date">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                    <groups>DMND_INFO</groups>
+                </column>
+                <column id="DELIVY_DATE" title="DELIVY_DATE" type="date">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                    <groups>PLAN_RST</groups>
+                </column>
+                <column id="DAYS_LATE" title="DAYS_LATE" type="number">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>PLAN_RST</groups>
+                    <grid-summary-exp>SUM</grid-summary-exp>
+                </column>
+                <column id="DELIVY_QTY" title="DELIVY_QTY" type="number">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>PLAN_RST</groups>
+                    <grid-summary-exp>SUM</grid-summary-exp>
+                </column>
+                <column id="ON_TIME_QTY" title="ON_TIME_QTY" type="number">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>PLAN_RST</groups>
+                    <grid-summary-exp>SUM</grid-summary-exp>
+                </column>
+                <column id="LATE_QTY" title="LATE_QTY" type="number">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>PLAN_RST</groups>
+                    <grid-summary-exp>SUM</grid-summary-exp>
+                </column>
+                <column id="SHORTAGE_QTY" title="SHORTAGE_QTY" type="number">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>PLAN_RST</groups>
+                    <grid-summary-exp>SUM</grid-summary-exp>
+                </column>
+                <column id="SRC_DMND_ID" title="SRC_DMND_ID" type="string">
+                    <width>120</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>PLAN_RST</groups>
+                </column>
+                <column id="DMND_LOCAT_CD" title="DMND_LOCAT_CD" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>PLAN_RST</groups>
+                </column>
+                <column id="DMND_LOCAT_NM" title="DMND_LOCAT_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <groups>PLAN_RST</groups>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_MP_27_10_RST_CPT_01_LOAD">
+                    <service-id>GetDemandTargetInfo</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+            <operation id="EXPORT" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_27_30_CPT_99_01" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_MP_27_30_CPT_99_01_CLICK">
+                    <component-id>POP_UI_MP_27_30_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_UI_MP_27_30_CPT_99_02" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_MP_27_30_CPT_99_02_CLICK">
+                    <component-id>POP_UI_MP_27_30_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

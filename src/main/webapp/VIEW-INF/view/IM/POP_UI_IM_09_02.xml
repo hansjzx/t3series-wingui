@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_IM_09_02" version="2.0">
+    <component id="POP_UI_IM_09_02_DATA_01" type="DATA">
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_09_02_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_IM_09_02</title>
+            <width>430</width>
+            <height>183</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_09_02_WINDOW_01_R_GRID_01" type="R_GRID">
+        <props>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right" />
+            </toolbar>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>true</editable>
+                </column>
+                <column id="QUADRANT_NM" title="QUADRANT_NM" type="string">
+                    <width>60</width>
+                    <editable>false</editable>
+                </column>
+                <column id="QUADRANT_DESCRIP" title="QUADRANT_DESCRIP" type="string">
+                    <width>160</width>
+                    <editable>false</editable>
+                    <lang>true</lang>
+                </column>
+                <column id="PRPSAL_SVC_LV_VAL" title="PRPSAL_SVC_LV_VAL" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_SET_RST_CPT_01">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-QUADRANT_ID" reference-id="POP_UI_IM_09_02_WINDOW_01_R_GRID_01:selections" extract-by="ID" default-value="" />
+                        <parameter id="SET_VALUE-to-QUADRANT_NM" reference-id="POP_UI_IM_09_02_WINDOW_01_R_GRID_01:selections" extract-by="QUADRANT_NM" default-value="" />
+                        <parameter id="SET_VALUE-to-QUADRANT_DESCRIP" reference-id="POP_UI_IM_09_02_WINDOW_01_R_GRID_01:selections" extract-by="QUADRANT_DESCRIP" default-value="" />
+                        <parameter id="SET_VALUE-to-PRPSAL_SVC_LV_VAL" reference-id="POP_UI_IM_09_02_WINDOW_01_R_GRID_01:selections" extract-by="PRPSAL_SVC_LV_VAL" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="cond1">
+                            <component>DATA_02</component>
+                            <key>ClickLoc</key>
+                            <operator>equal</operator>
+                            <value>RST1_CELLBUTTONCLICK</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_SET_POP_CPT_01">
+                    <component-id>POP_UI_IM_09_01_CPT_T2_08_05</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_IM_09_02_WINDOW_01_R_GRID_01:selections" extract-by="QUADRANT_NM" />
+                    </parameters>
+                    <conditions>
+                        <condition id="cond1">
+                            <component>DATA_02</component>
+                            <key>ClickLoc</key>
+                            <operator>equal</operator>
+                            <value>RST1_DOUBLECLICK</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_SET_POP_CPT_02">
+                            <component-id>POP_UI_IM_09_01_CPT_T2_09_05</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_IM_09_02_WINDOW_01_R_GRID_01:selections" extract-by="PRPSAL_SVC_LV_VAL" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_SET_POP_CPT_03">
+                            <component-id>DATA_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="QUADRANT_ID" reference-id="POP_UI_IM_09_02_WINDOW_01_R_GRID_01:selections" extract-by="ID" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_IM_09_02_WINDOW_01_CLOSE">
+                    <component-id>POP_UI_IM_09_02_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SRC_SP_UI_IM_09_Q3_LODE">
+                    <service-id>SRV_UI_IM_09_Q3</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="LOCAT_ID" reference-id="RST_CPT_01:selections" extract-by="LOCAT_ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

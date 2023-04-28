@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_DP_07" template="DP/STANDARD_SPLIT:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_VIEW_META" version="2.0">
+    <publish parent="MENU_05_01" open="true" seq="215" />
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="RESULT_SPLIT" type="SPLIT">
+        <props>
+            <position>vertical</position>
+            <splits>
+                <split id="top" collapsible="false" />
+                <split id="bottom" collapsible="true" resizable="true" size="40%" />
+            </splits>
+        </props>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_op_search_init1">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+                <operation-call id="OPC_op_search_init2">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+                <operation-call id="OPC_op_search_init3">
+                    <component-id>SRH_CPT_T1_03_04</component-id>
+                    <operation-id>SELECT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_op_search_init4">
+                    <component-id>SRH_CPT_T1_04_04</component-id>
+                    <operation-id>SELECT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_op_search_init5">
+                    <component-id>SRH_CPT_T1_05_04</component-id>
+                    <operation-id>SELECT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_05" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_OPC_GRID2_LOAD">
+                    <component-id>RST_CPT_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+                <operation-call id="OPC_OPC_GRID_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="DATA_01" type="DATA">
+        <operations>
+            <operation id="SET">
+                <service-call id="data01_set_1">
+                    <parameters>
+                        <parameter id="FROM_DATE" value="" />
+                        <parameter id="TO_DATE" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <service-call id="SVC_GET_DATETIME_SCOPE_Q1">
+                    <service-id>SRV_GET_DATETIME_SCOPE_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="UI_ID" value="VERSION" />
+                        <parameter id="TIME_UOM_CD" value="WEEK" />
+                        <parameter id="FROM_DATETIME_VAL" value="-2" />
+                        <parameter id="TO_DATETIME_VAL" value="0" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>APPY_SCPE</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_04" type="DATEPICKER">
+        <props>
+            <width>190</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+            <value-id>FROM_DATE</value-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_DATE_TIME_LOAD_01">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+            <operation id="LOAD">
+                <reference-service-call id="DATA_01:SVC_GET_DATETIME_SCOPE_Q1" />
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_02_04" type="DATEPICKER">
+        <props>
+            <width>190</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+            <value-id>TO_DATE</value-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_DATE_TIME_LOAD_02">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+            <operation id="LOAD">
+                <reference-service-call id="DATA_01:SVC_GET_DATETIME_SCOPE_Q1" />
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>FROM_CURCY_CD</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_03_04" type="COMBOBOX">
+        <props>
+            <width>190</width>
+            <lang>true</lang>
+            <value-id>ID</value-id>
+            <text-id>CD</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SP_UI_DP_00_CM_CD_Q1_INIT">
+                    <component-id>SRH_CPT_T1_03_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_op_combo_select1">
+                            <component-id>SRH_CPT_T1_03_04</component-id>
+                            <operation-id>SELECT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_00_CM_CD_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_00_CM_CD_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_CM_CD_Q1_01" value="CURRENCY" />
+                        <parameter id="SP_UI_DP_00_CM_CD_Q1_02" value="ALL" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SELECT">
+                <service-call id="OPC_combo1_SET">
+                    <parameters>
+                        <parameter id="INDEX" value="0" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_04_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>TO_CURCY_CD</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_04_04" type="COMBOBOX">
+        <props>
+            <width>190</width>
+            <lang>true</lang>
+            <value-id>ID</value-id>
+            <text-id>CD</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SP_UI_DP_00_CM_CD_Q1_INIT">
+                    <component-id>SRH_CPT_T1_04_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_op_combo_select2">
+                            <component-id>SRH_CPT_T1_04_04</component-id>
+                            <operation-id>SELECT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_00_CM_CD_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_00_CM_CD_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_CM_CD_Q1_01" value="CURRENCY" />
+                        <parameter id="SP_UI_DP_00_CM_CD_Q1_02" value="ALL" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SELECT">
+                <service-call id="OPC_combo1_SET">
+                    <parameters>
+                        <parameter id="INDEX" value="0" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>CURCY_TP</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_05_04" type="COMBOBOX">
+        <props>
+            <width>190</width>
+            <lang>true</lang>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SRH_CPT_T1_06_01_INIT_pricetype">
+                    <component-id>SRH_CPT_T1_05_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_CONF_Q1_01" value="DP_CURRENCY_TYPE" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_02" value="" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                    </parameters>
+                    <success>
+                        <operation-call id="OPC_op_combo_select_pricetype">
+                            <component-id>SRH_CPT_T1_05_04</component-id>
+                            <operation-id>SELECT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_00_CONF_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+            <operation id="SELECT">
+                <service-call id="OPC_combo1_SET11">
+                    <parameters>
+                        <parameter id="INDEX" value="0" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <check-bar>true</check-bar>
+            <fit-style>evenFill</fit-style>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <toolbar use="true">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_REMOVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="RST_CPT_01:SVC_SP_UI_DP_07_D1:IM_DATA" extract-by="SP_UI_DP_07_D1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_o4">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_o42">
+                            <component-id>RST_CPT_02</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="RST_CPT_01:SVC_SP_UI_DP_07_S1:IM_DATA" extract-by="SP_UI_DP_07_S1_J_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_ops3">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_ops23">
+                            <component-id>RST_CPT_02</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>0</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="FROM_CURCY_CD" title="FROM_CURCY_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                    <candidate>
+                        <drop-down-count>5</drop-down-count>
+                        <values>
+                            <value-id>CD</value-id>
+                            <text-id>CD</text-id>
+                            <service-call id="dropDown">
+                                <service-id>SRV_GET_SP_UI_DP_00_CM_CD_Q1</service-id>
+                                <service-target>dp</service-target>
+                                <parameters>
+                                    <parameter id="SP_UI_DP_00_CM_CD_Q1_01" value="CURRENCY" />
+                                    <parameter id="SP_UI_DP_00_CM_CD_Q1_02" value="" />
+                                </parameters>
+                            </service-call>
+                        </values>
+                    </candidate>
+                </column>
+                <column id="FROM_CURCY_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="TO_CURCY_CD" title="TO_CURCY_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                    <candidate>
+                        <drop-down-count>5</drop-down-count>
+                        <values>
+                            <value-id>CD</value-id>
+                            <text-id>CD</text-id>
+                            <service-call id="dropDown">
+                                <service-id>SRV_GET_SP_UI_DP_00_CM_CD_Q1</service-id>
+                                <service-target>dp</service-target>
+                                <parameters>
+                                    <parameter id="SP_UI_DP_00_CM_CD_Q1_01" value="CURRENCY" />
+                                    <parameter id="SP_UI_DP_00_CM_CD_Q1_02" value="" />
+                                </parameters>
+                            </service-call>
+                        </values>
+                    </candidate>
+                </column>
+                <column id="TO_CURCY_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="BASE_DATE" title="BASE_DATE" type="datetime">
+                    <width>120</width>
+                    <editable if-new="true">false</editable>
+                    <format>yyyy-MM-dd</format>
+                    <datepicker>true</datepicker>
+                </column>
+                <column id="EXCHANGE_RATE" title="EXCHANGE_RATE" type="number">
+                    <width>80</width>
+                    <visible>true</visible>
+                    <editable>true</editable>
+                    <format>#,###.###</format>
+                    <excel-format>#,##0.0##</excel-format>
+                </column>
+                <column id="CURCY_TP_CD" title="CURCY_TP" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                    <lang>true</lang>
+                    <candidate>
+                        <drop-down-count>5</drop-down-count>
+                        <values>
+                            <value-id>CD</value-id>
+                            <text-id>CD</text-id>
+                            <service-call id="dropDown2">
+                                <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                                <service-target>dp</service-target>
+                                <parameters>
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_01" value="DP_CURRENCY_TYPE" />
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_02" value="" />
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                                </parameters>
+                            </service-call>
+                        </values>
+                    </candidate>
+                </column>
+                <column id="CREATE_BY" title="CREATE_BY" type="string">
+                    <width>80</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="CREATE_DTTM" title="CREATE_DTTM" type="datetime">
+                    <width>120</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd HH:mm:ss</format>
+                </column>
+                <column id="MODIFY_BY" title="MODIFY_BY" type="string">
+                    <width>80</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="MODIFY_DTTM" title="MODIFY_DTTM" type="datetime">
+                    <width>120</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd HH:mm:ss</format>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-edited">
+                <operation-call id="OPC_grid1_cell-edited_op1">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-FROM_CURCY_NM" reference-id="RST_CPT_01:dropDown" extract-by="CD_NM" />
+                    </parameters>
+                    <conditions>
+                        <condition id="OPC_grid1_cell-edited_cond_01">
+                            <on-column>FROM_CURCY_CD</on-column>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_grid1_cell-edited_op2">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-TO_CURCY_NM" reference-id="RST_CPT_01:dropDown" extract-by="CD_NM" />
+                    </parameters>
+                    <conditions>
+                        <condition id="OPC_grid1_cell-edited_cond_02">
+                            <on-column>TO_CURCY_CD</on-column>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="EXPORT">
+                <relieve-merge>true</relieve-merge>
+                <all-columns>true</all-columns>
+                <export-lookup>true</export-lookup>
+            </operation>
+            <operation id="IMPORT" />
+            <operation id="REMOVE_ROW">
+                <service-call id="SVC_SP_UI_DP_07_D1">
+                    <service-id>SRV_SET_SP_UI_DP_07_D1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="changes" reference-id="RST_CPT_01:checked" default-value="" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" default-value="" />
+                        <parameter id="CHANGE_TYPE" value="DELETE" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="INSERT_ROW">
+                <position>above</position>
+                <service-call id="SET_DEFAULT">
+                    <parameters>
+                        <parameter id="SET_DEFAULT-to-CURCY_TP_CD" reference-id="SRH_CPT_T1_05_04" extract-by="CD" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="SVC_SP_UI_DP_07_S1">
+                    <url>/view-config/json-save</url>
+                    <method>post</method>
+                    <parameters>
+                        <parameter id="procedure" value="SP_UI_DP_07_S1_J" />
+                        <parameter id="changes" reference-id="RST_CPT_01:changes" />
+                        <parameter id="P_USER_ID" reference-id="COMMON:loginId"/>
+                    </parameters>
+                </service-call>
+                <!--                <service-call id="SVC_SP_UI_DP_07_S1">
+                    <service-id>SRV_SET_SP_UI_DP_07_S1</service-id>
+                    <service-target>dp</service-target>
+                    <param-empty-check>changes</param-empty-check>
+                    <parameters>
+                        <parameter id="changes" reference-id="RST_CPT_01:changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" default-value="" />
+                        <parameter id="CHANGE_TYPE" value="CHANGE" default-value="" />
+                    </parameters>
+                </service-call>-->
+            </operation>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_07_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_07_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_07_Q1_01" value="data" default-value="" />
+                        <parameter id="SP_UI_DP_07_Q1_02" value="" />
+                        <parameter id="SP_UI_DP_07_Q1_03" reference-id="SRH_CPT_T1_01_04" default-value="" />
+                        <parameter id="SP_UI_DP_07_Q1_04" reference-id="SRH_CPT_T1_02_04" default-value="" />
+                        <parameter id="SP_UI_DP_07_Q1_05" reference-id="SRH_CPT_T1_03_04" extract-by="ID" default-value="" />
+                        <parameter id="SP_UI_DP_07_Q1_06" reference-id="SRH_CPT_T1_04_04" extract-by="ID" default-value="" />
+                        <parameter id="SP_UI_DP_07_Q1_07" reference-id="SRH_CPT_T1_05_04" extract-by="ID" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="RST_CPT_02_02" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PLAN_TP</init-value>
+        </props>
+    </component>
+    <component id="RST_CPT_02_03" type="COMBOBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <value-id>BUCKET</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SP_UI_DP_LATEST_VER_Q1_INIT">
+                    <component-id>RST_CPT_02_03</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_CONF_Q1_01" value="DP_PLAN_TYPE" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_02" value="" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                    </parameters>
+                    <success>
+                        <operation-call id="OPC_SP_UI_DP_00_CONF_Q1_INIT_plantype">
+                            <component-id>RST_CPT_02_03</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="INDEX" value="0" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+            <action event-type="select-item">
+                <operation-call id="OPC_RST_CPT_02_05_SELECT">
+                    <component-id>RST_CPT_02_05</component-id>
+                    <operation-id>SELECT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_00_CONF_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+            <operation id="SELECT">
+                <service-call id="OPC_combo1_SET">
+                    <parameters>
+                        <parameter id="INDEX" value="0" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_02_04" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>BUCKET</init-value>
+        </props>
+    </component>
+    <component id="RST_CPT_02_05" type="COMBOBOX">
+        <props>
+            <width>160</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>CD</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SP_UI_DP_LATEST_VER_Q1_INIT2">
+                    <component-id>RST_CPT_02_05</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_CONF_Q1_01" value="BUCKET" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_02" value="" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                    </parameters>
+                    <success>
+                        <operation-call id="OPC_SP_UI_DP_00_CONF_Q1_INIT_plantype2">
+                            <component-id>RST_CPT_02_05</component-id>
+                            <operation-id>SELECT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_00_CONF_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+            <operation id="SELECT">
+                <service-call id="OPC_combo2_SET">
+                    <parameters>
+                        <parameter id="VALUE" reference-id="RST_CPT_02_03" default-value="MONTH" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_02_06" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_OPC_GRID2_LOAD">
+                    <component-id>RST_CPT_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_02" type="R_GRID">
+        <props>
+            <selection-mode>block</selection-mode>
+            <state-bar>false</state-bar>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right" />
+            </toolbar>
+            <columns>
+                <column id="FROM_CURCY_CD" title="FROM_CURCY_CD" type="string">
+                    <width>120</width>
+                    <visible>true</visible>
+                    <merge>true</merge>
+                </column>
+                <column id="TO_CURCY_CD" title="TO_CURCY_CD" type="string">
+                    <width>120</width>
+                    <visible>true</visible>
+                    <fix>true</fix>
+                    <merge>true</merge>
+                </column>
+                <column id="DAT" type="double">
+                    <width>100</width>
+                    <background>#FFFFFFFF</background>
+                    <iteration>
+                        <prefix remove="true">DAT_</prefix>
+                    </iteration>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SRV_GET_SP_UI_DP_07_Q2">
+                    <service-id>SRV_GET_SP_UI_DP_07_Q2</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_07_Q2_01" reference-id="SRH_CPT_T1_01_04" default-value="" />
+                        <parameter id="SP_UI_DP_07_Q2_02" reference-id="SRH_CPT_T1_02_04" default-value="" />
+                        <parameter id="SP_UI_DP_07_Q2_03" reference-id="SRH_CPT_T1_03_04" default-value="" />
+                        <parameter id="SP_UI_DP_07_Q2_04" reference-id="SRH_CPT_T1_04_04" default-value="" />
+                        <parameter id="SP_UI_DP_07_Q2_05" reference-id="SRH_CPT_T1_05_04" default-value="" />
+                        <parameter id="SP_UI_DP_07_Q2_06" reference-id="RST_CPT_02_05" extract-by="CD" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET" />
+        </operations>
+    </component>
+</view>

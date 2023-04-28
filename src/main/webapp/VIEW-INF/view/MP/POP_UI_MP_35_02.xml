@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_MP_35_02" version="2.0">
+    <component id="POP_UI_MP_35_02_DATA_01" type="DATA">
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_35_02_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_MP_35_02</title>
+            <width>420</width>
+            <height>405</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_35_02_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="T1" title="COMM" expand="true" />
+            </tabs>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_35_02_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ROUTE_GRP</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_35_02_CPT_T1_01_04" type="INPUTBOX">
+        <props>
+            <width>150</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_35_02_CPT_T1_01_05" type="BUTTON">
+        <props>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_MP_35_02_WINDOW_02_OPEN">
+                    <component-id>POP_UI_MP_35_02_WINDOW_02</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_SET_POP_UI_MP_35_02_DATA_01_01">
+                            <component-id>POP_UI_MP_35_02_DATA_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="CLICK_FROM" value="ROUTE_GRP_CD" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_35_02_02_GRID_LOAD">
+                            <component-id>POP_UI_MP_35_02_02_GRID</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_UI_MP_35_02_CPT_T1_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ROUTE_GRP_DESCRIP</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_35_02_CPT_T1_02_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_35_02_CPT_T1_02_05" type="INPUTBOX">
+        <props>
+            <hidden>true</hidden>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_35_02_CPT_T1_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>STRT_DATE</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_35_02_CPT_T1_03_04" type="DATEPICKER">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+            <init-value>NONE</init-value>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_35_02_CPT_T1_04_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>END_DATE</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_35_02_CPT_T1_04_04" type="DATEPICKER">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+            <init-value>NONE</init-value>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_35_02_CPT_T1_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>MAX_RESOURCE_COUNT</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_35_02_CPT_T1_05_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_35_02_CPT_T1_06_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACTV_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_35_02_CPT_T1_06_04" type="CHECKBOX">
+        <props>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_35_02_CPT_CONFIRM" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_MP_35_02_CPT_CONFIRM_CLICK_01">
+                    <component-id>POP_UI_MP_35_02_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_SAVE">
+                            <component-id>POP_UI_MP_35_02_CPT_CONFIRM</component-id>
+                            <operation-id>SAVE</operation-id>
+                            <success>
+                                <operation-call id="OPC_RST_CPT_01_SAVE_SUCCESS_MSG_02">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Information" />
+                                        <parameter id="msg" reference-data="POP_UI_MP_35_02_CPT_CONFIRM:SRC_POP_UI_MP_35_02_CPT_CONFIRM_S1:IM_DATA" extract-by="SP_UI_MP_35_S1_P_RT_MSG" />
+                                        <parameter id="type" value="info" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="OPC_RST_CPT_01_LOAD">
+                                    <component-id>RST_CPT_01</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SAVE">
+                <service-call id="SRC_POP_UI_MP_35_02_CPT_CONFIRM_S1">
+                    <service-id>SRV_UI_MP_35_S1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="WRK_TYPE" value="SAVE" />
+                        <parameter id="ID" reference-id="RST_CPT_01:selections" extract-by="ID" />
+                        <parameter id="ROUTE_CLASS_DTL_ID" reference-id="POP_UI_MP_35_02_CPT_T1_02_05" />
+                        <parameter id="STRT_DATE" reference-id="POP_UI_MP_35_02_CPT_T1_03_04" />
+                        <parameter id="END_DATE" reference-id="POP_UI_MP_35_02_CPT_T1_04_04" />
+                        <parameter id="MAX_RESOURCE_COUNT" reference-id="POP_UI_MP_35_02_CPT_T1_05_04" />
+                        <parameter id="ACTV_YN" reference-id="POP_UI_MP_35_02_CPT_T1_06_04" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_MP_35_02_CPT_CANCLE" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_MP_35_02_CPT_CANCLE_CLICK_01">
+                    <component-id>POP_UI_MP_35_02_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_UI_MP_35_02_WINDOW_02" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>ROUTE_GRP</title>
+            <width>660</width>
+            <height>300</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_35_02_02_GRID" type="R_GRID">
+        <props>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>true</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="ROUTE_CLASS_VAL" title="ROUTE_CLASS_VAL" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <init-group-order>2</init-group-order>
+                </column>
+                <column id="DESCRIP" title="DESCRIP" type="string">
+                    <width>170</width>
+                    <editable>false</editable>
+                    <init-group-order>3</init-group-order>
+                </column>
+                <column id="ROUTE_CLASS_DTL_ID" title="ROUTE_CLASS_DTL_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="ROUTE_GRP" title="ROUTE_GRP" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ROUTE_GRP_DESCRIP" title="ROUTE_GRP_DESCRIP" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_POP_UI_MP_35_02_02_GRID_DBL_CLICK_01">
+                    <component-id>POP_UI_MP_35_02_WINDOW_02</component-id>
+                    <operation-id>CLOSE</operation-id>
+                    <conditions>
+                        <condition id="cond2">
+                            <component>DATA_02</component>
+                            <key>CLICK_FROM</key>
+                            <operator>equal</operator>
+                            <value>RST_CPT_01_ROUTE_GRP_CD</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_TO_ROUTE_GRP_CD_SET">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET_VALUE-to-ROUTE_GRP" reference-id="POP_UI_MP_35_02_02_GRID:selections" extract-by="ROUTE_GRP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_TO_ROUTE_GRP_DESCRIP_SET">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET_VALUE-to-ROUTE_GRP_DESCRIP" reference-id="POP_UI_MP_35_02_02_GRID:selections" extract-by="ROUTE_GRP_DESCRIP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_TO_ROUTE_CLASS_DTL_ID_SET">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET_VALUE-to-ROUTE_CLASS_DTL_ID" reference-id="POP_UI_MP_35_02_02_GRID:selections" extract-by="ROUTE_CLASS_DTL_ID" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_35_02_02_GRID_DBL_CLICK_02">
+                    <component-id>POP_UI_MP_35_02_WINDOW_02</component-id>
+                    <operation-id>CLOSE</operation-id>
+                    <conditions>
+                        <condition id="cond3">
+                            <component>POP_UI_MP_35_01_DATA_01</component>
+                            <key>CLICK_FROM</key>
+                            <operator>equal</operator>
+                            <value>ROUTE_GRP_CD</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_35_01_CPT_T1_01_04_SET">
+                            <component-id>POP_UI_MP_35_01_CPT_T1_01_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_MP_35_02_02_GRID:selections" extract-by="ROUTE_GRP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_35_01_CPT_T1_02_04_SET">
+                            <component-id>POP_UI_MP_35_01_CPT_T1_02_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_MP_35_02_02_GRID:selections" extract-by="ROUTE_GRP_DESCRIP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_35_01_CPT_T1_02_05_SET">
+                            <component-id>POP_UI_MP_35_01_CPT_T1_02_05</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_MP_35_02_02_GRID:selections" extract-by="ROUTE_CLASS_DTL_ID" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_35_02_02_GRID_DBL_CLICK_03">
+                    <component-id>POP_UI_MP_35_02_WINDOW_02</component-id>
+                    <operation-id>CLOSE</operation-id>
+                    <conditions>
+                        <condition id="cond5">
+                            <component>POP_UI_MP_35_02_DATA_01</component>
+                            <key>CLICK_FROM</key>
+                            <operator>equal</operator>
+                            <value>ROUTE_GRP_CD</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_35_02_CPT_T1_01_04_SET">
+                            <component-id>POP_UI_MP_35_02_CPT_T1_01_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_MP_35_02_02_GRID:selections" extract-by="ROUTE_GRP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_35_02_CPT_T1_02_04_SET">
+                            <component-id>POP_UI_MP_35_02_CPT_T1_02_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_MP_35_02_02_GRID:selections" extract-by="ROUTE_GRP_DESCRIP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_35_02_CPT_T1_02_05_SET">
+                            <component-id>POP_UI_MP_35_02_CPT_T1_02_05</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_MP_35_02_02_GRID:selections" extract-by="ROUTE_CLASS_DTL_ID" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_MP_35_02_Q2">
+                    <service-id>SRV_UI_MP_35_POP_Q1</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

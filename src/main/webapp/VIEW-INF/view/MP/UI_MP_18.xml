@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_MP_18" template="MP/UI_MP_18:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:COMM/COMM_SRH_POP_LOCAT:MP/POP_UI_MP_05_02" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_VIEW_META:COMM_SRH_LOCAT:COMM_SRH_POP_LOCAT:COMM_BTN_EXCEL:POP_UI_MP_05_02" version="2.0">
+    <publish parent="MENU_04_01" open="true" seq="180" />
+    <component id="TTL_CPT_03" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_01">
+                    <component-id>SRH_CPT_LOCAT_TP_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_02">
+                    <component-id>SRH_CPT_LOCAT_LV_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_03">
+                    <component-id>SRH_CPT_LOCAT_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_04">
+                    <component-id>SRH_CPT_LOCAT_NM_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_05">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_06">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_08">
+                    <component-id>SRH_CPT_CONTAINER_01_01_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_09">
+                    <component-id>SRH_CPT_CONTAINER_01_02_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_10">
+                    <component-id>SRH_CPT_CONTAINER_02_01_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_11">
+                    <component-id>SRH_CPT_CONTAINER_02_02_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_REFRESH_12">
+                    <component-id>SRH_CPT_T1_00_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_01_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_00_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>CUTOFF_DATE</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_00_04" type="DATEPICKER">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+            <value-id>BASE_DATE</value-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SRH_CPT_T1_00_04_LOAD">
+                    <component-id>SRH_CPT_T1_00_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+            <operation id="LOAD">
+                <service-call id="SRC_SRH_CPT_T1_00_04_LODE">
+                    <service-id>SRV_GET_COMBO_LIST</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="TYPE" value="MAT_SUPPLY_CAL_CUTOFF_DATE" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_CD</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_04" type="INPUTBOX">
+        <props>
+            <width>150</width>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_01_05" type="BUTTON">
+        <props>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_SRH_CPT_T1_01_05_CLICK_01">
+                    <component-id>POP_UI_MP_05_02_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_SRH_CPT_T1_01_05_CLICK_02">
+                            <component-id>POP_UI_MP_05_02_WINDOW_01_02</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_01_05_CLICK_03">
+                            <component-id>POP_UI_MP_05_02_WINDOW_01_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_01_05_CLICK_04">
+                            <component-id>POP_UI_MP_05_02_WINDOW_01_05</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_01_05_CLICK_05">
+                            <component-id>POP_UI_MP_05_02_WINDOW_01_GRD</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_CPT_T1_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_NM</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_02_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_07_01" type="LABEL">
+        <props>
+            <width>90</width>
+            <lang>true</lang>
+            <init-value>PO_NO</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_07_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_08_01" type="LABEL">
+        <props>
+            <width>90</width>
+            <lang>true</lang>
+            <init-value>INVOICE_NO</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_08_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_09_01" type="LABEL">
+        <props>
+            <width>90</width>
+            <lang>true</lang>
+            <init-value>CONTAINER_NO</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_09_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+        </props>
+    </component>
+    <component id="SRH_CPT_CONTAINER_01" type="CONTAINER">
+        <props>
+            <height>84</height>
+            <group-box>
+                <title>ETA</title>
+                <title-position>left</title-position>
+            </group-box>
+            <containers>
+                <container id="con1_1" expand="true" />
+            </containers>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_CONTAINER_01_01_01" type="LABEL">
+        <props>
+            <width>90</width>
+            <lang>true</lang>
+            <init-value>FROM_DATE</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_CONTAINER_01_01_04" type="DATEPICKER">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+            <init-value>none</init-value>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_CONTAINER_01_02_01" type="LABEL">
+        <props>
+            <width>90</width>
+            <lang>true</lang>
+            <init-value>TO_DATE</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_CONTAINER_01_02_04" type="DATEPICKER">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+            <init-value>none</init-value>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_CONTAINER_02" type="CONTAINER">
+        <props>
+            <height>84</height>
+            <group-box>
+                <title>ATA</title>
+                <title-position>left</title-position>
+            </group-box>
+            <containers>
+                <container id="con2_1" expand="true" />
+            </containers>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_CONTAINER_02_01_01" type="LABEL">
+        <props>
+            <width>90</width>
+            <lang>true</lang>
+            <init-value>FROM_DATE</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_CONTAINER_02_01_04" type="DATEPICKER">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+            <init-value>none</init-value>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_CONTAINER_02_02_01" type="LABEL">
+        <props>
+            <width>90</width>
+            <lang>true</lang>
+            <init-value>TO_DATE</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_CONTAINER_02_02_04" type="DATEPICKER">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+            <init-value>none</init-value>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <header-height>30</header-height>
+            <selection-mode>BLOCK</selection-mode>
+            <indicator>true</indicator>
+            <check-bar>false</check-bar>
+            <fit-style>none</fit-style>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>true</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <toolbar use="false" />
+            <columns>
+                <column id="LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>1</init-group-order>
+                </column>
+                <column id="LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>2</init-group-order>
+                </column>
+                <column id="LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>3</init-group-order>
+                </column>
+                <column id="LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <datepicker>true</datepicker>
+                    <init-group-order>4</init-group-order>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <fix>true</fix>
+                </column>
+                <column id="DESCRIP" title="DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="UOM_NM" title="UOM_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="VENDOR_DESCRIP" title="VENDOR_DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="PO_NO" title="PO_NO" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="BOOKING_DATE" title="BOOKING_DATE" type="date">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                </column>
+                <column id="ETD" title="ETD" type="date">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                </column>
+                <column id="ATD" title="ATD" type="date">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                </column>
+                <column id="ETA" title="ETA" type="date">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                </column>
+                <column id="ATA" title="ATA" type="date">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                </column>
+                <column id="GR_QTY" title="GR_QTY" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="GR_AMT" title="GR_AMT" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="WAHOUS_TP_NM" title="WAHOUS_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="STOCK_LOCAT_NM" title="STOCK_LOCAT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="STOCK_LOCAT_DESCRIP" title="STOCK_LOCAT_DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="INVOICE_NO" title="INVOICE_NO" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="CONTAINER_NO" title="CONTAINER_NO" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="CREATE_BY" title="CREATE_BY" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="CREATE_DTTM" title="CREATE_DTTM" type="datetime">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="EXPORT">
+                <all-columns>true</all-columns>
+            </operation>
+            <operation id="IMPORT" />
+            <operation id="LOAD">
+                <service-call id="SVC_UI_MP_18_Q1">
+                    <service-id>SRV_UI_MP_18_Q1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="CUTOFF_DATE" reference-id="SRH_CPT_T1_00_04" default-value="" />
+                        <parameter id="LOCAT_TP" reference-id="SRH_CPT_LOCAT_TP_04" default-value="" />
+                        <parameter id="LOCAT_LV" reference-id="SRH_CPT_LOCAT_LV_04" default-value="" />
+                        <parameter id="LOCAT_CD" reference-id="SRH_CPT_LOCAT_CD_04" default-value="" />
+                        <parameter id="LOCAT_NM" reference-id="SRH_CPT_LOCAT_NM_04" default-value="" />
+                        <parameter id="ITEM_CD" reference-id="SRH_CPT_T1_01_04" default-value="" />
+                        <parameter id="ITEM_NM" reference-id="SRH_CPT_T1_02_04" default-value="" />
+                        <parameter id="PO_NO" reference-id="SRH_CPT_T1_07_04" default-value="" />
+                        <parameter id="INVOICE_NO" reference-id="SRH_CPT_T1_08_04" default-value="" />
+                        <parameter id="CONTAINER_NO" reference-id="SRH_CPT_T1_09_04" default-value="" />
+                        <parameter id="ETA_FROM_DATE" reference-id="SRH_CPT_CONTAINER_01_01_04" default-value="" />
+                        <parameter id="ETA_TO_DATE" reference-id="SRH_CPT_CONTAINER_01_02_04" default-value="" />
+                        <parameter id="ATA_FROM_DATE" reference-id="SRH_CPT_CONTAINER_02_01_04" default-value="" />
+                        <parameter id="ATA_TO_DATE" reference-id="SRH_CPT_CONTAINER_02_02_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

@@ -1,0 +1,59 @@
+<script type="text/javascript">
+
+
+    content.getCreateComponentCompleteFlag().done(function () {
+        var flag;
+        var grid = cm.getComponent("RST_CPT_01");
+        var viewId = vo.getId();
+
+        grid.doAfterSetData = function (srvcCallID, data, resultData) {
+            var viewId = vo.getId();
+            var gridView = grid.getActualComponent();
+            if (viewId == "UI_DP_32" || viewId == "UI_DP_33") {
+                var dataProvider = gridView.getDataSource();
+                if (dataProvider.getRowCount() > 0) {
+                    window.requestAnimationFrame(function () {
+                        setCellStyle(gridView, dataProvider, data);
+                    });
+                }
+            }        
+        }
+
+        function setCellStyle( gridView, dataProvider, data) {
+
+            console.log("setCellStyle");
+
+            gridView.addCellStyle("textStyle", {
+                "foreground": '#F90000'
+                , "readOnly": true
+                , "editable": false
+            }, true);
+
+            var validationData = data.map(function(rw){
+                var keys = Object.keys(rw).filter(function(key){
+                    return key.includes(",INDE")
+                }).filter(function(key){
+                    return rw[key] < 0 
+                });
+                //console.log("keys", keys);
+                return keys;
+			});
+
+            //console.log("validationData", validationData);
+            var rowsIndex = Object.keys(validationData).filter(function(key){
+			    return validationData[key].length
+			});
+            //console.log("rowsIndex", rowsIndex);
+
+			rowsIndex.map(function(Index){
+                if(validationData[Index].length !== 0)
+                    gridView.setCellStyles(Index, validationData[Index], 'textStyle');
+                return;
+			});
+
+        }
+
+        
+    });
+
+</script>

@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_AD_04" template="COMM/STANDARD:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:AD/UI_AD_05_EXT" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_DEPARTMENT" version="2.0">
+    <publish parent="MENU_90" open="true" seq="50" />
+    <component id="TTL_CPT_03" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_SRH_CPT_T1_01_04_INIT">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_01_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="BASE_OPTION" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <width>80</width>
+            <lang>true</lang>
+            <init-value>GRP_NM</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="enterLoad">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <height>300</height>
+            <indicator>false</indicator>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="true">
+                <toolbar-button operation-id="EXPORT" enable="false" visible="false" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="false" visible="false" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="COPY" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="LOAD" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_UI_AD_04_RST_CPT_REMOVE_ROW_SUCCESS_00">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0002" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_UI_AD_04_RST_CPT_REMOVE_ROW_SUCCESS_01">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_UI_AD_04_RST_CPT_REMOVE_ROW_SUCCESS_02">
+                            <component-id>RST_CPT_02</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                    </success>
+                    <fail>
+                        <operation-call id="OPC_UI_AD_04_RST_CPT_REMOVE_ROW_FAIL_00">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0004" />
+                            </parameters>
+                        </operation-call>
+                    </fail>
+                </toolbar-button>
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_UI_AD_04_RST_CPT_SAVE_SUCCESS_00">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0001" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_UI_AD_04_RST_CPT_SAVE_SUCCESS_01">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_UI_AD_04_RST_CPT_SAVE_SUCCESS_02">
+                            <component-id>RST_CPT_02</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                    </success>
+                    <fail>
+                        <operation-call id="OPC_UI_AD_04_RST_CPT_SAVE_FAIL_00">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0004" />
+                            </parameters>
+                        </operation-call>
+                    </fail>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="id" title="id" type="string">
+                    <width>200</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="username" title="username" type="string">
+                    <width>200</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="grpCd" title="GRP_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="grpNm" title="GRP_NM" type="string">
+                    <width>100</width>
+                    <editable>true</editable>
+                </column>
+                <column id="grpDescrip" title="DESCRIP" type="string">
+                    <width>120</width>
+                    <editable>true</editable>
+                </column>
+                <column id="grpCnt" title="USER_CNT" type="number">
+                    <width>80</width>
+                    <editable if-new="true">false</editable>
+                    <datepicker>false</datepicker>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_RST_CPT_01_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+            <action event-type="cell-click">
+                <operation-call id="OPC_RST_CPT_02_LOAD">
+                    <component-id>RST_CPT_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_GET_USERGROUPS_UI_AD_04">
+                    <url>/system/groups</url>
+                    <parameters>
+                        <parameter id="group-nm" reference-id="SRH_CPT_T1_01_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="SVC_SP_UI_AD_04_SAVE">
+                    <url>/system/groups</url>
+                    <method>post</method>
+                    <parameters>
+                        <parameter id="data" reference-id="RST_CPT_01:changes" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="INSERT_ROW">
+                <edit-on-cell>true</edit-on-cell>
+                <service-call id="SET_DEFAULT_username">
+                    <parameters>
+                        <parameter id="SET_DEFAULT-to-username" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="REMOVE_ROW">
+                <service-call id="SVC_RST_CPT_01_REMOVE_ROW">
+                    <url>/system/groups</url>
+                    <method>delete</method>
+                    <parameters>
+                        <parameter id="data" reference-id="RST_CPT_01:checked" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_02_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <name>MENU_CD</name>
+            <name-position>left</name-position>
+            <placeholder>MENU_CD</placeholder>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="OPC_RST_CPT_02_LOAD_02">
+                    <component-id>RST_CPT_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_02_05" type="BUTTON">
+        <props>
+            <tooltip>Find views contain this word</tooltip>
+            <icon>search-plus</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_02_LOAD">
+                    <component-id>RST_CPT_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_02_10" type="BUTTON">
+        <props>
+            <icon>save</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_02_SAVE">
+                    <component-id>RST_CPT_02</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_RST_CPT_02_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0001" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                    <fail>
+                        <operation-call id="OPC_RST_CPT_02_SAVE_FAIL_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0004" />
+                            </parameters>
+                        </operation-call>
+                    </fail>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_02" type="R_GRID">
+        <props>
+            <height>500</height>
+            <state-bar>false</state-bar>
+            <check-bar>false</check-bar>
+            <fit-style>none</fit-style>
+            <header-sortable>false</header-sortable>
+            <pageable>false</pageable>
+            <columns>
+                <column id="grpCd" title="GRP_CD" type="string">
+                    <width>200</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="viewCd" title="MENU_CD" type="string">
+                    <width>200</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <font-bold>true</font-bold>
+                    <lookup>MENU_CD</lookup>
+                </column>
+                <column id="menuCd" title="MENU_NM" type="string" sort="asc">
+                    <width>200</width>
+                    <editable>false</editable>
+                    <text-alignment>left</text-alignment>
+                    <lang>true</lang>
+                    <font-bold>true</font-bold>
+                    <filterable>true</filterable>
+                </column>
+                <column id="op" type="bool">
+                    <width>160</width>
+                    <visible>true</visible>
+                    <editable>true</editable>
+                    <header-checkable>true</header-checkable>
+                    <iteration>
+                        <prefix remove="true">PERMISSION_TYPE_</prefix>
+                        <ordinal-position>CREATE,READ,UPDATE,DELETE,IMPORT</ordinal-position>
+                    </iteration>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_RST_CPT_02_LOAD">
+                    <url>/system/groups/:group-cd/permissions</url>
+                    <parameters>
+                        <parameter id="group-cd" reference-id="RST_CPT_01:selections" extract-by="grpCd" default-value="none" />
+                        <parameter id="menu-cd" reference-id="RST_CPT_02_04" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="SVC_RST_CPT_02_SAVE">
+                    <url>/system/groups/permissions</url>
+                    <method>post</method>
+                    <parameters>
+                        <parameter id="data" reference-id="RST_CPT_02:changes" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

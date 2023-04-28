@@ -1,0 +1,800 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_IM_06" template="IM/UI_IM_06:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:COMM/COMM_SRH_POP_LOCAT:IM/POP_UI_IM_06_01:IM/POP_UI_IM_06_01_01:IM/POP_UI_IM_06_02:IM/POP_UI_IM_06_03:IM/POP_UI_IM_06_04:IM/POP_UI_IM_06_04_01" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_VIEW_META:COMM_SRH_LOCAT:COMM_SRH_POP_LOCAT:COMM_BTN_EXCEL:POP_UI_IM_06_01:POP_UI_IM_06_01_01:POP_UI_IM_06_02:POP_UI_IM_06_03:POP_UI_IM_06_04:POP_UI_IM_06_04_01" version="2.0">
+    <publish parent="MENU_02_01" open="true" seq="60" />
+    <component id="DATA_01" type="DATA">
+        <operations>
+            <operation id="LOAD" />
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="DATA_02" type="DATA">
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SRC_UI_IM_GET_ID">
+                    <service-id>SRV_UI_CM_CODE</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="CODE" value="NEW_ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="DROPDOWN" type="DATA">
+        <actions>
+            <action event-type="meta">
+                <operation-call id="OPC_DROPDOWN_LOAD">
+                    <component-id>DROPDOWN</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="LOOKUP_CODE">
+                    <service-id>SRV_UI_CM_CODE</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="CODE" value="INVENTORY_MGMT_SYSTEM_TYPE, INVENTORY_SUPPLY_DATE_TYPE, ORDERING_SCHEDULE_TYPE" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_TTL_CPT_04_CLICK_01_01">
+                    <component-id>SRH_CPT_LOCAT_TP_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_CLICK_01_02">
+                    <component-id>SRH_CPT_LOCAT_LV_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_CLICK_01_03">
+                    <component-id>SRH_CPT_LOCAT_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_CLICK_01_04">
+                    <component-id>SRH_CPT_LOCAT_NM_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_CLICK_01_05">
+                    <component-id>SRH_CPT_T1_05_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_CLICK_01_06">
+                    <component-id>SRH_CPT_T1_06_04</component-id>
+                    <operation-id>SELECT</operation-id>
+                    <parameters>
+                        <parameter id="TEXT" value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_CLICK_01_07">
+                    <component-id>SRH_CPT_T1_07_04</component-id>
+                    <operation-id>SELECT</operation-id>
+                    <parameters>
+                        <parameter id="TEXT" value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_CLICK_01_08">
+                    <component-id>SRH_CPT_T1_08_04</component-id>
+                    <operation-id>SELECT</operation-id>
+                    <parameters>
+                        <parameter id="TEXT" value="" />
+                    </parameters>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_05" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_GRID_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="srh_t1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>CALENDAR_DESCRIP</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_05_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_06_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>STOCK_MGMT_SYSTEM</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_06_04" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SRH_CPT_T1_06_04_INIT">
+                    <component-id>SRH_CPT_T1_06_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SELECT" />
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:INVENTORY_MGMT_SYSTEM_TYPE" />
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_07_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>OPERT_BASE_TP</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_07_04" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SRH_CPT_T1_07_04_INIT">
+                    <component-id>SRH_CPT_T1_07_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SELECT" />
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:INVENTORY_SUPPLY_DATE_TYPE" />
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_08_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PO_CYCL_TP</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_08_04" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SRH_CPT_T1_08_04_INIT">
+                    <component-id>SRH_CPT_T1_08_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SELECT" />
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:ORDERING_SCHEDULE_TYPE" />
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_01_08" type="BUTTON">
+        <props>
+            <icon>add</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_IM_06_01_WINDOW_01_OPEN">
+                    <component-id>POP_UI_IM_06_01_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="LOAD_DATA_02">
+                            <component-id>DATA_02</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                    <complete>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_LOCAT_TP_NM">
+                            <component-id>POP_UI_IM_06_01_CPT_T1_01_05</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_LOCAT_LV">
+                            <component-id>POP_UI_IM_06_01_CPT_T1_02_05</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_LOCAT_CD">
+                            <component-id>POP_UI_IM_06_01_CPT_T1_03_05</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_LOCAT_NM">
+                            <component-id>POP_UI_IM_06_01_CPT_T1_04_05</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_CALENDAR_ID">
+                            <component-id>POP_UI_IM_06_01_CPT_T1_05_05</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_CALENDAR_DESCRIP">
+                            <component-id>POP_UI_IM_06_01_CPT_T1_06_05</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_STOCK_MGMT_SYSTEM">
+                            <component-id>POP_UI_IM_06_01_CPT_T1_07_05</component-id>
+                            <operation-id>INIT</operation-id>
+                            <success>
+                                <operation-call id="POP_UI_IM_06_01_WINDOW_01_LOAD_INIT_STOCK_MGMT_SYSTEM">
+                                    <component-id>POP_UI_IM_06_01_CPT_T1_07_05</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_OPERT_BASE_TP">
+                            <component-id>POP_UI_IM_06_01_CPT_T1_08_05</component-id>
+                            <operation-id>INIT</operation-id>
+                            <success>
+                                <operation-call id="POP_UI_IM_06_01_WINDOW_01_LOAD_OPERT_BASE_TP">
+                                    <component-id>POP_UI_IM_06_01_CPT_T1_08_05</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_ACTV_YN">
+                            <component-id>POP_UI_IM_06_01_CPT_T1_09_05</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_PO_CYCL_TP">
+                            <component-id>POP_UI_IM_06_01_CPT_T2_01_05</component-id>
+                            <operation-id>INIT</operation-id>
+                            <success>
+                                <operation-call id="POP_UI_IM_06_01_WINDOW_01_LOAD_PO_CYCL_TP">
+                                    <component-id>POP_UI_IM_06_01_CPT_T2_01_05</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_DAILY_01">
+                            <component-id>POP_UI_IM_06_01_CPT_T2_CONT_01_02</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_DAILY_02">
+                            <component-id>POP_UI_IM_06_01_CPT_T2_CONT_01_03</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_DAILY_03">
+                            <component-id>POP_UI_IM_06_01_CPT_T2_CONT_01_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_DAILY_04">
+                            <component-id>POP_UI_IM_06_01_CPT_T2_CONT_01_05</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_DAILY_05">
+                            <component-id>POP_UI_IM_06_01_CPT_T2_CONT_01_06</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_DAILY_06">
+                            <component-id>POP_UI_IM_06_01_CPT_T2_CONT_01_07</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_DAILY_07">
+                            <component-id>POP_UI_IM_06_01_CPT_T2_CONT_01_08</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_MONTHLY_GRID">
+                            <component-id>POP_UI_IM_06_01_CPT_T2_CONT_02_GRID</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_06_01_WINDOW_01_INIT_DAILY_21">
+                            <component-id>POP_UI_IM_06_01_TAB</component-id>
+                            <operation-id>ACTIVATE</operation-id>
+                            <parameters>
+                                <parameter id="ACTIVATE" value="T1" />
+                            </parameters>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_01_09" type="BUTTON">
+        <props>
+            <name />
+            <icon>minus</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_01_09_01">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>REMOVE_ROW</operation-id>
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_DELETE_SUCCESS_MSG_02">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="RST_CPT_01:SVC_SP_UI_IM_06_D1:IM_DATA" extract-by="SP_UI_IM_06_S1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_09_SUCCESS_01">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_01_10" type="BUTTON">
+        <props>
+            <name />
+            <icon>save</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_UI_IM_06_RST_CPT_01_10_CLICK_01">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="RST_CPT_01:SVC_SP_UI_IM_06_S1:IM_DATA" extract-by="SP_UI_IM_06_S1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_SAVE_SUCCESS_MSG_LOAD">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <header-height>40</header-height>
+            <selection-mode>BLOCK</selection-mode>
+            <check-bar>true</check-bar>
+            <fit-style>even</fit-style>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>true</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <cell-attributes>
+                <cell-attribute id="CA_RST_CPT_01_01">
+                    <conditions>
+                        <condition id="COND_CA_RST_CPT_01_01">
+                            <column>EXIST_EXCEPTION</column>
+                            <operator>equal</operator>
+                            <value>Y</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="APY_CA_RST_CPT_01_01">
+                            <column>EXCEPTION_SCHEDULE</column>
+                            <attrs>
+                                <background>#A9F5F2</background>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+            </cell-attributes>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="LOCAT_MGMT_ID" title="LOCAT_MGMT_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="LOCAT_ID" title="LOCAT_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="EXIST_EXCEPTION" title="EXIST_EXCEPTION" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>1</init-group-order>
+                </column>
+                <column id="LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <init-group-order>2</init-group-order>
+                </column>
+                <column id="LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <init-group-order>3</init-group-order>
+                </column>
+                <column id="LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <init-group-order>4</init-group-order>
+                </column>
+                <column id="CALENDAR_ID" title="CALENDAR_ID" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <init-group-order>5</init-group-order>
+                </column>
+                <column id="DESCRIP" title="DESCRIP" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <init-group-order>6</init-group-order>
+                </column>
+                <column id="INV_MGMT_SYSTEM_TP" title="STOCK_MGMT_SYSTEM_TP" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <groups>STOCK_MGMT_SYSTEM</groups>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:INVENTORY_MGMT_SYSTEM_TYPE" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="OPERT_BASE_TP" title="OPERT_BASE_TP" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <groups>STOCK_MGMT_SYSTEM</groups>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:INVENTORY_SUPPLY_DATE_TYPE" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="PO_CYCL_TP" title="PO_CYCL_TP" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:ORDERING_SCHEDULE_TYPE" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="PO_CYCL_TP_CD" title="PO_CYCL_TP" type="string">
+                    <width>150</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="EXCEPTION_SCHEDULE" title="EXCEPTION_SCHEDULE" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <button>true</button>
+                </column>
+                <column id="ACTV_YN" title="ACTV_YN" type="bool">
+                    <width>100</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                </column>
+                <column id="CREATE_BY" title="CREATE_BY" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="CREATE_DTTM" title="CREATE_DTTM" type="datetime">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+                <column id="MODIFY_BY" title="MODIFY_BY" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="MODIFY_DTTM" title="MODIFY_DTTM" type="datetime">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_POP_UI_IM_06_04_WINDOW_01_OPEN">
+                    <component-id>POP_UI_IM_06_04_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_IM_06_04_TAB_INIT">
+                            <component-id>POP_UI_IM_06_04_TAB</component-id>
+                            <operation-id>ACTIVATE</operation-id>
+                            <parameters>
+                                <parameter id="ACTIVATE" value="T1" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_06_04_CPT_T1_01_05_SET">
+                            <component-id>POP_UI_IM_06_04_CPT_T1_01_05</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="LOCAT_TP_NM" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_06_04_CPT_T1_02_05_SET">
+                            <component-id>POP_UI_IM_06_04_CPT_T1_02_05</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="LOCAT_LV" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_06_04_CPT_T1_03_05_SET">
+                            <component-id>POP_UI_IM_06_04_CPT_T1_03_05</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="LOCAT_CD" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_06_04_CPT_T1_04_05_SET">
+                            <component-id>POP_UI_IM_06_04_CPT_T1_04_05</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="LOCAT_NM" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_06_04_CPT_T1_05_05_SET">
+                            <component-id>POP_UI_IM_06_04_CPT_T1_05_05</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="CALENDAR_ID" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_06_04_CPT_T1_06_05_SET">
+                            <component-id>POP_UI_IM_06_04_CPT_T1_06_05</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="DESCRIP" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_06_04_CPT_T1_07_05_SET">
+                            <component-id>POP_UI_IM_06_04_CPT_T1_07_05</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="VALUE" reference-id="RST_CPT_01:selections" extract-by="INV_MGMT_SYSTEM_TP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_06_04_CPT_T1_08_05_SET">
+                            <component-id>POP_UI_IM_06_04_CPT_T1_08_05</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="VALUE" reference-id="RST_CPT_01:selections" extract-by="OPERT_BASE_TP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_06_04_CPT_T1_09_05_SET">
+                            <component-id>POP_UI_IM_06_04_CPT_T1_09_05</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="ACTV_YN" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_06_04_CPT_T2_01_05_SET">
+                            <component-id>POP_UI_IM_06_04_CPT_T2_01_05</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="VALUE" reference-id="RST_CPT_01:selections" extract-by="PO_CYCL_TP_CD" default-value="DAILY" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_06_04_01_WINDOW_01_GRD_SET_DATA_01">
+                            <component-id>DATA_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="LOCAT_MGMT_ID" reference-id="RST_CPT_01:selections" extract-by="LOCAT_MGMT_ID" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_06_04_CPT_T2_01_05_LOAD_POP_UI_IM_06_04_DATA_01">
+                            <component-id>POP_UI_IM_06_04_DATA_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="PO_CYCL_CALENDAR_ID" reference-id="RST_CPT_01:selections" extract-by="ID" />
+                            </parameters>
+                            <success>
+                                <operation-call id="OPC_POP_UI_IM_06_04_CPT_T2_CONT_01_02_SET">
+                                    <component-id>POP_UI_IM_06_04_CPT_T2_CONT_01_02</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="POP_UI_IM_06_04_DATA_01:SRC_UI_IM_06_Q2" extract-by="MON_YN" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="OPC_POP_UI_IM_06_04_CPT_T2_CONT_01_03_SET">
+                                    <component-id>POP_UI_IM_06_04_CPT_T2_CONT_01_03</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="POP_UI_IM_06_04_DATA_01:SRC_UI_IM_06_Q2" extract-by="TUE_YN" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="OPC_POP_UI_IM_06_04_CPT_T2_CONT_01_04_SET">
+                                    <component-id>POP_UI_IM_06_04_CPT_T2_CONT_01_04</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="POP_UI_IM_06_04_DATA_01:SRC_UI_IM_06_Q2" extract-by="WED_YN" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="OPC_POP_UI_IM_06_04_CPT_T2_CONT_01_05_SET">
+                                    <component-id>POP_UI_IM_06_04_CPT_T2_CONT_01_05</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="POP_UI_IM_06_04_DATA_01:SRC_UI_IM_06_Q2" extract-by="THU_YN" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="OPC_POP_UI_IM_06_04_CPT_T2_CONT_01_06_SET">
+                                    <component-id>POP_UI_IM_06_04_CPT_T2_CONT_01_06</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="POP_UI_IM_06_04_DATA_01:SRC_UI_IM_06_Q2" extract-by="FRI_YN" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="OPC_POP_UI_IM_06_04_CPT_T2_CONT_01_07_SET">
+                                    <component-id>POP_UI_IM_06_04_CPT_T2_CONT_01_07</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="POP_UI_IM_06_04_DATA_01:SRC_UI_IM_06_Q2" extract-by="SAT_YN" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="OPC_POP_UI_IM_06_04_CPT_T2_CONT_01_08_SET">
+                                    <component-id>POP_UI_IM_06_04_CPT_T2_CONT_01_08</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="SET" reference-id="POP_UI_IM_06_04_DATA_01:SRC_UI_IM_06_Q2" extract-by="SUN_YN" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_06_04_GRID_LOAD">
+                            <component-id>POP_UI_IM_06_04_GRID</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="PO_CYCL_CALENDAR_ID" reference-id="RST_CPT_01:selections" extract-by="ID" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+            <action event-type="button-click">
+                <operation-call id="OPC_POP_UI_IM_06_02_WINDOW_01_OPEN">
+                    <component-id>POP_UI_IM_06_02_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <conditions>
+                        <condition id="OPC_POP_UI_IM_06_02_WINDOW_01_OPEN_CON_1">
+                            <on-column>EXCEPTION_SCHEDULE</on-column>
+                            <column>PO_CYCL_TP_CD</column>
+                            <operator>equal</operator>
+                            <value>DAILY</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_IM_06_02_WINDOW_01_CPT_01_10_LOAD">
+                            <component-id>POP_UI_IM_06_02_WINDOW_01_CPT_01_10</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_IM_06_03_WINDOW_01_OPEN">
+                    <component-id>POP_UI_IM_06_03_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <conditions>
+                        <condition id="OPC_POP_UI_IM_06_03_WINDOW_01_OPEN_CON_1">
+                            <on-column>EXCEPTION_SCHEDULE</on-column>
+                            <column>PO_CYCL_TP_CD</column>
+                            <operator>equal</operator>
+                            <value>MONTHLY</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_IM_06_03_WINDOW_01_CPT_01_10_LOAD">
+                            <component-id>POP_UI_IM_06_03_WINDOW_01_CPT_01_10</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="EXPORT">
+                <all-columns>true</all-columns>
+            </operation>
+            <operation id="IMPORT" />
+            <operation id="LOAD">
+                <service-call id="SRC_RST_CPT_01_LODE">
+                    <service-id>SRV_UI_IM_06_Q1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="LOCAT_TP" reference-id="SRH_CPT_LOCAT_TP_04" default-value="" />
+                        <parameter id="LOCAT_LV" reference-id="SRH_CPT_LOCAT_LV_04" default-value="" />
+                        <parameter id="LOCAT_CD" reference-id="SRH_CPT_LOCAT_CD_04" default-value="" />
+                        <parameter id="LOCAT_NM" reference-id="SRH_CPT_LOCAT_NM_04" default-value="" />
+                        <parameter id="CALENDAR_DESCRIP" reference-id="SRH_CPT_T1_05_04" default-value="" />
+                        <parameter id="INV_MGMT_SYSTEM_TP" reference-id="SRH_CPT_T1_06_04" extract-by="CD_NM" default-value="" />
+                        <parameter id="OPERT_BASE_TP" reference-id="SRH_CPT_T1_07_04" extract-by="CD_NM" default-value="" />
+                        <parameter id="PO_CYCL_TP" reference-id="SRH_CPT_T1_08_04" extract-by="CD_NM" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="SVC_SP_UI_IM_06_S1">
+                    <service-id>SRV_UI_IM_06_S1</service-id>
+                    <service-target>mp</service-target>
+                    <param-empty-check>changes</param-empty-check>
+                    <parameters>
+                        <parameter id="WRK_TYPE" value="SAVE" />
+                        <parameter id="TYPE" value="PO_CALENDAR" />
+                        <parameter id="changes" reference-id="RST_CPT_01:changes" />
+                        <parameter id="PO_MONTHLY_SCH_ID" value="" />
+                        <parameter id="MON_YN" value="" />
+                        <parameter id="TUE_YN" value="" />
+                        <parameter id="WED_YN" value="" />
+                        <parameter id="THU_YN" value="" />
+                        <parameter id="FRI_YN" value="" />
+                        <parameter id="SAT_YN" value="" />
+                        <parameter id="SUN_YN" value="" />
+                        <parameter id="PO_DAILY_SCH_ID" value="" />
+                        <parameter id="DD" value="" />
+                        <parameter id="MONTHLY_ACTV_YN" value="" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="REMOVE_ROW">
+                <service-call id="SVC_SP_UI_IM_06_D1">
+                    <service-id>SRV_UI_IM_06_S1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="WRK_TYPE" value="DELETE" />
+                        <parameter id="changes" reference-id="RST_CPT_01:checked" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

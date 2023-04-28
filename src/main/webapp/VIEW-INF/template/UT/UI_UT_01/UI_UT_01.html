@@ -1,0 +1,262 @@
+<section id="contentsInner" class="STANDARD">
+  <!-- 메인 화면 -->
+  <div id="contents" class="vue-app content_area parentCon">
+    <div class="result_area" style="height: 100%">
+      <div class="row" style="height: 100%">
+        <div style="height: calc(100% - 44px) !important;" class="wingui_component">
+          <div id="noticeboard" style="width: 100%; height: 100%;">
+            <div class="input-area">
+              <div class="input-section" style="height: 20%;">
+                <kendo-dropdownlist style=" width:20%;margin-left:5px;" v-model="dropdownlistValue"
+                  :data-source="dataSourceArray" :data-text-field="'text'" :data-value-field="'value'" title="Please select an item">
+                </kendo-dropdownlist>
+                <input class="k-textbox" type="text" v-model="mSearch" @keyup.enter="doDataLoad(1)"
+                  style="margin-left:5px;margin-right:5px; width:70%" title="Please enter your keyword to search">
+                <kendo-button v-on:click="doDataLoad(1)" style="width:5%; font-size: 1.8rem" title="Search a post">
+                  <i class="fa fa-search"></i>
+                </kendo-button>
+              </div>
+            </div>
+            <div class="parentCon" style="height: 45px;">
+              <div class="leftCon">
+                <label style="margin-left:5px;margin-right:10px;font-size:1.3em;font-style: normal;"><span
+                    v-t="'NB_TOTAL_POST'"></span>: {{mTotal}}
+                </label>
+              </div>
+              <div class="rightCon">
+                <kendo-button v-on:click="openOptionPopup" :disabled="optionDisable"
+                  style="padding-top:7px; padding-bottom:7px; width:40px;" title="'NOTICEBOARD_OPTION_SET'">
+                  <i class="fa fa-lg fa-fw fa-gear"></i>
+                </kendo-button>
+              
+                <kendo-button v-on:click="doOpen('write')" style="padding-top:7px; padding-bottom:7px; width:40px;" title="Write a post">
+                  <i class="fa fa-lg fa-plus"></i>
+                </kendo-button>
+                <kendo-button v-on:click="doDelete" :disabled="mDeleteDisable"
+                  style="padding-top:7px; padding-bottom:7px; width:40px;" title="Delete a post">
+                  <i class="fa fa-lg fa-minus"></i>
+                </kendo-button>
+              </div>
+            </div>
+            <div class="wingui_component" style="margin-top:5px; height: calc(86% - 2px); overflow:auto">
+              <div class="result_list">
+                <kendo-grid id="list" ref="list" :data-source="localDataSource" :selectable="'cell'" :sortable="false"
+                  v-on:change="onChange" v-on:databound="onDataBound" :scrollable="false">
+                  <kendo-grid-column :title="'No'"
+                    :header-Attributes='{style: "border-right:1px solid lightgray;text-align:center; font-size: 12px; font-weight:bold; width:5%;"}'
+                    :attributes="{style:'text-align:center; font-size: 12px'}" :template="getNumberTemplate">
+                  </kendo-grid-column>
+                  <kendo-grid-column :title="fieldNameTitle"
+                    :header-Attributes='{style: "border-right:1px solid lightgray;text-align:center; font-size: 12px; font-weight:bold; width:71%"}'
+                    :attributes="{style:'font-size: 12px'}" :template="getTitleTemplate">
+                  </kendo-grid-column>
+                  <kendo-grid-column :title="fieldNameCreateDttm"
+                    :header-Attributes='{style: "border-right:1px solid lightgray;text-align:center; font-size: 12px; font-weight:bold; width:11%"}'
+                    :attributes="{style:'text-align:center; font-size: 12px'}" :template="getDateTemplate">
+                  </kendo-grid-column>
+                  <kendo-grid-column :field="'createByDisplayName'" :title="fieldNameCreateUser"
+                    :header-Attributes='{style: "border-right:1px solid lightgray;text-align:center; font-size: 12px; font-weight:bold; width:8%"}'
+                    :attributes="{style:'text-align:center; font-size: 12px'}">
+                  </kendo-grid-column>
+                  <kendo-grid-column :field="'deleteYn'" :title="fieldNameDeleteYn"
+                    :header-Attributes='{style: "text-align:center; font-size: 12px; font-weight:bold; width:5%"}'
+                    :attributes="{style:'text-align:center; font-size: 12px'}" :template="checkboxTemplate">
+                  </kendo-grid-column>
+                </kendo-grid>
+              </div>
+            </div>
+            <page-navigator v-on:paging="doDataLoad" :settings="mSettings"></page-navigator>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 글 작성 폼 -->
+    <div id="writeForm">
+      <kendo-window id="dialog" ref="windowRefWrite" :actions="mActions" :width="'1200px'" :height="'740px'" :min-height="740"
+        :title="mWindowTitle" :visible="mVisibleWrite" :modal="true" style="display:none" @refresh=""
+        @activate="doActivate" @deactivate="doDeactivate">
+        <div class="titleForm">
+          <label style="margin-left:5px;margin-right:10px;font-size:1.5em;font-style: normal;">
+            <span v-t="'NB_POST_TITLE'"></span> </label><input style="width:94.5%;line-height:25px;" v-model="mTitle"
+            maxlength="60">
+        </div>
+
+        <div class="editorForm">
+          <div class="contentForm">
+            <div class="leftForm" style="float:left;">
+              <label style="margin-left:5px;margin-right:10px;font-size:1.5em;font-style: normal;"><span
+                  v-t="'NB_POST_CONTENT'"></span></label>
+            </div>
+            <div class="rightCon" style="float: right;">
+              <label style="margin-right:10px; font-size:1.4em; font-style:normal;">
+                <span v-t="'NB_NOTICE'"></span>
+                <input type="checkbox" checked="checked" style="width:15px; height:15px; margin-left: 10px;" v-model="mNoticeYn" />
+              </label>
+            </div>
+          </div>
+          <kendo-editor :resizable-toolbar="true" :resizable-max="420"
+            style="height:100%; margin-bottom: 5px;" rows="10" cols="50" v-model="mContent" :execute="doSetBorder"
+            ref="kedoEditor" :tools="tools" :messages="messages" id="editor">
+          </kendo-editor>
+        </div>
+        <div class="attatchForm">
+          <div id="upload-app" class="dropZoneElement" style="overflow:auto; height:100%">
+            <div id="vueapp" class="demo-section k-content">
+              
+              <input name="files" id="fileUpload" type="file" ref="fileupload" style="margin-top:5px" />
+
+              <!--
+              <label for="fileUploadForm" class="btn" style="font-size:1.8em; width: 100px;">
+                <i class="fa fa-files-o" aria-hidden="true"></i>
+              </label>
+              <input id="fileUploadForm" class="files" name="files" type="file" ref="fileupload" style="margin-top:5px; visibility:hidden;" />
+              -->
+              
+            </div>
+          </div>
+        </div>
+        <div style="margin-left:45%;margin-right:45%;margin-top:15px;bottom: 0%;">
+          <div id="write-link-file" class="file-list"></div>
+          <kendo-button v-on:click="doCloseWrites" style="width: 40px; height: 30px;" title="Cancle"><i class="fa fa-lg fa-arrow-left"></i></span></kendo-button>
+          <kendo-button v-on:click="doConfirm" style="width: 40px; height: 30px;" title="Save"><i class="fa fa-lg fa-save"></i></kendo-button>
+        </div>
+      </kendo-window>
+    </div>
+
+    <!-- 상세 보기 폼 -->
+    <div id="detailForm">
+      <kendo-window id="detail" ref="windowRefDetail" :actions="mActions" :width="'1200px'" :height="'700px'" :min-height="400"
+        :title="mWindowTitle" :visible="mVisibleDetail" :modal="true" style="display:none" @refresh="" @activate=""
+        @deactivate="doDeactivate" :resizable="true">
+        <div class="detail" style="height: calc(100% - 50px);">
+          <div class="titleForm" style=" text-align: left; height: 30px;">  <!-- 35  -->
+            <label style="margin-left:5px; margin-right:10px; font-size:1.5em; font-style: normal;">
+              {{detailObject.title}}
+            </label>
+          </div>
+          <div class="info" style="text-align: center;">
+            <div class="info2" style="float:left; width: 100%;"> <!-- 25 -->
+              <label style="float:left; border: 1px solid #ccc; margin-left:5px; margin-right:10px; font-style: normal;"><strong><span v-t="'NB_POST_DATE'"></span></strong>
+                &nbsp;&nbsp;{{mLocalCreateDttm}}</label>
+              <label style="float:left; margin-left:15px; margin-right:10px; font-style: normal;"><strong><span v-t="'WRITER'"></span>
+                </strong>&nbsp;&nbsp;{{detailObject.createByDisplayName}}</label>
+            </div>
+          </div>
+          <div class="detail-content" style="margin-left:5px; margin-right:5px; height: calc (100% - 200px); padding-bottom: 12px;">
+            <p>
+              <div v-html="detailObject.content" style="height:100%; margin-bottom: 5px; overflow:auto;"></div>
+            </p>
+            </br>
+          </div>
+          <div id="result_list" style="margin-left:5px; width: 99%; height:100px;">
+            <div id="link-file" class="file-list" style="overflow:auto; height:100%"></div>
+          </div>
+        </div>
+        <div style="float:right; margin-top:15px; bottom: 0%;"> <!-- 30 -->
+          <kendo-button v-on:click="doCloseDetails" style="width: 40px; height: 30px;" title="Cancle"><i class="fa fa-lg fa-arrow-left"></i></span></kendo-button>
+          <kendo-button v-if="mLoginId==detailObject.createBy" v-on:click="doOpenModify" style="width: 40px; height: 30px;" title="Edit a Post">
+            <i class="fa fa-lg fa-wrench"></i>
+          </kendo-button>
+        </div>
+      </kendo-window>
+
+      <!-- 에디터 내부 이미지 업로드 폼 -->
+      <div id="uploadForm">
+        <kendo-window id="upload" ref="windowRefUpload" :actions="mActions" :width="430" :height="300"
+          :title="mWindowTitle" :visible="mVisibleUpload" :modal="true" style="display:none" @refresh="" @activate=""
+          @deactivate="doDeactivate" :resizable="false">
+
+          <div style="display: inline-block; width: 100%; height: 10%; margin-bottom: 20px;">
+            <div class="parentCon" style="height:10%; margin-bottom: 20px;">
+              <div class="leftCon" style="float: left; margin-left: 12px;">
+                <label for="file" class="btn" style="font-size:1.5em; background: whitesmoke"><span v-t="'NB_IMAGE_UPLOAD'"></span></label>
+                <!--
+                <label for="file" class="btn" style="font-size:1.8em; background: whitesmoke; width: 100px;">
+                  <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                </label>
+                -->
+                <input id="file" class="hide_file" type="file" @change="doUploadImage($event.target)"
+                  @drop="doUploadImage($event.target)" multiple style="margin-left:8px; visibility:hidden;">
+                </input>
+              </div>
+            </div>
+          </div>
+          <div style=" height: 10%; margin-bottom: 30px; margin-top:20px;">
+            <div style="float: left; text-align: right; ">
+              <label style="margin-left:17px; margin-right:10px;font-size:1.5em;"><span v-t="'NB_WIDTH'"></span>
+              </label>
+            </div>
+            <div style="float: left;">
+              <input class="k-textbox" type="text" v-model="mImageWidth"
+                style="margin-left:5px; margin-right:5px; width:40px">
+            </div>
+            <label style="margin-left:10px; font-size:1.2em; float: left;"><span>px</span>
+            </label>
+          </div>
+          <div>
+            &nbsp;
+          </div>
+          <div style="height: 10%; margin-bottom: 20px;">
+            <div style="float: left; text-align: right;">
+              <label style="margin-left:17px; margin-right:10px;font-size:1.5em;"><span v-t="'NB_HEIGHT'"></span>
+              </label>
+            </div>
+            <div style="float: left;">
+              <input class="k-textbox" type="text" v-model="mImageHeight"
+                style="margin-left:5px; margin-right:5px; width:40px">
+            </div>
+            <label style="margin-left:10px; font-size:1.2em; float: left;"><span>px</span>
+            </label>
+          </div>
+
+          <div style="bottom: 0%; text-align: right;">
+            <kendo-button v-on:click="doCloseUpload" style="width:30px; height:25px" title="Cancle"><i class="fa fa-lg fa-arrow-left"></i></kendo-button>
+            <kendo-button v-on:click="doDraw" style="width:30px; height:25px" title="Save"><i class="fa fa-lg fa-save"></i></kendo-button>
+          </div>
+        </kendo-window>
+
+      </div>
+    </div>
+
+    <!Option Popup>
+    <kendo-window id="dialog" ref="optionPopup" :title="titleOptionPopup" :width="'450px'" :height="'230px'" 
+      :visible="false" :modal="true" style="display:none" @activate="activateOptionPopup" 
+      @deactivate="deactivateOptionPopup" @resize="doOptionPopupResize">
+
+      <div class="popup_area" style="width: 100%; height: 60%;">
+        <div class="parentCon" style="margin: 5px; margin-top: 15px;">
+          <span class ="leftCon">
+            <span class="kd_labelWrap" v-t="'NOTICEBOARD_BADGE_USAGE'" style="margin-left: 20px; margin-right: 10px;"></span>
+            <kendo-switch name="switch" :checked="badgeOn" :change="changeUseBadge">
+            </kendo-switch>
+            <span class="kd_labelWrap" v-t="'NOTICEBOARD_NEW_CONTENTS_RANGE'" style="margin-left: 50px; margin-right: 10px;"></span>
+            <kendo-numerictextbox :format="'n0'"
+                                  :min="1"
+                                  :max="100"
+                                  :step="1"
+                                  :default="1"
+                                  style="width: 80px;"
+                                  v-model="newContentsRangeDays">
+            </kendo-numerictextbox>
+          </span>
+          <span class="rightCon">
+          </span>
+        </div>
+
+        <div class="parentCon" style="margin-top: 40px;">
+          <kendo-button ref="btnSaveOption" @click="saveNoticeBoardBadge" style="position:absolute; left:calc(42% - 50px); width: 80px; height: 28px;">
+            <span class="kd_labelWrap" v-t="'SAVE'" style="font-weight: bolder; font-size: 12px; width:80px;">
+            </span>
+          </kendo-button>           
+          <kendo-button ref="btnOptionPopupClose" @click="closeOptionPopup" style="position:absolute; left:calc(64% - 50px); width: 80px; height: 28px;">
+            <span class="kd_labelWrap" v-t="'CLOSE'" style="font-weight: bolder; font-size: 12px; width:80px;">
+            </span>
+          </kendo-button>
+        </div>   
+
+      </div>
+    </kendo-window>
+
+  </div>
+</section>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_CM_16_03" version="2.0">
+    <component id="POP_CPT_03" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>CONFRM_SUBJECT_PLAN</title>
+            <width>500</width>
+            <height>340</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_CPT_03_01" type="R_GRID">
+        <props>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="DTL_ID" title="DTL_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="STEP" title="STEP" type="number">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+                <column id="PROCESS_DESCRIP" title="PROCESS_DESCRIP" type="string">
+                    <width>200</width>
+                    <editable>false</editable>
+                </column>
+                <column id="PROCESS_TP_NM" title="PROCESS_TP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_POP_CPT_02_T5_01_02_SET">
+                    <component-id>POP_CPT_02_T5_01_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_CPT_03_01:selections" extract-by="STEP" />
+                    </parameters>
+                    <conditions>
+                        <condition id="COND_POP_UI_CM_16_02_CLICK_02">
+                            <component>DATA_03</component>
+                            <key>VIEW_ID</key>
+                            <on-column>DTL_ID, PROCESS_DESCRIP</on-column>
+                            <operator>equal</operator>
+                            <value>POP_UI_CM_16_02</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_CPT_02_T5_01_03_SET">
+                            <component-id>POP_CPT_02_T5_01_03</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_CPT_03_01:selections" extract-by="DTL_ID" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_02_T5_02_02_SET">
+                            <component-id>POP_CPT_02_T5_02_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_CPT_03_01:selections" extract-by="PROCESS_DESCRIP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_03_CLOSE">
+                            <component-id>POP_CPT_03</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_CPT_07_T5_01_02_SET">
+                    <component-id>POP_CPT_07_T5_01_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_CPT_03_01:selections" extract-by="STEP" />
+                    </parameters>
+                    <conditions>
+                        <condition id="COND_POP_UI_CM_16_02_CLICK_01">
+                            <component>DATA_03</component>
+                            <key>VIEW_ID</key>
+                            <on-column>DTL_ID, PROCESS_DESCRIP</on-column>
+                            <operator>notEqual</operator>
+                            <value>POP_UI_CM_16_02</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_CPT_07_T5_01_03_SET">
+                            <component-id>POP_CPT_07_T5_01_03</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_CPT_03_01:selections" extract-by="DTL_ID" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_07_T5_02_02_SET">
+                            <component-id>POP_CPT_07_T5_02_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_CPT_03_01:selections" extract-by="PROCESS_DESCRIP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_03_CLOSE">
+                            <component-id>POP_CPT_03</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_CM_16_Q2_POP_CPT_03_LOAD">
+                    <service-id>SRV_UI_CM_16_Q2</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="Q_TYPE" value="CONFRM_PLAN_SNRIO" />
+                        <parameter id="VAL_01" reference-id="RST_CPT_01:selections" extract-by="MST_ID" default-value="" />
+                        <parameter id="VAL_02" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

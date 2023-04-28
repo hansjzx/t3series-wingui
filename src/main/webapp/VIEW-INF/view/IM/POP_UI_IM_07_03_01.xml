@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_IM_07_03_01" version="2.0">
+    <component id="POP_UI_IM_07_03_01_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_IM_07_03_01</title>
+            <width>550</width>
+            <height>200</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_07_03_01_WINDOW_01_GRD" type="R_GRID">
+        <props>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="VIEW_ID" title="VIEW_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="LOCAT_ID" title="LOCAT_ID" type="string">
+                    <width>80</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="POP_UI_IM_07_03_01_WINDOW_01_GRD_SETDATA_POP_UI_IM_07_03_CPT_T1_01_05">
+                    <component-id>POP_UI_IM_07_03_CPT_T1_01_05</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_IM_07_03_01_WINDOW_01_GRD:selections" extract-by="LOCAT_TP_NM" />
+                    </parameters>
+                    <success>
+                        <operation-call id="POP_UI_IM_07_03_01_WINDOW_01_GRD_SETDATA_POP_UI_IM_07_03_CPT_T1_02_05">
+                            <component-id>POP_UI_IM_07_03_CPT_T1_02_05</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_IM_07_03_01_WINDOW_01_GRD:selections" extract-by="LOCAT_LV" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_07_03_01_WINDOW_01_GRD_SETDATA_POP_UI_IM_07_03_CPT_T1_03_05">
+                            <component-id>POP_UI_IM_07_03_CPT_T1_03_05</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_IM_07_03_01_WINDOW_01_GRD:selections" extract-by="LOCAT_CD" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_07_03_01_WINDOW_01_GRD_SETDATA_POP_UI_IM_07_03_CPT_T1_04_05">
+                            <component-id>POP_UI_IM_07_03_CPT_T1_04_05</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_IM_07_03_01_WINDOW_01_GRD:selections" extract-by="LOCAT_NM" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_07_03_01_WINDOW_01_GRD_CLOSE_POP_UI_IM_07_03_01_WINDOW_01">
+                            <component-id>POP_UI_IM_07_03_01_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                        <operation-call id="POP_UI_IM_07_03_01_WINDOW_01_GRD_SETDATA_DATA_01">
+                            <component-id>DATA_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="LOCAT_ID" reference-id="POP_UI_IM_07_03_01_WINDOW_01_GRD:selections" extract-by="LOCAT_ID" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SC_RST_CPT_01_LOAD">
+                    <service-id>SRV_UI_IM_LOC_POP_Q4</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_DP_25_POPUP_ATTR" version="2.0">
+    <component id="UI_DP_25_POPUP_ATTR_WINDOWS" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>ATTR_POP</title>
+            <width>500</width>
+            <height>400</height>
+            <visible>false</visible>
+            <modal>false</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="ATTR_POP_SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <width>97</width>
+            <lang>true</lang>
+            <init-value>ITEM_CD</init-value>
+        </props>
+    </component>
+    <component id="ATTR_POP_SRH_CPT_T1_01_02" type="INPUTBOX">
+        <props>
+            <width>130</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="SVC_DEFULAT_SET_001">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="ITEM" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="ATTR_POP_SRH_CPT_T1_01_03" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACCOUNT_CD</init-value>
+        </props>
+    </component>
+    <component id="ATTR_POP_SRH_CPT_T1_01_04" type="INPUTBOX">
+        <props>
+            <width>130</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="SVC_DEFULAT_SET_002">
+                    <parameters>
+                        <parameter id="SET" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="ATTR_POP_SRH_CPT_T1_01_05" type="LABEL">
+        <props>
+            <width>97</width>
+            <lang>true</lang>
+            <init-value>AUTH_TP_ID</init-value>
+        </props>
+    </component>
+    <component id="ATTR_POP_SRH_CPT_T1_01_06" type="INPUTBOX">
+        <props>
+            <width>130</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="SVC_DEFULAT_SET_003">
+                    <parameters>
+                        <parameter id="SET" reference-id="SRH_CPT_T1_04_04" extract-by="CD" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="ATTR_POP_RST_CPT_01" type="R_GRID">
+        <props>
+            <height>300</height>
+            <selection-mode>ROWS</selection-mode>
+            <state-bar>false</state-bar>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="ITEM_MST_ID" type="string">
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ACCOUNT_ID" type="string">
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="CATEGORY" title="ATTR" type="string">
+                    <width>120</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <lang>true</lang>
+                </column>
+                <column id="VAL" type="string">
+                    <width>70</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <iteration>
+                        <prefix remove="true">VAL_</prefix>
+                        <delimiter>-</delimiter>
+                    </iteration>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_25_POPUP_ATTR_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_25_POPUP_ATTR_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="ITEM_CD" reference-id="RST_CPT_01:selections" extract-by="ITEM" default-value="" />
+                        <parameter id="ACCOUNT_CD" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT" default-value="" />
+                        <parameter id="SALES_LV_CD" reference-id="RST_CPT_01:selections" extract-by="SALES" default-value="" />
+                        <parameter id="AUTH_TP_ID" reference-id="SRH_CPT_T1_04_04" extract-by="ID" default-value="" />
+                        <parameter id="AUTH_TP_CD" reference-id="SRH_CPT_T1_04_04" extract-by="CD" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

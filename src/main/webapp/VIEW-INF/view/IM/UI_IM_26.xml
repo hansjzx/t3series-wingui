@@ -1,0 +1,894 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_IM_26" template="IM/UI_IM_26:IM/UI_IM_26_EXT:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:COMM/COMM_SRH_POP_LOCAT:IM/POP_UI_IM_26_03:IM/POP_UI_IM_26_04:IM/POP_UI_IM_09_03:DP/UI_DP_COMM:DP/UI_DP_POPUP_ITEM_TREE_POP:IM/POP_UI_IM_ITEM_TREE_EXT" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_VIEW_META:COMM_SRH_LOCAT:COMM_SRH_ITEM_CDNM:COMM_SRH_POP_LOCAT:COMM_BTN_EXCEL:POP_UI_IM_26_03:POP_UI_IM_26_04:POP_UI_IM_26_01:UI_DP_POPUP_ITEM_TREE" version="2.0">
+    <publish parent="MENU_02_01" open="true" seq="41" />
+    <component id="DATA_03" type="DATA">
+        <actions>
+            <action event-type="meta">
+                <operation-call id="DATA_03_LOAD">
+                    <component-id>DATA_03</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="LOOKUP_CODE">
+                    <service-id>SRV_UI_CM_CODE</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="CODE" value="INVENTORY_MGMT_SYSTEM_TYPE, PERIODIC_PO_YN, INVENTORY_SUPPLY_DATE_TYPE, STOCK_LOCATION_STRATEGY, DEMAND_RATE_CAL_METHOD, ROP_DECISION_RULE, EOQ_DECISION_RULE" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="DP_DATA_POP_ITEM" type="DATA">
+        <actions>
+            <action event-type="change-data">
+                <operation-call id="pop-item-main-search1">
+                    <component-id>SRH_CPT_ITEM_CD_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="DP_DATA_POP_ITEM:ITEM_CD" extract-by="ITEM_CD" delimiter="|" default-value="" />
+                    </parameters>
+                    <complete>
+                        <operation-call id="pop-item-main-search2">
+                            <component-id>SRH_CPT_ITEM_NM_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="DP_DATA_POP_ITEM:ITEM_NM" extract-by="ITEM_NM" delimiter="|" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="item-set">
+                    <parameters>
+                        <parameter id="ITEM_CD" />
+                        <parameter id="ITEM_NM" />
+                        <parameter id="EVENT_TYPE" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_TTL_CPT_04_CLICK_01_01">
+                    <component-id>SRH_CPT_LOCAT_TP_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_CLICK_01_02">
+                    <component-id>SRH_CPT_LOCAT_LV_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_CLICK_01_03">
+                    <component-id>SRH_CPT_LOCAT_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_CLICK_01_04">
+                    <component-id>SRH_CPT_LOCAT_NM_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_CLICK_01_06">
+                    <component-id>SRH_CPT_ITEM_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_CLICK_01_07">
+                    <component-id>SRH_CPT_ITEM_NM_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_05" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_GRID_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_ITEM_CD_05" type="BUTTON">
+        <props>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_openItemWindow1">
+                    <component-id>UI_DP_POPUP_ITEM_TREE_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_CPT_T1_01_04" type="CHECKBOX">
+        <props>
+        	<name>TOTAL_DISP</name>
+        	<name-position>right</name-position>
+        	<lang>true</lang>
+        	<init-value>true</init-value>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="RST_CPT_01_01" type="BUTTON">
+        <props>
+            <tooltip>BUNDLE_CREATE</tooltip>
+            <icon>file</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_IM_09_03_WINDOW_01_OPEN">
+                    <component-id>POP_UI_IM_09_03_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_01_02" type="BUTTON">
+        <props>
+            <name>PERIOD_INFO_MGMT</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="openWindow1">
+                    <component-id>POP_UI_IM_26_03_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_LOAD_POP_UI_IM_26_03_WINDOW_01_R_GRID_01">
+                            <component-id>POP_UI_IM_26_03_WINDOW_01_R_GRID_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="ID" reference-id="RST_CPT_01:selections" extract-by="ID" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_01_10" type="BUTTON">
+        <props>
+            <icon>save</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_SAVE_RST_CPT_01">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_LOAD_RST_CPT_01">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_UI_IM_26_GRD_01_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="RST_CPT_01:SVC_SP_UI_IM_26_S1:IM_DATA" extract-by="SP_UI_IM_26_S1_J_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <header-height>55</header-height>
+            <selection-mode>BLOCK</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>none</fit-style>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>120</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="TOTAL_GROUP" title="TOTAL_GROUP" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>160</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <filterable>true</filterable>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>160</width>
+                    <editable>false</editable>
+                    <filterable>true</filterable>
+                    <fix>true</fix>
+                </column>
+                <column id="DESCRIP" title="DESCRIP" type="string">
+                    <width>160</width>
+                    <editable>false</editable>
+                </column>
+                <column id="UOM_NM" title="UOM_NM" type="string">
+                    <width>50</width>
+                    <editable>false</editable>
+                </column>
+                <column id="VAL_01" title="VAL_01" type="string">
+                    <width>50</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="QUADRANT_DESCRIP" title="QUADRANT_DESCRIP" type="string">
+                    <width>160</width>
+                    <editable>false</editable>
+                    <lang>true</lang>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_02" title="VAL_02" type="string">
+                    <width>70</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_03" title="VAL_03" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_04" title="VAL_04" type="string">
+                    <width>70</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_05" title="VAL_05" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_06" title="VAL_06" type="string">
+                    <width>110</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_07" title="VAL_07" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_08" title="VAL_08" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_09" title="VAL_09" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_10" title="VAL_10" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_11" title="VAL_11" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_12" title="VAL_12" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_13" title="VAL_13" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_14" title="VAL_14" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_15" title="VAL_15" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_16" title="VAL_16" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_17" title="VAL_17" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_18" title="VAL_18" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_19" title="VAL_19" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="VAL_20" title="VAL_20" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>SEGMT_BASE</groups>
+                </column>
+                <column id="INV_LV_QTY" title="WAREHOUSE_QTY" type="number">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>STOCK_LV</groups>
+                </column>
+                <column id="WAREHOUSE_AMT" title="WAREHOUSE_AMT" type="number">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>STOCK_LV</groups>
+                </column>
+                <column id="INTRANSIT_QTY" title="INTRANSIT_QTY" type="number">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>STOCK_LV</groups>
+                </column>
+                <column id="INTRANSIT_AMT" title="INTRANSIT_AMT" type="number">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>STOCK_LV</groups>
+                </column>
+                <column id="INV_QTY" title="STOCK" type="number">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>STOCK_LV</groups>
+                </column>
+                <column id="INV_AMT" title="STOCK_AMT" type="number">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>STOCK_LV</groups>
+                </column>
+                <column id="SHPP_ACTUAL_PERIOD" title="SHIPPING_ACTUAL_PERIOD" type="number">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>STOCK_LV</groups>
+                </column>
+                <column id="AVG_SHPP_ACTUAL_QTY" title="AVG_SHIPPING_ACTUAL_QTY" type="number">
+                    <width>110</width>
+                    <editable>false</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>STOCK_LV</groups>
+                </column>
+                <column id="INVTURN" title="INVTURN" type="number">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <groups>STOCK_LV</groups>
+                </column>
+                <column id="PRPSAL_INV_MGMT_SYSTEM_TP_ID" title="PRPSAL_INV_MGMT_SYSTEM_TP" type="string">
+                    <width>130</width>
+                    <editable>false</editable>
+                    <groups>STOCK_MGMT_SYSTEM</groups>
+                    <candidate>
+                        <values>
+                            <value-id>CD_NM</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="GROUP:INVENTORY_MGMT_SYSTEM_TYPE" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="INV_MGMT_SYSTEM_TP_ID" title="STOCK_MGMT_SYSTEM_TP" type="string">
+                    <width>120</width>
+                    <editable>true</editable>
+                    <groups>STOCK_MGMT_SYSTEM</groups>
+                    <candidate>
+                        <values>
+                            <value-id>CD_NM</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="GROUP:INVENTORY_MGMT_SYSTEM_TYPE" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="INV_MGMT_SYSTEM_TP_CD" title="STOCK_MGMT_SYSTEM_TP_CD" type="string">
+                    <width>120</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                    <groups>STOCK_MGMT_SYSTEM</groups>
+                </column>
+                <column id="PO_CYCL_CD" title="PO_CYCL_CD" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>STOCK_MGMT_SYSTEM</groups>
+                    <candidate>
+                        <values>
+                            <value-id>CD_NM</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="GROUP:PERIODIC_PO_YN" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="PO_CYCL_CALENDAR" title="PO_CYCL_CALENDAR" type="string">
+                    <width>130</width>
+                    <editable>true</editable>
+                    <button>true</button>
+                    <groups>STOCK_MGMT_SYSTEM</groups>
+                </column>
+                <column id="OPERT_BASE_TP" title="OPERT_BASE_TP" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>STOCK_MGMT_SYSTEM</groups>
+                    <candidate>
+                        <values>
+                            <value-id>CD_NM</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="GROUP:INVENTORY_SUPPLY_DATE_TYPE" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="INV_PLACE_STRTGY_ID" title="STOCK_PLACE_STRTGY" type="string">
+                    <width>120</width>
+                    <editable>true</editable>
+                    <groups>STOCK_MGMT_SYSTEM</groups>
+                    <candidate>
+                        <values>
+                            <value-id>CD_NM</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="GROUP:STOCK_LOCATION_STRATEGY" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="SUPPLY_LEADTIME_PRPSAL_VAL" title="SUPPLY_LEADTIME_PRPSAL_VAL" type="number">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <groups>SUPPLY_LEADTIME</groups>
+                </column>
+                <column id="SUPPLY_LEADTIME" title="SUPPLY_LEADTIME" type="number">
+                    <width>100</width>
+                    <editable>true</editable>
+                    <groups>SUPPLY_LEADTIME</groups>
+                </column>
+                <column id="SUPPLY_LEADTIME_YN" title="SUPPLY_LEADTIME_YN" type="bool">
+                    <width>100</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                    <groups>OPERT_TARGET</groups>
+                </column>
+                <column id="PO_CYCL_YN" title="PO_CYCL_YN" type="bool">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <header-checkable>false</header-checkable>
+                    <groups>OPERT_TARGET</groups>
+                </column>
+                <column id="REPLSH_LEADTIME" title="REPLSH_LEADTIME" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <groups>OPERT_TARGET</groups>
+                </column>
+                <column id="OPERT_LV_VAL" title="OPERT_LV_VAL" type="number">
+                    <width>100</width>
+                    <editable>true</editable>
+                    <groups>OPERT_TARGET</groups>
+                </column>
+                <column id="OPERT_TARGET_VAL" title="OPERT_TARGET_VAL" type="number">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <groups>OPERT_TARGET</groups>
+                </column>
+                <column id="PRPSAL_SVC_LV" title="PRPSAL_SVC_LV" type="number">
+                    <width>140</width>
+                    <editable>false</editable>
+                    <groups>SFST</groups>
+                </column>
+                <column id="SFST_SVC_LV" title="SFST_SVC_LV" type="number">
+                    <width>100</width>
+                    <editable>true</editable>
+                    <groups>SFST</groups>
+                </column>
+                <column id="SFST_DEMDVAR_CONSID_YN" title="SFST_DEMDVAR_CONSID_YN" type="bool">
+                    <width>110</width>
+                    <editable>false</editable>
+                    <header-checkable>false</header-checkable>
+                    <groups>SFST</groups>
+                </column>
+                <column id="SFST_DEMDVAR_STDDEV" title="SFST_DEMDVAR_STDDEV" type="number">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>SFST</groups>
+                </column>
+                <column id="SFST_SUPYVAR_CONSID_YN" title="SFST_SUPYVAR_CONSID_YN" type="bool">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <header-checkable>false</header-checkable>
+                    <groups>SFST</groups>
+                </column>
+                <column id="SFST_DMND_RATE_CAL_TP_ID" title="SFST_DMND_RATE_CAL_TP" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>SFST</groups>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="GROUP:DEMAND_RATE_CAL_METHOD" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="SFST_DMND_RATE" title="SFST_DMND_RATE" type="number">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <groups>SFST</groups>
+                </column>
+                <column id="SUPYVAR_STDDEV" title="SUPYVAR_STDDEV" type="number">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>SFST</groups>
+                </column>
+                <column id="SFST_PRPSAL_VAL" title="SFST_PRPSAL_VAL" type="number">
+                    <width>90</width>
+                    <editable>false</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>SFST</groups>
+                </column>
+                <column id="SFST_VAL" title="SFST_VAL" type="number">
+                    <width>80</width>
+                    <editable>true</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>SFST</groups>
+                </column>
+                <column id="SFST_AMT" title="SFST_AMT" type="number">
+                    <width>90</width>
+                    <editable>false</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>SFST</groups>
+                </column>
+                <column id="OPT_INV_DMND_RATE_CAL_MTD_ID" title="OPERT_INV_DMND_RATE_CAL_MTD" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>OPERT_STOCK</groups>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="GROUP:DEMAND_RATE_CAL_METHOD" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="OPERT_INV_DMND_RATE" title="OPERT_STOCK_DMND_RATE" type="number">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <groups>OPERT_STOCK</groups>
+                </column>
+                <column id="OPERT_INV_PRPSAL_VAL" title="OPERT_STOCK_PRPSAL_VAL" type="number">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>OPERT_STOCK</groups>
+                </column>
+                <column id="OPERT_INV_VAL" title="OPERT_STOCK_VAL" type="number">
+                    <width>80</width>
+                    <editable>true</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>OPERT_STOCK</groups>
+                </column>
+                <column id="OPERT_INV_AMT" title="OPERT_STOCK_AMT" type="number">
+                    <width>90</width>
+                    <editable>false</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>OPERT_STOCK</groups>
+                </column>
+                <column id="ROP_CAL_TP_ID" title="ROP_CAL_TP_ID" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>ROP</groups>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="GROUP:ROP_DECISION_RULE" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ROP_SFST_CONSID_YN" title="ROP_SFST_CONSID_YN" type="bool">
+                    <width>110</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                    <groups>ROP</groups>
+                </column>
+                <column id="ROP_OPERT_INV_CONSID_YN" title="ROP_OPERT_STOCK_CONSID_YN" type="bool">
+                    <width>100</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                    <groups>ROP</groups>
+                </column>
+                <column id="ROP_RIGHT_RATE_YN" title="ROP_RIGHT_RATE_YN" type="bool">
+                    <width>50</width>
+                    <editable>false</editable>
+                    <header-checkable>false</header-checkable>
+                    <groups>ROP</groups>
+                </column>
+                <column id="ROP_DMND_RATE_CAL_MTD_ID" title="ROP_DMND_RATE_CAL_METHD_ID" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>ROP</groups>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="GROUP:DEMAND_RATE_CAL_METHOD" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ROP_DMND_RATE" title="ROP_DMND_RATE" type="number">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <groups>ROP</groups>
+                </column>
+                <column id="ROP_RIGHT_RATE_TARGET" title="ROP_RIGHT_RATE_TARGET" type="number">
+                    <width>110</width>
+                    <editable>false</editable>
+                    <groups>ROP</groups>
+                </column>
+                <column id="ROP_PRPSAL_VAL" title="ROP_PRPSAL_VAL" type="number">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>ROP</groups>
+                </column>
+                <column id="ROP_VAL" title="ROP_VAL" type="number">
+                    <width>50</width>
+                    <editable>true</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>ROP</groups>
+                </column>
+                <column id="ROP_AMT" title="ROP_AMT" type="number">
+                    <width>90</width>
+                    <editable>false</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>ROP</groups>
+                </column>
+                <column id="EOQ_CAL_TP_ID" title="EOQ_CAL_TP_ID" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>PO_QTY</groups>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="GROUP:EOQ_DECISION_RULE" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="EOQ_RIGHT_RATE_YN" title="EOQ_RIGHT_RATE_YN" type="bool">
+                    <width>50</width>
+                    <editable>false</editable>
+                    <header-checkable>false</header-checkable>
+                    <groups>PO_QTY</groups>
+                </column>
+                <column id="EOQ_DMND_RATE_CAL_MTD_ID" title="EOQ_DMND_RATE_CAL_METHD_ID" type="string">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <groups>PO_QTY</groups>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DATA_03:LOOKUP_CODE" extract="GROUP:DEMAND_RATE_CAL_METHOD" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="EOQ_DMND_RATE" title="EOQ_DMND_RATE" type="number">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <groups>PO_QTY</groups>
+                </column>
+                <column id="EOQ_RIGHT_RATE_TARGET" title="EOQ_RIGHT_RATE_TARGET" type="number">
+                    <width>110</width>
+                    <editable>false</editable>
+                    <groups>PO_QTY</groups>
+                </column>
+                <column id="EOQ_MULTIPLE" title="EOQ_MULTIPLE" type="number">
+                    <width>110</width>
+                    <editable>true</editable>
+                    <groups>PO_QTY</groups>
+                </column>
+                <column id="EOQ_PRPSAL_VAL" title="EOQ_PRPSAL_VAL" type="number">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>PO_QTY</groups>
+                </column>
+                <column id="EOQ_VAL" title="EOQ_VAL" type="number">
+                    <width>80</width>
+                    <editable>true</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>PO_QTY</groups>
+                </column>
+                <column id="EOQ_AMT" title="EOQ_AMT" type="number">
+                    <width>90</width>
+                    <editable>false</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>PO_QTY</groups>
+                </column>
+                <column id="TARGET_INV_SFST_CONSID_YN" title="TARGET_STOCK_SFST_CONSID_YN" type="bool">
+                    <width>110</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                    <groups>TARGET_STOCK</groups>
+                </column>
+                <column id="TARGET_INV_OPERT_INV_CONSID_YN" title="TARGET_INV_OPERT_INV_CONSID_YN" type="bool">
+                    <width>110</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                    <groups>TARGET_STOCK</groups>
+                </column>
+                <column id="TARGET_INV_PRPSAL_VAL" title="TARGET_STOCK_PRPSAL_VAL" type="number">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>TARGET_STOCK</groups>
+                </column>
+                <column id="TARGET_INV_VAL" title="TARGET_STOCK_VAL" type="number">
+                    <width>80</width>
+                    <editable>true</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>TARGET_STOCK</groups>
+                </column>
+                <column id="TARGET_INV_AMT" title="TARGET_STOCK_AMT" type="number">
+                    <width>90</width>
+                    <editable>false</editable>
+                    <group-summary-exp>sum</group-summary-exp>
+                    <groups>TARGET_STOCK</groups>
+                </column>
+                <column id="MOQ" title="MOQ" type="number">
+                    <width>80</width>
+                    <editable>true</editable>
+                </column>
+                <column id="MULTIPLIER" title="MULTIPLIER" type="number">
+                    <width>80</width>
+                    <editable>true</editable>
+                </column>
+                <column id="FIXED_YN" title="FIXED_YN" type="bool">
+                    <width>80</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                </column>
+                <column id="ACTV_YN" title="ACTV_YN" type="bool">
+                    <width>80</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                </column>
+                <column id="CREATE_BY" title="CREATE_BY" type="string">
+                    <width>90</width>
+                    <editable>false</editable>
+                </column>
+                <column id="CREATE_DTTM" title="CREATE_DTTM" type="date">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+                <column id="MODIFY_BY" title="MODIFY_BY" type="string">
+                    <width>90</width>
+                    <editable>false</editable>
+                </column>
+                <column id="MODIFY_DTTM" title="MODIFY_DTTM" type="date">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="button-click">
+                <operation-call id="OPC_POP_UI_IM_26_04_WINDOW_01_OPEN">
+                    <component-id>POP_UI_IM_26_04_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="POP_UI_IM_26_04_GRID_01_LOAD">
+                            <component-id>POP_UI_IM_26_04_GRID_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="LOCAT_CD" reference-id="RST_CPT_01:selections" extract-by="LOCAT_CD" default-value="" />
+                                <parameter id="USER_ID" reference-id="COMMON:loginId" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+			<operation id="EXPORT">
+                <all-columns>true</all-columns>
+				<relieve-merge>true</relieve-merge>
+				<export-lookup>true</export-lookup>
+				<export-footer>false</export-footer>
+			</operation>
+            <operation id="IMPORT"/>
+            <operation id="LOAD">
+                <service-call id="SRC_RST_CPT_01_LODE">
+                    <service-id>SRV_UI_IM_26_Q1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="LOCAT_TP" reference-id="SRH_CPT_LOCAT_TP_04" default-value="" />
+                        <parameter id="LOCAT_LV" reference-id="SRH_CPT_LOCAT_LV_04" default-value="" />
+                        <parameter id="LOCAT_CD" reference-id="SRH_CPT_LOCAT_CD_04" default-value="" />
+                        <parameter id="LOCAT_NM" reference-id="SRH_CPT_LOCAT_NM_04" default-value="" />
+                        <parameter id="ITEM_CD" reference-id="SRH_CPT_ITEM_CD_04" default-value="" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="SVC_SP_UI_IM_26_S1">
+                    <url>/view-config/json-save</url>
+                    <method>post</method>
+                    <parameters>
+                        <parameter id="procedure" value="SP_UI_IM_26_S1_J" />
+                        <parameter id="changes" reference-id="RST_CPT_01:changes" />
+                        <parameter id="P_USER_ID" reference-id="COMMON:loginId"/>
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET" />
+        </operations>
+    </component>
+</view>

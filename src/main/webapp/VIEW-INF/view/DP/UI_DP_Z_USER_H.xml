@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_DP_Z_USER_H" template="COMM/STANDARD" version="2.0">
+    <publish parent="MENU_05_05" open="true" seq="80" />
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="true" collapsible="false" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="TTL_CPT_05" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_OPC_GRID_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+        </props>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <state-bar>false</state-bar>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <data-fit>horizontal</data-fit>
+            <init-expand-level>all</init-expand-level>
+            <selection-mode>BLOCK</selection-mode>
+            <show-row-count>true</show-row-count>
+            <toolbar use="true">
+                <toolbar-button operation-id="LOAD" enable="true" visible="true" position="right" />
+            </toolbar>
+            <columns>
+                <column id="PARENT_OP_ID" type="string" sort="asc">
+                    <width>200</width>
+                    <editable>false</editable>
+                    <filterable>false</filterable>
+                    <merge>true</merge>
+                </column>
+                <column id="OPERATOR_ID" type="string">
+                    <width>200</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ROLE_ID" type="string">
+                    <width>200</width>
+                    <editable>false</editable>
+                </column>                
+                <!--
+                <column id="ROLE_LEVEL" type="string">
+                    <width>200</width>
+                    <editable>false</editable>
+                </column>
+                -->
+            </columns>
+        </props>
+
+        <actions>
+            <action event-type="init" />
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_GetOperatorHierarchy">
+                    <service-id>GetOperatorHierarchy</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="TREE_PARENT_ID" value="PARENT_OP_ID" />
+                        <parameter id="TREE_KEY_ID" value="OPERATOR_ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET" />
+        </operations>
+    </component>
+</view>

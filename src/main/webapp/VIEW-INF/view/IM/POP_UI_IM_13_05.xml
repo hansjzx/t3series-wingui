@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_IM_13_05" version="2.0">
+    <component id="POP_UI_IM_13_05_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>WAHOUS_TP_NM</title>
+            <width>550</width>
+            <height>500</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_13_05_WINDOW_01_GRD" type="R_GRID">
+        <props>
+            <header-height>30</header-height>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="WAREHOUSE_TP" title="WAREHOUSE_TP" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="WAREHOUSE_TP_NM" title="WAREHOUSE_NM" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="LOAD_CAPA_MGMT_BASE" title="LOAD_CAPA_MGMT_BASE" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_POP_UI_IM_13_05_WINDOW_01_GRD_SRH1_01">
+                    <component-id>SRH_CPT_T1_05_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_IM_13_05_WINDOW_01_GRD:selections" extract-by="WAREHOUSE_TP_NM" />
+                    </parameters>
+                    <success>
+                        <operation-call id="OPC_POP_UI_IM_13_05_WINDOW_01_GRD_SRH1_02">
+                            <component-id>SRH_CPT_T1_06_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_IM_13_05_WINDOW_01_GRD:selections" extract-by="LOAD_CAPA_MGMT_BASE" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_13_05_WINDOW_01_GRD_SRH1_04">
+                            <component-id>POP_UI_IM_13_05_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SC_SP_UI_IM_11_Q2_LOAD">
+                    <service-id>SRV_UI_IM_11_Q2</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_DP_25_POPUP_COMMENT" version="2.0">
+    <component id="UI_DP_25_POPUP_COMMENT_WINDOWS" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>Comment</title>
+            <width>250</width>
+            <height>228</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="CMT_POP_SRH_CPT_T1_01_01" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <hidden>true</hidden>
+            <lang>true</lang>
+            <type>text</type>
+            <value-id>ITEM</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="CMT_POP_SRH_CPT_T1_01_03" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <hidden>true</hidden>
+            <lang>true</lang>
+            <type>text</type>
+            <value-id>ACCOUNT</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="CMT_POP_SRH_CPT_T1_01_05" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>text</type>
+            <value-id>BUCKET</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="CMT_POP_RST_CPT_01" type="TEXTAREA">
+        <props>
+            <width>203</width>
+            <height>75</height>
+            <lang>true</lang>
+            <editable>true</editable>
+            <value-id>CMT</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="CMT_POP_SRH_CPT_T1_01_07" type="BUTTON">
+        <props>
+            <name>Save</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="op_close">
+                    <component-id>UI_DP_25_POPUP_COMMENT_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="CMT_POP_SRH_CPT_T1_01_08" type="BUTTON">
+        <props>
+            <name>Close</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="op_close">
+                    <component-id>UI_DP_25_POPUP_COMMENT_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_CM_04_05" version="2.0">
+    <component id="POP_UI_CM_04_05_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_CM_04_05</title>
+            <width>520</width>
+            <height>915</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="popup_tab_05" type="TAB">
+        <props>
+            <tabs>
+                <tab id="POP_UI_CM_04_05_WINDOW_01_TAB_COMM" title="COMM" expand="true" init-render="true" />
+                <tab id="POP_UI_CM_04_05_WINDOW_01_TAB_NPI_EOL" title="NPI/EOL" expand="false" init-render="true" />
+                <tab id="POP_UI_CM_04_05_WINDOW_01_TAB_STOCK" title="STOCK" expand="false" init-render="true" />
+                <tab id="POP_UI_CM_04_05_WINDOW_01_TAB_COST" title="PRODTY_COST" init-render="true" />
+            </tabs>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_01_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>LOCAT_TP_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_01_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_02_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>LOCAT_LV</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_02_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_CD</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_03_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_04_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_04_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_CD</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_05_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_06_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_06_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_07_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_DESCRIP</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_07_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_08_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_LV</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_08_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_09_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_TP</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_09_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_10_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>BOM_ITEM_TP</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_10_04" type="COMBOBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_CM_04_05_WINDOW_01_CPT_09_04_INIT">
+                    <component-id>POP_UI_CM_04_05_WINDOW_01_CPT_10_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SELECT" />
+            <operation id="SET" />
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:BOM_ITEM_TYPE" />
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_11_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PROCUR_TP</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_11_04" type="COMBOBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_CM_04_05_WINDOW_01_CPT_10_04_INIT">
+                    <component-id>POP_UI_CM_04_05_WINDOW_01_CPT_11_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SELECT" />
+            <operation id="SET" />
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:PROCUREMENT_TYPE" />
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_12_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DIF_GRADE</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_12_04" type="COMBOBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_CM_04_05_WINDOW_01_CPT_12_04_INIT">
+                    <component-id>POP_UI_CM_04_05_WINDOW_01_CPT_12_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:CM_ITEM_SPIM" />
+            </operation>
+            <operation id="SELECT" />
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_13_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>MIN_ORDER_SIZE</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_13_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_14_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>MAX_ORDER_SIZE</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_14_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_15_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>UOM_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_15_04" type="COMBOBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_CM_04_05_WINDOW_01_CPT_15_04_INIT">
+                    <component-id>POP_UI_CM_04_05_WINDOW_01_CPT_15_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+            <operation id="SELECT" />
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:UOM" />
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_16_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>CURCY_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_16_04" type="INPUTBOX">
+        <props>
+            <width>176.6</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_16_05" type="BUTTON">
+        <props>
+            <width>30</width>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_CM_04_05_WINDOW_01_CPT_15_05_CLICK">
+                    <component-id>POP_UI_CM_04_03_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_CM_04_01_WINDOW_01_CPT_11_05_CLICK_01">
+                            <component-id>POP_UI_CM_04_03_WINDOW_01_GRD</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="VIEW_ID" value="POP_UI_CM_04_05" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_17_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ALLOWED_HOLIDAY_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_17_04" type="CHECKBOX">
+        <props>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_18_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACTV_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_18_04" type="CHECKBOX">
+        <props>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_21_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>SRA</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_21_04" type="DATEPICKER">
+        <props>
+            <width>210</width>
+            <name-position>left</name-position>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_22_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>RTS</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_22_04" type="DATEPICKER">
+        <props>
+            <width>210</width>
+            <name-position>left</name-position>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_CM_04_05_WINDOW_01_CPT_19_04_INIT_01">
+                    <component-id>POP_UI_CM_04_05_WINDOW_01_CPT_22_04</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="false" />
+                    </parameters>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_23_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>EOP</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_23_04" type="DATEPICKER">
+        <props>
+            <width>210</width>
+            <name-position>left</name-position>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_24_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>EOS</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_24_04" type="DATEPICKER">
+        <props>
+            <width>210</width>
+            <name-position>left</name-position>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_CM_04_05_WINDOW_01_CPT_21_04_INIT_01">
+                    <component-id>POP_UI_CM_04_05_WINDOW_01_CPT_24_04</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="false" />
+                    </parameters>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_25_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PARENT_ITEM_EOL</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_25_04" type="DATEPICKER">
+        <props>
+            <width>210</width>
+            <name-position>left</name-position>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_31_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>STOCK_ONHAND_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_31_04" type="CHECKBOX">
+        <props>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_32_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>IMMEDIATE_SHIPMENT_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_32_04" type="CHECKBOX">
+        <props>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_33_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>STOCK_POLICY</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_33_04" type="COMBOBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_CM_04_05_WINDOW_01_CPT_14_04_INIT">
+                    <component-id>POP_UI_CM_04_05_WINDOW_01_CPT_33_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:CM_BASE_INV_POLICY" />
+            </operation>
+            <operation id="SELECT" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_34_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>STD_UTPIC</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_34_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_41_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DIRECT_COST</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_41_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_42_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>INDIRECT_COST</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_42_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_36_01" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_CM_04_05_WINDOW_01_CPT_36_01_CLICK_01">
+                    <component-id>POP_UI_CM_04_05_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_CM_04_05_WINDOW_01_CPT_36_01_CLICK_02">
+                    <component-id>POP_UI_CM_04_05_WINDOW_01_CPT_36_01</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_CM_04_05_WINDOW_01_CPT_36_01_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POP_UI_CM_04_05_WINDOW_01_CPT_36_01:SVC_UI_CM_04_S_220_UPDATE:IM_DATA" extract-by="SP_UI_CM_04_S1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_CM_04_05_WINDOW_01_CPT_36_01_SUCCESS">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SAVE">
+                <service-call id="SVC_UI_CM_04_S_220_UPDATE">
+                    <service-id>SRV_UI_CM_04_S1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="WRK_TYPE" value="SAVE" />
+                        <parameter id="ID" reference-id="UI_CM_04_DATA_02:MODIFY_ID" />
+                        <parameter id="BOM_ITEM_TP_ID" reference-id="POP_UI_CM_04_05_WINDOW_01_CPT_10_04" />
+                        <parameter id="PROCUR_TP_ID" reference-id="POP_UI_CM_04_05_WINDOW_01_CPT_11_04" />
+                        <parameter id="DIFFTD_CLSS_CD" reference-id="POP_UI_CM_04_05_WINDOW_01_CPT_12_04" />
+                        <parameter id="MIN_ORDER_SIZE" reference-id="POP_UI_CM_04_05_WINDOW_01_CPT_13_04" />
+                        <parameter id="MAX_ORDER_SIZE" reference-id="POP_UI_CM_04_05_WINDOW_01_CPT_14_04" />
+                        <parameter id="UOM_CD" reference-id="POP_UI_CM_04_05_WINDOW_01_CPT_15_04" />
+                        <parameter id="SRA" reference-id="POP_UI_CM_04_05_WINDOW_01_CPT_21_04" />
+                        <parameter id="EOP" reference-id="POP_UI_CM_04_05_WINDOW_01_CPT_23_04" />
+                        <parameter id="PARENT_ITEM_EOL" reference-id="POP_UI_CM_04_05_WINDOW_01_CPT_25_04" />
+                        <parameter id="INV_ONHAND_YN" reference-id="POP_UI_CM_04_05_WINDOW_01_CPT_31_04" />
+                        <parameter id="IMMEDIATE_SHIPMENT_YN" reference-id="POP_UI_CM_04_05_WINDOW_01_CPT_32_04" />
+                        <parameter id="INV_POLICY" reference-id="POP_UI_CM_04_05_WINDOW_01_CPT_33_04" />
+                        <parameter id="STD_UTPIC" reference-id="POP_UI_CM_04_05_WINDOW_01_CPT_34_04" />
+                        <parameter id="DIRECT_COST" reference-id="POP_UI_CM_04_05_WINDOW_01_CPT_41_04" />
+                        <parameter id="INDIRECT_COST" reference-id="POP_UI_CM_04_05_WINDOW_01_CPT_42_04" />
+                        <parameter id="CURCY_CD" reference-id="UI_CM_04_DATA_02:CURCY_CD_ID" />
+                        <parameter id="ALLOWED_HOLIDAY_YN" reference-id="POP_UI_CM_04_05_WINDOW_01_CPT_17_04" />
+                        <parameter id="ACTV_YN" reference-id="POP_UI_CM_04_05_WINDOW_01_CPT_18_04" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_05_WINDOW_01_CPT_36_05" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_CM_04_05_WINDOW_01_CPT_36_05_CLICK">
+                    <component-id>POP_UI_CM_04_05_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

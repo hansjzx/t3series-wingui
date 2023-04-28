@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_DP_Z_MAP_USER_ACCOUNT" template="COMM/STANDARD" version="2.0">
+    <publish parent="MENU_05_05" open="true" seq="22" />
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="TTL_CPT_05" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_OPC_GRID_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>USER_ID</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+        </props>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <state-bar>false</state-bar>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <data-fit>horizontal</data-fit>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <toolbar use="true">
+                <toolbar-button operation-id="LOAD" enable="true" visible="true" position="right" />
+            </toolbar>
+            <columns>
+                <column id="USERNAME" type="string">
+                    <width>200</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LV_CD" type="string">
+                    <width>200</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM" title="Account or SalesLevel" type="string">
+                    <width>200</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_GetUserAccountMap">
+                    <service-id>GetUserAccountMap</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="USER_ID" reference-id="SRH_CPT_T1_01_04" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

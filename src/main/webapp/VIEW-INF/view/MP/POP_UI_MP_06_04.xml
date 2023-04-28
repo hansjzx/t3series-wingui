@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_MP_06_04" version="2.0">
+    <component id="POP_UI_MP_06_04_WINDOW_01_GRD" type="R_GRID">
+        <props>
+            <header-height>30</header-height>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right" />
+            </toolbar>
+            <columns>
+                <column id="RES_GRP_ID" title="RES_GRP_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="VIEW_ID" title="VIEW_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="RES_GRP_CD" title="RES_GRP_CD" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="RES_GRP_DESCRIP" title="RES_GRP_DESCRIP" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="RES_GRP_TP" title="RES_GRP_TP" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_POP_UI_MP_06_04_WINDOW_01_GRD_CLICK_01">
+                    <component-id>DROPDOWN</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="CON_POP_UI_MP_06_04_WINDOW_01_GRD_01">
+                            <column>VIEW_ID</column>
+                            <operator>equal</operator>
+                            <value>UI_MP_06</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_06_04_WINDOW_01_GRD_CLICK_01_SUCCESS_01">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET_VALUE-to-RES_GRP_ID" reference-id="POP_UI_MP_06_04_WINDOW_01_GRD:selections" extract-by="RES_GRP_ID" default-value="" />
+                                <parameter id="SET_VALUE-to-RES_GRP_CD" reference-id="POP_UI_MP_06_04_WINDOW_01_GRD:selections" extract-by="RES_GRP_CD" default-value="" />
+                                <parameter id="SET_VALUE-to-RES_GRP_DESCRIP" reference-id="POP_UI_MP_06_04_WINDOW_01_GRD:selections" extract-by="RES_GRP_DESCRIP" default-value="" />
+                                <parameter id="SET_VALUE-to-RES_GRP_TP" reference-id="POP_UI_MP_06_04_WINDOW_01_GRD:selections" extract-by="RES_GRP_TP" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_06_04_WINDOW_01_GRD_CLICK_01_SUCCESS_02">
+                            <component-id>POP_UI_MP_06_04_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_06_04_WINDOW_01_GRD_CLICK_02">
+                    <component-id>POP_UI_MP_06_01_WINDOW_01_CPT_15_06</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_MP_06_04_WINDOW_01_GRD:selections" extract-by="RES_GRP_ID" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_POP_UI_MP_06_04_WINDOW_01_GRD_02">
+                            <column>VIEW_ID</column>
+                            <operator>equal</operator>
+                            <value>POP_UI_MP_06_01</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_06_04_WINDOW_01_GRD_01_SUCCESS_01">
+                            <component-id>POP_UI_MP_06_01_WINDOW_01_CPT_15_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_MP_06_04_WINDOW_01_GRD:selections" extract-by="RES_GRP_CD" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_06_04_WINDOW_01_GRD_01_SUCCESS_02">
+                            <component-id>POP_UI_MP_06_01_WINDOW_01_CPT_16_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_MP_06_04_WINDOW_01_GRD:selections" extract-by="RES_GRP_DESCRIP" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_06_04_WINDOW_01_GRD_01_SUCCESS_03">
+                            <component-id>POP_UI_MP_06_01_WINDOW_01_CPT_17_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_MP_06_04_WINDOW_01_GRD:selections" extract-by="RES_GRP_TP" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_06_04_WINDOW_01_GRD_01_SUCCESS_04">
+                            <component-id>POP_UI_MP_06_04_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_MP_O5_10_RST_CPT_01_LOAD">
+                    <service-id>SRV_UI_MP_06_POP_Q2</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="VIEW_ID" reference-id="DATA_03:VIEW_ID" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_AD_18" template="COMM/STANDARD:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_DEPARTMENT" version="2.0">
+    <publish parent="MENU_90" open="true" seq="45" />
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_op_search_init1">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="OPC_op_search_init2">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_05" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_01_DEL_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_06" type="DATA">
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_TTL_CPT_06_DEL_INIT">
+                    <component-id>TTL_CPT_06</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="MENU_ID" value="UI_AD_18" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="DATA_01" type="DATA">
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="BASE_OPTION" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <width>80</width>
+            <lang>true</lang>
+            <init-value>USER_ID</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="enterLoad">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_02_01" type="LABEL">
+        <props>
+            <width>80</width>
+            <lang>true</lang>
+            <init-value>DELEGATION_USER_ID</init-value>
+        </props>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_02_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="enterLoad">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="DATA_01" type="DATA">
+        <actions>
+            <action event-type="meta">
+                <operation-call id="DATA_01_LOAD">
+                    <component-id>DATA_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="LOOKUP_CODE">
+                    <url>/system/users</url>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <indicator>false</indicator>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="true">
+                <toolbar-button operation-id="REFRESH" enable="false" visible="false" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_UI_AD_18_GRD_01_DELETE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Success" />
+                                <parameter id="msg" value="MSG_0002" />
+                                <parameter id="type" value="info" />
+                                <parameter id="modal" value="true" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                    <fail>
+                        <operation-call id="OPC_UI_AD_18_GRD_01_DELETE_FAIL_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Fail" />
+                                <parameter id="msg" value="MSG_0004" />
+                                <parameter id="type" value="alert" />
+                                <parameter id="modal" value="true" />
+                            </parameters>
+                        </operation-call>
+                    </fail>
+                    <complete>
+                        <operation-call id="AFTER_REMOVE_RST_CPT_01">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </complete>
+                </toolbar-button>
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_UI_AD_02_GRD_01_DEL_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Sucess" />
+                                <parameter id="msg" value="MSG_0001" />
+                                <parameter id="type" value="info" />
+                                <parameter id="modal" value="true" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                    <fail>
+                        <operation-call id="OPC_UI_AD_02_GRD_01_DEL_SAVE_FAIL_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Fail" />
+                                <parameter id="msg" value="MSG_0004" />
+                                <parameter id="type" value="alert" />
+                                <parameter id="modal" value="true" />
+                            </parameters>
+                        </operation-call>
+                    </fail>
+                    <complete>
+                        <operation-call id="AFTER_SAVE_RST_CPT_01">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </complete>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="username" title="USER_ID" type="string">
+                    <width>100</width>
+                    <editable>true</editable>
+                    <candidate>
+                        <values>
+                            <value-id>username</value-id>
+                            <reference-service-call id="DATA_01:LOOKUP_CODE" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="displayName" title="USER_NM" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="delegationUsername" title="DELEGATION_USER_ID" type="string">
+                    <width>100</width>
+                    <editable>true</editable>
+                    <candidate>
+                        <values>
+                            <value-id>username</value-id>
+                            <reference-service-call id="DATA_01:LOOKUP_CODE" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="delegationDisplayName" title="DELEGATION_USER_NM" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="applyStartDttm" title="APPY_STRT_DTTM" type="date">
+                    <width>100</width>
+                    <editable>true</editable>
+                    <format>yyyy-MM-dd</format>
+                    <datepicker>true</datepicker>
+                </column>
+                <column id="applyEndDttm" title="APPY_END_DTTM" type="date">
+                    <width>100</width>
+                    <editable>true</editable>
+                    <format>yyyy-MM-dd</format>
+                    <datepicker>true</datepicker>
+                </column>
+                <column id="createBy" title="CREATE_BY" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="createDttm" title="CREATE_DTTM" type="date">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                    <format>yyyy-MM-dd</format>
+                </column>
+                <column id="modifyBy" title="MODIFY_BY" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="modifyDttm" title="MODIFY_DTTM" type="date">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                    <format>yyyy-MM-dd</format>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-edited">
+                <operation-call id="OPC_RST_CPT_01_SET_USER_NM">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-USER_NM" reference-id="RST_CPT_01:selections" extract-by="USER_ID(NAME)" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_ONLY_MEASURE_CD">
+                            <on-column>username</on-column>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_RST_CPT_01_SET_DELEGATION_USER_NM">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-DELEGATION_USER_NM" reference-id="RST_CPT_01:selections" extract-by="DELEGATION_USER_ID(NAME)" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_ONLY_MEASURE_CD">
+                            <on-column>delegationUsername</on-column>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="REFRESH">
+                <service-call id="SVC_RST_CPT_01_DEL_REFRESH">
+                    <url>/system/users/delegations</url>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <service-call id="SVC_RST_CPT_01_DEL_LOAD">
+                    <url>/system/users/delegations</url>
+                    <parameters>
+                        <parameter id="username" reference-id="SRH_CPT_T1_01_04" />
+                        <parameter id="delegation-username" reference-id="SRH_CPT_T1_02_04" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="SVC_RST_CPT_01_DEL_SAVE">
+                    <url>/system/users/delegations</url>
+                    <method>post</method>
+                    <parameters>
+                        <parameter id="data" reference-id="RST_CPT_01:changes" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="REMOVE">
+                <service-call id="SVC_RST_CPT_01_DEL_REMOVE">
+                    <url>/system/users/delegations</url>
+                    <method>delete</method>
+                    <parameters>
+                        <parameter id="data" reference-id="RST_CPT_01:checked" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET" />
+            <operation id="INSERT_ROW">
+                <edit-on-cell>true</edit-on-cell>
+                <service-call id="SET_DEFAULT_COMBO">
+                    <parameters>
+                        <parameter id="SET_DEFAULT-to-username" reference-id="DATA_01:LOOKUP_CODE" extract-by="username" />
+                        <parameter id="SET_DEFAULT-to-delegationUsername" reference-id="DATA_01:LOOKUP_CODE" extract-by="username" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="REMOVE_ROW">
+                <service-call id="SVC_RST_CPT_01_DEL_DELETE">
+                    <url>/system/users/delegations</url>
+                    <method>delete</method>
+                    <parameters>
+                        <parameter id="data" reference-id="RST_CPT_01:checked" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

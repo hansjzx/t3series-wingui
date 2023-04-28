@@ -1,0 +1,941 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_BF_05" template="COMM/STANDARD:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:DP/UI_DP_POPUP_USER:DP/UI_DP_COMM:DP/UI_DP_POPUP_ACCOUNT:DP/UI_DP_POPUP_ITEM" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_VIEW_META:UI_DP_POPUP_ITEM:UI_DP_POPUP_ACCOUNT" version="2.0">
+    <publish parent="MENU_07_01" open="true" seq="50" />
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_set_FROM_DATE">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+                <operation-call id="OPC_set_TO_DATE">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+                <operation-call id="OPC_set_ITEM_CD">
+                    <component-id>SRH_CPT_T1_04_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="OPC_set_ITEM_NM">
+                    <component-id>SRH_CPT_T1_05_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="OPC_set_ACCOUNT_CD">
+                    <component-id>SRH_CPT_T1_06_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="OPC_set_ACCOUNT_NM">
+                    <component-id>SRH_CPT_T1_07_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="OPC_set_STATUS">
+                    <component-id>SRH_CPT_T1_08_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_05" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_GRID_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_001" group="OR1">
+                            <component>SRH_CPT_T1_04_04</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_002" group="OR2">
+                            <component>SRH_CPT_T1_05_04</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_SEARCH_BUTTON_INFO_DIALOG_01">
+                    <component-id>COMMON</component-id>
+                    <operation-id>DIALOG</operation-id>
+                    <parameters>
+                        <parameter id="title" value="notice" />
+                        <parameter id="msg" value="MSG_0017" />
+                        <parameter id="type" value="alert" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_101" group="AND">
+                            <component>SRH_CPT_T1_04_04</component>
+                            <operator>equal</operator>
+                            <value>empty</value>
+                        </condition>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_102" group="AND">
+                            <component>SRH_CPT_T1_05_04</component>
+                            <operator>equal</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="DP_DATA_POP_ITEM" type="DATA">
+        <actions>
+            <action event-type="change-data">
+                <operation-call id="pop-item-main-search">
+                    <component-id>SRH_CPT_T1_04_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="DP_DATA_POP_ITEM:ITEM_INFO" extract-by="ITEM_CD" delimiter="|" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="item-type-check">
+                            <component>DP_DATA_POP_ITEM</component>
+                            <key>EVENT_TYPE</key>
+                            <operator>equal</operator>
+                            <value>MAIN_SEARCH</value>
+                        </condition>
+                    </conditions>
+                    <complete>
+                        <operation-call id="op_POP_sel2">
+                            <component-id>SRH_CPT_T1_05_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="DP_DATA_POP_ITEM:ITEM_INFO" extract-by="ITEM_NM" delimiter="|" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+                <operation-call id="pop-item-grid">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-ITEM_MST_ID" reference-id="DP_DATA_POP_ITEM:ITEM_INFO" extract-by="ID" default-value="" />
+                        <parameter id="SET_VALUE-to-ITEM_CD" reference-id="DP_DATA_POP_ITEM:ITEM_INFO" extract-by="ITEM_CD" default-value="" />
+                        <parameter id="SET_VALUE-to-ITEM_NM" reference-id="DP_DATA_POP_ITEM:ITEM_INFO" extract-by="ITEM_NM" default-value="" />
+                        <parameter id="SET_VALUE-to-UOM_CD" reference-id="DP_DATA_POP_ITEM:ITEM_INFO" extract-by="UOM_CD" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="1" group="g">
+                            <component>DP_DATA_POP_ITEM</component>
+                            <key>EVENT_TYPE</key>
+                            <operator>equal</operator>
+                            <value>GRID_ITEM</value>
+                        </condition>
+                        <condition id="2" group="g">
+                            <component>DP_DATA_POP_ITEM</component>
+                            <key>ITEM_INFO</key>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="pop-item-multigrid">
+                    <component-id>POPM_RST_CPT_01_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="DP_DATA_POP_ITEM:ITEM_INFO" extract-by="ITEM_CD" delimiter="|" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="1">
+                            <component>DP_DATA_POP_ITEM</component>
+                            <key>EVENT_TYPE</key>
+                            <operator>equal</operator>
+                            <value>MULTI_POP</value>
+                        </condition>
+                    </conditions>
+                    <complete>
+                        <operation-call id="op_POP4_sel2">
+                            <component-id>POPM_RST_CPT_01_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="DP_DATA_POP_ITEM:ITEM_INFO" extract-by="ITEM_NM" delimiter="|" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="item-set">
+                    <parameters>
+                        <parameter id="ITEM_INFO" />
+                        <parameter id="EVENT_TYPE" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="DP_DATA_POP_ACCT" type="DATA">
+        <actions>
+            <action event-type="change-data">
+                <operation-call id="pop-acct-main-search">
+                    <component-id>SRH_CPT_T1_06_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="DP_DATA_POP_ACCT:ACCT_INFO" extract-by="ACCOUNT_CD" delimiter="|" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="1">
+                            <component>DP_DATA_POP_ACCT</component>
+                            <key>EVENT_TYPE</key>
+                            <operator>equal</operator>
+                            <value>MAIN_SEARCH</value>
+                        </condition>
+                    </conditions>
+                    <complete>
+                        <operation-call id="op_POP_sel10">
+                            <component-id>SRH_CPT_T1_07_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="DP_DATA_POP_ACCT:ACCT_INFO" extract-by="ACCOUNT_NM" delimiter="|" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+                <operation-call id="pop-item-grid">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-ACCOUNT_ID" reference-id="DP_DATA_POP_ACCT:ACCT_INFO" extract-by="ID" default-value="" />
+                        <parameter id="SET_VALUE-to-ACCOUNT_CD" reference-id="DP_DATA_POP_ACCT:ACCT_INFO" extract-by="ACCOUNT_CD" default-value="" />
+                        <parameter id="SET_VALUE-to-ACCOUNT_NM" reference-id="DP_DATA_POP_ACCT:ACCT_INFO" extract-by="ACCOUNT_NM" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="1" group="g">
+                            <component>DP_DATA_POP_ACCT</component>
+                            <key>EVENT_TYPE</key>
+                            <operator>equal</operator>
+                            <value>GRID_ACCT</value>
+                        </condition>
+                        <condition id="2" group="g">
+                            <component>DP_DATA_POP_ACCT</component>
+                            <key>ACCT_INFO</key>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="pop-item-multigrid">
+                    <component-id>POPM_RST_CPT_02_03</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="DP_DATA_POP_ACCT:ACCT_INFO" extract-by="ACCOUNT_CD" delimiter="" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="1">
+                            <component>DP_DATA_POP_ACCT</component>
+                            <key>EVENT_TYPE</key>
+                            <operator>equal</operator>
+                            <value>MULTI_POP</value>
+                        </condition>
+                    </conditions>
+                    <complete>
+                        <operation-call id="op_POP4_sel12">
+                            <component-id>POPM_RST_CPT_02_05</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="DP_DATA_POP_ACCT:ACCT_INFO" extract-by="ACCOUNT_NM" delimiter="" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="ACCT_INFO" />
+                        <parameter id="EVENT_TYPE" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="DATA_02" type="DATA">
+        <operations>
+            <operation id="SET">
+                <service-call id="data01_set_1">
+                    <parameters>
+                        <parameter id="FROM_DATE" value="" />
+                        <parameter id="TO_DATE" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <service-call id="SVC_BF_GET_DATETIME_SCOPE_Q1">
+                    <service-id>SRV_BF_GET_DATETIME_SCOPE_Q1</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>APPY_SCPE</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_04" type="DATEPICKER">
+        <props>
+            <width>211</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+            <value-id>FROM_DATE</value-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_DATE_TIME_LOAD_01">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+            <operation id="LOAD">
+                <reference-service-call id="DATA_02:SVC_BF_GET_DATETIME_SCOPE_Q1" />
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_02_04" type="DATEPICKER">
+        <props>
+            <width>211</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+            <value-id>TO_DATE</value-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_DATE_TIME_LOAD_02">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+            <operation id="LOAD">
+                <reference-service-call id="DATA_02:SVC_BF_GET_DATETIME_SCOPE_Q1" />
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_04_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_CD</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_04_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="enterLoad">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_003" group="OR_03">
+                            <component>SRH_CPT_T1_04_04</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_004" group="OR_04">
+                            <component>SRH_CPT_T1_05_04</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_SEARCH_BUTTON_INFO_DIALOG_02">
+                    <component-id>COMMON</component-id>
+                    <operation-id>DIALOG</operation-id>
+                    <parameters>
+                        <parameter id="title" value="notice" />
+                        <parameter id="msg" value="MSG_0017" />
+                        <parameter id="type" value="alert" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_103" group="AND0">
+                            <component>SRH_CPT_T1_04_04</component>
+                            <operator>equal</operator>
+                            <value>empty</value>
+                        </condition>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_104" group="AND0">
+                            <component>SRH_CPT_T1_05_04</component>
+                            <operator>equal</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_04_05" type="BUTTON">
+        <props>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="setEventType">
+                    <component-id>DP_DATA_POP_ITEM</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="EVENT_TYPE" value="MAIN_SEARCH" />
+                        <parameter id="ITEM_INFO" value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_openWin_src_item">
+                    <component-id>UI_DP_POPUP_ITEM_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+                <operation-call id="OPC_init1">
+                    <component-id>ITEM_POP_SRH_CPT_T1_01_02</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="OPC_init2">
+                    <component-id>ITEM_POP_SRH_CPT_T1_01_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="OPC_init3">
+                    <component-id>ITEM_POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_CPT_T1_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_NM</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_05_04" type="INPUTBOX">
+        <props>
+            <width>211</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="enterLoad2">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_005" group="OR_05">
+                            <component>SRH_CPT_T1_04_04</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_006" group="OR_06">
+                            <component>SRH_CPT_T1_05_04</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_SEARCH_BUTTON_INFO_DIALOG_03">
+                    <component-id>COMMON</component-id>
+                    <operation-id>DIALOG</operation-id>
+                    <parameters>
+                        <parameter id="title" value="notice" />
+                        <parameter id="msg" value="MSG_0017" />
+                        <parameter id="type" value="alert" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_105" group="AND1">
+                            <component>SRH_CPT_T1_04_04</component>
+                            <operator>equal</operator>
+                            <value>empty</value>
+                        </condition>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_106" group="AND1">
+                            <component>SRH_CPT_T1_05_04</component>
+                            <operator>equal</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_06_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACCOUNT_CD</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_06_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="enterLoad3">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_007" group="OR_07">
+                            <component>SRH_CPT_T1_04_04</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_008" group="OR_08">
+                            <component>SRH_CPT_T1_05_04</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_SEARCH_BUTTON_INFO_DIALOG_04">
+                    <component-id>COMMON</component-id>
+                    <operation-id>DIALOG</operation-id>
+                    <parameters>
+                        <parameter id="title" value="notice" />
+                        <parameter id="msg" value="MSG_0017" />
+                        <parameter id="type" value="alert" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_107" group="AND2">
+                            <component>SRH_CPT_T1_04_04</component>
+                            <operator>equal</operator>
+                            <value>empty</value>
+                        </condition>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_108" group="AND2">
+                            <component>SRH_CPT_T1_05_04</component>
+                            <operator>equal</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_06_05" type="BUTTON">
+        <props>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="setEventTypeAcct">
+                    <component-id>DP_DATA_POP_ACCT</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="EVENT_TYPE" value="MAIN_SEARCH" />
+                        <parameter id="ACCT_INFO" value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_openWindow1">
+                    <component-id>UI_DP_POPUP_ACCOUNT_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+                <operation-call id="OPC_init_ACCOUNT_1">
+                    <component-id>ACCT_POP_SRH_CPT_T1_01_02</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="OPC_init_ACCOUNT_2">
+                    <component-id>ACCT_POP_SRH_CPT_T1_01_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="OPC_init_ACCOUNT_3">
+                    <component-id>ACCT_POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_CPT_T1_07_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACCOUNT_NM</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_07_04" type="INPUTBOX">
+        <props>
+            <width>211</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="enterLoad4">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_009" group="OR_09">
+                            <component>SRH_CPT_T1_04_04</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_010" group="OR_10">
+                            <component>SRH_CPT_T1_05_04</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_SEARCH_BUTTON_INFO_DIALOG_05">
+                    <component-id>COMMON</component-id>
+                    <operation-id>DIALOG</operation-id>
+                    <parameters>
+                        <parameter id="title" value="notice" />
+                        <parameter id="msg" value="MSG_0017" />
+                        <parameter id="type" value="alert" />
+                    </parameters>
+                    <conditions>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_109" group="AND5">
+                            <component>SRH_CPT_T1_04_04</component>
+                            <operator>equal</operator>
+                            <value>empty</value>
+                        </condition>
+                        <condition id="CON_SEARCH_AREA_NECESSARY_110" group="AND5">
+                            <component>SRH_CPT_T1_05_04</component>
+                            <operator>equal</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_08_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>STATUS</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_08_04" type="COMBOBOX">
+        <props>
+            <width>211</width>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>CD</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="load_status_combo">
+                    <component-id>SRH_CPT_T1_08_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <service-call id="SVC_STATUS_COMBO_LOAD">
+                    <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_CONF_Q1_01" value="DP_SO_STATUS" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_02" value="ALL" />
+                        <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <check-bar>true</check-bar>
+            <fit-style>even</fit-style>
+            <data-fit>horizontal</data-fit>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <toolbar use="true">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="false" visible="false" position="right">
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_REMOVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="RST_CPT_01:SVC_SP_UI_BF_05_D1:IM_DATA" extract-by="SP_UI_BF_05_D1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_o4">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <conditions>
+                                <condition id="CON_SEARCH_AREA_NECESSARY_003" group="OR_03">
+                                    <component>SRH_CPT_T1_04_04</component>
+                                    <operator>notEqual</operator>
+                                    <value>empty</value>
+                                </condition>
+                                <condition id="CON_SEARCH_AREA_NECESSARY_004" group="OR_04">
+                                    <component>SRH_CPT_T1_05_04</component>
+                                    <operator>notEqual</operator>
+                                    <value>empty</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="RST_CPT_01:SVC_SP_UI_BF_05_S1_J:IM_DATA" extract-by="SP_UI_BF_05_S1_J_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="ops3">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <conditions>
+                                <condition id="CON_SEARCH_AREA_NECESSARY_003" group="OR_03">
+                                    <component>SRH_CPT_T1_04_04</component>
+                                    <operator>notEqual</operator>
+                                    <value>empty</value>
+                                </condition>
+                                <condition id="CON_SEARCH_AREA_NECESSARY_004" group="OR_04">
+                                    <component>SRH_CPT_T1_05_04</component>
+                                    <operator>notEqual</operator>
+                                    <value>empty</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>0</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ACCOUNT_CD" title="ACCOUNT_CD" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ACCOUNT_NM" title="ACCOUNT_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="BASE_DATE" title="BASE_DATE" type="datetime">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">false</editable>
+                    <format>yyyy-MM-dd</format>
+                    <datepicker>true</datepicker>
+                </column>
+                <column id="STATUS" title="STATUS" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">false</editable>
+                    <lang>true</lang>
+                    <candidate>
+                        <drop-down-count>5</drop-down-count>
+                        <values>
+                            <value-id>CD</value-id>
+                            <text-id>CD_NM</text-id>
+                            <service-call id="SVC_STATUS_COMBO_LOAD">
+                                <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                                <service-target>dp</service-target>
+                                <parameters>
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_01" value="DP_SO_STATUS" />
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_02" value="" />
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                                </parameters>
+                            </service-call>
+                        </values>
+                    </candidate>
+                </column>
+                <column id="QTY" title="QTY" type="float">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="QTY_CORRECTION" title="QTY_CORRECTION" type="float">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="false">true</editable>
+                </column>
+                <column id="CORRECTION_COMMENT" title="CORRECTION_COMMENT" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>true</editable>
+                    <lang>true</lang>
+                    <candidate>
+                        <drop-down-count>5</drop-down-count>
+                        <values>
+                            <value-id>CD</value-id>
+                            <text-id>CD_NM</text-id>
+                            <service-call id="dropDown">
+                                <service-id>SRV_GET_SP_UI_DP_00_CONF_Q1</service-id>
+                                <service-target>dp</service-target>
+                                <parameters>
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_01" value="BF_SO_MODIFY_REASON" />
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_02" value="NN" />
+                                    <parameter id="SP_UI_DP_00_CONF_Q1_03" value="" />
+                                </parameters>
+                            </service-call>
+                        </values>
+                    </candidate>
+                </column>
+                <column id="MODIFY_BY" title="MODIFY_BY" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+                <column id="MODIFY_DTTM" title="MODIFY_DTTM" type="datetime">
+                    <width>120</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="REMOVE_ROW">
+                <service-call id="SVC_SP_UI_BF_05_D1">
+                    <service-id>SRV_SET_SP_UI_BF_05_D1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="changes" reference-id="RST_CPT_01:checked" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="INSERT_ROW" />
+            <operation id="SAVE">
+                <service-call id="SVC_SP_UI_BF_05_S1_J">
+                    <url>/view-config/json-save</url>
+                    <method>post</method>
+                    <parameters>
+                        <parameter id="procedure" value="SP_UI_BF_05_S1_J" />
+                        <parameter id="changes" reference-id="RST_CPT_01:changes" />
+                        <parameter id="P_USER_ID" reference-id="COMMON:loginId" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <!-- <operation id="SAVE">
+                <service-call id="SVC_SP_UI_BF_05_S1">
+                    <service-id>SRV_SET_SP_UI_BF_05_S1</service-id>
+                    <service-target>dp</service-target>
+                    <param-empty-check>changes</param-empty-check>
+                    <parameters>
+                        <parameter id="changes" reference-id="RST_CPT_01:changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation> -->
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_BF_05_Q1">
+                    <service-id>SRV_GET_SP_UI_BF_05_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="FROM_DATE" reference-id="SRH_CPT_T1_01_04" />
+                        <parameter id="TO_DATE" reference-id="SRH_CPT_T1_02_04" />
+                        <parameter id="ITEM_CD" reference-id="SRH_CPT_T1_04_04" />
+                        <parameter id="ITEM_NM" reference-id="SRH_CPT_T1_05_04" />
+                        <parameter id="ACCOUNT_CD" reference-id="SRH_CPT_T1_06_04" />
+                        <parameter id="ACCOUNT_NM" reference-id="SRH_CPT_T1_07_04" />
+                        <parameter id="STATUS" reference-id="SRH_CPT_T1_08_04" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET" />
+            <operation id="EXPORT">
+                <relieve-merge>true</relieve-merge>
+                <all-columns>false</all-columns>
+            </operation>
+            <operation id="IMPORT" />
+        </operations>
+    </component>
+</view>

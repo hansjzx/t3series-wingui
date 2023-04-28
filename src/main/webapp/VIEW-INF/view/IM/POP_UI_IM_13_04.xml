@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_IM_13_04" version="2.0">
+    <component id="POP_UI_IM_13_04_DATA_01" type="DATA">
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_13_04_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_IM_13_04</title>
+            <width>550</width>
+            <height>455</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_13_04_WINDOW_01_R_GRID_01" type="R_GRID">
+        <props>
+            <height>340</height>
+            <check-exclusive>true</check-exclusive>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right" />
+            </toolbar>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>150</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="ACCOUNT_CD" title="ACCOUNT_CD" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ACCOUNT_NM" title="ACCOUNT_NM" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_Click_RST1_01_02">
+                    <component-id>POP_UI_IM_13_04_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                    <conditions>
+                        <condition id="cond1">
+                            <component>DATA_02</component>
+                            <key>CLICK_FROM</key>
+                            <operator>equal</operator>
+                            <value>RST_CPT_01</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_Click_RST1_02_02">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET_VALUE-to-ACCOUNT_ID" reference-id="POP_UI_IM_13_04_WINDOW_01_R_GRID_01:selections" extract-by="ID" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_Click_RST1_03_02">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET_VALUE-to-ACCOUNT_CD" reference-id="POP_UI_IM_13_04_WINDOW_01_R_GRID_01:selections" extract-by="ACCOUNT_CD" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_Click_RST1_04_02">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET_VALUE-to-ACCOUNT_NM" reference-id="POP_UI_IM_13_04_WINDOW_01_R_GRID_01:selections" extract-by="ACCOUNT_NM" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_Click_RST1_POP1_01_02">
+                    <component-id>POP_UI_IM_13_04_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                    <conditions>
+                        <condition id="cond2">
+                            <component>DATA_02</component>
+                            <key>CLICK_FROM</key>
+                            <operator>equal</operator>
+                            <value>RST1_POP1</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_Click_RST1_POP1_02_02">
+                            <component-id>POP_UI_IM_13_04_DATA_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="ACCOUNT_ID" reference-id="POP_UI_IM_13_04_WINDOW_01_R_GRID_01:selections" extract-by="ID" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_Click_RST1_POP1_03_02">
+                            <component-id>POP_UI_IM_13_01_CPT_T5_01_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_IM_13_04_WINDOW_01_R_GRID_01:selections" extract-by="ACCOUNT_CD" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_Click_RST1_POP1_04_02">
+                            <component-id>POP_UI_IM_13_01_CPT_T5_02_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_IM_13_04_WINDOW_01_R_GRID_01:selections" extract-by="ACCOUNT_NM" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SRC_SP_UI_IM_13_Q4_LODE">
+                    <service-id>SRV_UI_IM_13_Q4</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_13_04_CPT_CONFIRM" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_Click_RST1_01">
+                    <component-id>POP_UI_IM_13_04_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                    <conditions>
+                        <condition id="cond1">
+                            <component>DATA_02</component>
+                            <key>CLICK_FROM</key>
+                            <operator>equal</operator>
+                            <value>RST_CPT_01</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_Click_RST1_02">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET_VALUE-to-ACCOUNT_ID" reference-id="POP_UI_IM_13_04_WINDOW_01_R_GRID_01:selections" extract-by="ACCOUNT_ID" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_Click_RST1_03">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET_VALUE-to-ACCOUNT_CD" reference-id="POP_UI_IM_13_04_WINDOW_01_R_GRID_01:selections" extract-by="ACCOUNT_CD" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_Click_RST1_04">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET_VALUE-to-ACCOUNT_NM" reference-id="POP_UI_IM_13_04_WINDOW_01_R_GRID_01:selections" extract-by="ACCOUNT_NM" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_Click_RST1_POP1_01_02">
+                    <component-id>POP_UI_IM_13_04_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                    <conditions>
+                        <condition id="cond2">
+                            <component>DATA_02</component>
+                            <key>CLICK_FROM</key>
+                            <operator>equal</operator>
+                            <value>RST1_POP1</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_Click_RST1_POP1_02_02">
+                            <component-id>POP_UI_IM_13_04_DATA_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="ACCOUNT_ID" reference-id="POP_UI_IM_13_04_WINDOW_01_R_GRID_01:selections" extract-by="ID" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_Click_RST1_POP1_03_02">
+                            <component-id>POP_UI_IM_13_01_CPT_T5_01_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_IM_13_04_WINDOW_01_R_GRID_01:selections" extract-by="ACCOUNT_CD" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_Click_RST1_POP1_04_02">
+                            <component-id>POP_UI_IM_13_01_CPT_T5_02_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_IM_13_04_WINDOW_01_R_GRID_01:selections" extract-by="ACCOUNT_NM" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_UI_IM_13_04_CPT_CANCLE" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_IM_13_04_CPT_CANCLE_CLICK_01">
+                    <component-id>POP_UI_IM_13_04_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

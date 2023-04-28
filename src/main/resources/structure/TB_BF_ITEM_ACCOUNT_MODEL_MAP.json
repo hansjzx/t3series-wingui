@@ -1,0 +1,45 @@
+{
+    "name": "TB_BF_ITEM_ACCOUNT_MODEL_MAP",
+    "useDefaultSchema": "N",
+    "columns": [{
+            "name": "ID",
+            "type": "ID",
+            "update": "N"
+        },
+        {
+            "name": "ACCOUNT_CD",
+            "unique": "Y",
+            "type": "STRING",
+            "header": "ACCOUNT_CD"
+        },
+        {
+            "name": "ITEM_CD",
+            "unique": "Y",
+            "type": "STRING",
+            "header": "ITEM_CD"
+        },
+        {
+            "name": "ACTV_YN",
+            "type": "STRING",
+            "header": "ACTV_YN"
+        },
+        {
+            "name": "CREATE_BY",
+            "type": "USER_ID",
+            "update": "N"
+        },
+        {
+            "name": "CREATE_DTTM",
+            "type": "NOW",
+            "update": "N"
+        },
+        {
+            "name": "MODIFY_BY",
+            "type": "USER_ID"
+        },
+        {
+            "name": "MODIFY_DTTM",
+            "type": "NOW"
+        }
+    ]
+}

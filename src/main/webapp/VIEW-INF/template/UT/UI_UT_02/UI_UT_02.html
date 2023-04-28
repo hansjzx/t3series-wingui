@@ -1,0 +1,234 @@
+<section id="contentsInner" class="STANDARD UI_UT_02">
+
+  <!-- Vue instance wrapper -->
+  <div id="contents" class="vue-app content_area parentCon">
+    <kendo-splitter :orientation="'horizontal'"
+            :panes="[ { size: '380px', collapsible: true, resizable: false }, {} ]"
+            style="height:100%;">
+
+      <!-- Left -->
+      <div class="search_area">
+
+        <!-- Search btn -->
+        <div class='commonBtn_area'>
+          <kendo-button @click="onSearchBtnClick"><i class="fa fa-lg fa-search"></i></kendo-button>
+        </div>
+
+        <!-- Option TAB -->
+        <div class='srhTab_area'>
+          <kendo-tabstrip id="SRH_TAB" style="height: calc(100% - 65px);">
+
+            <!-- TAB Header -->
+            <ul>
+              <li class="k-state-active">
+                <span v-t="'BASE_OPTION_IMPORT_WORKFLOW'">Import workflow</span>
+              </li>
+            </ul>
+
+            <!-- TAB Body -->
+            <div style="height: 100%; display: block;">
+
+              <!-- Module selection -->
+              <div class="parentCon">
+
+                <!-- Label -->
+                <span class="leftCon">
+									<span v-t="'MODULE_VAL'" class="kd_labelWrap"></span>
+								</span>
+
+                <!-- Combo box-->
+                <span class="rightCon">
+                  <kendo-combobox
+                      v-model="mSelectedModule"
+                      :data-source="mModuleList"
+                      :filter="'contains'"
+                      :placeholder="'Select...'">
+                  </kendo-combobox>
+								</span>
+              </div>
+
+              <!-- Import workflow -->
+              <div class="parentCon">
+
+                <!-- Tree view container -->
+                <div v-if="mTreeAreaVisible" id="tree-view-container">
+
+                  <!-- Tree view -->
+                  <kendo-treeview style="height: 695px">
+                    <li data-expanded="true">
+                      <span class="k-icon k-i-folder"></span>
+                      {{ mSelectedModule }}
+                      <ul>
+                        <li v-for="(levelItem, index) in mTableList" data-expanded="true">
+                          <span class="k-icon" :class="getLevelItemClass(levelItem)"></span>
+                          {{ 'Level ' + (index + 1) }}
+                          <ul>
+                            <li v-for="tableItem in levelItem"
+                              @click="onTableItemClick(tableItem)"><span
+                                class="k-icon"
+                                :class="getTableItemClass(tableItem)"></span>
+                              {{ tableItem.table + ' (' + Intl.NumberFormat().format(tableItem.dataCount) + ')' }}
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </kendo-treeview>
+
+                </div>
+              </div>
+            </div>
+
+          </kendo-tabstrip>
+        </div>
+      </div>
+
+      <!-- Right -->
+      <div class="result_area">
+
+        <!-- Excel import options area-->
+        <div v-if="mImportAreaVisible">
+
+          <!-- Table status-->
+          <div class="excel_import_title_area">
+            <span class="excel_import_title" v-t="'LABEL_TABLE_STATUS'">Table status</span>
+          </div>
+
+          <div style="height: 110px">
+            <ul class="table_status">
+              <li><strong v-t="'LABEL_TABLE_NAME'">Name :</strong><span>{{ mSelectedTable }}</span></li>
+              <li><strong v-t="'LABEL_DATA_COUNT'">Data count :</strong><span>{{ mTableDataCount }}</span>
+              </li>
+              <li><strong v-t="'LABEL_IMPORT_JOB_STATUS'">Import job status
+                :</strong><span :style="{color: mTableJobStatus ? 'black' : 'red'}">{{ mTableJobStatus ? 'Idle' : 'Running'}}</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Excel export options -->
+          <div class="excel_import_title_area">
+            <span class="excel_import_title" v-t="'LABEL_EXCEL_EXPORT_OPTIONS'">Excel export options:</span>
+          </div>
+
+          <div style="height: 190px">
+            <!-- 1. Export options-->
+            <div class="excel_import_option">
+              <span class="import_option_title" v-t="'LABEL_EXPORT_OPTION_1'">1. Export option :</span>
+              <ul class="radio_list">
+                <li><input @click="onClickExportOption1(0)" type="radio" name="export_option1"
+                       id="export_option_1"
+                       :checked="mExportCheckStatus1"><label
+                    for="export_option_1">Header</label></li>
+                <li><input @click="onClickExportOption1(1)" type="radio" name="export_option1"
+                       id="export_option_2"><label
+                    for="export_option_2">Header AND Data</label></li>
+              </ul>
+            </div>
+
+            <!-- 2. Separator options -->
+            <div class="excel_import_option">
+              <span class="import_option_title" v-t="'LABEL_EXPORT_OPTION_2'">2. Separator option :</span>
+              <ul class="radio_list">
+                <li><input @click="onClickExportOption2(0)" type="radio" name="export_option2"
+                       id="export_separator_option_1" :checked="mExportCheckStatus2"><label
+                    for="export_separator_option_1">CSV</label></li>
+                <li><input @click="onClickExportOption2(1)" type="radio" name="export_option2"
+                       id="export_separator_option_2"><label
+                    for="export_separator_option_2">TSV</label>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Export button-->
+            <kendo-button id="export_btn" @click="doExcelExport" :disabled="!mTableJobStatus"
+                    v-t="'BTN_TXT_EXPORT_AND_DOWNLOAD'">
+              Export and Download
+            </kendo-button>
+          </div>
+
+          <!-- Excel import options-->
+          <div class="excel_import_title_area">
+            <span class="excel_import_title" v-t="'LABEL_EXCEL_IMPORT_OPTIONS'">Excel import options</span>
+          </div>
+
+          <div>
+            <!-- 1. Import options-->
+            <div class="excel_import_option">
+              <span class="import_option_title" v-t="'LABEL_IMPORT_OPTION_1'">1. Import option :</span>
+              <ul class="radio_list">
+                <li><input @click="onClickImportOption1(0)" type="radio" name="option1"
+                       id="insert_option_1"><label
+                    for="insert_option_1">Add</label></li>
+                <li><input @click="onClickImportOption1(1)" type="radio" name="option1"
+                       id="insert_option_2"><label
+                    for="insert_option_2">Update</label></li>
+                <li><input @click="onClickImportOption1(2)" type="radio" name="option1"
+                       id="insert_option_3"
+                       :checked="mImportCheckStatus1"><label
+                    for="insert_option_3">Add OR Update</label></li>
+                <!-- Clean option -->
+                <li v-if="HIDDEN_OPTION_ON">
+                  <input @click="onClickImportOption1(3)" type="radio" name="option1"
+                       id="insert_option_4"><label
+                    for="insert_option_4">Delete AND Insert</label></li>
+              </ul>
+            </div>
+
+            <!-- 2. Separator options -->
+            <div class="excel_import_option">
+              <span class="import_option_title" v-t="'LABEL_EXPORT_OPTION_2'">2. Separator option :</span>
+              <ul class="radio_list">
+                <li><input @click="onClickImportOption2(0)" type="radio" name="option2"
+                       id="separator_option_1" :checked="mImportCheckStatus2"><label
+                    for="separator_option_1">CSV</label></li>
+                <li><input @click="onClickImportOption2(1)" type="radio" name="option2"
+                       id="separator_option_2"><label
+                    for="separator_option_2">TSV</label>
+                </li>
+              </ul>
+            </div>
+
+            <!-- 3. Files to import -->
+            <div class="excel_import_option">
+              <span class="import_option_title" v-t="'LABEL_IMPORT_OPTION_3'">3. Files to import :</span>
+
+              <div id="file_list_area">
+                <!-- Real input file -->
+                <input id="files" type="file" ref="files" :accept="mAllowedExtensions"
+                     @change="onSelectedFilesChange" :multiple="mMultiple" style="display: none"/>
+
+                <!-- Fake input file -->
+                <kendo-button @click="onClickAddFiles" v-t="'BTN_TXT_ADD_FILES'">Add Files
+                </kendo-button>
+
+                <!-- Total count label -->
+                <label style="padding-left: 10px">{{ mTotalLabelTxt + ' ' +
+                  mSelectedFiles.length}}</label>
+
+                <!-- File list-->
+                <div class="file_list_item" v-for="(file, index) in mSelectedFiles">
+                  <span>{{ (index + 1) + '. ' + file.name }}</span>
+                  <kendo-button class="remove_file_btn" @click="onClickFileRemove(index)">
+                    <i class="fa fa-lg fa-trash"></i>
+                  </kendo-button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Save and Run -->
+          <kendo-button id="save_run_btn" @click="onClickSaveAndImport" :disabled="mSaveAndImportEnable"
+                  v-t="'BTN_TXT_SAVE_AND_IMPORT'">
+            Save and Import
+          </kendo-button>
+        </div>
+
+        <!-- Import disable area -->
+        <div v-else class="import_area_disable">
+          <h3 v-t="'LABEL_SELECT_JOB_TABLE'">Please select the table to import and export.</h3>
+        </div>
+
+      </div>
+    </kendo-splitter>
+  </div>
+</section>

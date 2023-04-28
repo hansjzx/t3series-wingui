@@ -1,0 +1,107 @@
+<link rel="stylesheet" href="../js/kendo/styles/kendo.fiori.min.css" />
+<link rel="stylesheet" href="../js/kendo/styles/kendo.common-fiori.min.css" />
+
+<div id="contentsInner" class="permissions">
+	<div class="parentCon">
+		<div class="leftCon">
+			<span id="search_1_1" class="component_ui"></span>
+			<span id="search_1_2" class="component_ui"></span>
+			<span id="search_1_3" class="component_ui"></span>
+			<span id="search_1_4" class="component_ui"></span>
+		</div>
+		<div class="rightCon">
+			<span id="button_1_1" class="component_ui"></span>
+			<span id="button_1_2" class="component_ui"></span>
+		</div>
+	</div>
+	<div class="innerCon">
+		<div id="gridWrap">
+			<ul>
+				<li id="groupTab">
+					GROUP
+				</li>
+				<li id="userTab">
+					USER
+				</li>
+			</ul>
+			<div class="byGroup">
+				<div class="gridConTop">
+					<span id="button_1_3" class="component_ui"></span>
+				</div>
+				<div class="gridCon">
+					<div class="leftGridCon">
+						<div id="grd_group" class="component_ui"></div>
+					</div>
+					<div class="rightGridCon">
+						<div id="p_byGroup" class="component_ui"></div>
+					</div>
+				</div>
+			</div>
+			<div class="byUser">
+				<div class="gridConTop">
+					<span id="button_1_4" class="component_ui"></span>
+				</div>
+				<div class="gridCon">
+					<div class="leftGridCon">
+						<div id="grd_user" class="component_ui"></div>
+					</div>
+					<div class="rightGridCon">
+						<div id="p_byUser" class="component_ui"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<style type="text/css">
+.permissions {}
+.permissions .parentCon:after {content:'';display:block;clear:both;}
+.permissions .leftCon {float:left; width:78%; margin-left: 1%}
+.permissions .rightCon {float:left; width:18%; margin-left: 1%; text-align:right;}
+
+.permissions .innerCon #gridWrap {border:1px solid #ccc;}
+.permissions .innerCon #gridWrap .k-content {padding:0;}
+.permissions .innerCon .gridConTop {float:left; width:98%; padding: 1%; text-align:right;}
+.permissions .innerCon .gridCon .leftGridCon {float:left; width:28%; padding: 1%}
+.permissions .innerCon .gridCon .rightGridCon {float:left; width:68%; padding: 1%; text-align:right;}
+.permissions {}
+</style>
+
+</div>
+<script type="text/javascript">
+	$("#search_1_1").show();
+	$("#search_1_2").show();
+	$("#search_1_3").hide();
+	$("#search_1_4").hide();
+	$("#button_1_1").show();
+	$("#button_1_2").hide();
+
+	function onActivate(e) {
+		var activatedTab = $(e.item).find("> .k-link").text().trim();
+		if (activatedTab == "GROUP") {
+			$("#search_1_1").show();
+			$("#search_1_2").show();
+			$("#search_1_3").hide();
+			$("#search_1_4").hide();
+			$("#button_1_1").show();
+			$("#button_1_2").hide();
+		} else if (activatedTab == "USER") {
+			$("#search_1_1").hide();
+			$("#search_1_2").hide();
+			$("#search_1_3").show();
+			$("#search_1_4").show();
+			$("#button_1_1").hide();
+			$("#button_1_2").show();
+		}
+	}
+
+    $("#gridWrap").kendoTabStrip({
+    	theme: "fiori",
+        animation:  {
+            open: {
+                effects: "fadeIn"
+            }
+        },
+		activate: onActivate
+    }).data("kendoTabStrip").activateTab($("#groupTab"));
+</script>

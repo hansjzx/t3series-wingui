@@ -1,0 +1,65 @@
+<section id="contentsInner" class="STANDARD UI_AD_10">
+  <div id="contents" class="vue-app content_area parentCon">
+    <kendo-splitter :orientation="'horizontal'" :panes="[ { size: '24%', collapsible: true, resizable: false }, {} ]" v-on:resize="doResize" style="height:100%;" class="split_component">
+      <div class="search_area" style="position: absolute; top: 0px; width: 334px; height: 100%; left: 0px;">
+        <div class="commonBtn_area">
+          <span id="TTL_COMM_CPT_HELP" class="component_ui"></span>
+          <kendo-button @click="doRefresh"><i class="fa fa-lg fa-refresh"></i></kendo-button>
+          <kendo-button @click="doDataLoad(1)"><i class="fa fa-lg fa-search"></i></kendo-button>
+          <!-- <excel-export style="margin-right: 3px;" @export="excelExport('grid1')"></excel-export>
+          <excel-import id=""
+              @select="onExcelImportSelect"
+              @success="onExcelImportSuccess"
+              @complete="onExcelImportComplete"                  
+              @error="onExcelImportError">
+            </excel-import> -->
+        </div>
+        <div class="srhTab_area">
+          <kendo-tabstrip id="SRH_TAB" style="height: calc(100% - 35px);">
+            <ul>
+              <li class="k-state-active">
+                <span id="t1-1" v-t="'BASE_OPTION'"></span>
+              </li>
+            </ul>
+            <div style="height: calc(100% - 35px); min-height: calc(100% - 35px); display: block;">
+              <div class="parentCon">
+                <span class="leftCon">
+                  <span id="SRH_CPT_T1_01_01" v-t="'USER_NM'" class="kd_labelWrap"></span>
+                </span>
+                <span class="rightCon">
+                  <input type="text" id="displayName" class="k-textbox" v-model="displayName" @keydown="doKeyDown" style="width: 190px;"></input>
+                </span>
+              </div>
+              <div class="parentCon">
+                <span class="leftCon">
+                  <span id="SRH_CPT_T1_01_02" v-t="'LOGIN_DTTM'" class="kd_labelWrap"></span>
+                </span>
+                <span class="rightCon">
+                  <kendo-datetimepicker :culture=local :format="'yyyy-MM-dd HH:mm:ss'" v-model="accessDttmFrom" style="width: 190px"></kendo-datetimepicker>
+                </span>
+              </div>
+              <div class="parentCon">
+                <span class="leftCon">
+                  <span id="SRH_CPT_T1_01_03" v-t="'LOGOUT_DTTM'" class="kd_labelWrap"></span>
+                </span>
+                <span class="rightCon">
+                  <kendo-datetimepicker :culture=local :format="'yyyy-MM-dd HH:mm:ss'" v-model="accessDttmTo" style="width: 190px"></kendo-datetimepicker>
+                </span>
+              </div>
+            </div>
+          </kendo-tabstrip>
+        </div>
+      </div>
+      <div class="result_area">
+        <div class="row" style="height: 100%">
+          <div style="height: calc(100% - 44px) !important;" class="component_ui wingui_component">
+            <div id="grid1" version="1" style="width: 1310px; height: 750px;"></div>
+          </div>
+          <div style="height: 42px;">
+              <page-navigator v-on:paging="doDataLoad" :settings="settings" ></page-navigator>
+          </div>
+        </div>
+      </div>
+    </kendo-splitter>
+  </div>
+</section>

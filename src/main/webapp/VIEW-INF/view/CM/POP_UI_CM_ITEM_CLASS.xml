@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_CM_ITEM_CLASS" version="2.0">
+    <component id="POP_UI_CM_ITEM_CLASS_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_MP_ITEM_CLASS</title>
+            <width>500</width>
+            <height>318</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_ITEM_CLASS_WINDOW_01_GRD" type="R_GRID">
+        <props>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="ITEM_LV_NM" title="ITEM_LV" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_CLASS_VAL" title="ITEM_CLASS_VAL" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="DESCRIP" title="DESCRIP" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="POP_UI_CM_ITEM_CLASS_WINDOW_01_GRD_SETDATA_01">
+                    <component-id>POP_UI_CM_03_07_WINDOW_01_CPT_02_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_ITEM_CLASS_WINDOW_01_GRD:selections" extract-by="ITEM_CLASS_VAL" />
+                    </parameters>
+                    <success>
+                        <operation-call id="POP_UI_CM_ITEM_CLASS_WINDOW_01_GRD_SETDATA_03">
+                            <component-id>POP_UI_CM_03_07_WINDOW_01_CPT_01_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_CM_ITEM_CLASS_WINDOW_01_GRD:selections" extract-by="ITEM_LV_NM" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="POP_UI_CM_ITEM_CLASS_WINDOW_01_GRD_SETDATA_02">
+                            <component-id>POP_UI_CM_03_07_WINDOW_01_CPT_03_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_CM_ITEM_CLASS_WINDOW_01_GRD:selections" extract-by="DESCRIP" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="POP_UI_CM_ITEM_CLASS_WINDOW_01_GRD_SETDATA_04">
+                            <component-id>POP_UI_CM_03_07_WINDOW_01_CPT_04_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_CM_ITEM_CLASS_WINDOW_01_GRD:selections" extract-by="ID" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="POP_UI_CM_ITEM_CLASS_WINDOW_01_CLOSE_01">
+                            <component-id>POP_UI_CM_ITEM_CLASS_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_POP_UI_CM_ITEM_CLASS_WINDOW_01_LOAD">
+                    <service-id>SRV_UI_MP_14_POP_Q1</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

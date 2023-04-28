@@ -1,0 +1,77 @@
+{
+    "name": "TB_IF_ROUTING",
+    "useDefaultSchema": "Y",
+    "procedure": [{
+            "sequence": "1",
+            "method": "{call dbo.SP_UI_MP_38_BATCH(?, ?, ?, ?)}",
+            "description": "공정 관리"
+        }
+    ],
+    "columns": [{
+            "name": "LOCAT_CD",
+            "type": "STRING",
+            "header": "LOCAT_CD",
+            "unique": "Y"
+        },
+        {
+            "name": "ITEM_CD",
+            "type": "STRING",
+            "header": "ITEM_CD",
+            "unique": "Y"
+        },
+        {
+            "name": "ROUTE_CD",
+            "type": "STRING",
+            "header": "ROUTE_CD",
+            "default": "Y"
+        },
+        {
+            "name": "ROUTE_DESCRIP",
+            "type": "STRING",
+            "header": "ROUTE_DESCRIP",
+            "default": "N"
+        },
+        {
+            "name": "ROUTE_SEQ",
+            "type": "NUMBER",
+            "header": "ROUTE_SEQ",
+            "default": "N"
+        },
+        {
+            "name": "BASE_ALLOC_RULE",
+            "type": "STRING",
+            "header": "BASE_ALLOC_RULE",
+            "default": "N"
+        },
+        {
+            "name": "BASE_ALLOC_RULE_PRIORT",
+            "type": "STRING",
+            "header": "BASE_ALLOC_RULE_PRIORT",
+            "default": "N"
+        },
+        {
+            "name": "BASE_ALLOC_RULE_PROPTN",
+            "type": "STRING",
+            "header": "BASE_ALLOC_RULE_PROPTN",
+            "default": "N"
+        },
+        {
+            "name": "CREATE_BY",
+            "type": "USER_ID",
+            "update": "N"
+        },
+        {
+            "name": "CREATE_DTTM",
+            "type": "NOW",
+            "update": "N"
+        },
+        {
+            "name": "MODIFY_BY",
+            "type": "USER_ID"
+        },
+        {
+            "name": "MODIFY_DTTM",
+            "type": "NOW"
+        }
+    ]
+}

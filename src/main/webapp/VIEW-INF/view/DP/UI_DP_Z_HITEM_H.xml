@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_DP_Z_HITEM_H" template="COMM/STANDARD" version="2.0">
+    <publish parent="MENU_05_05" open="false" seq="70" />
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="TTL_CPT_05" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="G_GRID_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="LOAD_CONDITION1" group="AND">
+                            <component>SRH_CPT_T1_01_04</component>
+                            <operator>notEqual</operator>
+                            <value>SALES-ACCOUNT</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="SA_GRID_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD_SA</operation-id>
+                    <conditions>
+                        <condition id="LOAD_CONDITION2" group="AND">
+                            <component>SRH_CPT_T1_01_04</component>
+                            <operator>Equal</operator>
+                            <value>SALES-ACCOUNT</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>Hierachy</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_04" type="COMBOBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <init-value>
+                <option value="ITEM" text="Item" />
+                <option value="SALES" text="Sales" />
+                <option value="PERIOD" text="Period" />
+                <option value="SALES-ACCOUNT" text="Sales-Account" />
+            </init-value>
+        </props>
+    </component>
+    <component id="RST_CPT_01" type="R_TREE">
+        <props>
+            <state-bar>false</state-bar>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <data-fit>horizontal</data-fit>
+            <init-expand-level>all</init-expand-level>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <show-row-count>true</show-row-count>
+            <toolbar use="false" />
+            <columns>
+                <column id="HIERARCHY_ITEM_ID" type="string">
+                    <width>200</width>
+                    <editable>false</editable>
+                </column>
+                <column id="HIERARCHY_ITEM_NAME" type="string">
+                    <width>200</width>
+                    <editable>false</editable>
+                </column>
+                <column id="HIERARCHY_ITEM_KEY" type="string">
+                    <width>200</width>
+                    <editable>false</editable>
+                </column>
+                <column id="HIERARCHY_ID" type="string">
+                    <width>200</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_VALUE1" type="string">
+                    <width>200</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_VALUE2" type="string">
+                    <width>200</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="GeneralLoad">
+                    <service-id>GetMasterHierarchyItem</service-id>
+                    <service-target>T3SeriesDemandPlanServer</service-target>
+                    <parameters>
+                        <parameter id="TREE_PARENT_ID" value="PARENT_HIERARCHY_ITEM_ID" />
+                        <parameter id="TREE_KEY_ID" value="HIERARCHY_ITEM_ID" />
+                        <parameter id="HIERARCHT_ID" reference-id="SRH_CPT_T1_01_04" default-value="ITEM" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD_SA">
+                <service-call id="SALoad">
+                    <service-id>GetSalesAccountHierarchyItem</service-id>
+                    <service-target>T3SeriesDemandPlanServer</service-target>
+                    <parameters>
+                        <parameter id="TREE_PARENT_ID" value="PARENT_HIERARCHY_ITEM_ID" />
+                        <parameter id="TREE_KEY_ID" value="HIERARCHY_ITEM_ID" />
+                        <parameter id="HIERARCHT_ID" value="SALES" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

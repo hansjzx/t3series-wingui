@@ -1,0 +1,50 @@
+<div id="contentsInner" class="langWrap">
+
+	<div class="leftCon">
+		<div class="localeManage">
+			<div id="LOCALE_GRID" class="component_ui"></div>
+		</div>
+		<div class="langKeyManage">
+			<div class="inputsWrap parentCon">
+				<span class="leftCon">
+					<span id="INP_LANG_KEY" class="component_ui"></span>
+					<span id="BTN_LANG_KEY_SEARCH" class="component_ui"></span>
+				</span>
+				<span class="rightCon">
+					<span id="BTN_LANG_KEY_INSERT" class="component_ui"></span>
+					<span id="BTN_LANG_KEY_REMOVE" class="component_ui"></span>
+					<span id="BTN_LANG_KEY_SAVE" class="component_ui"></span>
+				</span>
+			</div>
+			<div id="LANG_KEY_GRID" class="component_ui"></div>
+		</div>
+	</div>
+
+	<div class="rightCon langManage">
+		<div class="inputsWrap parentCon">
+			<span class="leftCon">
+				<span id="CBX_LOCALE" class="component_ui"></span>
+				<span id="CBX_LANG_KEY" class="component_ui"></span>
+				<span id="INP_LANG_VALUE" class="component_ui"></span>
+				<span id="BTN_LANG_VAL_SEARCH" class="component_ui"></span>
+			</span>
+			<span class="rightCon">
+				<span id="BTN_LANG_VAL_SAVE" class="component_ui"></span>
+			</span>
+		</div>
+		<div id="LANG_VAL_GRID" class="component_ui"></div>
+
+		<div id="TEMP_GRID" class="component_ui" style="display: none"></div>
+	</div>
+
+</div>
+<style type="text/css">
+.langWrap:after, .parentCon:after {content:'';display:block;clear:both;}
+.langWrap > div {float:left; margin-left:1%;}
+.langWrap > .leftCon {width:29%; margin-left:0;}
+.langWrap > .leftCon .localeManage {margin-bottom:10px;}
+.langWrap > .rightCon {width:70%;}
+	.inputsWrap {margin-bottom:10px; }
+.leftCon {float:left;}
+.rightCon {float:right; text-align:right;}
+</style>

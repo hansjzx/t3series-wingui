@@ -1,0 +1,1019 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_CM_12_03" version="2.0">
+    <component id="POP_UI_CM_12_03_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_CM_12_03</title>
+            <width>480</width>
+            <height>740</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_TAB_03" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t3-1" title="DMND_INFO" expand="true" init-render="true" />
+                <tab id="t3-2" title="FROM_LOCAT" init-render="true" />
+                <tab id="t3-3" title="SHIPPING_LOT" init-render="true" />
+            </tabs>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="POP_ITEM_LV_01" type="CHECKBOX">
+        <props>
+            <name>ITEM_LV_REGISTRY</name>
+            <name-position>right</name-position>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="change">
+                <operation-call id="OPC_POP_ITEM_LV_01_CHANGE_01">
+                    <component-id>POP_ITEM_LV_CD_05</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" reference-id="POP_ITEM_LV_01" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_POP_ITEM_LV_01_CHANGE_02">
+                    <component-id>POP_ITEM_LV_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_POP_ITEM_LV_01_CHANGE_03">
+                    <component-id>POP_ITEM_LV_NM_04</component-id>
+                    <operation-id>INIT</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_ITEM_LV_01_CHANGE_SUCCESS_01">
+                            <component-id>POP_SALES_LV_CD_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_LV_01_CHANGE_SUCCESS_02">
+                            <component-id>POP_SALES_LV_NM_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_LV_01_CHANGE_SUCCESS_03">
+                            <component-id>POP_SALES_LV_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_LV_01_CHANGE_SUCCESS_04">
+                            <component-id>POP_SALES_LV_CD_05</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_LV_01_CHANGE_SUCCESS_05">
+                            <component-id>POP_ITEM_CD_02_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_LV_01_CHANGE_SUCCESS_06">
+                            <component-id>POP_ITEM_NM_02_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_LV_01_CHANGE_SUCCESS_07">
+                            <component-id>POP_ITEM_TP_02_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_LV_01_CHANGE_SUCCESS_08">
+                            <component-id>POP_ITEM_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_LV_01_CHANGE_SUCCESS_09">
+                            <component-id>POP_ITEM_CD_02_05</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_LV_01_CHANGE_SUCCESS_10">
+                            <component-id>ACCOUNT_CD_02_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_LV_01_CHANGE_SUCCESS_11">
+                            <component-id>ACCOUNT_NM_02_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_LV_01_CHANGE_SUCCESS_12">
+                            <component-id>POP_ACCOUNT_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_LV_01_CHANGE_SUCCESS_13">
+                            <component-id>ACCOUNT_CD_02_05</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_ITEM_LV_CD_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_LV_CD</init-value>
+        </props>
+    </component>
+    <component id="POP_ITEM_LV_CD_04" type="INPUTBOX">
+        <props>
+            <width>146.6</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_ITEM_LV_CD_05" type="BUTTON">
+        <props>
+            <width>30</width>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_ITEM_LV_CD_05_INIT">
+                    <component-id>POP_ITEM_LV_CD_05</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" reference-id="POP_ITEM_LV_01" />
+                    </parameters>
+                </operation-call>
+            </action>
+            <action event-type="click">
+                <operation-call id="OPC_POP_ITEM_LV_WINDOW_01_OPEN">
+                    <component-id>POP_ITEM_LV_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+                <operation-call id="OPC_POP_ITEM_LV_GRD_LOAD">
+                    <component-id>POP_ITEM_LV_GRD</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_ITEM_LV_NM_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_LV_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_ITEM_LV_NM_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_SALES_LV_01" type="CHECKBOX">
+        <props>
+            <name>SALES_LV_REGISTRY</name>
+            <name-position>right</name-position>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="change">
+                <operation-call id="OPC_POP_SALES_LV_01_CHANGE_01">
+                    <component-id>POP_SALES_LV_CD_05</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" reference-id="POP_SALES_LV_01" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_POP_SALES_LV_01_CHANGE_02">
+                    <component-id>POP_SALES_LV_CD_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_POP_SALES_LV_01_CHANGE_03">
+                    <component-id>POP_SALES_LV_NM_04</component-id>
+                    <operation-id>INIT</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_SALES_LV_01_CHANGE_SUCCESS_01">
+                            <component-id>POP_ITEM_LV_CD_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_SALES_LV_01_CHANGE_SUCCESS_02">
+                            <component-id>POP_ITEM_LV_NM_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_SALES_LV_01_CHANGE_SUCCESS_03">
+                            <component-id>POP_ITEM_LV_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_SALES_LV_01_CHANGE_SUCCESS_04">
+                            <component-id>POP_ITEM_LV_CD_05</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_SALES_LV_01_CHANGE_SUCCESS_05">
+                            <component-id>POP_ITEM_CD_02_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_SALES_LV_01_CHANGE_SUCCESS_06">
+                            <component-id>POP_ITEM_NM_02_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_SALES_LV_01_CHANGE_SUCCESS_07">
+                            <component-id>POP_ITEM_TP_02_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_SALES_LV_01_CHANGE_SUCCESS_08">
+                            <component-id>POP_ITEM_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_SALES_LV_01_CHANGE_SUCCESS_09">
+                            <component-id>POP_ITEM_CD_02_05</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_SALES_LV_01_CHANGE_SUCCESS_10">
+                            <component-id>ACCOUNT_CD_02_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_SALES_LV_01_CHANGE_SUCCESS_11">
+                            <component-id>ACCOUNT_NM_02_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_SALES_LV_01_CHANGE_SUCCESS_12">
+                            <component-id>POP_ACCOUNT_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_SALES_LV_01_CHANGE_SUCCESS_13">
+                            <component-id>ACCOUNT_CD_02_05</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_SALES_LV_CD_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_LV_CD</init-value>
+        </props>
+    </component>
+    <component id="POP_SALES_LV_CD_04" type="INPUTBOX">
+        <props>
+            <width>146.6</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_SALES_LV_CD_05" type="BUTTON">
+        <props>
+            <width>30</width>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_SALES_LV_CD_05_INIT">
+                    <component-id>POP_SALES_LV_CD_05</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" reference-id="POP_SALES_LV_01" />
+                    </parameters>
+                </operation-call>
+            </action>
+            <action event-type="click">
+                <operation-call id="OPC_POP_SALES_LV_WINDOW_01_OPEN">
+                    <component-id>POP_SALES_LV_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+                <operation-call id="OPC_POP_SALES_LV_GRD_LOAD">
+                    <component-id>POP_SALES_LV_GRD</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_SALES_LV_NM_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_LV_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_SALES_LV_NM_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_ITEM_01" type="CHECKBOX">
+        <props>
+            <name>ITEM_REGISTRY</name>
+            <name-position>right</name-position>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="change">
+                <operation-call id="OPC_POP_ITEM_01_CHANGE_01">
+                    <component-id>POP_ITEM_CD_02_05</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" reference-id="POP_ITEM_01" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_POP_ITEM_01_CHANGE_02">
+                    <component-id>POP_ITEM_CD_02_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_POP_ITEM_01_CHANGE_03">
+                    <component-id>POP_ITEM_NM_02_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_POP_ITEM_01_CHANGE_04">
+                    <component-id>POP_ITEM_TP_02_04</component-id>
+                    <operation-id>INIT</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_ITEM_01_CHANGE_SUCCESS_01">
+                            <component-id>POP_ITEM_LV_CD_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_01_CHANGE_SUCCESS_02">
+                            <component-id>POP_ITEM_LV_NM_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_01_CHANGE_SUCCESS_02">
+                            <component-id>POP_ITEM_LV_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_01_CHANGE_SUCCESS_04">
+                            <component-id>POP_ITEM_LV_CD_05</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_01_CHANGE_SUCCESS_05">
+                            <component-id>POP_SALES_LV_CD_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_01_CHANGE_SUCCESS_06">
+                            <component-id>POP_SALES_LV_NM_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_01_CHANGE_SUCCESS_07">
+                            <component-id>POP_SALES_LV_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_01_CHANGE_SUCCESS_08">
+                            <component-id>POP_SALES_LV_CD_05</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_01_CHANGE_SUCCESS_09">
+                            <component-id>ACCOUNT_CD_02_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_01_CHANGE_SUCCESS_10">
+                            <component-id>ACCOUNT_NM_02_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_01_CHANGE_SUCCESS_11">
+                            <component-id>POP_ACCOUNT_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ITEM_01_CHANGE_SUCCESS_12">
+                            <component-id>ACCOUNT_CD_02_05</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_ITEM_CD_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_CD</init-value>
+        </props>
+    </component>
+    <component id="POP_ITEM_CD_02_04" type="INPUTBOX">
+        <props>
+            <width>146.6</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_ITEM_CD_02_05" type="BUTTON">
+        <props>
+            <width>30</width>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_ITEM_CD_02_05_INIT">
+                    <component-id>POP_ITEM_CD_02_05</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" reference-id="POP_ITEM_01" />
+                    </parameters>
+                </operation-call>
+            </action>
+            <action event-type="click">
+                <operation-call id="OPC_POP_ALL_ITEM_WINDOW_01_OPEN">
+                    <component-id>POP_ALL_ITEM_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+                <operation-call id="OPC_POP_ALL_ITEM_GRD_LOAD">
+                    <component-id>POP_ALL_ITEM_GRD</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="DATA_DIV" value="GET_DP_ITEM" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_RESET_DATA_01">
+                    <component-id>POP_ALL_ITEM_CD_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_RESET_DATA_02">
+                    <component-id>POP_ALL_ITEM_NM_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_RESET_DATA_03">
+                    <component-id>POP_ALL_ITEM_TP_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_ITEM_NM_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_ITEM_NM_02_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_ITEM_TP_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_TP</init-value>
+        </props>
+    </component>
+    <component id="POP_ITEM_TP_02_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_ACCOUNT_01" type="CHECKBOX">
+        <props>
+            <name>ACCOUNT_REGISTRY</name>
+            <name-position>right</name-position>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="change">
+                <operation-call id="OPC_POP_ACCOUNT_01_CHANGE_01">
+                    <component-id>ACCOUNT_CD_02_05</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" reference-id="POP_ACCOUNT_01" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_POP_ACCOUNT_01_CHANGE_02">
+                    <component-id>ACCOUNT_CD_02_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_POP_ACCOUNT_01_CHANGE_03">
+                    <component-id>ACCOUNT_NM_02_04</component-id>
+                    <operation-id>INIT</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_ACCOUNT_01_CHANGE_SUCCESS_01">
+                            <component-id>POP_ITEM_LV_CD_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ACCOUNT_01_CHANGE_SUCCESS_02">
+                            <component-id>POP_ITEM_LV_NM_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ACCOUNT_01_CHANGE_SUCCESS_03">
+                            <component-id>POP_ITEM_LV_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ACCOUNT_01_CHANGE_SUCCESS_04">
+                            <component-id>POP_ITEM_LV_CD_05</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ACCOUNT_01_CHANGE_SUCCESS_05">
+                            <component-id>POP_SALES_LV_CD_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ACCOUNT_01_CHANGE_SUCCESS_06">
+                            <component-id>POP_SALES_LV_NM_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ACCOUNT_01_CHANGE_SUCCESS_07">
+                            <component-id>POP_SALES_LV_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ACCOUNT_01_CHANGE_SUCCESS_08">
+                            <component-id>POP_SALES_LV_CD_05</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ACCOUNT_01_CHANGE_SUCCESS_09">
+                            <component-id>POP_ITEM_CD_02_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ACCOUNT_01_CHANGE_SUCCESS_10">
+                            <component-id>POP_ITEM_NM_02_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ACCOUNT_01_CHANGE_SUCCESS_11">
+                            <component-id>POP_ITEM_TP_02_04</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ACCOUNT_01_CHANGE_SUCCESS_12">
+                            <component-id>POP_ITEM_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="false" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_ACCOUNT_01_CHANGE_SUCCESS_13">
+                            <component-id>POP_ITEM_CD_02_05</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="ACCOUNT_CD_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACCOUNT_CD</init-value>
+        </props>
+    </component>
+    <component id="ACCOUNT_CD_02_04" type="INPUTBOX">
+        <props>
+            <width>146.6</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="LOAD" />
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="ACCOUNT_CD_02_05" type="BUTTON">
+        <props>
+            <width>30</width>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_ACCOUNT_CD_02_05_INIT">
+                    <component-id>ACCOUNT_CD_02_05</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" reference-id="POP_ACCOUNT_01" />
+                    </parameters>
+                </operation-call>
+            </action>
+            <action event-type="click">
+                <operation-call id="OPC_POP_ACCOUNT_WINDOW_01_OPEN">
+                    <component-id>POP_ACCOUNT_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+                <operation-call id="OPC_POP_ACCOUNT_GRD_LOAD">
+                    <component-id>POP_ACCOUNT_GRD</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="ACCOUNT_NM_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACCOUNT_NM</init-value>
+        </props>
+    </component>
+    <component id="ACCOUNT_NM_02_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="LOAD" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_12_03_WINDOW_01_CPT_09_04" type="CHECKBOX">
+        <props>
+            <name>OVERWRITE_EXIST_DATA</name>
+            <name-position>right</name-position>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SUPPLY_LOCAT_TP_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_TP_NM</init-value>
+        </props>
+    </component>
+    <component id="SUPPLY_LOCAT_TP_02_04" type="INPUTBOX">
+        <props>
+            <width>146.6</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SUPPLY_LOCAT_TP_02_05" type="BUTTON">
+        <props>
+            <width>30</width>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_SUPPLY_LOCAT_WINDOW_01_OPEN">
+                    <component-id>POP_SUPPLY_LOCAT_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+                <operation-call id="POP_SUPPLY_LOCAT_GRD">
+                    <component-id>POP_SUPPLY_LOCAT_GRD</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SUPPLY_LOCAT_LV_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_LV</init-value>
+        </props>
+    </component>
+    <component id="SUPPLY_LOCAT_LV_02_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SUPPLY_LOCAT_CD_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_CD</init-value>
+        </props>
+    </component>
+    <component id="SUPPLY_LOCAT_CD_02_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SUPPLY_LOCAT_NM_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_NM</init-value>
+        </props>
+    </component>
+    <component id="SUPPLY_LOCAT_NM_02_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_12_03_WINDOW_01_CPT_31_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOAD_UOM_ID</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_12_03_WINDOW_01_CPT_31_04" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <select-index>1</select-index>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_CM_12_03_WINDOW_01_CPT_31_04_INIT_01">
+                    <component-id>POP_UI_CM_12_03_WINDOW_01_CPT_31_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:LOAD_UOM_TYPE" />
+            </operation>
+            <operation id="SET" />
+            <operation id="SELECT" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_12_03_WINDOW_01_CPT_32_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>TRANSP_LOTSIZE</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_12_03_WINDOW_01_CPT_32_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_12_03_WINDOW_01_CPT_33_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>UOM_QTY</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_12_03_WINDOW_01_CPT_33_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_12_03_WINDOW_01_CPT_34_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PACKING_QTY</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_12_03_WINDOW_01_CPT_34_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_12_03_WINDOW_01_CPT_35_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PACKING_TP</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_12_03_WINDOW_01_CPT_35_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_12_03_WINDOW_01_CPT_36_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PALLET_QTY</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_12_03_WINDOW_01_CPT_36_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_12_03_WINDOW_01_CPT_37_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PALLET_TP</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_12_03_WINDOW_01_CPT_37_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_12_03_WINDOW_01_CPT_99_01" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_CM_12_03_WINDOW_01_CPT_99_01_CLICK_01">
+                    <component-id>POP_UI_CM_12_03_WINDOW_01_CPT_99_01</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_SAVE_SUCCESS_MSG_03">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POP_UI_CM_12_03_WINDOW_01_CPT_99_01:SVC_POP_UI_CM_12_03_S_001:IM_DATA" extract-by="SP_UI_CM_12_BATCH_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_CM_12_03_WINDOW_01_CPT_99_01_CLICK_02">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_CM_12_03_WINDOW_01_CPT_99_01_CLICK_03">
+                            <component-id>RST_CPT_02</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_CM_12_03_WINDOW_01_CPT_99_01_CLICK_04">
+                    <component-id>POP_UI_CM_12_03_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SAVE">
+                <service-call id="SVC_POP_UI_CM_12_03_S_001">
+                    <service-id>SRV_UI_CM_12_BATCH</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="CHK_ITEM_LV" reference-id="POP_ITEM_LV_01" />
+                        <parameter id="ITEM_LV_ID" reference-id="POP_ITEM_LV_DATA_01:ITEM_LV_ID" />
+                        <parameter id="CHK_SALES_LV" reference-id="POP_SALES_LV_01" />
+                        <parameter id="SALES_LV_ID" reference-id="POP_SALES_LV_DATA_01:SALES_LV_ID" />
+                        <parameter id="CHK_ITEM" reference-id="POP_ITEM_01" />
+                        <parameter id="ITEM_MST_ID" reference-id="POP_ALL_ITEM_DATA_01:ITEM_MST_ID" />
+                        <parameter id="CHK_ACCOUNT" reference-id="POP_ACCOUNT_01" />
+                        <parameter id="ACCOUNT_ID" reference-id="POP_ACCOUNT_DATA_01:ACCOUNT_ID" />
+                        <parameter id="LOCAT_MGMT_ID" reference-id="POP_SUPPLY_LOC_DATA_01:LOC_MGMT_ID" />
+                        <parameter id="TRANSP_LOTSIZE" reference-id="POP_UI_CM_12_03_WINDOW_01_CPT_32_04" />
+                        <parameter id="LOAD_UOM_ID" reference-id="POP_UI_CM_12_03_WINDOW_01_CPT_31_04" />
+                        <parameter id="OVERWRITE_DATA_YN" reference-id="POP_UI_CM_12_03_WINDOW_01_CPT_09_04" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_CM_12_03_WINDOW_01_CPT_99_02" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_CM_12_03_WINDOW_01_CPT_99_02_CLICK">
+                    <component-id>POP_UI_CM_12_03_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

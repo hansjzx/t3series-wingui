@@ -1,0 +1,14 @@
+.category-col {
+  background-color: #FAF0E6;
+  text-align: left;
+}
+.shortage-cell {
+  color: red;
+  font-weight: bold;
+  text-align: right;
+}
+.mrp-row {
+  font-weight: bold;
+  background-color: #F7F0FF;
+  text-align: right;
+}

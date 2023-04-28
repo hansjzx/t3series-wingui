@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_IM_11_02" version="2.0">
+    <component id="POP_UI_IM_11_02_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_IM_11_02</title>
+            <width>450</width>
+            <height>472</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_11_02_WINDOW_01_GRD" type="R_GRID">
+        <props>
+            <header-height>30</header-height>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="WAREHOUSE_TP" title="WAREHOUSE_TP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="WAREHOUSE_TP_NM" title="WAREHOUSE_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="LOAD_CAPA_MGMT_BASE" title="LOAD_CAPA_MGMT_BASE" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_POP_UI_IM_11_02_WINDOW_01_GRD_SRH1_01">
+                    <component-id>SRH_CPT_T1_04_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_IM_11_02_WINDOW_01_GRD:selections" extract-by="WAREHOUSE_TP_NM" />
+                    </parameters>
+                    <conditions>
+                        <condition id="cond1">
+                            <component>DATA_02</component>
+                            <key>ClickLoc</key>
+                            <operator>equal</operator>
+                            <value>SRH1</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_IM_11_02_WINDOW_01_GRD_SRH1_02">
+                            <component-id>SRH_CPT_T1_05_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_IM_11_02_WINDOW_01_GRD:selections" extract-by="LOAD_CAPA_MGMT_BASE" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_11_02_WINDOW_01_GRD_SRH1_03">
+                            <component-id>DATA_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_IM_11_02_WINDOW_01_GRD:selections" extract-by="ID" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_11_02_WINDOW_01_GRD_SRH1_04">
+                            <component-id>POP_UI_IM_11_02_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_IM_11_02_WINDOW_01_GRD_RST1_01">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-WAHOUS_TP_ID" reference-id="POP_UI_IM_11_03_WINDOW_01_GRD:selections" extract-by="ID" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="cond1">
+                            <component>DATA_02</component>
+                            <key>ClickLoc</key>
+                            <operator>equal</operator>
+                            <value>RST1</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_IM_11_02_WINDOW_01_GRD_RST1_02">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET_VALUE-to-WAHOUS_TP_NM" reference-id="POP_UI_IM_11_03_WINDOW_01_GRD:selections" extract-by="WAREHOUSE_TP_NM" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_11_02_WINDOW_01_GRD_RST1_04">
+                            <component-id>POP_UI_IM_11_03_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPOP_UI_IM_11_02_WINDOW_01_GRD_RST1_POP1_01">
+                    <component-id>POP_UI_IM_11_01_DATA_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="WAHOUS_TP_ID" reference-id="POP_UI_IM_11_02_WINDOW_01_GRD:selections" extract-by="ID" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="cond1">
+                            <component>DATA_02</component>
+                            <key>ClickLoc</key>
+                            <operator>equal</operator>
+                            <value>RST1_POP1</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_IM_11_02_WINDOW_01_GRD_RST1_POP1_02">
+                            <component-id>POP_UI_IM_11_01_CPT_T1_04_05</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_IM_11_02_WINDOW_01_GRD:selections" extract-by="WAREHOUSE_TP_NM" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_11_02_WINDOW_01_GRD_RST1_POP1_03">
+                            <component-id>POP_UI_IM_11_02_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SC_SP_UI_IM_11_Q2_LOAD">
+                    <service-id>SRV_UI_IM_11_Q2</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

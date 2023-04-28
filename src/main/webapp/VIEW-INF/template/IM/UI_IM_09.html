@@ -1,0 +1,145 @@
+<meta charset="utf-8" />
+<section id="contentsInner" class="STANDARD">
+	<!--
+	 
+	Title : STANDARD
+	UI id : STANDARD
+	최초 작성자 : 김지호
+	최초 생성일 : 2017.06.13
+	마지막 작성자 : 홍길동
+	마지막 수정일 : 2017.06.29
+	파일버전 : 1.0
+	 
+	설명
+	 - GCS standard template
+	 
+	History (수정일자 / 수정자 / 수정내용)
+	- 2017.06.13 / 김지호 / 최초 작성
+	- 2017.06.15 / 김지호 / DATA component 전용 DATA_01 ~ 03 추가
+	- 2017.06.16 / 김지호 / result영역 각 component마다 상단에 좌우배열 component 추가
+	- 2017.06.29 / 김지호 / 파일명 STANDARD로 변경
+	- 2017.09.07 / 김지호 / VIEW_META 추가
+	 
+	구조
+	- 상단 :
+	- 중단 : 콤보박스(2), Inputbox(2)
+	- 하단 : R-Grid(1)
+	 
+	 -->
+
+	<!-- DATA 영역 시작  -->
+	<div class="data_area">
+		<!-- data component-->
+		<div id="VIEW_META" class="component_ui"></div>
+		<div id="DATA_01" class="component_ui"></div>
+		<div id="DATA_02" class="component_ui"></div>
+		<div id="DATA_03" class="component_ui"></div>
+	</div>
+	<!-- DATA 영역 끝  -->
+
+	<!-- 본 영역 시작  -->
+	<div class="content_area parentCon">
+		<div id='CONTENT_SPLIT' class="component_ui split_component">
+			<!-- 조회 조건 시작  -->
+			<div class="search_area">
+
+				<!-- 공통 버튼 영역 시작  -->
+				<div class="commonBtn_area">
+					<span id="TTL_COMM_CPT_HELP" class="component_ui"></span> 
+					<span id="TTL_COMM_CPT_PERSONALIZATION" class="component_ui"></span> 
+					<span id="TTL_CPT_03" class="component_ui"></span> 
+					<span id="TTL_CPT_04" class="component_ui"></span> 
+					<span id="TTL_CPT_05" class="component_ui"></span>
+				</div>
+				<!-- 공통 버튼 영역 끝 -->
+
+				<!--조회 탭 영역 시작-->
+				<div class="srhTab_area">
+					<div id="SRH_TAB" class="component_ui tab_component">
+						<!--first tab-->
+						<div>
+							<include src="COMM/COMM_SRH_VERSION.html" />
+							<include src="COMM/COMM_SRH_LOCAT.html" />
+							<include src="COMM/COMM_SRH_ITEM.html" />
+							<include src="COMM/COMM_SRH_ACCOUNT.html" />
+							<include src="COMM/COMM_SRH_RES.html" />
+							
+							<!-- 기본 조회 조건 영역 시작 -->
+							<div class="parentCon">
+								<span class="leftCon"> 
+									<span id="SRH_CPT_T1_01_01" class="component_ui"></span> 
+									<span id="SRH_CPT_T1_01_02" class="component_ui"></span> 
+									<span id="SRH_CPT_T1_01_03" class="component_ui"></span>
+								</span> 
+								<span class="rightCon"> 
+									<span id="SRH_CPT_T1_01_04" class="component_ui"></span> 
+									<span id="SRH_CPT_T1_01_05" class="component_ui"></span> 
+									<span id="SRH_CPT_T1_01_06" class="component_ui"></span>
+								</span>
+							</div>
+							<!-- 기본 조회 조건 영역 끝 -->
+						</div>
+						<!--first tab end-->
+					</div>
+					<!--tab component-->
+				</div>
+				<!--조회 탭 영역 끝-->
+			</div>
+			<!-- 조회 조건 끝 -->
+
+			<!-- 결과 영역 시작  -->
+			<div class="result_area">
+				<div style="height: 100%" class="row">
+					<div style="height: 100%" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+						<div style="height: 68%">
+							<div style="height: 5%" class="parentCon">
+								<div class="leftCon">
+									<span id="BTN_EXPORT" class="component_ui"></span>
+									<span id="BTN_IMPORT" class="component_ui"></span>
+									<span id="RST_CPT_01_01" class="component_ui"></span> 
+									<span id="RST_CPT_01_02" class="component_ui"></span> 
+									<span id="RST_CPT_01_03" class="component_ui"></span> 
+									<span id="RST_CPT_01_04" class="component_ui"></span> 
+									<span id="RST_CPT_01_05" class="component_ui"></span>
+								</div>
+								<div class="rightCon">
+									<span id="RST_CPT_01_06" class="component_ui"></span> 
+									<span id="RST_CPT_01_07" class="component_ui"></span> 
+									<span id="RST_CPT_01_08" class="component_ui"></span> 
+									<span id="RST_CPT_01_09" class="component_ui"></span> 
+									<span id="RST_CPT_01_10" class="component_ui"></span>
+								</div>
+							</div>
+							<div style="height: 95%">
+								<div id="RST_CPT_01" class="component_ui"></div>
+							</div>
+						</div>
+						<div style="height: 29%">
+							<div class="parentCon">
+								<span id="RST_CPT_02_01" class="component_ui"></span>
+								<div class="leftCon">
+									<span id="RST_CPT_02_02" class="component_ui"></span> 
+									<span id="RST_CPT_02_03" class="component_ui"></span> 
+									<span id="RST_CPT_02_04" class="component_ui"></span> 
+									<span id="RST_CPT_02_05" class="component_ui"></span>
+								</div>
+								<div class="rightCon">
+									<span id="RST_CPT_02_06" class="component_ui"></span> 
+									<span id="RST_CPT_02_07" class="component_ui"></span> 
+									<span id="RST_CPT_02_08" class="component_ui"></span> 
+									<span id="RST_CPT_02_09" class="component_ui"></span> 
+									<span id="RST_CPT_02_10" class="component_ui"></span>
+								</div>
+							</div>
+							<div style="height: 100%">
+								<div id="RST_CPT_02" class="component_ui"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 결과 영역 종료 -->
+		</div>
+	</div>
+	<!-- 본 영역 종료  -->
+</section>

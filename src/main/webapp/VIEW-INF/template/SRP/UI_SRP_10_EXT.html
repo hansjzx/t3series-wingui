@@ -1,0 +1,46 @@
+<script type="text/javascript">
+//#################################################################
+//SRP, DP Entry ???
+//
+
+function getRowTotalMeasures(){
+	var totalMeasure = getGroupTotalMeasure();
+	return [totalMeasure]
+}
+
+function getGroupTotalMeasure(){
+	var viewId = cm.getComponent("COMMON").getValue("VIEW_ID");
+	var groupTotalMeasure = viewId=="UI_SRP_10"? "SRPN_PO_ENTRY_ARRIVAL":"PO_ARRI_QTY";
+	return groupTotalMeasure;
+}
+
+function checkSumColumn(columnName){
+	return columnName.startsWith('DATE_') || columnName.endsWith('_SUM')
+}
+function checkVersionBucket(){
+/* 	var versionInfo =  TAFFY(dm.getDataState("SRH_CPT_T1_01_04"))().select("SVC_SP_UI_SRP_00_VERSION_Q1");
+	var row = TAFFY(versionInfo[0])().select("RESULT_DATA");
+	var versionCurrent = cm.getComponent("SRH_CPT_T1_01_04").getValue();
+	var bukt = TAFFY(row[0])().filter({ID:versionCurrent}).select("BUKT"); */
+	var versionComp = cm.getComponent("SRH_CPT_T1_01_04").getActualComponent();
+	var versionData = versionComp._data();
+	var selectedVersionIndex = versionComp.select();
+	console.log("BUKT", versionData[selectedVersionIndex]["BUKT"]);
+//	return versionData[selectedVersionIndex]["BUKT"];
+return versionData[selectedVersionIndex]["BUKT"]=="PAR_WEEK"? "PW": versionData[selectedVersionIndex]["BUKT"];		
+}
+function getVersionInfo(){
+	var versionComp = cm.getComponent("SRH_CPT_T1_01_04").getActualComponent();
+	var versionData = versionComp._data();
+	var selectedVersionIndex = versionComp.select();
+    return versionData[selectedVersionIndex];
+
+}
+function getDTF(){
+        return getVersionInfo()["DTF_DATE"];
+}
+function getStartDate(){
+        return getVersionInfo()["FROM_DATE"];
+}
+//#################################################################
+</script>

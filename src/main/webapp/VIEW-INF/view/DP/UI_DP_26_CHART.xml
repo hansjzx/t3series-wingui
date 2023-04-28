@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_DP_26_CHART" template="DP/UI_DP_25_CHART:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:DP/UI_ENTRY_EXT:DP/UI_DP_25_EXT:DP/UI_DP_COMM:DP/UI_DP_POPUP_USER:DP/UI_DP_POPUP_ITEM_TREE_POP:DP/UI_DP_POPUP_ACCOUNT_TREE_POP:DP/UI_DP_POPUP_MEASURE_COPY:DP/UI_DP_25_POPUP_ATTR" copyfrom="UI_DP_26:COMM_HELP:COMM_PREFERENCE:UI_DP_POPUP_ACCOUNT_TREE:UI_DP_POPUP_ITEM_TREE:COMM_VIEW_META" version="2.0">
+    <publish parent="MENU_05_03" open="true" seq="260" />
+    <component id="RESULT_SPLIT" type="SPLIT">
+        <props>
+            <position>vertical</position>
+            <splits>
+                <split id="chart" collapsible="true" resizable="true" size="320" />
+                <split id="grid" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="DATA_05" type="DATA">
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_DATA_05_LOAD">
+                    <component-id>DATA_05</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_00_EMP_AUTH_TP_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_00_EMP_AUTH_TP_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_EMP_AUTH_TP_Q1_01" value="" />
+                        <parameter id="SP_UI_DP_00_EMP_AUTH_TP_Q1_02" reference-id="COMMON:VIEW_ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CRT_01_01" type="COMBOBOX">
+        <props>
+            <width>200</width>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>CD</value-id>
+            <text-id>NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_RST_CRT_01_01_LOAD">
+                    <component-id>RST_CRT_01_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_RST_CRT_01_01_SELECT">
+                            <component-id>RST_CRT_01_01</component-id>
+                            <operation-id>SELECT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_GET_CHART_COMBO">
+                    <service-id>SRV_GET_CHART_COMBO</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+            <operation id="SELECT">
+                <service-call id="SVC_RST_CRT_01_01_dEFAULT">
+                    <service-id />
+                    <service-target />
+                    <parameters>
+                        <parameter id="VALUE" value="QTY" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CRT_01" type="CHART">
+        <props>
+            <height>282</height>
+            <theme>metro</theme>
+            <legend>
+                <visible>false</visible>
+                <position>right</position>
+            </legend>
+            <tooltip>
+                <visible>true</visible>
+            </tooltip>
+            <category-axis>
+                <rotation>45</rotation>
+                <category id="DATE">
+                    <format>yyyy-MM-dd</format>
+                    <type>date</type>
+                </category>
+            </category-axis>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_GetDemand2">
+                    <service-id>GetDemand</service-id>
+                    <service-target>T3SeriesDemandPlanServer</service-target>
+                    <parameters>
+                        <parameter id="OPERATOR_ID" value="" />
+                        <parameter id="AUTH_TYPE" value="" />
+                        <parameter id="COLUMNS_INFO" reference-id="DATA_01:SVC_SP_UI_DP_00_PERSONALIZATION_Q1_CHART" />
+                        <parameter id="VERSION_ID" reference-id="SRH_CPT_T1_01_04" />
+                        <parameter id="CURRENCY" value="" />
+                        <parameter id="ITEM_FILTER_CONDITION" reference-id="RST_CPT_01:selections" extract-by="ITEM" />
+                        <parameter id="ACCOUNT_FILTER_CONDITION" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT" />
+                        <parameter id="SALES_FILTER_CONDITION" reference-id="RST_CPT_01:selections" extract-by="SALES" />
+                        <parameter id="PLAN_TYPE" reference-id="SRH_CPT_T1_00_04" extract-by="CD" default-value="" />
+                        <parameter id="PLAN_TYPE_KEY" reference-id="SRH_CPT_T1_00_04" extract-by="ID" default-value="" />
+                        <parameter id="PERIOD_FILTER_CONDITION" reference-id="SRH_CPT_T1_12_04" />
+                        <parameter id="PERIOD_FILTER_CONDITION" reference-id="SRH_CPT_T1_13_04" />
+                        <parameter id="FILTER_CONDITION_LEVEL_OPTION" value="ignore" />
+                        <parameter id="BUCKET_TYPE" value="PERIOD" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

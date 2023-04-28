@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_AD_00" template="AD/UI_AD_00:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION" version="2.0">
+    <publish parent="MENU_90" open="true" seq="1" />
+    <component id="UI_AD_00_LOAD_DATA" type="DATA">
+        <actions>
+            <action event-type="init">
+                <operation-call id="UI_AD_00_LOAD">
+                    <component-id>UI_AD_00_LOAD_DATA</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="UI_AD_00_01_LOAD">
+                            <component-id>UI_AD_00_01_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="UI_AD_00_LOAD_DATA:UI_AD_00_DATA" extract-by="username" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="UI_AD_00_02_LOAD">
+                            <component-id>UI_AD_00_02_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="UI_AD_00_05_LOAD">
+                            <component-id>UI_AD_00_05_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="UI_AD_00_LOAD_DATA:UI_AD_00_DATA" extract-by="uniqueValue" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="UI_AD_00_06_LOAD">
+                            <component-id>UI_AD_00_06_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="UI_AD_00_LOAD_DATA:UI_AD_00_DATA" extract-by="department" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="UI_AD_00_07_LOAD">
+                            <component-id>UI_AD_00_07_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="UI_AD_00_LOAD_DATA:UI_AD_00_DATA" extract-by="businessValue" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="UI_AD_00_08_LOAD">
+                            <component-id>UI_AD_00_08_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="UI_AD_00_LOAD_DATA:UI_AD_00_DATA" extract-by="displayName" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="UI_AD_00_09_LOAD">
+                            <component-id>UI_AD_00_09_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="UI_AD_00_LOAD_DATA:UI_AD_00_DATA" extract-by="email" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="UI_AD_00_10_LOAD">
+                            <component-id>UI_AD_00_10_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="UI_AD_00_LOAD_DATA:UI_AD_00_DATA" extract-by="phone" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="UI_AD_00_11_LOAD">
+                            <component-id>UI_AD_00_11_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="UI_AD_00_LOAD_DATA:UI_AD_00_DATA" extract-by="etc" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="MENU_ID" value="UI_AD_00" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <service-call id="UI_AD_00_DATA">
+                    <url>/system/users/:username</url>
+                    <parameters>
+                        <parameter id="username" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="UI_AD_00_01_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>USER_ID</init-value>
+        </props>
+    </component>
+    <component id="UI_AD_00_01_02" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>false</lang>
+            <type>text</type>
+            <value-id>USER_ID</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="UI_AD_00_02_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>USER_PW_NOW</init-value>
+        </props>
+    </component>
+    <component id="UI_AD_00_02_02" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <lang>false</lang>
+            <type>password</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="UI_AD_00_03_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>USER_PW_INPUT</init-value>
+        </props>
+    </component>
+    <component id="UI_AD_00_03_02" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <lang>false</lang>
+            <type>password</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="UI_AD_00_04_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>USER_PW_INPUT_RE</init-value>
+        </props>
+    </component>
+    <component id="UI_AD_00_04_02" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <lang>false</lang>
+            <type>password</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="UI_AD_00_04_03" type="BUTTON">
+        <props>
+            <name>SAVE</name>
+            <icon>save</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="UI_AD_00_CHANGE_PW">
+                    <component-id>UI_AD_00_04_03</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <conditions>
+                        <condition id="check_empty_pw" group="A">
+                            <component>UI_AD_00_02_02</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                            <msg>Now Password is empty&lt;br&gt;</msg>
+                        </condition>
+                        <condition id="check_empty_pw_new" group="A">
+                            <component>UI_AD_00_03_02</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                            <msg>New Password is empty&lt;br&gt;</msg>
+                        </condition>
+                        <condition id="check_empty_pw_re" group="A">
+                            <component>UI_AD_00_04_02</component>
+                            <operator>notEqual</operator>
+                            <value>empty</value>
+                            <msg>Re password is empty</msg>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="o2">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0003" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="o21">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Success" />
+                                <parameter id="msg" value="success to change password" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                    <fail>
+                        <operation-call id="o3">
+                            <component-id>COMMON</component-id>
+                            <operation-id>ALERT</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="Fail!" />
+                            </parameters>
+                        </operation-call>
+                    </fail>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SAVE">
+                <service-call id="UI_AD_00_CHANGE_PASSWORD">
+                    <url>/system/users/:username/password</url>
+                    <method>put</method>
+                    <parameters>
+                        <parameter id="username" reference-id="COMMON:loginId" />
+                        <parameter id="oldPassword" reference-id="UI_AD_00_02_02" />
+                        <parameter id="newPassword" reference-id="UI_AD_00_03_02" />
+                        <parameter id="confirmPassword" reference-id="UI_AD_00_04_02" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="UI_AD_00_05_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>UNIQUE_VALUE</init-value>
+        </props>
+    </component>
+    <component id="UI_AD_00_05_02" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="UI_AD_00_06_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>DEPARTMENT</init-value>
+        </props>
+    </component>
+    <component id="UI_AD_00_06_02" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="UI_AD_00_07_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>BUSINESS</init-value>
+        </props>
+    </component>
+    <component id="UI_AD_00_07_02" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="UI_AD_00_08_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>USER_NM</init-value>
+        </props>
+    </component>
+    <component id="UI_AD_00_08_02" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <lang>false</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="UI_AD_00_09_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>EMAIL</init-value>
+        </props>
+    </component>
+    <component id="UI_AD_00_09_02" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="UI_AD_00_10_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>PHONE</init-value>
+        </props>
+    </component>
+    <component id="UI_AD_00_10_02" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="UI_AD_00_11_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>ETC</init-value>
+        </props>
+    </component>
+    <component id="UI_AD_00_11_02" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="UI_AD_00_SAVE" type="BUTTON">
+        <props>
+            <name>SAVE</name>
+            <icon>save</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="UI_AD_00_UPDATE">
+                    <component-id>UI_AD_00_SAVE</component-id>
+                    <operation-id>UPDATE</operation-id>
+                    <success>
+                        <operation-call id="o2">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0003" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="o21">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Success" />
+                                <parameter id="msg" value="Success to userInfo change" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                    <fail>
+                        <operation-call id="o3">
+                            <component-id>COMMON</component-id>
+                            <operation-id>ALERT</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="Fail to save" />
+                            </parameters>
+                        </operation-call>
+                    </fail>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="UPDATE">
+                <service-call id="UI_AD_00_SERVICE_UPDATE">
+                    <url>/system/users/:username</url>
+                    <method>put</method>
+                    <parameters>
+                        <parameter id="username" reference-id="COMMON:loginId" />
+                        <parameter id="uniqueValue" reference-id="UI_AD_00_05_02" />
+                        <parameter id="department" reference-id="UI_AD_00_06_02" />
+                        <parameter id="businessValue" reference-id="UI_AD_00_07_02" />
+                        <parameter id="displayName" reference-id="UI_AD_00_08_02" />
+                        <parameter id="email" reference-id="UI_AD_00_09_02" />
+                        <parameter id="phone" reference-id="UI_AD_00_10_02" />
+                        <parameter id="etc" reference-id="UI_AD_00_11_02" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

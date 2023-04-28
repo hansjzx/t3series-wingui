@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_AD_08" template="AD/UI_AD_08" version="2.0">
+    <publish parent="MENU_90" open="true" seq="80" />
+    <component id="center" type="R_TREE">
+        <props>
+            <height>800</height>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <header-sortable>false</header-sortable>
+            <grid-summary>false</grid-summary>
+            <toolbar use="true">
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right" tooltip="Save">
+                    <success>
+                        <operation-call id="LOAD_MENU">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MENU-REFRESH</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_UI_AD_08_GRD_01_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0001" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                    <fail>
+                        <operation-call id="OPC_UI_AD_08_GRD_01_SAVE_FAIL_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0004" />
+                            </parameters>
+                        </operation-call>
+                    </fail>
+                    <complete>
+                        <operation-call id="LOADmenu_auth">
+                            <component-id>center</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </complete>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="id" title="MENU_ID" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <text-alignment>left</text-alignment>
+                    <lang>true</lang>
+                    <font-bold>true</font-bold>
+                </column>
+                <column id="bookmarked" title="BOOKMARK" type="bool">
+                    <width>50</width>
+                    <visible>true</visible>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="LOADmenu_auth">
+                    <component-id>center</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="1">
+                    <url>/system/menus</url>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="2">
+                    <url>/system/menus/bookmarks</url>
+                    <method>post</method>
+                    <parameters>
+                        <parameter id="data" reference-id="center:changes" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

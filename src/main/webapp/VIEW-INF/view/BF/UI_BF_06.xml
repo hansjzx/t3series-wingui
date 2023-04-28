@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_BF_06" template="COMM/STANDARD:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_VIEW_META" version="2.0">
+    <publish parent="MENU_07_01" open="true" seq="40" />
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_set_FROM_DATE">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+                <operation-call id="OPC_set_TO_DATE">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_05" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_GRID_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="DATA_02" type="DATA">
+        <operations>
+            <operation id="SET">
+                <service-call id="data01_set_1">
+                    <parameters>
+                        <parameter id="FROM_DATE" value="" />
+                        <parameter id="TO_DATE" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <service-call id="SVC_BF_GET_DATETIME_SCOPE_Q1">
+                    <service-id>SRV_BF_GET_DATETIME_SCOPE_Q1</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>APPY_SCPE</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_04" type="DATEPICKER">
+        <props>
+            <width>211</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+            <value-id>FROM_DATE</value-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_DATE_TIME_LOAD_01">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+            <operation id="LOAD">
+                <reference-service-call id="DATA_02:SVC_BF_GET_DATETIME_SCOPE_Q1" />
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_02_04" type="DATEPICKER">
+        <props>
+            <width>211</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+            <value-id>TO_DATE</value-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_DATE_TIME_LOAD_02">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+            <operation id="LOAD">
+                <reference-service-call id="DATA_02:SVC_BF_GET_DATETIME_SCOPE_Q1" />
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <check-bar>true</check-bar>
+            <fit-style>even</fit-style>
+            <data-fit>horizontal</data-fit>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <toolbar use="true">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_REMOVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="RST_CPT_01:SVC_SP_UI_BF_06_D1:IM_DATA" extract-by="SP_UI_BF_06_D1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_o4">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="RST_CPT_01:SVC_SP_UI_BF_06_S1_J:IM_DATA" extract-by="SP_UI_BF_06_S1_J_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="ops3">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="BASE_DATE" title="BASE_DATE" type="datetime">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">false</editable>
+                    <format>yyyy-MM-dd</format>
+                    <datepicker>true</datepicker>
+                </column>
+                <column id="FACTOR1" title="FACTOR1" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR2" title="FACTOR2" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR3" title="FACTOR3" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR4" title="FACTOR4" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR5" title="FACTOR5" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR6" title="FACTOR6" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR7" title="FACTOR7" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR8" title="FACTOR8" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR9" title="FACTOR9" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR10" title="FACTOR10" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR11" title="FACTOR11" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR12" title="FACTOR12" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR13" title="FACTOR13" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR14" title="FACTOR14" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR15" title="FACTOR15" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR16" title="FACTOR16" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR17" title="FACTOR17" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR18" title="FACTOR18" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR19" title="FACTOR19" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR20" title="FACTOR20" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR21" title="FACTOR21" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR22" title="FACTOR22" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR23" title="FACTOR23" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR24" title="FACTOR24" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR25" title="FACTOR25" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR26" title="FACTOR26" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR27" title="FACTOR27" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR28" title="FACTOR28" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR29" title="FACTOR29" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR30" title="FACTOR30" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR31" title="FACTOR31" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR32" title="FACTOR32" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR33" title="FACTOR33" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR34" title="FACTOR34" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR35" title="FACTOR35" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR36" title="FACTOR36" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR37" title="FACTOR37" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR38" title="FACTOR38" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR39" title="FACTOR39" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR40" title="FACTOR40" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR41" title="FACTOR41" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR42" title="FACTOR42" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR43" title="FACTOR43" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR44" title="FACTOR44" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR45" title="FACTOR45" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR46" title="FACTOR46" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR47" title="FACTOR47" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR48" title="FACTOR48" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR49" title="FACTOR49" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="FACTOR50" title="FACTOR50" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable if-new="true">true</editable>
+                </column>
+                <column id="MODIFY_BY" title="MODIFY_BY" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+                <column id="MODIFY_DTTM" title="MODIFY_DTTM" type="datetime">
+                    <width>120</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="REMOVE_ROW">
+                <service-call id="SVC_SP_UI_BF_06_D1">
+                    <service-id>SRV_SET_SP_UI_BF_06_D1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="changes" reference-id="RST_CPT_01:checked" />
+                        <parameter id="P_USER_ID" reference-id="COMMON:loginId" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="INSERT_ROW" />
+            <operation id="SAVE">
+                <service-call id="SVC_SP_UI_BF_06_S1_J">
+                    <url>/view-config/json-save</url>
+                    <method>post</method>
+                    <parameters>
+                        <parameter id="procedure" value="SP_UI_BF_06_S1_J" />
+                        <parameter id="changes" reference-id="RST_CPT_01:changes" />
+                        <parameter id="P_USER_ID" reference-id="COMMON:loginId" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <!-- <operation id="SAVE">
+                <service-call id="SVC_SP_UI_BF_06_S1">
+                    <service-id>SRV_SET_SP_UI_BF_06_S1</service-id>
+                    <service-target>dp</service-target>
+                    <param-empty-check>changes</param-empty-check>
+                    <parameters>
+                        <parameter id="changes" reference-id="RST_CPT_01:changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation> -->
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_BF_06_Q1">
+                    <service-id>SRV_GET_SP_UI_BF_06_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="FROM_DATE" reference-id="SRH_CPT_T1_01_04" default-value="" />
+                        <parameter id="TO_DATE" reference-id="SRH_CPT_T1_02_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET" />
+            <operation id="EXPORT">
+                <relieve-merge>true</relieve-merge>
+                <all-columns>true</all-columns>
+            </operation>
+            <operation id="IMPORT" />
+        </operations>
+    </component>
+</view>

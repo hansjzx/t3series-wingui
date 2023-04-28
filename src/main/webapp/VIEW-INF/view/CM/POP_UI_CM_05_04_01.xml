@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_CM_05_04_01" version="2.0">
+    <component id="POP_UI_CM_05_04_01_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>COMPONENT_ITEM</title>
+            <width>1250</width>
+            <height>240</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_05_04_01_WINDOW_01_GRD" type="R_GRID">
+        <props>
+            <height>150</height>
+            <header-height>30</header-height>
+            <selection-mode>rows</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>true</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="BOM_VER_ID" title="BOM_VER_ID" type="string" sort="asc">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>1</init-group-order>
+                </column>
+                <column id="VER_ACTV_YN" title="VER_ACTV_YN" type="bool">
+                    <width>100</width>
+                    <editable>true</editable>
+                    <init-group-order>2</init-group-order>
+                </column>
+                <column id="BASE_BOM_YN" title="BASE_BOM_YN" type="bool">
+                    <width>100</width>
+                    <editable>true</editable>
+                    <init-group-order>3</init-group-order>
+                </column>
+                <column id="BOM_LV" title="BOM_LV" type="int">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <init-group-order>4</init-group-order>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>200</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ITEM_TP" title="ITEM_TP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ROUTE_CD" title="ROUTE_CD" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="ROUTE_DESCRIP" title="ROUTE_DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="BOM_ITEM_TP" title="BOM_ITEM_TP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="CONSUME_QTY" title="CONSUME_QTY" type="double">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="UOM_CD" title="UOM_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="BASE_BOM_RATE" title="BASE_BOM_RATE" type="double">
+                    <width>120</width>
+                    <editable>true</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="POP_UI_CM_05_04_01_WINDOW_01_GRD_SETDATA_01">
+                    <component-id>POP_UI_CM_05_04_WINDOW_01_CPT_01_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_05_04_01_WINDOW_01_GRD:selections" extract-by="BOM_VER_ID" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_CM_05_04_01_WINDOW_01_GRD_SETDATA_02">
+                    <component-id>POP_UI_CM_05_04_WINDOW_01_CPT_02_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_05_04_01_WINDOW_01_GRD:selections" extract-by="VER_ACTV_YN" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_CM_05_04_01_WINDOW_01_GRD_SETDATA_03">
+                    <component-id>POP_UI_CM_05_04_WINDOW_01_CPT_03_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_05_04_01_WINDOW_01_GRD:selections" extract-by="BASE_BOM_YN" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_CM_05_04_01_WINDOW_01_GRD_SETDATA_04">
+                    <component-id>POP_UI_CM_05_04_WINDOW_01_CPT_04_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_05_04_01_WINDOW_01_GRD:selections" extract-by="BOM_LV" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_CM_05_04_01_WINDOW_01_GRD_SETDATA_05">
+                    <component-id>POP_UI_CM_05_04_WINDOW_01_CPT_05_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_05_04_01_WINDOW_01_GRD:selections" extract-by="ITEM_CD" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_CM_05_04_01_WINDOW_01_GRD_SETDATA_05_01">
+                    <component-id>POP_UI_CM_05_04_WINDOW_01_CPT_05_06</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_05_04_01_WINDOW_01_GRD:selections" extract-by="ID" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_CM_05_04_01_WINDOW_01_GRD_SETDATA_06">
+                    <component-id>POP_UI_CM_05_04_WINDOW_01_CPT_06_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_05_04_01_WINDOW_01_GRD:selections" extract-by="ITEM_NM" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_CM_05_04_01_WINDOW_01_GRD_SETDATA_07">
+                    <component-id>POP_UI_CM_05_04_WINDOW_01_CPT_07_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_05_04_01_WINDOW_01_GRD:selections" extract-by="ITEM_TP" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_CM_05_04_01_WINDOW_01_GRD_SETDATA_08">
+                    <component-id>POP_UI_CM_05_04_WINDOW_01_CPT_08_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_05_04_01_WINDOW_01_GRD:selections" extract-by="BOM_ITEM_TP" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_CM_05_04_01_WINDOW_01_GRD_SETDATA_09">
+                    <component-id>POP_UI_CM_05_04_WINDOW_01_CPT_09_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_05_04_01_WINDOW_01_GRD:selections" extract-by="CONSUME_QTY" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_CM_05_04_01_WINDOW_01_GRD_SETDATA_10">
+                    <component-id>POP_UI_CM_05_04_WINDOW_01_CPT_10_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_05_04_01_WINDOW_01_GRD:selections" extract-by="UOM_CD" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_CM_05_04_01_WINDOW_01_GRD_SETDATA_11">
+                    <component-id>POP_UI_CM_05_04_WINDOW_01_CPT_13_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_05_04_01_WINDOW_01_GRD:selections" extract-by="BASE_BOM_RATE" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_CM_05_04_01_WINDOW_01_GRD_SETDATA_12">
+                    <component-id>POP_UI_CM_05_04_WINDOW_01_CPT_15_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_05_04_01_WINDOW_01_GRD:selections" extract-by="ROUTE_CD" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_CM_05_04_01_WINDOW_01_GRD_SETDATA_13">
+                    <component-id>POP_UI_CM_05_04_WINDOW_01_CPT_16_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_05_04_01_WINDOW_01_GRD:selections" extract-by="ROUTE_DESCRIP" default-value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="POP_UI_CM_05_04_01_WINDOW_01_GRD_SETDATA_01_CLOSE">
+                    <component-id>POP_UI_CM_05_04_01_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_POP_UI_CM_05_04_01_WINDOW_01_GRD_LOAD">
+                    <service-id>SRV_UI_CM_05_Q2</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="ID" reference-id="RST_CPT_01:selections" extract-by="ID" />
+                        <parameter id="ITEM_CD" reference-id="RST_CPT_01:selections" extract-by="ITEM_CD" />
+                        <parameter id="COMPONENT_ITEM_CD" reference-id="SRH_CPT_T1_07_04" default-value="" />
+                        <parameter id="COMPONENT_ITEM_DESCRIP" reference-id="SRH_CPT_T1_08_04" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

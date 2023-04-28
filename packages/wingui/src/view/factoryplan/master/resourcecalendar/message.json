@@ -1,0 +1,114 @@
+{
+  "ko": {
+    "scheduler": {
+      "today": "오늘",
+      "monthViewTitle": "월",
+      "weekViewTitle": "주",
+      "dayViewTitle": "일",
+      "timelineViewTitle": "타임라인",
+      "allDay": "하루 종일",
+      "allEvents": "모든 이벤트",
+      "deleteDialogTitle": "일정 삭제",
+      "deleteConfirmation": "이 일정을 삭제하시겠습니까?",
+      "editCancel": "취소",
+      "editorDelete": "삭제",
+      "editSave": "저장",
+      "deleteTitle": "삭제"
+    },
+    "calendar": {
+      "today": "오늘"
+    },
+    "timepicker": {
+      "now": "지금",
+      "selectNow": "지금 선택",
+      "set": "설정",
+      "cancel": "취소",
+      "toggleTimeSelector": "시간 선택기 전환"
+    },
+    "datetimepicker": {
+      "toggleDateTimeSelector": "날짜-시간 선택기 전환",
+      "cancel": "취소",
+      "set": "설정",
+      "date": "날짜",
+      "time": "시간"
+    },
+    "datepicker": {
+      "toggleCalendar": "달력 전환"
+    }
+  },
+  "ja": {
+    "scheduler": {
+      "today": "今日",
+      "monthViewTitle": "月",
+      "weekViewTitle": "週",
+      "dayViewTitle": "日",
+      "timelineViewTitle": "タイムライン",
+      "allDay": "終日",
+      "allEvents": "すべてのイベント",
+      "deleteDialogTitle": "予定を削除",
+      "deleteConfirmation": "このイベントを削除してもよろしいですか?",
+      "editCancel": "キャンセル",
+      "editorDelete": "削除",
+      "editSave": "保存",
+      "deleteTitle": "破棄"
+    },
+    "calendar": {
+      "today": "今日"
+    },
+    "timepicker": {
+      "now": "今",
+      "selectNow": "今すぐ選択",
+      "set": "設定",
+      "cancel": "キャンセル",
+      "toggleTimeSelector": "時間セレクターの切り替え"
+    },
+    "datetimepicker": {
+      "toggleDateTimeSelector": "日時セレクターの切り替え",
+      "cancel": "キャンセル",
+      "set": "設定",
+      "date": "日付",
+      "time": "時間"
+    },
+    "datepicker": {
+      "toggleCalendar": "カレンダーの切り替え"
+    }
+  },
+  "zh": {
+    "scheduler": {
+      "today": "今天",
+      "monthViewTitle": "月",
+      "weekViewTitle": "周",
+      "dayViewTitle": "日",
+      "timelineViewTitle": "时间线",
+      "allDay": "一整天",
+      "allEvents": "所有事件",
+      "deleteDialogTitle": "删除活动",
+      "deleteConfirmation": "确定要删除此活动吗？",
+      "editCancel": "取消",
+      "editorDelete": "删除",
+      "editSave": "保存",
+      "deleteTitle": "删除"
+    },
+    "calendar": {
+      "today": "今天"
+    },
+    "timepicker": {
+      "now": "现在",
+      "selectNow": "立即选择",
+      "set": "放",
+      "cancel": "取消",
+      "toggleTimeSelector": "切换时间选择器"
+    },
+    "datetimepicker": {
+      "toggleDateTimeSelector": "切换日期时间选择器",
+      "cancel": "取消",
+      "set": "放",
+      "date": "日期",
+      "time": "时间"
+    },
+    "datepicker": {
+      "toggleCalendar": "切换日历"
+    }
+  }
+}
+

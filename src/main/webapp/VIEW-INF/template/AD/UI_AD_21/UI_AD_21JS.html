@@ -1,0 +1,257 @@
+<script>
+  var vm = new Vue({
+    el: '#UI_AD_21-contents',
+    i18n: gI18n,
+    data: function () {
+      return {
+        menuCd: ''
+      };
+    },
+    methods: {
+      doDataLoad: function(e) {
+        var dataProvider = this.$grid1.dataProvider;
+        var gridView = this.$grid1.gridView;
+
+        this.$grid1.gridView.commit(true);
+
+        gridView.showToast(progressSpinner + 'Loading data...', true);
+
+        axios
+          .get(BASE_URL + "system/menus/badges/general", {
+            params: {
+              'menu-cd': this.menuCd
+            }
+          })
+          .then(function(response) {
+            if (response.status === gHttpStatus.SUCCESS) {
+              dataProvider.fillJsonData(response.data, { count: -1 });
+            } else if (response.status === gHttpStatus.NO_CONTENT) {
+              dataProvider.clearRows();
+            }
+          })
+          .catch(function(err) {
+            console.log(err);
+          })
+          .then(function() {
+            gridView.hideToast();
+          });
+      },
+      doRefresh: function() {
+        this.menuCd = '';
+      },
+      doInsertRow: function() {
+        if (this.$grid1.dataProvider.getRowCount() > 0) {
+          this.$grid1.gridView.beginInsertRow(
+            this.$grid1.gridView.getCurrent().dataRow + 1
+          );
+          this.$grid1.gridView.commit(true);
+        } else {
+          this.$grid1.gridView.beginAppendRow(0);
+          this.$grid1.gridView.commit(true);
+        }
+        
+        let disabledColumns = ['menuName'];
+        let distabledRows = this.$grid1.gridView.getCurrent().dataRow;
+        gSetEditableColumns(this.$grid1, distabledRows, disabledColumns, false);
+      },
+      doDeleteRow: function() {
+        let that = this;
+
+        showDialog(
+          'Delete',
+          'Are you sure to Delete?',
+          DIALOG_TYPE.CONFIRM
+        ).then(function(answer) {
+          if (answer) {
+            let arMenuId = [];
+            that.$grid1.gridView.getCheckedItems().map(function(indx) {
+              if (
+                !that.$grid1.dataProvider.getAllStateRows().created.includes(indx)
+              ) {
+                arMenuId.push(that.$grid1.dataProvider.getValue(indx, 'menuCd'));
+              }
+            });
+
+            that.$grid1.dataProvider.removeRows(
+              that.$grid1.dataProvider.getAllStateRows().created
+            );
+
+            if (!arMenuId.length) {
+              // showDialog('Alert', 'Please select the rows to delete.', DIALOG_TYPE.CONFIRM);
+            } else {
+              this.$grid1.gridView.showToast(
+                progressSpinner + 'Deleting data...',
+                true
+              );
+
+              axios({
+                method: 'post',
+                url: BASE_URL + 'system/menus/badges/delete',
+                headers: { 'content-type': 'application/json' },
+                data: arMenuId
+              })
+                .then(function(response) {
+                  console.log(response);
+                  if (response.status === gHttpStatus.SUCCESS) {
+                    this.$grid1.dataProvider.removeRows(
+                      this.$grid1.gridView.getCheckedItems()
+                    );
+                  }
+                })
+                .catch(function(err) {
+                  console.log(err);
+                })
+                .then(function() {
+                  this.$grid1.gridView.hideToast();
+                });
+            }
+          }
+        });
+      },
+      doSave: function () {
+        let that = this;
+        showDialog('Save', 'Are you sure to Save?', DIALOG_TYPE.CONFIRM).then(
+          function(answer) {
+            if (answer) {
+              let arChange = gChangedRows(that.$grid1);
+              if (!arChange.length) {
+                // showDialog('Alert', 'No data to save.', DIALOG_TYPE.CONFIRM);
+              } else {
+                that.$grid1.gridView.showToast(progressSpinner + 'Saving data...', true);
+
+                arChange.forEach(function (value) {
+                  if (value.expiredDttm && value.expiredDttm instanceof Date) {
+                    value.expiredDttm = value.expiredDttm.format("yyyy-MM-ddTHH:mm:ss");
+                  }
+                })
+
+                axios({
+                  method: 'post',
+                  headers: { 'content-type': 'application/json' },
+                  url: BASE_URL + 'system/menus/badges',
+                  data: arChange
+                })
+                  .then(function(response) {})
+                  .catch(function(err) {
+                    console.log(err);
+                  })
+                  .then(function() {
+                    that.$grid1.gridView.hideToast();
+                    vm.doDataLoad();
+                  });
+              }
+            } else {
+              that.$grid1.gridView.hideToast();
+            }
+          }
+        );
+      },
+      doResize: function () {
+        if (this.$grid1) {
+          this.$grid1.gridView.resetSize();
+        }
+      },
+      doKeyDown: function (e) {
+        if (e.type === 'keydown' && e.key === 'Enter') {
+          this.doDataLoad();
+        }
+      },
+      createGrid: function () {
+        var gridInfo = this.setColumnsAndFields();
+        this.$grid1 = this.$createGrid("grid1", gridInfo.fields, gridInfo.columns);
+
+        gInitStyle(this.$grid1);
+        gSetOptions(this.$grid1);
+
+        this.$grid1.gridView.setEditorOptions({
+          //useCssStyle: true,  //모든 에디터에 CSS를 적용할 경우 사용  
+          //useCssStyleDropDownList: true, //dropDown
+          useCssStyleDatePicker: true   //달력
+          //useCssStylePopupMenu: true,    //popupMenu
+          //useCssStyleMultiCheck: true    //multiCheck
+        });
+
+        this.$grid1.gridView.onCellEdited = function (grid, itemIndex, dataRow, field) {
+          grid.commit();
+        };
+      },
+      setColumnsAndFields: function() {
+        var fields = [
+          { fieldName: 'menuCd' },
+          { fieldName: 'menuName' },
+          { fieldName: 'badgeContent' },
+          {
+            fieldName: 'expiredDttm',
+            dataType: 'datetime',
+            datetimeFormat: 'iso'
+          } //expire_date
+        ]
+
+        var columns = [
+        {
+            name: 'menuCd',
+            fieldName: 'menuCd',
+            header: {
+              text: gI18n.tc('VIEW_ID')
+            },
+            width: 300
+          },
+          {
+            name: 'menuName',
+            fieldName: 'menuName',
+            header: {
+              text: gI18n.tc('VIEW_NAME')
+            },
+            displayCallback: function(grid, index, value) {
+              var menuCdIndex = grid.columnByName("menuCd").dataIndex;
+              var menuCd = grid.getValue(index.dataRow, menuCdIndex);
+              if (menuCd != undefined) {
+                return gI18n.tc(menuCd);
+              } else {
+                return '';
+              }
+            },
+            editable: false,
+            width: 300
+          },
+          {
+            name: 'badgeContent',
+            fieldName: 'badgeContent',
+            header: {
+              text: gI18n.tc('BADGE_CONTENT')
+            },
+            width: 300
+          },
+          {
+            name: 'expiredDttm',
+            fieldName: 'expiredDttm',
+            alwaysShowButton: true,
+            alwaysShowEditButton: true,
+            header: {
+              text: gI18n.tc('EXPIRE_DATE')
+            },
+            editor: {
+              type: 'date',
+              datetimeFormat: "yyyy-MM-dd",
+              textReadOnly: true
+            },
+            styles: {
+              textAlignment: 'center',
+              datetimeFormat: 'yyyy-MM-dd'
+            },
+            width: 344
+          }
+        ]
+        var obj = {};
+        obj.fields = fields;
+        obj.columns = columns;
+        return obj;
+      }
+    },
+    mounted: function () {
+      this.createGrid();
+    }
+  });
+
+  
+</script>

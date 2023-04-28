@@ -1,0 +1,94 @@
+<script>
+    /* 
+        엔진 실행 결과 화면의 crosstab 그리드 중 summary 기능을 사용하는 경우
+        chart에는 해당하는 기능이 없기 때문에 날짜가 중복되어 그려지는 현상이 나타남
+        위 function은 상단 그리드의 데이터를 재구성하여 chart에 setting 함
+
+        **parameter info**
+        gridComponentId ::: upper grid component id
+        chartComponentId ::: target to redraw chart component id
+        itemIndex ::: itemIndex of selected row
+        fixedColumns ::: target columns to filter data
+    */
+    
+    function redrawChart(gridComponentId, chartComponentId, itemIndex, fixedColumns) {
+        	
+        //click event 가 발생한 component
+        var gridView = cm.getComponent(gridComponentId).getActualComponent();
+        var dataProvider = gridView.getDataSource();
+        var resultData = dataProvider.getJsonRows();
+        
+        /* console.log("gridComponentId: ",gridComponentId);
+        console.log("chartComponentId: ",chartComponentId);
+        console.log("itemIndex: ",itemIndex);
+        console.log("fixedColumns: ",fixedColumns); */
+
+        //클릭한 row의 data
+        var rowData = gridView.getValues(itemIndex);
+
+        //target chart component
+        var chartView = cm.getComponent(chartComponentId).getActualComponent();
+        var categoryField = chartView.options.categoryAxis.field; //component에 설정한 category ID
+
+        //날짜 categoryAxis 생성
+        var categoryAxisArrays = gridView.getColumnNames()
+                                .filter(function(name){ return name.startsWith(categoryField) })
+                                .map(function(value) { return value.split("_")[1] })
+                                .sort(); //재정렬
+
+        // 값을 가져올 series 속성 설정값
+        var seriesArrays = chartView.options.series
+                          .map(function(value) { return value.field });
+        
+        // chart 조회조건에 해당하는 컬럼으로 Object 생성
+        var conditionData = {};
+        for (let i in fixedColumns) {
+            var keyName = fixedColumns[i];
+            var value = rowData[keyName];
+
+            if (value !== undefined) {
+                conditionData[keyName] = value;
+            }
+        }
+
+        //chart에 넣을 데이터 틀 만들기
+        var dataArray = categoryAxisArrays.map(function(value) {
+            var obj = {};
+            obj[categoryField] = value;
+            for (var i = 0, len = seriesArrays.length; i < len; i ++) {
+                obj[seriesArrays[i]] = 0
+            }
+            return obj
+        });
+        
+        //전체 result data에서 target data 추출 및 data set
+        for (let j in resultData) {
+
+            var resultRow = resultData[j];
+            var flag = true;
+
+            for (let [key, value] of Object.entries(conditionData)) {
+                if (resultRow[key] === value && seriesArrays.includes(resultRow["CATEGORY"])) {
+                    continue;
+                } else {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (flag) {
+                var category = resultRow.CATEGORY;
+                for (let [key, value] of Object.entries(resultRow)) {
+                    if (key.startsWith(categoryField)) {
+                        var index = dataArray.findIndex(obj => obj[categoryField] === key.split("_")[1]);
+                        dataArray[index][category] = value;
+                    }
+                }
+            }
+        }
+
+        console.log("@Chart Data@", dataArray);
+        chartView.setDataSource(dataArray);
+        chartView.redraw();
+    }
+</script>

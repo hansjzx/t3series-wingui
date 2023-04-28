@@ -1,0 +1,1442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_CM_01" template="CM/UI_CM_01:CM/POP_UI_CM_01:IM/POP_UI_IM_01:COMM/COMM_PERSONALIZATION:COMM/COMM_HELP" copyfrom="POP_UI_CM_01:POP_UI_IM_01:COMM_PREFERENCE:COMM_HELP:COMM_VIEW_META" version="2.0">
+    <publish parent="MENU_01" open="true" seq="10" />
+    <component id="DROPDOWN" type="DATA">
+        <actions>
+            <action event-type="meta">
+                <operation-call id="OPC_DROPDOWN_LOAD">
+                    <component-id>DROPDOWN</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="LOOKUP_CODE">
+                    <service-id>SRV_UI_CM_CODE</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="CODE" value="MODULE_CD, LOC_TP, ITEM_ATTR, UOM, TRUE_FALSE, TIME_BUCKET, TIME_UOM, REF_TIME_UOM, 
+                        RES_GRP_TP, LOCAT_LV_DESCRIP, VEHICL_TP, LEAD_TIME_TP, ITEM_TP, PRODUCT_TP, ITEM_SCOPE, START_DATE_TP, 
+                        DAY_OF_WEEK, QUADRANT_BASE, QUADRANT_BASE, INV_ANLY_PRIOD, SABC_CAL_BASE, TARGET_SVC_CAL_BASE_TP, 
+                        AVG_SUPPLY_LT_CAL_METHOD, AVG_TRANSF_COST_CAL_METHOD, CURRENCY, AVG_MFG_LT_CAL_METHOD, DEMAND_RATE_CAL_METHOD, 
+                        EOQ_DECISION_RULE, CORPOR_NM" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_TTL_CPT_04_CLICK_01">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="CON_REFRESH_01">
+                            <component>COMMON</component>
+                            <key>VIEW_ID</key>
+                            <operator>equal</operator>
+                            <value>UI_CM_01</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_CLICK_02">
+                    <component-id>SRH_CPT_T1_02_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+                <operation-call id="OPC_TTL_CPT_04_CLICK_03">
+                    <component-id>SRH_CPT_T1_03_04</component-id>
+                    <operation-id>INIT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_05" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_GRID_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>MODULE_VAL</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_04" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <select-index>2</select-index>
+            <value-id>CD</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SRH_CPT_T1_01_04_INIT">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_SRH_CPT_T1_01_04_SELECT_01">
+                            <component-id>SRH_CPT_T1_01_04</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="TEXT" value="CM" />
+                            </parameters>
+                            <conditions>
+                                <condition id="CHECK_UI_ID_01">
+                                    <component>COMMON</component>
+                                    <key>VIEW_ID</key>
+                                    <operator>equal</operator>
+                                    <value>UI_CM_01</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_01_04_SELECT_02">
+                            <component-id>SRH_CPT_T1_01_04</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="TEXT" value="IM" />
+                            </parameters>
+                            <conditions>
+                                <condition id="CHECK_UI_ID_02">
+                                    <component>COMMON</component>
+                                    <key>VIEW_ID</key>
+                                    <operator>equal</operator>
+                                    <value>UI_IM_02</value>
+                                </condition>
+                            </conditions>
+                            <success>
+                                <operation-call id="OPC_SRH_CPT_T1_01_04_ENABLE_02">
+                                    <component-id>SRH_CPT_T1_01_04</component-id>
+                                    <operation-id>ENABLE</operation-id>
+                                    <parameters>
+                                        <parameter id="ENABLE" value="false" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                        <operation-call id="OPC_SRH_CPT_T1_01_04_SELECT_03">
+                            <component-id>SRH_CPT_T1_01_04</component-id>
+                            <operation-id>SELECT</operation-id>
+                            <parameters>
+                                <parameter id="TEXT" value="MP" />
+                            </parameters>
+                            <conditions>
+                                <condition id="CHECK_UI_ID_03">
+                                    <component>COMMON</component>
+                                    <key>VIEW_ID</key>
+                                    <operator>equal</operator>
+                                    <value>UI_MP_01</value>
+                                </condition>
+                            </conditions>
+                            <success>
+                                <operation-call id="OPC_SRH_CPT_T1_01_04_ENABLE_03">
+                                    <component-id>SRH_CPT_T1_01_04</component-id>
+                                    <operation-id>ENABLE</operation-id>
+                                    <parameters>
+                                        <parameter id="ENABLE" value="false" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:MODULE_CD" />
+            </operation>
+            <operation id="SELECT" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>CONF_ID</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_02_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="ENTER_KEY_LOAD_GRID_01">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_CPT_T1_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>CONF_NM</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_03_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="ENTER_KEY_LOAD_GRID_01">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <selection-mode>BLOCK</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="MODULE_VAL" title="MODULE_VAL" type="string" sort="asc">
+                    <width>50</width>
+                    <editable>false</editable>
+                </column>
+                <column id="CONF_NM" title="CONF_NM" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <text-alignment>left</text-alignment>
+                    <lang>true</lang>
+                </column>
+                <column id="CONF_KEY" title="CONF_ID" type="string">
+                    <width>50</width>
+                    <visible>false</visible>
+                </column>
+                <column id="DESCRIP" title="DESCRIP" type="string">
+                    <width>200</width>
+                    <editable>false</editable>
+                    <text-alignment>left</text-alignment>
+                    <lang>true</lang>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="RST_CPT_01_INIT">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_CODE_LOAD">
+                    <component-id>DROPDOWN</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_CPT_01_OPEN">
+                            <component-id>POP_UI_CM_01_01_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_01">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>001</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_02_OPEN">
+                            <component-id>POP_UI_CM_01_02_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_02">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>002</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_03_OPEN">
+                            <component-id>POP_UI_CM_01_03_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_03">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>003</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_04_OPEN">
+                            <component-id>POP_UI_CM_01_04_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_04">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>004</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_06_OPEN">
+                            <component-id>POP_UI_CM_01_06_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_06">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>006</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_07_OPEN">
+                            <component-id>POP_UI_CM_01_07_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_07">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>007</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_08_OPEN">
+                            <component-id>POP_UI_CM_01_08_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_08">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>008</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_09_OPEN">
+                            <component-id>POP_UI_CM_01_09_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_09">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>009</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_10_OPEN">
+                            <component-id>POP_UI_CM_01_10_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_10">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>010</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_11_OPEN">
+                            <component-id>POP_UI_CM_01_11_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_11">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>011</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_13_OPEN">
+                            <component-id>POP_UI_CM_01_13_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_13">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>013</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_14_OPEN">
+                            <component-id>POP_UI_CM_01_14_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_14">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>014</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_15_OPEN">
+                            <component-id>POP_UI_CM_01_15_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_15">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>015</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_16_OPEN">
+                            <component-id>POP_UI_CM_01_16_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_16">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>016</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_17_OPEN">
+                            <component-id>POP_UI_CM_01_17_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_17">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>017</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_18_OPEN">
+                            <component-id>POP_UI_CM_01_18_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_18">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>018</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_19_OPEN">
+                            <component-id>POP_UI_CM_01_19_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_19">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>019</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_20_OPEN">
+                            <component-id>POP_UI_CM_01_20_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_20">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>020</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_21_OPEN">
+                            <component-id>POP_UI_CM_01_21_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_21">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>021</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_23_OPEN">
+                            <component-id>POP_UI_CM_01_23_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_23">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>023</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_24_OPEN">
+                            <component-id>POP_UI_CM_01_24_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_24">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>024</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_26_OPEN">
+                            <component-id>POP_UI_CM_01_26_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_26">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>026</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_27_OPEN">
+                            <component-id>POP_UI_CM_01_27_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_27">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>027</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_28_OPEN">
+                            <component-id>POP_UI_CM_01_28_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_28">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>028</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_29_OPEN">
+                            <component-id>POP_UI_CM_01_29_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_29">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>029</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_30_OPEN">
+                            <component-id>POP_UI_CM_01_30_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_30">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>030</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_31_OPEN">
+                            <component-id>POP_UI_CM_01_31_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_31">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>031</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_32_OPEN">
+                            <component-id>POP_UI_CM_01_32_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_32">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>032</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_33_OPEN">
+                            <component-id>POP_UI_CM_01_33_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_33">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>033</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_35_OPEN">
+                            <component-id>POP_UI_CM_01_35_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_35">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>035</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_36_OPEN">
+                            <component-id>POP_UI_CM_01_36_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_36">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>036</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_37_OPEN">
+                            <component-id>POP_UI_CM_01_37_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_37">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>037</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_38_OPEN">
+                            <component-id>POP_UI_CM_01_38_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_38">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>038</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_40_OPEN">
+                            <component-id>POP_UI_CM_01_40_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_40">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>040</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_42_OPEN">
+                            <component-id>POP_UI_CM_01_42_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_42">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>042</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_43_OPEN">
+                            <component-id>POP_UI_CM_01_43_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_43">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>043</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_44_OPEN">
+                            <component-id>POP_UI_CM_01_44_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_44">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>044</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_45_OPEN">
+                            <component-id>POP_UI_CM_01_45_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_45">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>045</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_46_OPEN">
+                            <component-id>POP_UI_CM_01_46_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_46">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>046</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_47_OPEN">
+                            <component-id>POP_UI_CM_01_47_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_47">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>047</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_51_OPEN">
+                            <component-id>POP_UI_CM_01_51_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_51">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>051</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_111_OPEN">
+                            <component-id>POP_UI_CM_01_111_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_111" group="MP">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>111</value>
+                                </condition>
+                                <condition id="COND_UI_CM_01_111_1" group="MP">
+                                    <column>MODULE_VAL</column>
+                                    <operator>equal</operator>
+                                    <value>MP</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_334_OPEN">
+                            <component-id>POP_UI_CM_01_334_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_334">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>334</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_339_OPEN">
+                            <component-id>POP_UI_CM_01_339_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_339">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>339</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_CPT_120_OPEN">
+                            <component-id>POP_UI_CM_01_120_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_CM_01_120">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>120</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_DP_MODULE_OPEN">
+                            <component-id>POP_UI_DP_01_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_DP_01" group="DP">
+                                    <column>CONF_KEY</column>
+                                    <operator>notEqual</operator>
+                                    <value>120</value>
+                                </condition>
+                                <condition id="COND_UI_DP_02" group="DP">
+                                    <column>MODULE_VAL</column>
+                                    <operator>equal</operator>
+                                    <value>DP</value>
+                                </condition>
+                            </conditions>
+                            <success>
+                                <operation-call id="OPC_POP_UI_DP_MODULE_OPEN_SUCCESS">
+                                    <component-id>POP_UI_DP_01_RST</component-id>
+                                    <operation-id>INIT</operation-id>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_SRP_MODULE_OPEN">
+                            <component-id>POP_UI_DP_01_WINDOW_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_SRP_01">
+                                    <column>MODULE_VAL</column>
+                                    <operator>equal</operator>
+                                    <value>SRP</value>
+                                </condition>
+                            </conditions>
+                            <success>
+                                <operation-call id="OPC_POP_UI_SRP_MODULE_OPEN_SUCCESS">
+                                    <component-id>POP_UI_DP_01_RST</component-id>
+                                    <operation-id>INIT</operation-id>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_01_OPEN">
+                            <component-id>POP_UI_IM_01</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_01">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>301</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_02_OPEN">
+                            <component-id>POP_UI_IM_02</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_02">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>302</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_03_OPEN">
+                            <component-id>POP_UI_IM_03</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_03">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>303</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_04_OPEN">
+                            <component-id>POP_UI_IM_04</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_04">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>304</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_05_OPEN">
+                            <component-id>POP_UI_IM_05</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_05">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>305</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_06_OPEN">
+                            <component-id>POP_UI_IM_06</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_06">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>306</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_07_OPEN">
+                            <component-id>POP_UI_IM_07</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_07">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>307</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_08_OPEN">
+                            <component-id>POP_UI_IM_08</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_08">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>308</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_09_OPEN">
+                            <component-id>POP_UI_IM_09</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_09">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>309</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_10_OPEN">
+                            <component-id>POP_UI_IM_10</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_10">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>310</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_11_OPEN">
+                            <component-id>POP_UI_IM_11</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_11">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>311</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_12_OPEN">
+                            <component-id>POP_UI_IM_12</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_12">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>312</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_13_OPEN">
+                            <component-id>POP_UI_IM_13</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_13">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>313</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_14_OPEN">
+                            <component-id>POP_UI_IM_14</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_14">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>314</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_17_OPEN">
+                            <component-id>POP_UI_IM_17</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_17">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>317</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_18_OPEN">
+                            <component-id>POP_UI_IM_18</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_18">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>318</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_19_OPEN">
+                            <component-id>POP_UI_IM_19</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_19">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>319</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_20_OPEN">
+                            <component-id>POP_UI_IM_20</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_20">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>320</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_21_OPEN">
+                            <component-id>POP_UI_IM_21</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_21">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>321</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_22_OPEN">
+                            <component-id>POP_UI_IM_22</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_22">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>322</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_23_OPEN">
+                            <component-id>POP_UI_IM_23</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_23">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>323</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_24_OPEN">
+                            <component-id>POP_UI_IM_24</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_24">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>324</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_25_OPEN">
+                            <component-id>POP_UI_IM_25</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_25">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>325</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_26_OPEN">
+                            <component-id>POP_UI_IM_26</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_26">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>326</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_27_OPEN">
+                            <component-id>POP_UI_IM_27</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_27">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>327</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_28_OPEN">
+                            <component-id>POP_UI_IM_28</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_28">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>328</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_29_OPEN">
+                            <component-id>POP_UI_IM_29</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_29">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>329</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_30_OPEN">
+                            <component-id>POP_UI_IM_30</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_30">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>330</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_31_OPEN">
+                            <component-id>POP_UI_IM_31</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_31">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>331</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_32_OPEN">
+                            <component-id>POP_UI_IM_32</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_32">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>332</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_33_OPEN">
+                            <component-id>POP_UI_IM_33</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_33">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>333</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_35_OPEN">
+                            <component-id>POP_UI_IM_35</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_35">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>335</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_36_OPEN">
+                            <component-id>POP_UI_IM_36</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_36">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>336</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_IM_37_OPEN">
+                            <component-id>POP_UI_IM_37</component-id>
+                            <operation-id>OPEN</operation-id>
+                            <parameters>
+                                <parameter id="RENDER" value="true" />
+                            </parameters>
+                            <conditions>
+                                <condition id="COND_UI_IM_37">
+                                    <column>CONF_KEY</column>
+                                    <operator>equal</operator>
+                                    <value>337</value>
+                                </condition>
+                            </conditions>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_CM_01_Q_001">
+                    <service-id>SRV_UI_CM_01_Q</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="MODULE_VAL" reference-id="SRH_CPT_T1_01_04" default-value="" />
+                        <parameter id="CONF_KEY" reference-id="SRH_CPT_T1_02_04" default-value="" />
+                        <parameter id="CONF_NM" reference-id="SRH_CPT_T1_03_04" default-value="" />
+                        <parameter id="LOCALE" reference-id="COMMON:LANGUAGE_CODE" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

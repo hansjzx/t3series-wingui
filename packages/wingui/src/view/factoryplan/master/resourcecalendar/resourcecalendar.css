@@ -1,0 +1,282 @@
+.k-button:hover,
+.k-button.k-state-hover {
+  background-image: unset !important;
+}
+
+.k-scheduler .k-button:active {
+  border-color: transparent !important;
+  color: black !important; 
+  background-color: unset !important; 
+  background-image: unset !important;
+  box-shadow: unset !important;
+}
+
+.k-scheduler .k-button-solid-base:focus,
+.k-scheduler .k-button-solid-base.k-focus {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08) !important;
+}
+
+.k-dialog-buttongroup,
+.k-actions.k-actions-stretched {
+  padding: 8px 8px !important;
+  border-width: 0px 0 0 0 !important;
+}
+
+.k-actions.k-actions-stretched .k-button {
+  border-radius: 2px !important;
+  padding: 4px 8px !important;
+  border-width: 1px !important;
+}
+
+.k-icon-button {
+  height: auto !important;
+}
+
+.k-calendar .k-nav-today {
+  padding: 0 !important;
+}
+
+.k-calendar-caption,
+.k-calendar-td {
+  padding: 0 !important;
+  text-align: center !important;
+  font-weight: normal !important;
+  opacity: unset !important;
+}
+
+.k-calendar-caption {
+  height: 32px !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+}
+
+.k-calendar .k-calendar-view {
+  width: 224px !important;
+}
+
+.k-week-number .k-calendar-view {
+  width: 256px !important;
+}
+
+.k-calendar .k-content .k-link,
+.k-calendar .k-calendar-content .k-link {
+  border-radius: 4px !important;
+}
+
+.k-calendar-monthview .k-calendar-td,
+.k-calendar-monthview .k-link {
+  width: 32px !important;
+  height: 32px !important;
+}
+
+.k-calendar .k-calendar-td.k-state-selected .k-link,
+.k-calendar .k-calendar-td.k-selected .k-link,
+.k-calendar .k-calendar-td.k-state-selected:hover .k-link,
+.k-calendar .k-calendar-td.k-selected:hover .k-link,
+.k-calendar .k-calendar-td.k-state-selected.k-state-hover .k-link,
+.k-calendar .k-calendar-td.k-selected.k-hover .k-link,
+.k-calendar .k-calendar-td.k-selected:hover .k-link,
+.k-calendar .k-calendar-td.k-selected.k-hover .k-link,
+.k-dialog-titlebar,
+.k-list-item.k-selected {
+  background-color: #1274AC;
+}
+
+.k-calendar .k-calendar-navigation li:hover,
+.k-calendar .k-calendar-navigation li.k-state-hover,
+.k-calendar .k-calendar-navigation li.k-hover {
+  color: #0f6190;
+}
+
+/* button, checkbox color */
+.k-button-solid-base:focus, .k-button-solid-base.k-focus {
+  box-shadow: 0 0 0 2px rgb(0 0 0 / 8%) !important;
+}
+
+.k-button-solid-base:active, .k-button-solid-base.k-active {
+  background-color: #d8d8d8 !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: unset !important;
+  background-image: unset !important;
+  box-shadow: unset !important;
+}
+
+.k-button-solid-base.k-selected,
+.k-checkbox:checked,
+.k-checkbox.k-checked,
+.k-radio:checked,
+.k-radio.k-checked,
+.k-button-solid-primary,
+.k-button-solid-base.k-selected {
+  border-color: #1274AC;
+  background-color: #1274AC;
+}
+
+.k-checkbox:checked:focus,
+.k-checkbox.k-checked.k-focus,
+.k-radio:checked:focus,
+.k-radio.k-checked.k-state-focus,
+.k-radio.k-checked.k-focus,
+.k-button-solid-primary:focus,
+.k-button-solid-primary.k-focus {
+  box-shadow: 0 0 0 2px rgba(18, 116, 172, 0.3);
+}
+
+/* datetime picker */
+
+.k-button-solid-primary:hover,
+.k-button-solid-primary.k-hover {
+  border-color: #116fa5;
+  background-color: #116fa5;
+}
+
+.k-button-group .k-group-start,
+.k-button-group .k-button:first-child {
+   border-top-left-radius: 4px !important; 
+   border-bottom-left-radius: 4px !important;
+}
+
+.k-button-solid-primary:active,
+.k-button-solid-primary.k-active {
+  border-color: #106697;
+  background-color: #106697;
+}
+
+.k-button-solid-primary {
+  color: white !important;
+}
+
+.k-time-header .k-time-now:hover,
+.k-time-selector-header .k-time-now:hover,
+.k-calendar .k-nav-today:hover,
+.k-calendar .k-calendar-nav-today:hover
+{
+  color: #0f6190;
+}
+
+.k-calendar .k-nav-today,
+.k-calendar .k-calendar-nav-today,
+.k-calendar .k-calendar-view .k-today,
+.k-time-header .k-time-now,
+.k-time-selector-header .k-time-now,
+.k-time-list .k-item:hover {
+  color: #1274AC;
+}
+
+#form-displayColor {
+  margin-left: 20px;
+}
+
+.k-form .k-form-field {
+  margin-top: 2rem;
+}
+
+.k-floating-label-container > :first-child {
+  margin-top: 2px;
+}
+
+.k-time-container {
+  top: 0 !important;
+  bottom: 0 !important;
+}
+
+.k-datetime-container .k-title {
+  background-color: #ffffff !important;
+}
+
+.k-time-list-wrapper .k-title {
+  position: unset;
+  min-height: unset;
+  height: unset;
+  margin-top: unset;
+  z-index: unset;
+  opacity: unset;
+  background-color: unset;
+}
+
+.k-time-list-wrapper {
+  background-color: unset;
+  padding: 0 !important;
+}
+
+.k-scheduler-layout.k-scheduler-layout-flex {
+  height: 30px;
+}
+
+.k-scheduler {
+  border-color: rgba(0, 0, 0, 0.14);
+  box-shadow: unset !important;
+}
+
+.k-scheduler-head .k-scheduler-group:nth-child(2) {
+  display: none;
+}
+
+.k-scheduler-layout .k-scheduler-cell.k-selected {
+  background-color: rgba(18, 116, 172, 0.15) !important;
+}
+
+.k-list-item.k-selected:hover {
+  background-color: #116b9e;
+}
+
+.k-actions .k-button + .k-button {
+  margin: 0;
+}
+
+.k-event:hover:before {
+  background-color: rgba(32, 33, 36, 0.122);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  z-index: 2;
+}
+
+.k-event.k-state-selected, .k-event.k-selected {
+   box-shadow: none !important; 
+}
+
+.start-end-form > div > span:first-child {
+  margin-right: 6px;
+}
+
+.k-justify-content-stretch > * {
+  flex: 1 0 0 !important;
+}
+
+.k-scheduler-monthview .k-scheduler-cell.k-slot-cell {
+  height: 170px !important;
+  min-height: 170px !important;
+}
+
+.k-scheduler-cell.k-heading-cell.today {
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
+}
+
+.k-scheduler-cell.k-heading-cell.today .k-link.k-nav-day {
+  background-color: #1a73e8;
+  color: white;
+  padding: 1px 5px 1px 5px;
+  border-radius: 4px;
+}
+
+.k-scheduler-monthview .k-scheduler-cell.k-slot-cell {
+  padding-top: 5px !important;
+  padding-bottom: 11px !important;
+}
+
+.k-scheduler-cell.k-slot-cell.today .k-link.k-nav-day {
+  height: 21px;
+  background-color: #1a73e8;
+  color: white;
+  padding: 1px 4px 1px 4px;
+  border-radius: 4px;
+}
+
+.k-scheduler-cell.k-slot-cell.today {
+  padding-left: 5px !important;
+  padding-right: 11px !important;
+}

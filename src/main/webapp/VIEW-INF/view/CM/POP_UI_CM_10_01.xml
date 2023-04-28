@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_CM_10_01" version="2.0">
+    <component id="POP_UI_CM_10_01_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_CM_10_01</title>
+            <width>500</width>
+            <height>590</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_TAB_01" type="TAB">
+        <props>
+            <position>top</position>
+            <tabs>
+                <tab id="t-1" title="FROM_TO_LOCAT" expand="true" init-render="true" />
+                <tab id="t-2" title="ITEM" init-render="true" />
+                <tab id="t-3" title="VEHICL_GROUP" init-render="true" />
+                <tab id="t-4" title="BOD_LEADTIME" init-render="true" />
+            </tabs>
+        </props>
+        <actions>
+            <action event-type="activate-tab">
+                <operation-call id="OPC_POP_TAB_01_ACTIVATE_01">
+                    <component-id>POP_UI_CM_10_01_WINDOW_01_GRD_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="CON_GET_TAB_01-3_GRID">
+                            <component>POP_TAB_01</component>
+                            <operator>equal</operator>
+                            <value>t-3</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_POP_TAB_01_ACTIVATE_02">
+                    <component-id>POP_UI_CM_10_01_WINDOW_01_GRD</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <conditions>
+                        <condition id="CON_GET_TAB_01-4_GRID">
+                            <component>POP_TAB_01</component>
+                            <operator>equal</operator>
+                            <value>t-4</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_10_01_WINDOW_01_CPT_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>BOD_TYPE</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_10_01_WINDOW_01_CPT_01_04" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_CM_10_01_WINDOW_01_CPT_01_04_INIT_01">
+                    <component-id>POP_UI_CM_10_01_WINDOW_01_CPT_01_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_CM_10_01_WINDOW_01_CPT_01_04_INIT_02">
+                            <component-id>POP_UI_CM_10_01_WINDOW_01_CPT_01_04</component-id>
+                            <operation-id>ENABLE</operation-id>
+                            <parameters>
+                                <parameter id="ENABLE" value="false" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:BOD_TP" />
+            </operation>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="CONSUME_LOCAT_TP_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_TP_NM</init-value>
+        </props>
+    </component>
+    <component id="CONSUME_LOCAT_TP_04" type="INPUTBOX">
+        <props>
+            <width>146.6</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>LOCAT_TP</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="CONSUME_LOCAT_TP_05" type="BUTTON">
+        <props>
+            <width>30</width>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPEN_POP_CONSUME_LOCAT_WINDOW_01">
+                    <component-id>POP_CONSUME_LOCAT_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+                <operation-call id="POP_CONSUME_LOCAT_GRD_LOAD">
+                    <component-id>POP_CONSUME_LOCAT_GRD</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+            <action event-type="init">
+                <operation-call id="CONSUME_LOCAT_TP_ENABLE">
+                    <component-id>CONSUME_LOCAT_TP_05</component-id>
+                    <operation-id>ENABLE</operation-id>
+                    <parameters>
+                        <parameter id="ENABLE" value="true" />
+                    </parameters>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="CONSUME_LOCAT_LV_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_LV</init-value>
+        </props>
+    </component>
+    <component id="CONSUME_LOCAT_LV_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>LOCAT_LV</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="CONSUME_LOCAT_CD_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_CD</init-value>
+        </props>
+    </component>
+    <component id="CONSUME_LOCAT_CD_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="CONSUME_LOCAT_NM_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_NM</init-value>
+        </props>
+    </component>
+    <component id="CONSUME_LOCAT_NM_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>LOCAT_NM</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SUPPLY_LOCAT_TP_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_TP_NM</init-value>
+        </props>
+    </component>
+    <component id="SUPPLY_LOCAT_TP_04" type="INPUTBOX">
+        <props>
+            <width>146.6</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>LOCAT_TP</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SUPPLY_LOCAT_TP_05" type="BUTTON">
+        <props>
+            <width>30</width>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPEN_POP_SUPPLY_LOCAT_WINDOW_01">
+                    <component-id>POP_SUPPLY_LOCAT_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+                <operation-call id="POP_SUPPLY_LOCAT_GRD_LOAD">
+                    <component-id>POP_SUPPLY_LOCAT_GRD</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SUPPLY_LOCAT_LV_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_LV</init-value>
+        </props>
+    </component>
+    <component id="SUPPLY_LOCAT_LV_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SUPPLY_LOCAT_CD_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_CD</init-value>
+        </props>
+    </component>
+    <component id="SUPPLY_LOCAT_CD_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="SUPPLY_LOCAT_NM_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>LOCAT_NM</init-value>
+        </props>
+    </component>
+    <component id="SUPPLY_LOCAT_NM_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_ITEM_CD_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_CD</init-value>
+        </props>
+    </component>
+    <component id="POP_ITEM_CD_04" type="INPUTBOX">
+        <props>
+            <width>149.6</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>ITEM_CD</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_ITEM_CD_05" type="BUTTON">
+        <props>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_BOD_ITEM_WINDOW_01_OPEN">
+                    <component-id>POP_BOD_ITEM_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_BOD_ITEM_WINDOW_01_RESET_DATA_01">
+                            <component-id>POP_SRH_ITEM_CD_02</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_BOD_ITEM_WINDOW_01_RESET_DATA_02">
+                            <component-id>POP_SRH_ITEM_NM_02</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_BOD_ITEM_WINDOW_01_RESET_DATA_03">
+                            <component-id>POP_SRH_ITEM_TP_02</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_BOD_ITEM_WINDOW_01_OPEN_SUCCESS_04">
+                            <component-id>POP_BOD_ITEM_GRD</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_ITEM_NM_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_ITEM_NM_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>ITEM_NM</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_ITEM_TP_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_TP</init-value>
+        </props>
+    </component>
+    <component id="POP_ITEM_TP_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>ITEM_TP</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_ITEM_UOM_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>UOM_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_ITEM_UOM_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <value-id>UOM</value-id>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_10_01_WINDOW_01_GRD_02" type="R_GRID">
+        <props>
+            <height>440</height>
+            <header-height>30</header-height>
+            <check-bar>true</check-bar>
+            <fit-style>none</fit-style>
+            <pageable>false</pageable>
+            <cell-attributes>
+                <cell-attribute id="cal1">
+                    <conditions>
+                        <condition id="cond1">
+                            <column>TRANSP_MGMT_MST_ID</column>
+                            <operator>equal</operator>
+                            <value>empty</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="attr1">
+                            <column>VEHICL_TP_ID</column>
+                            <attrs>
+                                <editable>true</editable>
+                                <background>#FFFFFFD2</background>
+                                <foreground>#ff000000</foreground>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+            </cell-attributes>
+            <toolbar use="false" />
+            <columns>
+                <column id="TRANSP_MGMT_MST_ID" title="TRANSP_MGMT_MST_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="BOD_LT_ACTV_YN" title="ACTV_YN" type="bool">
+                    <width>60</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                </column>
+                <column id="FIXED_YN" title="FIXED_YN" type="bool">
+                    <width>60</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                </column>
+                <column id="VEHICL_TP_ID" title="VEHICL_VAL" type="string">
+                    <width>100</width>
+                    <editable>true</editable>
+                    <candidate>
+                        <values>
+                            <value-id>CD</value-id>
+                            <text-id>CD_NM</text-id>
+                            <service-call id="SVC_POP_UI_CM_10_01_COLUMN_LOAD">
+                                <service-id>SRV_UI_COMM_DATA_Q</service-id>
+                                <service-target>mp</service-target>
+                                <parameters>
+                                    <parameter id="DATA_DIV" value="GET_VEHICL_TP" />
+                                    <parameter id="PARAM1" reference-id="POP_SUPPLY_LOC_DATA_01:LOC_MGMT_ID" />
+                                    <parameter id="PARAM2" reference-id="POP_CONSUME_LOC_DATA_01:LOC_MGMT_ID" />
+                                    <parameter id="PARAM3" value="" />
+                                </parameters>
+                            </service-call>
+                        </values>
+                    </candidate>
+                </column>
+                <column id="BOD_PRIORITY" title="PRIORITY" type="double">
+                    <width>50</width>
+                    <editable>true</editable>
+                </column>
+                <column id="LOAD_UOM_ID" title="LOAD_UOM_ID" type="string">
+                    <width>90</width>
+                    <editable>true</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:LOAD_UOM_TYPE" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="TRANSP_LOTSIZE" title="TRANSP_LOTSIZE" type="double">
+                    <width>90</width>
+                    <editable>true</editable>
+                </column>
+                <column id="UOM_QTY" title="UOM_QTY" type="double">
+                    <width>90</width>
+                    <editable>false</editable>
+                </column>
+                <column id="PACKING_QTY" title="PACKING_QTY" type="double">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+                <column id="PACKING_TP" title="PACKING_TP" type="string">
+                    <width>80</width>
+                    <editable>false</editable>
+                </column>
+                <column id="PALLET_QTY" title="PALLET_QTY" type="double">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="PALLET_TP" title="PALLET_TP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_POP_UI_CM_10_01_GRID_01_LOAD">
+                    <service-id>SRV_UI_CM_10_POP_Q2</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="WRK_TYPE" value="N" />
+                        <parameter id="CONSUME_LOCAT_MGMT_ID" reference-id="POP_CONSUME_LOC_DATA_01:LOC_MGMT_ID" />
+                        <parameter id="SUPPLY_LOCAT_MGMT_ID" reference-id="POP_SUPPLY_LOC_DATA_01:LOC_MGMT_ID" />
+                        <parameter id="ITEM_MST_ID" reference-id="POP_BOD_ITEM_DATA_01:ITEM_MST_ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="SVC_POP_UI_CM_10_01_GRID_01_SAVE">
+                    <service-id>SRV_UI_CM_10_POP_S1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="BOD_TP_ID" reference-id="POP_UI_CM_10_01_WINDOW_01_CPT_01_04" />
+                        <parameter id="CONSUME_LOCAT_MGMT_ID" reference-id="POP_CONSUME_LOC_DATA_01:LOC_MGMT_ID" />
+                        <parameter id="SUPPLY_LOCAT_MGMT_ID" reference-id="POP_SUPPLY_LOC_DATA_01:LOC_MGMT_ID" />
+                        <parameter id="ITEM_MST_ID" reference-id="POP_BOD_ITEM_DATA_01:ITEM_MST_ID" />
+                        <parameter id="changes" reference-id="POP_UI_CM_10_01_WINDOW_01_GRD_02:all" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_CM_10_01_WINDOW_01_GRD" type="R_GRID">
+        <props>
+            <height>440</height>
+            <header-height>30</header-height>
+            <check-bar>false</check-bar>
+            <fit-style>none</fit-style>
+            <pageable>false</pageable>
+            <cell-attributes>
+                <cell-attribute id="POP_UI_CM_10_01_WINDOW_01_GRD_COND_01">
+                    <conditions>
+                        <condition id="POP_UI_CM_10_01_WINDOW_01_GRD_cond1">
+                            <column>LEADTIME_MGMT_YN</column>
+                            <operator>equal</operator>
+                            <value>true</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="POP_UI_CM_10_01_WINDOW_01_GRD_tgt1">
+                            <column>BOD_LEAD_TIME</column>
+                            <attrs>
+                                <editable>true</editable>
+                                <background>#FFFFFFD2</background>
+                                <foreground>#ff000000</foreground>
+                            </attrs>
+                        </apply>
+                        <apply id="POP_UI_CM_10_01_WINDOW_01_GRD_tgt2">
+                            <column>UOM</column>
+                            <attrs>
+                                <editable>true</editable>
+                                <background>#FFFFFFD2</background>
+                                <foreground>#ff000000</foreground>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+            </cell-attributes>
+            <toolbar use="false" />
+            <columns>
+                <column id="TRANSFER_MGMT_MST_ID" title="TRANSFER_MGMT_MST_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="VEHICL_TP_ID" title="VEHICL_TP_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="VEHICL_TP" title="VEHICL_VAL" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="BOD_LEADTIME_ID" title="BOD_LEADTIME_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="LEADTIME_MGMT_YN" title="LEADTIME_MGMT_YN" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="BOD_LEADTIME_PERIOD" title="BOD_LEADTIME_PERIOD" type="string">
+                    <width>170</width>
+                    <editable>false</editable>
+                </column>
+                <column id="LEADTIME_TP" title="LEADTIME_TP" type="string">
+                    <width>110</width>
+                    <editable>false</editable>
+                </column>
+                <column id="BOD_LEADTIME_SEQ" title="BOD_LEADTIME_SEQ" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="BOD_LEAD_TIME" title="LEADTIME" type="double">
+                    <width>90</width>
+                    <editable>true</editable>
+                </column>
+                <column id="UOM" title="TIME_UOM_NM" type="string">
+                    <width>80</width>
+                    <editable>true</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:TIME_UOM" />
+                        </values>
+                    </candidate>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_POP_UI_CM_10_01_WINDOW_01_GRD_LOAD">
+                    <service-id>SRV_UI_CM_10_POP_Q1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="WRK_TYPE" value="N" />
+                        <parameter id="CONSUME_LOCAT_MGMT_ID" reference-id="POP_CONSUME_LOC_DATA_01:LOC_MGMT_ID" default-value="" />
+                        <parameter id="SUPPLY_LOCAT_MGMT_ID" reference-id="POP_SUPPLY_LOC_DATA_01:LOC_MGMT_ID" default-value="" />
+                        <parameter id="ITEM_MST_ID" reference-id="POP_BOD_ITEM_DATA_01:ITEM_MST_ID" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="WRITE" permission-type="UPDATE">
+                <service-call id="SVC_POP_UI_CM_10_01_S_002">
+                    <service-id>SRV_UI_CM_10_POP_S2</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="BOD_TP_ID" reference-id="POP_UI_CM_10_01_WINDOW_01_CPT_01_04" default-value="" />
+                        <parameter id="CONSUME_LOCAT_MGMT_ID" reference-id="POP_CONSUME_LOC_DATA_01:LOC_MGMT_ID" default-value="" />
+                        <parameter id="SUPPLY_LOCAT_MGMT_ID" reference-id="POP_SUPPLY_LOC_DATA_01:LOC_MGMT_ID" default-value="" />
+                        <parameter id="ITEM_MST_ID" reference-id="POP_BOD_ITEM_DATA_01:ITEM_MST_ID" default-value="" />
+                        <parameter id="changes" reference-id="POP_UI_CM_10_01_WINDOW_01_GRD:all" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_CM_10_01_WINDOW_01_CPT_99_01" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_CM_10_01_WINDOW_01_CPT_99_01_CLICK_01">
+                    <component-id>POP_UI_CM_10_01_WINDOW_01_GRD_02</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_CM_10_01_WINDOW_01_CPT_99_01_CLICK_04">
+                            <component-id>POP_UI_CM_10_01_WINDOW_01_GRD</component-id>
+                            <operation-id>WRITE</operation-id>
+                            <success>
+                                <operation-call id="OPC_POP_UI_CM_10_01_WINDOW_01_CPT_99_01_SAVE_SUCCESS_MSG">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Information" />
+                                        <parameter id="msg" reference-data="POP_UI_CM_10_01_WINDOW_01_GRD:SVC_POP_UI_CM_10_01_S_002:IM_DATA" extract-by="SP_UI_CM_10_POP_S2_P_RT_MSG" />
+                                        <parameter id="type" value="info" />
+                                    </parameters>
+                                </operation-call>
+                                <operation-call id="OPC_POP_UI_CM_10_01_WINDOW_01_CPT_99_01_CLICK_03">
+                                    <component-id>POP_UI_CM_10_01_WINDOW_01</component-id>
+                                    <operation-id>CLOSE</operation-id>
+                                </operation-call>
+                                <operation-call id="OPC_POP_UI_CM_10_01_WINDOW_01_CPT_99_01_CLICK_02">
+                                    <component-id>RST_CPT_01</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_UI_CM_10_01_WINDOW_01_CPT_99_02" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_CM_10_01_WINDOW_01_CPT_99_02_CLICK">
+                    <component-id>POP_UI_CM_10_01_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

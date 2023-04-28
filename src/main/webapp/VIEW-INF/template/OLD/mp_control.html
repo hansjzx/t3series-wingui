@@ -1,0 +1,111 @@
+<div id="contentsInner" class="mpControl">
+
+	<div class="northArea">
+		<div class="mpStatus">
+			<p id="status_label" class="component_ui">Supply Plan Processs Status</p>
+			<ul class="dep1">
+				<li>
+					<span id="pd" class="component_ui"></span>
+					<ol class="dep2">
+						<li id="pd_ready" class="component_ui"></li>
+						<li id="pd_process" class="component_ui"></li>
+						<li id="pd_result" class="component_ui"></li>
+					</ol>
+				</li>
+				<li>
+					<span id="vd" class="component_ui"></span>
+					<ol class="dep2">
+						<li id="vd_ready" class="component_ui"></li>
+						<li id="vd_process" class="component_ui"></li>
+						<li id="vd_result" class="component_ui"></li>
+					</ol>
+				</li>
+				<li>
+					<span id="mp" class="component_ui"></span>
+					<ol class="dep2">
+						<li id="mp_ready" class="component_ui"></li>
+						<li id="mp_process" class="component_ui"></li>
+						<li id="mp_result" class="component_ui"></li>
+					</ol>
+				</li>
+				<li>
+					<span id="cp" class="component_ui"></span>
+					<ol class="dep2">
+						<li id="cp_ready" class="component_ui"></li>
+						<li id="cp_process" class="component_ui"></li>
+						<li id="cp_result" class="component_ui"></li>
+					</ol>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="centerArea">
+		<div class="chart1Area">
+			<span id="chart1" class="component_ui chartArea"></span>
+		</div>
+		<div class="chart2Area">
+			<span id="chart2" class="component_ui chartArea"></span>
+		</div>
+		<div class="buttonArea">
+			<span id='btnGrp1' class='btn_set'>
+				<span id="btn_prepare_data" class="component_ui"></span>
+				<span id="btn_1" class="component_ui"></span>
+			</span>
+			<span id='btnGrp2' class='btn_set'>
+				<span id="btn_validate_data" class="component_ui"></span>
+				<span id="btn_2" class="component_ui"></span>
+			</span>
+			<span id='btnGrp3' class='btn_set'>
+				<span id="btn_supply_plan" class="component_ui"></span>
+				<span id="btn_3" class="component_ui"></span>
+			</span>
+			<span id='btnGrp4' class='btn_set'>
+				<span id="btn_confirm_plan" class="component_ui"></span>
+				<span id="btn_4" class="component_ui"></span>
+			</span>
+		</div>
+	</div>
+	<div class="southArea">
+		<div id="south" class="component_ui south"></div>
+	</div>
+</div>
+
+<style type="text/css">
+.mpControl {}
+.mpControl ul, .mpControl li, .mpControl ol {list-style: none; margin:0; padding:0;}
+
+.mpControl .mpStatus {min-height:100px;}
+.mpControl .mpStatus > p {margin:0; width:100%;padding:6px 0; text-align:center; font-size:14px; font-weight:bold; background-color:#666; color:#fff;}
+.mpControl .mpStatus:after {content:'';display:block;clear:both;}
+.mpControl .mpStatus .dep1 > li {position:relative;float:left;padding:8px 0;width:25%; border:1px solid #ccc; box-sizing:border-box; text-align:center; background-color:#ddd;}
+.mpControl .mpStatus .dep2 {position:absolute; top:39px; width:100%; }
+.mpControl .mpStatus .dep2 > li {float:left;padding:5px 0;width:33.3%;border:1px solid #ccc; box-sizing:border-box;text-align:center;}
+.mpControl .mpStatus .dep2 > li#pd_ready {background:#fff; color:#000;}
+.mpControl .mpStatus .dep2 > li#vd_ready {background:#fff; color:#000;}
+.mpControl .mpStatus .dep2 > li#mp_ready {background:#fff; color:#000;}
+.mpControl .mpStatus .dep2 > li#cp_ready {background:#fff; color:#000;}
+
+.mpControl .centerArea div {position:relative;float:left; width:32.8%; min-width:250px; min-height:232px; margin-left:2%; margin: 3px; padding:0px 5px 0px 7px; border:1px solid #ccc; }
+.mpControl .centerArea div .chartArea {display:block; }
+.mpControl .centerArea div:first-child {margin-left:2px;}
+.mpControl .centerArea .buttonArea {position:relative; min-width:320px; }
+.mpControl .centerArea .buttonArea .btn_set {position:absolute;z-index:1;}
+
+.mpControl .centerArea .buttonArea > span > span > button {min-width:130px;}
+.mpControl .centerArea .buttonArea #btnGrp1 {top:13%; left:5%;}
+.mpControl .centerArea .buttonArea #btnGrp1 > .kd_comboBoxWrap { position:relative; left:10px; top:-2px;}
+.mpControl .centerArea .buttonArea #btnGrp2 {top:33%; left:5%;}
+.mpControl .centerArea .buttonArea #btnGrp2 > .kd_comboBoxWrap { position:relative; left:10px; top:-2px;}
+.mpControl .centerArea .buttonArea #btnGrp3 {top:53%; left:5%;}
+.mpControl .centerArea .buttonArea #btnGrp3 > .kd_comboBoxWrap { position:relative; left:10px; top:-2px;}
+.mpControl .centerArea .buttonArea #btnGrp4 {top:73%; left:5%;}
+.mpControl .centerArea .buttonArea #btnGrp4 > .kd_comboBoxWrap { position:relative; left:10px; top:-2px;}
+
+.mpControl .southArea:after {content:'';display:block;clear:both;}
+.mpControl .southArea > div {float:left;}
+.mpControl .southArea .south {width:100%; margin-left:0%;}
+</style>
+
+<script type="text/javascript">
+</script>

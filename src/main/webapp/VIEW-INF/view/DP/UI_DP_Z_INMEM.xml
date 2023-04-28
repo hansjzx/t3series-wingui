@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_DP_Z_INMEM" template="COMM/STANDARD" version="2.0">
+    <publish parent="MENU_05_05" open="false" seq="10" />
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="false" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="RST_CPT_01_06" type="BUTTON">
+        <props>
+            <name>Get Sql</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="call3">
+                    <component-id>RST_CPT_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="SQL" reference-id="RST_CPT_01" />
+                    </parameters>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_01_07" type="BUTTON">
+        <props>
+            <name>Set Sql</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="call3">
+                    <component-id>RST_CPT_01_07</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <parameters>
+                        <parameter id="SQL" reference-id="RST_CPT_01" />
+                        <parameter id="TYPE" value="SET" />
+                    </parameters>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SAVE">
+                <service-call id="2">
+                    <service-id>GetInMemoryData</service-id>
+                    <service-target>T3SeriesDemandPlanServer</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_01" type="TEXTAREA">
+        <props>
+            <height>300</height>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="VALIDATE" />
+        </operations>
+    </component>
+    <component id="RST_CPT_02_02" type="COMBOBOX">
+        <props>
+            <width>300</width>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <init-value>
+                <option value="ITEM_HIERARCHY" text="ITEM_HIERARCHY" />
+                <option value="PERIOD_HIERARCHY" text="PERIOD_HIERARCHY" />
+                <option value="SALES_ACCT_HIERARCHY" text="SALES_ACCT_HIERARCHY" />
+                <option value="OPERATOR_ITEM_ACCOUNT_MAP" text="OPERATOR_ITEM_ACCOUNT_MAP" />
+                <option value="OPERATOR_ITEM_MAP" text="OPERATOR_ITEM_MAP" />
+                <option value="OPERATOR_SALES_ACCOUNT_MAP" text="OPERATOR_SALES_ACCOUNT_MAP" />
+                <option value="OPERATOR_HIERARCHY2" text="OPERATOR_HIERARCHY2" />
+            </init-value>
+        </props>
+    </component>
+    <component id="RST_CPT_02_03" type="BUTTON">
+        <props>
+            <name>Search</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="call2">
+                    <component-id>RST_CPT_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="SQL" reference-id="RST_CPT_02_02" />
+                        <parameter id="TYPE" value="ALL" />
+                    </parameters>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_02_04" type="BUTTON">
+        <props>
+            <name>EXPORT</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="call2">
+                    <component-id>RST_CPT_02</component-id>
+                    <operation-id>EXPORT</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="RST_CPT_02" type="R_GRID">
+        <props>
+            <height>400</height>
+            <ignore-change>true</ignore-change>
+            <selection-mode>rows</selection-mode>
+            <state-bar>false</state-bar>
+            <check-bar>false</check-bar>
+            <show-row-count>true</show-row-count>
+            <page-row-count>15</page-row-count>
+            <grid-summary>false</grid-summary>
+            <groupable>true</groupable>
+            <group-header>true</group-header>
+            <group-summary>true</group-summary>
+            <columns>
+                <column id="COL" type="string">
+                    <width>120</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                    <iteration>
+                        <prefix remove="true">COL_</prefix>
+                    </iteration>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="1">
+                    <service-id>GetInMemoryData</service-id>
+                    <service-target>T3SeriesDemandPlanServer</service-target>
+                </service-call>
+            </operation>
+            <operation id="EXPORT">
+                <file-name />
+                <current-page>false</current-page>
+                <relieve-merge>true</relieve-merge>
+                <all-columns>true</all-columns>
+                <export-footer>false</export-footer>
+                <export-lookup>false</export-lookup>
+            </operation>
+        </operations>
+    </component>
+</view>

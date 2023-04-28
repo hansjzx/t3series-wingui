@@ -1,0 +1,927 @@
+<script>
+  var deletedFiles = [];
+
+  function getBase64(file) {
+    if (file.type.substring(0, 5) === 'image') {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function () {
+        writeForm.mBase64.push(reader.result);
+      };
+      reader.onerror = function (error) {
+        console.log(error);
+      };
+    } else {
+      showDialog(
+        gI18n.tc('WARNING'),
+        gI18n.tc('MSG_WARNING_FILE'),
+        DIALOG_TYPE.CONFIRM
+      ).then(function () {
+        writeForm.mBase64 = [];
+      });
+    }
+  }
+
+  function getCookie(name) { // 함수 추가
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      let cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        var cookie = jQuery.trim(cookies[i]);
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  function onRemove(e) {
+    if (e.files !== undefined) {
+      var id = e.files[0].id;
+      var userId = gSessionInfo.getUserId();
+      e.headers["X-XSRF-TOKEN"] = getCookie("XSRF-TOKEN");
+      $('#UI_UT_01-fileUpload').data('kendoUpload').options.async.removeUrl =
+        'file-storage/files/delete?ID=' + id + '&USER_ID=' + userId;
+      if(!deletedFiles.includes(id)){
+        deletedFiles.push(id);
+      }
+    }
+  }
+
+  function onSelect(e) {
+    if (e.files.length !== 0) {
+      var files = e.files;
+      var notAllowedExtensionList = ['.asa', '.asp', '.cdx', '.cer', '.htr', '.aspx', '.jsp',
+                                  '.jspx', '.html', '.htm', '.php', '.php3', '.php4', '.php5'];
+      for (var i = 0; i < files.length; i++) {
+        var checkInvalidExtension = notAllowedExtensionList.includes(files[i].extension.toLowerCase());
+        if (checkInvalidExtension) {
+          e.preventDefault();
+          showDialog(
+            gI18n.tc('WARNING'),
+            gI18n.tc('MSG_WARNING_FILEEXTENTION'),
+            DIALOG_TYPE.CONFIRM
+          );
+          break;
+        }
+        if (files[i].name.includes('..')) {
+          e.preventDefault();
+          showDialog(
+            gI18n.tc('WARNING'),
+            gI18n.tc('MSG_WARNING_FILENAME'),
+            DIALOG_TYPE.CONFIRM
+          );
+          break;
+        }
+      }
+    }
+  }
+
+  function doOpenIamgeUpload() {
+    var window = uploadForm.$refs.windowRefUpload.kendoWidget();
+    window.center().open();
+  }
+
+  var writeForm = new Vue({
+    el: '#UI_UT_01-writeForm',
+    i18n: gI18n,
+    data: function () {
+      return {
+        mWindowTitle: '',
+        mTitle: '',
+        mContent: '',
+        mActions: ['Minimize', 'Maximize', 'Close'],
+        mVisibleWrite: false,
+        mCheck: '',
+        mNoticeYn: '',
+        mFiles: [],
+        mBase64: [],
+        messages: {
+          fontSizeInherit: 'Font-Size'
+        },
+        mUpload: '',
+        mUploadFiles: [],
+        tools: [
+          'formatting',
+          'bold',
+          'italic',
+          'underline',
+          'justifyLeft',
+          'justifyCenter',
+          'justifyRight',
+          'fontSize',
+          'foreColor',
+          'insertUnorderedList',
+          'insertOrderedList',
+          'indent',
+          'insertImage',
+          {
+            name: 'customImageTool',
+            template:
+              '<button class="k-button" onclick="doOpenIamgeUpload()" title="Insert Image from local" style="width:28px; height:28px;"><i class="fa fa-file-image-o customStyle"></i></button>'
+          },
+          'tableWizard',
+          'createTable',
+          'print'
+        ],
+        searchFile: gI18n.tc('NB_SEARCH_FILE')
+      };
+    },
+    methods: {
+      doActivate: function () {
+        /*
+         * 기존의 upload 삭제 처리 후, 재생성
+         * Kendo 프레임 워크에 의해 자동으로 생성 된 클래스가 .k-upload 인 DOM 요소를 제거
+         */
+        if (writeForm.mCheck === 'update') {
+          var mUpload = $('#UI_UT_01-fileUpload').data('kendoUpload');
+
+          var uploaderOptions = mUpload.options;
+          uploaderOptions.files = writeForm.mUploadFiles;
+
+          var mUploadInput = $('#UI_UT_01-fileUpload');
+          var wrapper = mUploadInput.parents('.k-upload');
+          wrapper.remove();
+          $('#UI_UT_01-vueapp').append(mUploadInput);
+          mUpload = $('#UI_UT_01-fileUpload')
+            .kendoUpload(uploaderOptions)
+            .data('kendoUpload');
+          mUpload.element[0].nextSibling.innerText = this.searchFile
+        }
+      },
+      doFileSave: function () {
+        var that = this;
+        var mUpload = $('#UI_UT_01-fileUpload').data('kendoUpload');
+        var files = mUpload.getFiles();
+        var formData = new FormData();
+        var rawFiles = [];
+        var fileSizeCheck = false;
+        var fileExistCheck = false;
+        files.map(function (file) {
+          if (file.rawFile !== undefined) {
+            fileExistCheck = true;
+            formData.append('FILES', file.rawFile, file.name);
+            if (file.size === 0 || file.size > 128000000) fileSizeCheck = true
+          }
+        });
+
+        if (fileSizeCheck) {
+          showDialog(
+            gI18n.tc('WARNING'),
+            gI18n.tc('MSG_WARNING_FILESIZE'),
+            DIALOG_TYPE.CONFIRM
+          )
+        } else {
+          formData.append('CATEGORY', 'noticeboard');
+          formData.append('USER_ID', gSessionInfo.getUserId());
+          if (fileExistCheck)  {
+            axios
+            .post(BASE_URL + 'file-storage/files', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              }
+            })
+            .then(function (response) {
+              if (response.status === gHttpStatus.SUCCESS) {
+                if (response.data) {
+                  var data = response.data;
+                  if (data.success === true) {
+                    data.data.forEach(function (element) {
+                      that.mFiles.push(element.id);
+                    });
+                    that.doSave();
+                  } else if (data.success === false) {
+                    console.error(data.message);
+                    showDialog('Error', "파일 업로드를 실패했습니다.", DIALOG_TYPE.ALERT, true);
+                  }
+                }
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            })
+            .then(function () { });
+          } else {
+            that.doSave();
+          }
+        }
+      },
+      doSave: function () {
+        var mNoticeFlag = this.mNoticeYn ? 'Y' : 'N';
+
+        if (writeForm.mCheck === 'update') {
+          var object = {
+            id: detailForm.detailObject.id,
+            title: this.mTitle,
+            content: this.mContent,
+            createDttm: detailForm.detailObject.createDttm,
+            createBy: detailForm.detailObject.createBy,
+            modifyBy: gSessionInfo.getUserId(),
+            deleteYn: 'N',
+            noticeYn: mNoticeFlag,
+            files: this.mFiles
+          };
+
+          axios
+            .post(BASE_URL + 'noticeboard', object)
+            .then(function (response) { })
+            .catch(function (response) { })
+            .then(function () {
+              detailForm.detailObject = {};
+              vm.doDataLoad(vm.mSettings.currentPage);
+              vm.doClose('write');
+              writeForm.mCheck = '';
+            });
+        } else {
+          var object = {
+            title: this.mTitle,
+            content: this.mContent,
+            createBy: gSessionInfo.getUserId(),
+            deleteYn: 'N',
+            noticeYn: mNoticeFlag,
+            files: this.mFiles
+          };
+
+          axios
+            .post(BASE_URL + 'noticeboard', object)
+            .then(function (response) { })
+            .catch(function (response) { })
+            .then(function () {
+              vm.doClose('write');
+              vm.doDataLoad(vm.mSettings.currentPage);
+            });
+        }
+      },
+      doDeactivate: function () {
+        var mUpload = $('#UI_UT_01-fileUpload').data('kendoUpload');
+        this.mCheck = '';
+        this.mContent = '';
+        this.mTitle = '';
+        this.mNoticeYn = false;
+        this.mVisibleDetail = false;
+        this.mBase64 = [];
+        this.mUploadFiles = [];
+        this.mFiles = [];
+        mUpload.options.files = [];
+        mUpload.clearAllFiles();
+
+        if(deletedFiles.length > 0) {
+          writeForm.doFileReLoad();
+        }
+      },
+      doCloseWrites: function () {
+        var window = this.$refs.windowRefWrite.kendoWidget();
+        window.close();
+
+        if(deletedFiles.length > 0) {
+          writeForm.doFileReLoad();
+        }
+      },
+      doConfirm: function () {
+        var that = this;
+        if (this.mCheck === 'update') {
+          var check = true;
+          if (writeForm.mTitle === '' || writeForm.mContent === '') {
+            showDialog(
+              gI18n.tc('WARNING'),
+              gI18n.tc('MSG_WARNING'),
+              DIALOG_TYPE.CONFIRM
+            );
+            check = false;
+          }
+          if (check) {
+            showDialog(
+              gI18n.tc('SAVE'),
+              gI18n.tc('MSG_SAVE'),
+              DIALOG_TYPE.CONFIRM
+            ).then(function (answer) {
+              if (answer) {
+                var mUpload = $('#UI_UT_01-fileUpload').data('kendoUpload');
+                var files = mUpload.getFiles();
+                files.length !== 0 ? that.doFileSave() : that.doSave();
+              }
+            });
+          }
+        } else {
+          var check = true;
+          if (writeForm.mTitle === '' || writeForm.mContent === '') {
+            showDialog(
+              gI18n.tc('WARNING'),
+              gI18n.tc('MSG_WARNING'),
+              DIALOG_TYPE.CONFIRM
+            );
+            check = false;
+          }
+          if (check) {
+            showDialog(
+              gI18n.tc('SAVE'),
+              gI18n.tc('MSG_SAVE'),
+              DIALOG_TYPE.CONFIRM
+            ).then(function (answer) {
+              if (answer) {
+                var mUpload = $('#UI_UT_01-fileUpload').data('kendoUpload');
+                var files = mUpload.getFiles();
+                files.length !== 0 ? that.doFileSave() : that.doSave();
+              }
+            });
+          }
+        }
+        //예비 삭제 목록 비우기
+        deletedFiles = [];
+      },
+      doFileReLoad: function() {
+        axios
+            .post(BASE_URL + 'noticeboard-file/clear-deletefiles', deletedFiles)
+            .then(function (response) { })
+            .catch(function (response) { })
+            .then(function () {
+              deletedFiles = [];
+            });
+      },
+      // Editor 내부 Table Widget 의 Border 설정
+      doSetBorder: function (e) {
+        var editor = this.$refs.kedoEditor.kendoWidget();
+
+        if (e.name === 'createtable') {
+          setTimeout(function () {
+            var table = $(editor.body).find('table:not(.custom-table)');
+
+            table.addClass('custom-table');
+            table.attr('style', 'border: 1px solid black;');
+            table
+              .find('tr td')
+
+              .each(function () {
+                var currentStyle = $(this).attr('style');
+                $(this).attr(
+                  'style',
+                  currentStyle + ' border: 1px solid black;'
+                );
+              });
+          }, 0);
+        }
+      },
+      doUpload: function () {
+        var files = mUpload.getFiles();
+
+        var formData = new FormData();
+        var rawFiles = [];
+
+        files.map(function (file) {
+          formData.append('FILES', file.rawFile);
+        });
+        formData.append('CATEGORY', 'noticeboard');
+        formData.append('USER_ID', gSessionInfo.getUserId());
+
+        axios
+          .post(BASE_URL + 'file-storage/files', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then(function (response) {
+            if (response.status === gHttpStatus.SUCCESS) {
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+          .then(function () { });
+      },
+
+      doDrawUploadImage: function (mImageWidth, mImageHeight) {
+        writeForm.mBase64.forEach(function (element) {
+          var content = "<img src='" + element + "' width='" + mImageWidth + "'height=" + mImageHeight + "'></img>";
+          writeForm.mContent += content;
+        });
+
+        uploadForm.doCloseUpload();
+      }
+    },
+    mounted: function () {
+      var editor = this.$refs.kedoEditor.kendoWidget();
+      editor.body.style.width = '100%';
+      editor.body.style.height = '100%';
+
+      $('#UI_UT_01-fileUpload').kendoUpload({
+        async: {
+          saveUrl: 'save',
+          removeUrl: 'remove',
+          autoUpload: false
+        },
+        remove: onRemove,
+        select: onSelect,
+        files: this.mUploadFiles,
+        showFileList: true,
+        dropZone: '.dropZoneElement',
+        validation: {
+          maxFileSize: 100000000,
+          minFileSize: 1
+        }
+      });
+      this.mUpload = $('#UI_UT_01-fileUpload').data('kendoUpload');
+      this.mUpload.element[0].nextSibling.innerText = this.searchFile
+    }
+  });
+
+  /*
+   * 글 작성 폼
+   */
+  var uploadForm = new Vue({
+    el: '#UI_UT_01-uploadForm',
+    i18n: gI18n,
+    data: function () {
+      return {
+        mActions: ['Minimize', 'Maximize', 'Close'],
+        mVisibleUpload: false,
+        mWindowTitle: gI18n.tc('NB_IMAGE_UPLOAD'),
+        mImageWidth: '',
+        mImageHeight: ''
+      };
+    },
+    methods: {
+      doDeactivate: function () {
+        this.mVisibleUpload = false;
+        this.mImageWidth = '';
+        this.mImageHeight = '';
+      },
+      doCloseUpload: function () {
+        writeForm.mBase64 = [];
+        var window = this.$refs.windowRefUpload.kendoWidget();
+        window.close();
+      },
+      doUploadImage: function (ev) {
+        if (ev.files.length === 1) {
+          getBase64(ev.files[0]);
+        } else if (ev.files.length > 1) {
+          for (var i = 0; i < ev.files.length; i++) {
+            getBase64(ev.files[i]);
+          }
+        }
+      },
+      doDraw: function () {
+        /*
+         * 같은 Image 연속 삽입을 위한 file value 초기화
+         */
+        var agent = navigator.userAgent.toLowerCase();
+        if ((navigator.appName == 'Netscape' && agent.indexOf('trident') != -1) || (agent.indexOf("msie") != -1)) {
+          //IE version
+          document.getElementById('file').type = 'password';
+          document.getElementById('file').type = 'file';
+        } else {
+          document.getElementById('file').value = '';
+        }
+        writeForm.doDrawUploadImage(this.mImageWidth, this.mImageHeight);
+      }
+    }
+  });
+
+  /*
+   * Image 업로드 폼
+   */
+  var detailForm = new Vue({
+    el: '#UI_UT_01-detailForm',
+    i18n: gI18n,
+    data: function () {
+      return {
+        mActions: ['Minimize', 'Maximize', 'Close'],
+        mVisibleDetail: false,
+        detailObject: {},
+        mLoginId: '',
+        mLocalCreateDttm: '',
+        mWindowTitle: '',
+        localDataSource: {},
+        titleFilename: gI18n.tc('NB_FILE_NM'),
+        titleFilepath: gI18n.tc('NB_ATTACHMENTS'),
+        mHeight: '300px'
+      };
+    },
+    methods: {
+      doOpenModify: function () {
+        var mUpload = $('#UI_UT_01-fileUpload').data('kendoUpload');
+        writeForm.mWindowTitle = gI18n.tc('NB_POST_MODIFY');
+        writeForm.mTitle = detailForm.detailObject.title;
+        writeForm.mContent = detailForm.detailObject.content;
+        writeForm.mNoticeYn =
+          detailForm.detailObject.noticeYn === 'Y' ? true : false;
+        writeForm.mCheck = 'update';
+
+        var board_id = detailForm.detailObject.id;
+
+        var that = this;
+
+        mUpload.clearAllFiles();
+        this.doCloseDetails();
+      },
+      doCloseDetails: function () {
+        if (!writeForm.mCheck === 'update') {
+          this.detailObject = {};
+        }
+        this.mVisibleDetail = false;
+        var window = this.$refs.windowRefDetail.kendoWidget();
+        window.close();
+      },
+      doDeactivate: function () {
+        if (writeForm.mCheck === 'update') {
+          var mUpload = $('#UI_UT_01-fileUpload').data('kendoUpload');
+          mUpload.clearAllFiles();
+          writeForm.mVisibleWrite = true;
+          var window = writeForm.$refs.windowRefWrite.kendoWidget();
+          window.center().open();
+          this.mVisibleDetail = false;
+        } else {
+          writeForm.mUploadFiles = [];
+          this.mVisibleDetail = false;
+        }
+      }
+    },
+    mounted: function () {
+      this.mLoginId = gSessionInfo.getUserId();
+    }
+  });
+
+  /*
+   * 상세 보기 폼
+   */
+  var vm = new Vue({
+    el: '#UI_UT_01-contents',
+    i18n: gI18n,
+    data: function () {
+      return {
+        mSettings: {
+          currentPage: 0, // 현재 페이지
+          totalPages: 0, // 전체 페이지
+          perPageSize: 15, // 페이지 수 기본 값 설정
+          comboboxUse: true, // 페이지 수 선택 드롭다운리스트 사용 여부 (true : 사용, false : 미사용)
+          dataSourceArray: [15, 20, 25, 30, 35] // 드롭다운 리스트 메뉴 값 설정
+        },
+        mDeleteDisable: true,
+        mCheckAdmin: null,
+        mLoginId: '',
+        mActions: ['Minimize', 'Maximize', 'Close'],
+        content: null,
+        mSearch: '',
+        mTotal: 0,
+        dropdownlistValue: 1,
+        dataSourceArray: [
+          { text: gI18n.tc('NB_POST_TITLE'), value: '1' },
+          { text: gI18n.tc('NB_POST_CONTENT'), value: '2' },
+          {
+            text: gI18n.tc('NB_POST_TITLE') + ' + ' + gI18n.tc('NB_POST_CONTENT'),
+            value: '3'
+          }
+        ],
+        localDataSource: {},
+        mCheckedRows: [],
+        count: 0,
+        gridView: null,
+        fieldNameTitle: gI18n.tc('NB_POST_TITLE'),
+        fieldNameCreateUser: gI18n.tc('WRITER'),
+        fieldNameDeleteYn: gI18n.tc('NB_DELETE_YN'),
+        fieldNameCreateDttm: gI18n.tc('NB_POST_DATE'),
+        mCertainListSize: 0,
+
+        optionDisable: true,
+        titleOptionPopup: gI18n.tc("NOTICEBOARD_OPTION_SET"),
+        badgeOn: true,
+        newContentsRangeDays: 1
+      };
+    },
+    methods: {
+      // 메인 화면 삭제 여부 CheckBox disabled 조건에 따른 Formatting
+      checkboxTemplate: function (data) {
+        var checkbox = '';
+        this.mCheckAdmin = checkSystemAdmin();
+        if (this.mCheckAdmin || data.createBy === this.mLoginId) {
+          if (data.deleteYn === 'Y') {
+            checkbox = '<input type="checkbox" class="chkbx" checked="checked" style="width: 15px; height: 15px;" />';
+          } else if (data.deleteYn === 'N') {
+            checkbox = '<input type="checkbox" class="chkbx" style="width: 15px; height: 15px;" />';
+          }
+        } else {
+          checkbox = '<input type="checkbox" class="chkbx" disabled style="width: 15px; height: 15px;" />';
+        }
+        return checkbox;
+      },
+      doDataLoad: function (page) {
+        var that = this;
+
+        axios
+          .get(BASE_URL + 'noticeboard', {
+            params: {
+              PAGE: page - 1,
+              SIZE: that.mSettings.perPageSize,
+              SEARCH: that.mSearch,
+              OPTION: that.dropdownlistValue
+            }
+          })
+          .then(function (response) {
+            vm.mCertainListSize = response.data.certainList.length;
+
+            if (response.status === gHttpStatus.SUCCESS) {
+              that.mSettings.currentPage = response.data.pageContent.number + 1;
+              that.mSettings.totalPages = response.data.pageContent.totalPages
+
+              vm.mTotal = response.data.pageContent.totalElements;
+              vm.localDataSource = response.data.certainList.concat(
+                response.data.pageContent.content
+              );
+            } else if (response.status === gHttpStatus.NO_CONTENT) {
+              that.mSettings.currentPage = 0;
+              that.mSettings.totalPages = 0;
+              vm.mTotal = response.data.pageContent.content.length;
+              vm.localDataSource = response.data.pageContent.content;
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+          .then(function (response) { });
+      },
+      doOpen: function (n) {
+        if (n === 'write') {
+          writeForm.mWindowTitle = gI18n.tc('NB_POST');
+          writeForm.mVisibleWrite = true;
+          writeForm.mContent = '';
+          var window = writeForm.$refs.windowRefWrite.kendoWidget();
+          window.center().open();
+        }
+        if (n === 'detail') {
+          detailForm.mWindowTitle = gI18n.tc('DETAIL');
+
+          var createDttm = detailForm.detailObject.createDttm;
+          detailForm.mLocalCreateDttm = createDttm ? vm.getDateFormat(createDttm) : '';
+
+          detailForm.mVisibleDetail = true;
+          var window = detailForm.$refs.windowRefDetail.kendoWidget();
+
+          var board_id = detailForm.detailObject.id;
+
+          // 선택 된 글에 저장된 file link 출력
+
+          axios
+            .get(BASE_URL + 'noticeboard-file', {
+              params: {
+                BOARD_ID: board_id
+              }
+            })
+            .then(function (response) {
+              var resultList = document.getElementById('UI_UT_01-list');
+              resultList.style.display = 'block';
+
+              detailForm.localDataSource = response.data;
+              $('#UI_UT_01-link-file').empty();
+
+              if (response.data.length !== 0) {
+                response.data.forEach(function (data) {
+                  var file = {
+                    id: data.id,
+                    name: data.fileName,
+                    size: data.fileSize,
+                    extension: '.' + data.fileType
+                  }
+
+                  writeForm.mUploadFiles.push(file);
+
+                  $("#UI_UT_01-link-file").append('<p><a href="file-storage/file?ID=' + data.id +'">' + data.fileName + "</a></p>");
+                });
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            })
+            .then(function (response) {
+            });
+          window.center().open();
+        }
+      },
+      doClose: function (n) {
+        if (n === 'write') {
+          writeForm.mVisibleWrite = false;
+          var window = writeForm.$refs.windowRefWrite.kendoWidget();
+          window.close();
+        }
+        if (n === 'detail') {
+          this.mVisibleWrite = false;
+          var window = this.$refs.windowRefDetail.kendoWidget();
+          window.close();
+        }
+      },
+      onChange: function (ev) {
+        if (!detailForm.mVisibleDetail) {
+          if (ev.sender.select().index() === 1) {
+            var tr = ev.sender.select().closest('tr');
+            var dataItem = ev.sender.dataItem(tr);
+
+            detailForm.detailObject = dataItem;
+
+            this.doOpen('detail');
+          }
+        }
+      },
+      doDelete: function () {
+        var check = true;
+        if (check) {
+          showDialog(
+            gI18n.tc('DELETE'),
+            gI18n.tc('MSG_DELETE'),
+            DIALOG_TYPE.CONFIRM
+          ).then(function (answer) {
+            if (answer) {
+            axios({
+              method: 'post',
+              headers: { 'content-type': 'application/json' },
+              url: BASE_URL + 'noticeboard/delete',
+              data: vm.mCheckedRows
+            })
+            .then(function (response) { })
+            .catch(function (error) { })
+            .then(function () {
+              vm.doDataLoad(vm.mSettings.currentPage);
+              vm.mCheckedRows = [];
+            });
+            }
+          });
+        }
+      },
+      // 글 번호 Formmating
+      onDataBound: function (ev) {
+        this.count = 0;
+      },
+      // 글 번호 Formatting
+      getNumberTemplate: function (data) {
+        if (data.noticeYn === 'Y') {
+          return gI18n.tc('NB_NOTICE');
+        } else {
+          if (this.mSettings.currentPage === 1) {
+            ++vm.count;
+            return vm.count;
+          } else {
+            ++vm.count;
+            return (
+              this.mSettings.currentPage *
+              (vm.mSettings.perPageSize - vm.mCertainListSize) -
+              (vm.mSettings.perPageSize - vm.mCertainListSize) +
+              vm.count
+            );
+          }
+        }
+      },
+      getDateTemplate: function (data) {
+        return data.createDttm ? this.getDateFormat(data.createDttm).substring(0, 10) : '';
+      },
+      // 공지사항 Title Formatting
+      getTitleTemplate: function (data) {
+        if (data.noticeYn === 'Y') {
+          return "<i class='fa fa-file-text' aria-hidden= 'true' style='color: DarkBlue;'></i><span><strong> [ "  + gI18n.tc('NB_NOTICE') + " ] "  + data.title.toString() + " </strong></span>";
+        } else {
+          return data.title.toString();
+        }
+      },
+      // 메인 그리드 작성 일 Formatting
+      getDateFormat: function (date) {
+        var createTime = new Date(date.substring(0, 19));
+        var dateTime =
+          createTime.getFullYear() + '/' +
+          ('0' + (createTime.getMonth() + 1)).slice(-2) + '/' +
+          ('0' + createTime.getDate()).slice(-2) + ' ' +
+          ('0' + createTime.getHours()).slice(-2) + ':' +
+          ('0' + createTime.getMinutes()).slice(-2) + ':' +
+          ('0' + createTime.getSeconds()).slice(-2);
+
+        return dateTime;
+      },
+
+      ///////////// NoticeBoard Popup /////////////////
+      setOptionButtonUsable: function() {
+        var me = this;
+        axios.get(BASE_URL + 'system/users/check-admin', {
+          params: {
+            username: gSessionInfo.getUserId()
+          }
+        }).then(function (result) {
+          me.optionDisable = !result.data;
+        });
+      },
+      openOptionPopup: function() {
+        var window = this.$refs.optionPopup.kendoWidget();
+        window.center().open();
+      },
+      activateOptionPopup: function() {
+        this.getNoticeBoardBadge();
+      },
+      deactivateOptionPopup: function() {
+      },
+      doOptionPopupResize: function() {
+      },
+      closeOptionPopup: function() {
+        this.$refs.optionPopup.kendoWidget().close();
+      },
+      changeUseBadge: function (e) {
+        this.badgeOn = e.checked;
+      },
+      saveNoticeBoardBadge: function() {
+        var me = this;
+        showDialog('Save', 'Are you sure to Save?', DIALOG_TYPE.CONFIRM).then(
+          function(answer) {
+            if (answer) {
+              var useYn = me.badgeOn ? "Y" : "N";
+              axios({
+                method: 'post',
+                headers: { 'content-type': 'application/json' },
+                url: BASE_URL + 'system/menus/badges/noticeboard',
+                params: {
+                  USE_YN : useYn,
+                  EXPIRED_DAYS : me.newContentsRangeDays
+                }
+              })
+              .then(function(response) {})
+              .catch(function(err) {
+                console.log(err);
+              })
+              .then(function() {
+                me.getNoticeBoardBadge();
+              });
+            }
+          }
+        );
+      },
+      getNoticeBoardBadge: function() {
+        var me = this;
+
+        me.badgeOn = false;
+        me.newContentsRangeDays = 1;
+
+        axios
+          .get(BASE_URL + "system/menus/badges/noticeboard", {
+          })
+          .then(function(response) {
+            if (response.status === gHttpStatus.SUCCESS) {
+              if(response.data != null && response.data.menuId != undefined) {
+                me.badgeOn = true;
+                me.newContentsRangeDays = response.data.expiredDays;
+              }
+            }
+          })
+          .catch(function(err) {
+            console.log(err);
+          })
+          .then(function() {
+          });
+      }
+    },
+    mounted: function () {
+      this.mLoginId = gSessionInfo.getUserId();
+      var that = this;
+      that.grid = this.$refs.list.kendoWidget();
+
+      that.grid.element.on('change', 'input.chkbx', function (e) {
+        var target = e.target;
+
+        var closestCell = kendo.jQuery($(target).closest('td'));
+
+        var cellIndex = closestCell.index();
+
+        var headerCell = that.grid.element.find(
+          'thead th:nth-of-type(' + (cellIndex + 1) + ')'
+        );
+
+        var fieldName = headerCell.data('field');
+
+        var dataItem = that.grid.dataItem($(e.target).closest('tr'));
+
+        var fieldValueBeforeCheck = dataItem.get(fieldName);
+
+        var mFlag = this.checked ? 'Y' : 'N';
+
+        dataItem.set(fieldName, mFlag);
+
+        if (this.checked) {
+          dataItem.set('deleteBy', gSessionInfo.getUserId());
+          delete dataItem["__ob__"];
+          vm.mCheckedRows.push(dataItem);
+        } else {
+          var itemToFind = vm.mCheckedRows.find(function (item) {
+            return item.id === dataItem.get('id');
+          });
+          var index = vm.mCheckedRows.indexOf(itemToFind);
+
+          vm.mCheckedRows.splice(index, 1);
+        }
+
+        var fieldValueAfterCheck = dataItem.get(fieldName);
+      });
+      this.doDataLoad(1);
+
+      this.setOptionButtonUsable();
+    },
+    watch: {
+      mCheckedRows: function (val) {
+        if (val.length > 0) this.mDeleteDisable = false;
+        else this.mDeleteDisable = true;
+      }
+    }
+  });
+</script>

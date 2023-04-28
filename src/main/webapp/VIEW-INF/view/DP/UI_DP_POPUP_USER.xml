@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_DP_POPUP_USER" version="2.0">
+    <component id="UI_DP_POPUP_USER_WINDOWS" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>USER_POP</title>
+            <width>603</width>
+            <height>545</height>
+            <visible>false</visible>
+            <modal>false</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="USER_POP_SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>USER_CD</init-value>
+        </props>
+    </component>
+    <component id="USER_POP_SRH_CPT_T1_01_02" type="INPUTBOX">
+        <props>
+            <width>100</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="up-user_enterLoad">
+                    <component-id>USER_POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="USER_POP_SRH_CPT_T1_01_03" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>USER_NM</init-value>
+        </props>
+    </component>
+    <component id="USER_POP_SRH_CPT_T1_01_04" type="INPUTBOX">
+        <props>
+            <width>100</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="up-user_enterLoad2">
+                    <component-id>USER_POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="USER_POP_SRH_CPT_T1_01_05" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="op_user_pop1">
+                    <component-id>USER_POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="USER_POP_SRH_CPT_T1_01_06" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="op_user_search_init1">
+                    <component-id>USER_POP_SRH_CPT_T1_01_02</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="op_user_search_init2">
+                    <component-id>USER_POP_SRH_CPT_T1_01_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="op_user_pop1">
+                    <component-id>USER_POP_RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="USER_POP_SRH_CPT_T1_01_07" type="BUTTON">
+        <props>
+            <tooltip>selection</tooltip>
+            <icon>mouse-pointer</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="op_user_pop_sel004">
+                    <component-id>DP_DATA_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="EMP_INFO" reference-id="USER_POP_RST_CPT_01:checked" />
+                    </parameters>
+                    <conditions>
+                        <condition id="con_dp_popup_user_close_01">
+                            <component>USER_POP_RST_CPT_01</component>
+                            <key>CHECKED_ROWCOUNT</key>
+                            <operator>notEqual</operator>
+                            <value>0</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="op_user_close001">
+                    <component-id>UI_DP_POPUP_USER_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                    <conditions>
+                        <condition id="con_dp_popup_user_close_02">
+                            <component>USER_POP_RST_CPT_01</component>
+                            <key>CHECKED_ROWCOUNT</key>
+                            <operator>notEqual</operator>
+                            <value>0</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+                <operation-call id="OPC_DP_POPUP_USER_CLOSE_FAIL_MSG">
+                    <component-id>COMMON</component-id>
+                    <operation-id>DIALOG</operation-id>
+                    <parameters>
+                        <parameter id="title" value="Information" />
+                        <parameter id="msg" value="MSG_0025" />
+                        <parameter id="type" value="info" />
+                    </parameters>
+                    <conditions>
+                        <condition id="con_dp_popup_user_close_03">
+                            <component>USER_POP_RST_CPT_01</component>
+                            <key>CHECKED_ROWCOUNT</key>
+                            <operator>equal</operator>
+                            <value>0</value>
+                        </condition>
+                    </conditions>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="USER_POP_RST_CPT_01" type="R_GRID">
+        <props>
+            <height>400</height>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <state-bar>false</state-bar>
+            <check-bar>true</check-bar>
+            <check-exclusive>true</check-exclusive>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>150</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="USER_ID" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="EMP_NO" type="string">
+                    <width>150</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="EMP_NM" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="DEPT_NM" type="string">
+                    <width>150</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="op_user_pop_sel005">
+                    <component-id>DP_DATA_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="EMP_INFO" reference-id="USER_POP_RST_CPT_01:selections" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="op_user_close002">
+                    <component-id>UI_DP_POPUP_USER_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SP_UI_DP_00_POPUP_USER_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_00_POPUP_USER_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_00_POPUP_USER_Q1_01" reference-id="USER_POP_SRH_CPT_T1_01_02" default-value="" />
+                        <parameter id="SP_UI_DP_00_POPUP_USER_Q1_02" reference-id="USER_POP_SRH_CPT_T1_01_04" default-value="" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_CM_04_03" version="2.0">
+    <component id="POP_UI_CM_04_03_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_CM_04_03</title>
+            <width>400</width>
+            <height>450</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_03_WINDOW_01_GRD" type="R_GRID">
+        <props>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="SRC_ID" title="SRC_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="VIEW_ID" title="VIEW_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="COMN_CD" title="COMN_CD" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+                <column id="COMN_CD_NM" title="COMN_CD_NM" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="POP_UI_CM_04_03_WINDOW_01_GRD_SETDATA_CM_04_01">
+                    <component-id>POP_UI_CM_04_01_WINDOW_01_CPT_16_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_04_03_WINDOW_01_GRD:selections" extract-by="COMN_CD_NM" />
+                    </parameters>
+                    <conditions>
+                        <condition id="COND_UI_CM_04_03_01">
+                            <on-column>COMN_CD,COMN_CD_NM</on-column>
+                            <column>VIEW_ID</column>
+                            <operator>equal</operator>
+                            <value>POP_UI_CM_04_01</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="POP_UI_CM_04_03_WINDOW_01_GRD_SETDATA_CM_04_02">
+                            <component-id>UI_CM_04_DATA_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="CURRENCY_CODE" reference-id="POP_UI_CM_04_03_WINDOW_01_GRD:selections" extract-by="COMN_CD" />
+                                <parameter id="CURCY_CD_ID" reference-id="POP_UI_CM_04_03_WINDOW_01_GRD:selections" extract-by="ID" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="POP_UI_CM_04_03_WINDOW_01_GRD_SETDATA_CM_04_CLOSE">
+                            <component-id>POP_UI_CM_04_03_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="POP_UI_CM_04_03_WINDOW_01_GRD_SETDATA_CM_04_05_01">
+                    <component-id>POP_UI_CM_04_05_WINDOW_01_CPT_16_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_04_03_WINDOW_01_GRD:selections" extract-by="COMN_CD_NM" />
+                    </parameters>
+                    <conditions>
+                        <condition id="COND_UI_CM_04_03_02">
+                            <on-column>COMN_CD,COMN_CD_NM</on-column>
+                            <column>VIEW_ID</column>
+                            <operator>equal</operator>
+                            <value>POP_UI_CM_04_05</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="POP_UI_CM_04_03_WINDOW_01_GRD_SETDATA_CM_04_05_02">
+                            <component-id>UI_CM_04_DATA_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="CURRENCY_CODE" reference-id="POP_UI_CM_04_03_WINDOW_01_GRD:selections" extract-by="COMN_CD" />
+                                <parameter id="CURCY_CD_ID" reference-id="POP_UI_CM_04_03_WINDOW_01_GRD:selections" extract-by="ID" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="POP_UI_CM_04_03_WINDOW_01_GRD_SETDATA_CM_04_05_CLOSE">
+                            <component-id>POP_UI_CM_04_03_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="POP_UI_CM_04_03_WINDOW_01_GRD_SETDATA_CM_04_10_01">
+                    <component-id>POP_UI_CM_04_10_TAB_03_16_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP_UI_CM_04_03_WINDOW_01_GRD:selections" extract-by="COMN_CD_NM" />
+                    </parameters>
+                    <conditions>
+                        <condition id="COND_UI_CM_04_03_02">
+                            <on-column>COMN_CD,COMN_CD_NM</on-column>
+                            <column>VIEW_ID</column>
+                            <operator>equal</operator>
+                            <value>POP_UI_CM_04_10</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="POP_UI_CM_04_03_WINDOW_01_GRD_SETDATA_CM_04_05_02">
+                            <component-id>UI_CM_04_DATA_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="CURRENCY_CODE" reference-id="POP_UI_CM_04_03_WINDOW_01_GRD:selections" extract-by="COMN_CD" />
+                                <parameter id="CURCY_CD_ID" reference-id="POP_UI_CM_04_03_WINDOW_01_GRD:selections" extract-by="ID" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="POP_UI_CM_04_03_WINDOW_01_GRD_SETDATA_CM_04_05_CLOSE">
+                            <component-id>POP_UI_CM_04_03_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SC_POP_UI_CM_04_03_WINDOW_01_GRD_LOAD">
+                    <service-id>SRV_UI_CM_04_POP_01_Q</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="CONF_KEY" value="002" />
+                        <parameter id="ITEM_CD" value="" />
+                        <parameter id="ITEM_NM" value="" />
+                        <parameter id="DESCRIP" value="" />
+                        <parameter id="ITEM_LV" value="" />
+                        <parameter id="ITEM_TP" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_CM_04_02_WINDOW_02_CPT_30_01" type="BUTTON">
+        <props>
+            <width>130</width>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_SRH_CPT_T1_30_01_CLICK">
+                    <component-id>POP_UI_CM_04_02_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_UI_CM_04_02_WINDOW_02_CPT_30_04" type="BUTTON">
+        <props>
+            <width>130</width>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_SRH_CPT_T1_30_4_CLICK">
+                    <component-id>POP_UI_CM_04_02_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_IM_26_03" version="2.0">
+    <component id="POP_UI_IM_26_03_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_IM_26_03</title>
+            <width>1215</width>
+            <height>405</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_IM_26_03_WINDOW_01_R_GRID_01" type="R_GRID">
+        <props>
+            <height>300</height>
+            <header-height>55</header-height>
+            <selection-mode>BLOCK</selection-mode>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>120</width>
+                    <visible>false</visible>
+                </column>
+                <column id="ITEM_INV_POLICY_ID" title="ITEM_INV_POLICY_ID" type="string">
+                    <width>120</width>
+                    <visible>false</visible>
+                </column>
+                <column id="STRT_DTTM" title="STRT_DTTM" type="date">
+                    <width>90</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                </column>
+                <column id="END_DTTM" title="END_DTTM" type="date">
+                    <width>90</width>
+                    <editable>false</editable>
+                    <format>yyyy-MM-dd</format>
+                    <fix>true</fix>
+                </column>
+                <column id="SFST_DMND_RATE" title="SFST_DMND_RATE" type="double">
+                    <width>70</width>
+                    <editable>false</editable>
+                    <groups>SFST</groups>
+                </column>
+                <column id="SFST_PRPSAL_VAL" title="SFST_PRPSAL_VAL" type="double">
+                    <width>90</width>
+                    <editable>false</editable>
+                    <groups>SFST</groups>
+                </column>
+                <column id="SFST_VAL" title="SFST_VAL" type="double">
+                    <width>70</width>
+                    <editable>true</editable>
+                    <groups>SFST</groups>
+                </column>
+                <column id="OPERT_INV_DMND_RATE" title="OPERT_STOCK_DMND_RATE" type="double">
+                    <width>70</width>
+                    <editable>false</editable>
+                    <groups>OPERT_STOCK</groups>
+                </column>
+                <column id="OPERT_INV_PRPSAL_VAL" title="OPERT_STOCK_PRPSAL_VAL" type="double">
+                    <width>90</width>
+                    <editable>false</editable>
+                    <groups>OPERT_STOCK</groups>
+                </column>
+                <column id="OPERT_INV_VAL" title="OPERT_STOCK_VAL" type="double">
+                    <width>70</width>
+                    <editable>true</editable>
+                    <groups>OPERT_STOCK</groups>
+                </column>
+                <column id="ROP_DMND_RATE" title="ROP_DMND_RATE" type="double">
+                    <width>70</width>
+                    <editable>false</editable>
+                    <groups>ROP</groups>
+                </column>
+                <column id="ROP_RIGHT_RATE_TARGET" title="ROP_RIGHT_RATE_TARGET" type="double">
+                    <width>70</width>
+                    <editable>false</editable>
+                    <groups>ROP</groups>
+                </column>
+                <column id="ROP_PRPSAL_VAL" title="ROP_PRPSAL_VAL" type="double">
+                    <width>70</width>
+                    <editable>false</editable>
+                    <groups>ROP</groups>
+                </column>
+                <column id="ROP_VAL" title="ROP_VAL" type="double">
+                    <width>70</width>
+                    <editable>true</editable>
+                    <groups>ROP</groups>
+                </column>
+                <column id="EOQ_DMND_RATE" title="EOQ_DMND_RATE" type="double">
+                    <width>70</width>
+                    <editable>false</editable>
+                    <groups>PO_QTY</groups>
+                </column>
+                <column id="EOQ_RIGHT_RATE_TARGET" title="EOQ_RIGHT_RATE_TARGET" type="double">
+                    <width>70</width>
+                    <editable>false</editable>
+                    <groups>PO_QTY</groups>
+                </column>
+                <column id="EOQ_PRPSAL_VAL" title="EOQ_PRPSAL_VAL" type="double">
+                    <width>70</width>
+                    <editable>false</editable>
+                    <groups>PO_QTY</groups>
+                </column>
+                <column id="EOQ_VAL" title="EOQ_VAL" type="double">
+                    <width>70</width>
+                    <editable>true</editable>
+                    <groups>PO_QTY</groups>
+                </column>
+                <column id="TARGET_INV_PRPSAL_VAL" title="TARGET_STOCK_PRPSAL_VAL" type="double">
+                    <width>90</width>
+                    <editable>false</editable>
+                    <groups>TARGET_STOCK</groups>
+                </column>
+                <column id="TARGET_INV_VAL" title="TARGET_STOCK_VAL" type="double">
+                    <width>70</width>
+                    <editable>true</editable>
+                    <groups>TARGET_STOCK</groups>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SRC_POP_UI_IM_26_03_WINDOW_01_R_GRID_01_LODE">
+                    <service-id>SRV_SP_UI_IM_26_Q3</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+            <operation id="SAVE">
+                <service-call id="SVC_SP_UI_IM_26_S2">
+                    <service-id>SRV_SP_UI_IM_26_S2</service-id>
+                    <service-target>mp</service-target>
+                    <param-empty-check>changes</param-empty-check>
+                    <parameters>
+                        <parameter id="changes" reference-id="POP_UI_IM_26_03_WINDOW_01_R_GRID_01:changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_IM_26_03_CPT_T1_01_04" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_SAVE_POP_UI_IM_26_03_WINDOW_01_R_GRID_01">
+                    <component-id>POP_UI_IM_26_03_WINDOW_01_R_GRID_01</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_IM_26_03_CPT_T1_01_04_CLICK_SUCCESS_MSG_01">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0001" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_IM_26_03_CPT_T1_01_04_CLOSE_POP_UI_IM_26_03_WINDOW_01">
+                    <component-id>POP_UI_IM_26_03_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_UI_IM_26_03_CPT_T1_01_05" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_IM_26_03_CPT_T1_01_05_CLICK_01">
+                    <component-id>POP_UI_IM_26_03_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

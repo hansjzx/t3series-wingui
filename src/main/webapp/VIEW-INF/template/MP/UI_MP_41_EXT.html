@@ -1,0 +1,30 @@
+<script>
+	content.getCreateComponentCompleteFlag().done(function () {
+	    var grid = cm.getComponent('RST_CPT_02');
+	    var grid1 = cm.getComponent('RST_CPT_02');
+		var chart = cm.getComponent("RST_CPT_01");
+	    
+		grid.onRGridDataFillReady = function (viewId, componentId, gridView, resultData) {
+	        gridWrap = new wingui.util.grid.GridWrap(gridView);
+	        gridWrap.init();
+	        
+	        return resultData;
+	    };
+
+		grid.onRGridCellClicked = function(viewID, componentID, grid, index) {
+
+			var gridView = grid1.getActualComponent();
+	        var fixedColumns = gridView.getColumnNames(true,true).filter(function(columnName){
+					                 return !columnName.includes("DAT_") 
+					                 		&& !columnName.includes("CATEGORY_GROUP")
+					                 		&& !columnName.includes("CATEGORY");
+					             });
+	        
+			var itemIndex = index.itemIndex;
+			var chartComponentId = "RST_CPT_01";
+			
+			redrawChart(componentID, chartComponentId, itemIndex, fixedColumns);
+		};
+	});
+
+</script>

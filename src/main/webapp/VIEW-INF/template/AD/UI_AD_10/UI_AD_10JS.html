@@ -1,0 +1,256 @@
+<script>
+  var ISO_LOCAL_DATE_TIME = 'yyyy-MM-ddTHH:mm:ss';
+
+  var vm = new Vue({
+    el: '#UI_AD_10-contents',
+    i18n: gI18n,
+    data: function () {
+      var nowDate = new Date();
+      nowDate.setHours(0, 0, 0, 0);
+
+      return {
+        local: localStorage.getItem('languageCode'),
+        displayName: '',
+        accessDttmFrom: nowDate.format(ISO_LOCAL_DATE_TIME),
+        accessDttmTo: new Date().format(ISO_LOCAL_DATE_TIME),
+        settings: {
+          currentPage: 0,
+          totalPages: 0,
+          perPageSize: 500,
+          comboboxUse: true,      
+          dataSourceArray: [500, 1000, 2000, 5000, 10000]
+        },
+        exportSettings: {}
+      };
+    },
+    methods: {
+      setColumnsAndFields: function () {
+        var fields = [
+          {
+            fieldName: 'username'
+          },
+          {
+            fieldName: 'displayName'
+          },
+          {
+            fieldName: 'accessIp'
+          },
+          {
+            fieldName: 'accessDttm',
+            dataType: 'datetime',
+            datetimeFormat: 'iso'
+          }
+        ]
+        var columns = [
+          {
+            name: 'username',
+            fieldName: 'username',
+            header: {
+              text: gI18n.tc('USER_ID')
+            },
+            editable: false,
+            width: 300
+          },
+          {
+            name: 'displayName',
+            fieldName: 'displayName',
+            header: {
+              text: gI18n.tc('USER_NM')
+            },
+            editable: false,
+            width: 300
+          },
+          {
+            name: 'accessIp',
+            fieldName: 'accessIp',
+            header: {
+              text: gI18n.tc('USER_IP')
+            },
+            editable: false,
+            width: 300
+          },
+          {
+            name: 'accessDttm',
+            fieldName: 'accessDttm',
+            header: {
+              text: gI18n.tc('LOGIN_DTTM')
+            },
+            styles: {
+              datetimeFormat: 'yyyy-MM-dd HH:mm:ss'
+            },
+            editable: false,
+            width: 300
+          }
+        ]
+
+        var obj = {};
+        obj.fields = fields;
+        obj.columns = columns;
+        return obj;
+      },
+      createGrid: function () {
+        var gridInfo = this.setColumnsAndFields();
+        this.$grid1 = this.$createGrid("grid1", gridInfo.fields, gridInfo.columns);
+
+        
+        gInitStyle(this.$grid1);
+        gSetOptions(this.$grid1);
+
+        this.$grid1.gridView.setEditorOptions({
+          //useCssStyle: true,  //모든 에디터에 CSS를 적용할 경우 사용  
+          //useCssStyleDropDownList: true, //dropDown
+          useCssStyleDatePicker: true   //달력
+          //useCssStylePopupMenu: true,    //popupMenu
+          //useCssStyleMultiCheck: true    //multiCheck
+        });
+
+        this.$grid1.gridView.setFilteringOptions({
+          clearWhenSearchCheck: true,
+          selector: {
+            showSearchInput: true,
+            showButtons: true,
+            acceptText: '확인',
+            cancelText: '취소'
+          }
+        });
+
+        setGridContextMenu(this.$grid1.gridView)
+
+        this.$grid1.gridView.onCellEdited = function (grid, itemIndex, dataRow, field) {
+          grid.commit();
+        };
+      },
+      excelExport: function (grid, MainSub) {
+        this.exportSettings = {
+          headerDepth: 1, // GridView Header 행수
+          footer: "default",
+          allColumns: false,
+          lookupDisplay: true,
+          separateRows: true
+        }
+        gExcelExportComponent(this.$grid1, this.exportSettings);
+      },
+      doDataLoad: function (page) {
+        var that = this;
+
+        var size = that.settings.perPageSize;
+        var dataProvider = this.$grid1.dataProvider;
+        var gridView = this.$grid1.gridView;
+        var fromDate = new Date(that.accessDttmFrom).format(ISO_LOCAL_DATE_TIME);
+        var toDate = new Date(that.accessDttmTo).format(ISO_LOCAL_DATE_TIME);
+
+        gridView.showToast(progressSpinner + 'Loading data...', true);
+
+        axios
+          .get(BASE_URL + 'system/logs/system-access', {
+            params: {
+              'accessdttm-from': fromDate,
+              'accessdttm-to': toDate,
+              'display-name': that.displayName,
+              'page': page - 1, // data는 0번째 부터 시작
+              'size': size
+            }
+          })
+          .then(function (res) {
+            var resultData = res.data;
+
+            if (res.status === gHttpStatus.SUCCESS) {
+              dataProvider.fillJsonData(resultData.content, { count: -1 });
+              that.doSetFilter();
+              that.settings.currentPage = resultData.number + 1;
+              that.settings.totalPages = parseInt(resultData.totalPages);
+            } else if (res.status === gHttpStatus.NO_CONTENT) {
+              dataProvider.clearRows();
+              that.doClearFilter();
+              that.settings.currentPage = 0;
+              that.settings.totalPages = 0;
+            }
+          })
+          .catch(function (err) {
+            console.log(err);
+          })
+          .then(function () {
+            gridView.hideToast();
+          });
+      },
+      doResize: function () {
+        if (this.$grid1) {
+          this.$grid1.gridView.resetSize();
+        }
+      },
+      doKeyDown: function (e) {
+        if (e.type === 'keydown' && e.key === 'Enter') {
+          this.doDataLoad(1);
+        }
+      },
+      doRefresh: function () {
+        var nowDate = new Date();
+        nowDate.setHours(0, 0, 0, 0);
+
+        this.displayName = '';
+        this.accessDttmFrom = nowDate.format(ISO_LOCAL_DATE_TIME);
+        this.accessDttmTo = new Date().format(ISO_LOCAL_DATE_TIME);
+      },
+      doSetFilter: function () {
+        var columnNames = this.$grid1.gridView.getColumnNames();
+        columnNames.splice(columnNames.indexOf('seq'), 1);
+        columnNames.splice(columnNames.indexOf('accessDttm'), 1);
+        var dataProvider = this.$grid1.dataProvider;
+        var gridView = this.$grid1.gridView;
+        columnNames.forEach(function (columnName) {
+          var distinctValues = dataProvider.getDistinctValues(columnName);
+          var filters = [];
+          distinctValues.forEach(function (value) {
+            filters.push({
+              name: value,
+              criteria: 'value = ' + '\'' + value + '\''
+            });
+          });
+          gridView.setColumnFilters(columnName, filters);
+        });
+      },
+      doClearFilter: function() {
+        var columnNames = this.$grid1.gridView.getColumnNames();
+        columnNames.forEach(function (columnName) {
+          this.$grid1.gridView.clearColumnFilters(columnName);
+        });
+      },
+      doChange: function () {
+      },
+      onExcelImportSelect: function(e) {
+        var grid = this.$grid1.gridView;
+        grid.cancel();
+        grid.showToast(
+          progressSpinner + "Importing excel data...",
+          true
+        );
+      },
+      onExcelImportSuccess: function(e) {
+        var grid = this.$grid1.gridView;
+        var dataProvider = this.$grid1.dataProvider;
+        // 엑셀 업로드 전 기존 data clear
+        dataProvider.clearRows();
+        // import한 데이터 채우기
+        dataProvider.fillJsonData(e.response.RESULT_DATA, {
+          fillMode: "append",
+          count: -1
+        });
+      },
+      onExcelImportComplete: function(e) {
+        this.$grid1.gridView.hideToast();
+      },
+      onExcelImportError: function(e) {
+        this.$grid1.gridView.hideToast();
+        console.log(e);
+      }
+    },
+    mounted: function () {
+      console.log("mounted....!");
+      this.createGrid();
+
+      saveDefaultLayout(this.$grid1.gridView, 'grid1')
+      loadGridLayout(this.$grid1.gridView)
+
+    }
+  });
+</script>

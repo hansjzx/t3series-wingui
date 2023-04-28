@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_CM_03_01" version="2.0">
+    <component id="POP_UI_CM_03_01_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_CM_03_01</title>
+            <width>500</width>
+            <height>608</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="popup_tab" type="TAB">
+        <props>
+            <tabs>
+                <tab id="POP_UI_CM_03_01_01" title="ITEM_GRP" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="POP_UI_CM_03_01_WINDOW_01_CPT_01_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>ITEM_LV</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_03_01_WINDOW_01_CPT_01_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_03_01_WINDOW_01_CPT_02_01" type="LABEL">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+            <init-value>ITEM_CLASS_VAL</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_03_01_WINDOW_01_CPT_02_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_03_01_WINDOW_01_CPT_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DESCRIP</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_03_01_WINDOW_01_CPT_03_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_03_01_WINDOW_01_CPT_04_01" type="R_GRID">
+        <props>
+            <height>150</height>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="ATTRS" title="ATTR" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <lang>true</lang>
+                </column>
+                <column id="VAL" title="VAL" type="string">
+                    <width>150</width>
+                    <editable>true</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_POP_UI_CM_03_01_WINDOW_01_CPT_04_01_001">
+                    <service-id>SRV_UI_CM_03_POP_01_Q</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="CONF_KEY" value="003" />
+                        <parameter id="VIEW_ID" value="" />
+                        <parameter id="ITEM_LV_ID" value="" />
+                        <parameter id="ITEM_CLASS" reference-id="RST_CPT_02:selections" extract-by="ITEM_CLASS_VAL" default-value="" />
+                        <parameter id="ITEM_CLASS_DTL_ID" reference-id="RST_CPT_02:selections" extract-by="ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_CM_03_01_WINDOW_01_CPT_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_GRP</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_03_01_WINDOW_01_CPT_05_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_03_01_WINDOW_01_CPT_06_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DESCRIP</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_03_01_WINDOW_01_CPT_06_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_03_01_WINDOW_01_CPT_07_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>SEQ</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_03_01_WINDOW_01_CPT_07_04" type="INPUTBOX">
+        <props>
+            <width>210</width>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_03_01_WINDOW_01_CPT_08_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACTV_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_CM_03_01_WINDOW_01_CPT_08_04" type="CHECKBOX">
+        <props>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_CM_03_01_WINDOW_01_CPT_11_01" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_CM_03_01_WINDOW_01_CPT_11_01_CLICK_01">
+                    <component-id>POP_UI_CM_03_01_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_CM_03_01_WINDOW_01_CPT_11_01_CLICK_02">
+                    <component-id>POP_UI_CM_03_01_WINDOW_01_CPT_11_01</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_CM_03_01_WINDOW_01_CPT_11_01_CLICK_02_SUCCESS">
+                            <component-id>RST_CPT_02</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_CM_03_01_WINDOW_01_CPT_11_01_CLICK_02_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POP_UI_CM_03_01_WINDOW_01_CPT_11_01:SVC_UI_CM_03_POP_02_S:IM_DATA" extract-by="SP_UI_CM_03_S2_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SAVE">
+                <service-call id="SVC_UI_CM_03_POP_02_S">
+                    <service-id>SRV_UI_CM_03_S2</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="ITEM_CLASS_ID" reference-id="RST_CPT_01:selections" extract-by="ID" />
+                        <parameter id="ITEM_GRP" reference-id="POP_UI_CM_03_01_WINDOW_01_CPT_05_04" />
+                        <parameter id="ITEM_GRP_DESCRIP" reference-id="POP_UI_CM_03_01_WINDOW_01_CPT_06_04" />
+                        <parameter id="changes" reference-id="POP_UI_CM_03_01_WINDOW_01_CPT_04_01:changes" />
+                        <parameter id="SEQ" reference-id="POP_UI_CM_03_01_WINDOW_01_CPT_07_04" />
+                        <parameter id="ACTV_YN" reference-id="POP_UI_CM_03_01_WINDOW_01_CPT_08_04" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_CM_03_01_WINDOW_01_CPT_11_05" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_SRH_CPT_T1_11_05_CLICK">
+                    <component-id>POP_UI_CM_03_01_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

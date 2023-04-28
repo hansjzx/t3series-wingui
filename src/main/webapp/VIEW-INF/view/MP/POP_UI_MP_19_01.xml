@@ -1,0 +1,1660 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_MP_19_01" version="2.0">
+    <component id="POP_UI_MP_19_01_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_MP_19_01</title>
+            <width>650</width>
+            <height>725</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_TAB" type="TAB">
+        <props>
+            <position>top</position>
+            <tabs>
+                <tab id="Version" title="VER" expand="true" />
+                <tab id="Demand_Information" title="DMND_INFO" init-render="true" />
+                <tab id="Demand_Priority" title="DMND_PRIOR" init-render="true" />
+                <tab id="Plan_Policy" title="PLAN_POLICY" init-render="true" />
+                <tab id="ASSIGNED_STOCK" title="ASSIGN_STOCK" init-render="true" />
+                <tab id="ASSIGNED_WIP" title="ASSIGN_WIP" init-render="true" />
+                <tab id="ASSIGNED_SITE" title="ASSIGN_SITE" init-render="true" />
+                <tab id="ASSIGNED_RES" title="ASSIGN_RES" init-render="true" />
+                <tab id="ORDER_BOM_RATE" title="ORDER_BOM_RATE" init-render="true" />
+            </tabs>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T1_00_01" type="INPUTBOX">
+        <props>
+            <editable>false</editable>
+            <hidden>true</hidden>
+            <lang>true</lang>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>MODULE_VAL</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T1_01_02" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T1_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>CONFRM_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T1_05_02" type="CHECKBOX">
+        <props>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T1_06_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>FINAL_CONFRM_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T1_06_02" type="CHECKBOX">
+        <props>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T1_07_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACTV_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T1_07_02" type="CHECKBOX">
+        <props>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T1_08_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DISPLAY_COLOR</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T1_08_02" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_00_01" type="INPUTBOX">
+        <props>
+            <editable>false</editable>
+            <hidden>true</hidden>
+            <lang>true</lang>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_00_02" type="INPUTBOX">
+        <props>
+            <editable>false</editable>
+            <hidden>true</hidden>
+            <lang>true</lang>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DMND_ID</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_01_02" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DMND_TP_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_02_02" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_02_03" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>URGENT_ORDER_TP</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_02_04" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_MP_19_01_T2_02_04_INIT">
+                    <component-id>POP_UI_MP_19_01_T2_02_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET" />
+            <operation id="SELECT" />
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:URGENT_ORDER_TYPE" />
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DMND_CLASS_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_03_02" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_CD</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_05_02" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_06_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_06_02" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_07_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_TP</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_07_02" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_08_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DEMAND_QTY</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_08_02" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_09_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>UOM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_09_02" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_09_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>SALES_UNIT_PRIC</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_09_02_01" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_09_03" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACCOUNT_CD</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_09_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_09_05" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACCOUNT_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_09_06" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_10_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DUE_DATE</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T2_10_02" type="DATEPICKER">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+            <init-value>DUE_DATE</init-value>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T3_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>BOD_LEADTIME</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T3_01_02" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T3_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>TIME_UOM_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T3_02_02" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <type>text</type>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T3_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PRIORITY</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T3_03_02" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T3_04_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PRDUCT_DELIVY_DATE</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T3_04_02" type="DATEPICKER">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T4_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DELIVY_PLAN_POLICY_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T4_01_02" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_MP_19_01_T4_01_02_LOAD">
+                    <component-id>POP_UI_MP_19_01_T4_01_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:CM_BASE_ORD_DELIV_POLICY" />
+            </operation>
+            <operation id="ENABLE" />
+            <operation id="SELECT" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T4_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>MAT_CONST_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T4_02_02" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_MP_19_01_T4_02_02_LOAD">
+                    <component-id>POP_UI_MP_19_01_T4_02_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:MP_ORD_CAPA_MAT_COST" />
+            </operation>
+            <operation id="ENABLE" />
+            <operation id="SELECT" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T4_04_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PARTIAL_PLAN_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T4_04_02" type="CHECKBOX">
+        <props>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T4_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>HEURISTIC_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T4_05_02" type="CHECKBOX">
+        <props>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T4_06_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>COST_OPTIMIZ_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T4_06_02" type="CHECKBOX">
+        <props>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T4_07_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>PST</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T4_07_02" type="DATEPICKER">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T4_08_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DUE_DATE_FNC</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T4_08_02" type="DATEPICKER">
+        <props>
+            <width>180</width>
+            <lang>true</lang>
+            <date-type>day</date-type>
+            <date-format>yyyy-MM-dd</date-format>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="ENABLE" />
+            <operation id="LOAD" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T4_09_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>STRATEGY_METHD</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_19_01_T4_09_02" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_MP_19_01_T4_09_02_LOAD">
+                    <component-id>POP_UI_MP_19_01_T4_09_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:STRATEGY_METHD" />
+            </operation>
+            <operation id="ENABLE" />
+            <operation id="SELECT" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T5_00_00" type="R_GRID">
+        <props>
+            <height>563</height>
+            <header-height>30</header-height>
+            <check-bar>true</check-bar>
+            <fit-style>none</fit-style>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>false</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <toolbar use="true">
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" tooltip="Insert Row" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" tooltip="Remove Row">
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T5_00_00_REMOVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POP_UI_MP_19_01_T5_00_00:SVC_UI_MP_19_POP_S5:IM_DATA" extract-by="SP_UI_MP_19_POP_S5_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T5_00_00_REMOVE_SUCCESS">
+                            <component-id>POP_UI_MP_19_01_T5_00_00</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="DMND_OVERVIEW_ID" title="DMND_OVERVIEW_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="STOCK_PARENT_ID" title="STOCK_PARENT_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="ASSIGN_SEQ" title="ASSIGN_SEQ" type="int">
+                    <width>80</width>
+                    <editable>true</editable>
+                </column>
+                <column id="ASSIGN_TP_ID" title="ASSIGN_TP_ID" type="string">
+                    <width>100</width>
+                    <editable>true</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:STOCK_ASSIGN_TP" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="ASSIGN_DESCRIP" title="ASSIGN_DESCRIP" type="string">
+                    <width>100</width>
+                    <editable>true</editable>
+                </column>
+                <column id="STOCK_ID" title="STOCK_ID" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                    <button>true</button>
+                </column>
+                <column id="LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>150</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="UOM_ID" title="UOM" type="string">
+                    <width>50</width>
+                    <editable if-new="true">false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:UOM" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="LOT_NO" title="LOT_NO" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="INV_TP" title="INV_TP" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="INV_QTY" title="INV_QTY" type="int">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="QTY" title="QTY" type="int">
+                    <width>50</width>
+                    <editable>true</editable>
+                </column>
+                <column id="ASSIGN_YN" title="ASSIGN_YN" type="boolean">
+                    <width>80</width>
+                    <editable>true</editable>
+                </column>
+                <column id="ACTV_YN" title="ACTV_YN" type="boolean">
+                    <width>80</width>
+                    <editable>true</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="button-click">
+                <operation-call id="OPC_POP_UI_MP_19_01_T5_00_00_DATA_SET">
+                    <component-id>DATA_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="BTN_ID" value="POP_UI_MP_19_01" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_RST_CPT_07_BUTTON_CLICK_01">
+                    <component-id>POP_UI_MP_STOCK_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <conditions>
+                        <condition id="CON_RST_CPT_07_BUTTON_CLICK_01">
+                            <on-column>STOCK_ID</on-column>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_STOCK_WINDOW_01_GRD_LOAD">
+                            <component-id>COMM_SRH_POP_STOCK_WINDOW_01_GRD</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="ITEM_MST_ID" reference-id="RST_CPT_01:selections" extract-by="ITEM_MST_ID" />
+                                <parameter id="ACCOUNT_ID" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT_ID" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_MP_19_POP_Q3">
+                    <service-id>SRV_SP_UI_MP_19_POP_Q3</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="DMND_OVERVIEW_ID" reference-id="POP_UI_MP_19_01_T1_00_01" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="INSERT_ROW">
+                <position>below</position>
+                <edit-on-cell>true</edit-on-cell>
+                <service-call id="SET_DEFAULT_POP_UI_MP_19_01_T1_00_01">
+                    <parameters>
+                        <parameter id="SET_DEFAULT-to-DMND_OVERVIEW_ID" reference-id="RST_CPT_01:selections" extract-by="ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="PUT_STOCK" permission-type="UPDATE">
+                <service-call id="SVC_POP_RST_CPT_01_T7_SAVE">
+                    <service-id>SRV_SP_UI_MP_19_S6</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="changes" reference-id="POP_UI_MP_19_01_T5_00_00:changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="REMOVE_ROW">
+                <service-call id="SVC_UI_MP_19_POP_S5">
+                    <service-id>SRV_UI_MP_19_POP_S5</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="checked" reference-id="POP_UI_MP_19_01_T5_00_00:checked" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T6_00_00" type="R_GRID">
+        <props>
+            <height>563</height>
+            <header-height>30</header-height>
+            <check-bar>true</check-bar>
+            <fit-style>none</fit-style>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>false</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <toolbar use="true">
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" tooltip="Insert Row" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" tooltip="Remove Row">
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T6_00_00_REMOVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POP_UI_MP_19_01_T6_00_00:SVC_UI_MP_19_POP_S5:IM_DATA" extract-by="SP_UI_MP_19_POP_S8_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T6_00_00_REMOVE_SUCCESS">
+                            <component-id>POP_UI_MP_19_01_T6_00_00</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="DMND_OVERVIEW_ID" title="DMND_OVERVIEW_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="WIP_MST_ID" title="WIP_MST_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="WIP_ID" title="WIP_ID" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                    <button>true</button>
+                </column>
+                <column id="LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>150</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ROUTE_CD" title="ROUTE_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ROUTE_DESCRIP" title="ROUTE_DESCRIP" type="string">
+                    <width>150</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="UOM_ID" title="UOM" type="string">
+                    <width>50</width>
+                    <editable if-new="true">false</editable>
+                    <candidate>
+                        <values>
+                            <value-id>ID</value-id>
+                            <text-id>CD_NM</text-id>
+                            <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:UOM" />
+                        </values>
+                    </candidate>
+                </column>
+                <column id="RES_CD" title="RES_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="RES_DESCRIP" title="RES_DESCRIP" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ACCOUNT_CD" title="ACCOUNT_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ACCOUNT_NM" title="ACCOUNT_NM" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="WIP_QTY" title="WIP_QTY" type="int">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="QTY" title="QTY" type="int">
+                    <width>50</width>
+                    <editable>true</editable>
+                </column>
+                <column id="ASSIGN_YN" title="ASSIGN_YN" type="boolean">
+                    <width>80</width>
+                    <editable>true</editable>
+                </column>
+                <column id="ACTV_YN" title="ACTV_YN" type="boolean">
+                    <width>80</width>
+                    <editable>true</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="button-click">
+                <operation-call id="OPC_POP_UI_MP_19_01_T6_00_00_DATA_SET">
+                    <component-id>DATA_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="BTN_ID" value="POP_UI_MP_19_01" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_RST_CPT_07_BUTTON_CLICK_01">
+                    <component-id>POP_UI_MP_WIP_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <conditions>
+                        <condition id="CON_RST_CPT_07_BUTTON_CLICK_01">
+                            <on-column>WIP_ID</on-column>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_WIP_WINDOW_01_GRD_LOAD">
+                            <component-id>COMM_SRH_POP_WIP_WINDOW_01_GRD</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="ITEM_MST_ID" reference-id="RST_CPT_01:selections" extract-by="ITEM_MST_ID" />
+                                <parameter id="ACCOUNT_ID" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT_ID" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_MP_19_POP_Q10">
+                    <service-id>SRV_UI_MP_19_POP_Q10</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="DMND_OVERVIEW_ID" reference-id="POP_UI_MP_19_01_T1_00_01" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="INSERT_ROW">
+                <position>below</position>
+                <edit-on-cell>true</edit-on-cell>
+                <service-call id="SET_DEFAULT_POP_UI_MP_19_01_T6_00_01">
+                    <parameters>
+                        <parameter id="SET_DEFAULT-to-DMND_OVERVIEW_ID" reference-id="RST_CPT_01:selections" extract-by="ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="PUT_WIP" permission-type="UPDATE">
+                <service-call id="SVC_POP_RST_CPT_01_T6_SAVE">
+                    <service-id>SRV_UI_MP_19_S7</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="changes" reference-id="POP_UI_MP_19_01_T6_00_00:changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="REMOVE_ROW">
+                <service-call id="SVC_UI_MP_19_POP_S5">
+                    <service-id>SRV_UI_MP_19_POP_S8</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="checked" reference-id="POP_UI_MP_19_01_T6_00_00:checked" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T7_00_00" type="R_GRID">
+        <props>
+            <height>563</height>
+            <header-height>50</header-height>
+            <check-bar>true</check-bar>
+            <fit-style>none</fit-style>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>false</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <toolbar use="true">
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" tooltip="Insert Row" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" tooltip="Remove Row">
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T7_00_00_REMOVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POP_UI_MP_19_01_T7_00_00:SVC_UI_MP_19_POP_S2:IM_DATA" extract-by="SP_UI_MP_19_POP_S2_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T7_00_00_REMOVE_SUCCESS">
+                            <component-id>POP_UI_MP_19_01_T7_00_00</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="DMND_OVW_SITE_ASIGN_ID" title="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                </column>
+                <column id="DMND_OVERVIEW_ID" title="DMND_OVERVIEW_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                </column>
+                <column id="TRANSP_MGMT_MST_ID" title="TRANSP_MGMT_MST_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                </column>
+                <column id="CONSUME_LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                    <!-- <groups>CONSUME</groups> -->
+                </column>
+                <column id="CONSUME_LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                    <!-- <groups>CONSUME</groups> -->
+                </column>
+                <column id="CONSUME_LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                    <button>true</button>
+                    <!-- <groups>CONSUME</groups> -->
+                </column>
+                <column id="CONSUME_LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>150</width>
+                    <editable if-new="true">false</editable>
+                    <!-- <groups>CONSUME</groups> -->
+                </column>
+                <column id="SUPPLY_LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                    <!-- <groups>SUPPLY</groups> -->
+                </column>
+                <column id="SUPPLY_LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                    <!-- <groups>SUPPLY</groups> -->
+                </column>
+                <column id="SUPPLY_LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                    <button>true</button>
+                    <!-- <groups>SUPPLY</groups> -->
+                </column>
+                <column id="SUPPLY_LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>150</width>
+                    <editable if-new="true">false</editable>
+                    <!-- <groups>SUPPLY</groups> -->
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>150</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="VEHICL_TP" title="VEHICL_TP" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ASSIGN_YN" title="ASSIGN_YN" type="boolean">
+                    <width>80</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                </column>
+                <column id="PRIORT" title="PRIORITY" type="int">
+                    <width>80</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                </column>
+                <column id="ACTV_YN" title="ACTV_YN" type="boolean">
+                    <width>80</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="button-click">
+                <operation-call id="OPC_POP_UI_MP_19_01_T7_00_00_BTN_DATA_SET">
+                    <component-id>DATA_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="BTN_ID" value="POP_UI_MP_19_01" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_19_01_T7_00_00_BTN_CLICK_01">
+                    <component-id>POP_UI_MP_19_03_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T7_00_00_BTN_CLICK_02">
+                            <component-id>POP_UI_MP_19_03_WINDOW_LOCAT_GRID</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="ITEM_MST_ID" reference-id="RST_CPT_01:selections" extract-by="ITEM_MST_ID" />
+                                <parameter id="ACCOUNT_ID" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT_ID" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_MP_19_POP_Q1">
+                    <service-id>SRV_UI_MP_19_POP_Q1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="DMND_OVW_ID" reference-id="RST_CPT_01:selections" extract-by="ID" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="PUT_SITE" permission-type="UPDATE">
+                <service-call id="SVC_UI_MP_19_POP_S1">
+                    <service-id>SRV_UI_MP_19_POP_S1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="changes" reference-id="POP_UI_MP_19_01_T7_00_00:changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="REMOVE_ROW">
+                <service-call id="SVC_UI_MP_19_POP_S2">
+                    <service-id>SRV_UI_MP_19_POP_S2</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="checked" reference-id="POP_UI_MP_19_01_T7_00_00:checked" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="INSERT_ROW">
+                <service-call id="SET_DEFAULT_POP_UI_MP_19_01_T7_00_00">
+                    <parameters>
+                        <parameter id="SET_DEFAULT-to-DMND_OVERVIEW_ID" reference-id="RST_CPT_01:selections" extract-by="ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T8_00_00" type="R_GRID">
+        <props>
+            <height>563</height>
+            <header-height>30</header-height>
+            <check-bar>true</check-bar>
+            <fit-style>none</fit-style>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>false</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <toolbar use="true">
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" tooltip="Insert Row" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" tooltip="Remove Row">
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T8_00_00_REMOVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POP_UI_MP_19_01_T8_00_00:SVC_UI_MP_19_POP_S4:IM_DATA" extract-by="SP_UI_MP_19_POP_S4_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T8_00_00_REMOVE_SUCCESS">
+                            <component-id>POP_UI_MP_19_01_T8_00_00</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                </column>
+                <column id="DMND_OVERVIEW_ID" title="DMND_OVERVIEW_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                </column>
+                <column id="LOCAT_MGMT_ID" title="LOCAT_MGMT_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                </column>
+                <column id="RES_PREFER_MST_ID" title="RES_PREFER_MST_ID" type="string">
+                    <width>100</width>
+                    <visible>false</visible>
+                </column>
+                <column id="RES_CD" title="RES_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                    <button>true</button>
+                </column>
+                <column id="RES_NM" title="RES_DESCRIP" type="string">
+                    <width>160</width>
+                </column>
+                <column id="LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>110</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="LOCAT_CD" title="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>150</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ITEM_CD" title="ITEM_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                 <column id="ROUTE_CD" title="ROUTE_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ASSIGN_YN" title="ASSIGN_YN" type="boolean">
+                    <width>80</width>
+                    <editable>true</editable>
+                    <header-checkable>false</header-checkable>
+                </column>
+                <column id="PRIORT" title="PRIORITY" type="int">
+                    <width>80</width>
+                    <editable>true</editable>
+                </column>
+                <column id="ACTV_YN" title="ACTV_YN" type="boolean">
+                    <width>80</width>
+                    <editable>true</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="button-click">
+                <operation-call id="OPC_POP_UI_MP_19_01_T8_00_00_DATA_SET">
+                    <component-id>DATA_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="BTN_ID" value="POP_UI_MP_19_01" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_19_01_T8_00_00_CLICK_02_SUCCESS_02">
+                    <component-id>POP_UI_MP_19_03_WINDOW_02</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T8_00_00_CLICK_02_SUCCESS_03">
+                            <component-id>POP_UI_MP_19_03_WINDOW_RES_GRID</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="ACCOUNT_ID" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT_ID" />
+                                <parameter id="ITEM_MST_ID" reference-id="RST_CPT_01:selections" extract-by="ITEM_MST_ID" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_MP_19_POP_Q2">
+                    <service-id>SRV_UI_MP_19_POP_Q2</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="DMND_OVW_ID" reference-id="RST_CPT_01:selections" extract-by="ID" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="PUT_RES" permission-type="UPDATE">
+                <service-call id="SVC_UI_MP_19_POP_S3">
+                    <service-id>SRV_UI_MP_19_POP_S3</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="changes" reference-id="POP_UI_MP_19_01_T8_00_00:changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="INSERT_ROW">
+                <service-call id="SET_DEFAULT_POP_UI_MP_19_01_T8_00_00">
+                    <parameters>
+                        <parameter id="SET_DEFAULT-to-DMND_OVERVIEW_ID" reference-id="RST_CPT_01:selections" extract-by="ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="REMOVE_ROW">
+                <service-call id="SVC_UI_MP_19_POP_S4">
+                    <service-id>SRV_UI_MP_19_POP_S4</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="checked" reference-id="POP_UI_MP_19_01_T8_00_00:checked" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_T9_00_00" type="R_GRID">
+        <props>
+            <height>563</height>
+            <header-height>30</header-height>
+            <check-bar>true</check-bar>
+            <fit-style>none</fit-style>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>false</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <toolbar use="true">
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" tooltip="Insert Row" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" tooltip="Remove Row">
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T9_00_00_REMOVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POP_UI_MP_19_01_T9_00_00:SVC_POP_CPT_T8_REMOVE_ROW:IM_DATA" extract-by="SP_UI_MP_19_POP_S7_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T9_00_00_REMOVE_SUCCESS">
+                            <component-id>POP_UI_MP_19_01_T9_00_00</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+            </toolbar>
+            <columns>
+                <column id="ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="DMND_OVW_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="PRDUCT_BOM_DTL_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="LOCAT_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                    <button>true</button>
+                </column>
+                <column id="LOCAT_NM" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="P_ITEM_CD" title="PARENT_ITEM" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="P_ITEM_NM" title="ITEM_NM" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="P_ITEM_TP" title="ITEM_TP" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="BOM_VER_ID" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="BOM_LV" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="C_ITEM_CD" title="COMPONENT_ITEM" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="C_ITEM_NM" title="ITEM_NM" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="C_ITEM_TP" title="ITEM_TP" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="ROUTE_CD" title="ROUTE_CD" type="string">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="BASE_BOM_RATE" type="double">
+                    <width>100</width>
+                    <editable if-new="true">false</editable>
+                </column>
+                <column id="BOM_RATE" type="double">
+                    <width>120</width>
+                    <editable>true</editable>
+                </column>
+                <column id="ACTV_YN" type="bool">
+                    <width>80</width>
+                    <editable>true</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="button-click">
+                <operation-call id="OPC_POP_UI_MP_19_01_T9_00_00_DATA_SET">
+                    <component-id>DATA_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="BTN_ID" value="POP_UI_MP_19_01" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_19_01_T9_00_00_BUTTON_CLICK_01">
+                    <component-id>POP_UI_MP_19_03_WINDOW_03</component-id>
+                    <operation-id>OPEN</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T9_00_00_BUTTON_CLICK_02">
+                            <component-id>POP_UI_MP_19_03_WINDOW_PARENT</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <parameters>
+                                <parameter id="ITEM_MST_ID" reference-id="RST_CPT_01:selections" extract-by="ITEM_MST_ID" />
+                                <parameter id="ACCOUNT_ID" reference-id="RST_CPT_01:selections" extract-by="ACCOUNT_ID" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T9_00_00_BUTTON_CLICK_03">
+                            <component-id>POP_UI_MP_19_03_WINDOW_CHILD</component-id>
+                            <operation-id>INIT</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_POP_UI_MP_19_01_T8_GRID_LOAD">
+                    <service-id>SRV_UI_MP_19_POP_Q9</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="DMND_OVW_ID" reference-id="RST_CPT_01:selections" extract-by="ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="PUT_BOM_RATE" permission-type="UPDATE">
+                <service-call id="SVC_POP_UI_MP_19_01_T8_GRID_SAVE">
+                    <service-id>SRV_UI_MP_19_POP_S6</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="changes" reference-id="POP_UI_MP_19_01_T9_00_00:changes" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="INSERT_ROW">
+                <position>below</position>
+                <edit-on-cell>true</edit-on-cell>
+                <service-call id="SET_DEFAULT_POP_UI_MP_19_01_T9_00_00">
+                    <parameters>
+                        <parameter id="SET_DEFAULT-to-DMND_OVW_ID" reference-id="RST_CPT_01:selections" extract-by="ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="REMOVE_ROW">
+                <service-call id="SVC_POP_CPT_T8_REMOVE_ROW">
+                    <service-id>SRV_UI_MP_19_POP_S7</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="checked" reference-id="POP_UI_MP_19_01_T9_00_00:checked" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_CONFIRM" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_01_SAVE">
+                    <component-id>POP_UI_MP_19_01_CONFIRM</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T5_SAVE">
+                            <component-id>POP_UI_MP_19_01_T5_00_00</component-id>
+                            <operation-id>PUT_STOCK</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T6_SAVE">
+                            <component-id>POP_UI_MP_19_01_T6_00_00</component-id>
+                            <operation-id>PUT_WIP</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T7_SAVE">
+                            <component-id>POP_UI_MP_19_01_T7_00_00</component-id>
+                            <operation-id>PUT_SITE</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T8_SAVE">
+                            <component-id>POP_UI_MP_19_01_T8_00_00</component-id>
+                            <operation-id>PUT_RES</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_19_01_T9_SAVE">
+                            <component-id>POP_UI_MP_19_01_T9_00_00</component-id>
+                            <operation-id>PUT_BOM_RATE</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_19_01_CLOSE">
+                            <component-id>POP_UI_MP_19_01_WINDOW_01</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_SAVE_MSG_02">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POP_UI_MP_19_01_CONFIRM:SVC_SP_UI_MP_19_S1:IM_DATA" extract-by="SP_UI_MP_19_S1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_RST_CPT_01_LOAD">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SAVE">
+                <service-call id="SVC_SP_UI_MP_19_S1">
+                    <service-id>SRV_SP_UI_MP_19_S1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="ID" reference-id="POP_UI_MP_19_01_T1_00_01" />
+                        <parameter id="ACTV_YN" reference-id="POP_UI_MP_19_01_T1_07_02" />
+                        <parameter id="DISPLAY_COLOR" reference-id="POP_UI_MP_19_01_T1_08_02" />
+                        <parameter id="URGENT_ORDER_TP" reference-id="POP_UI_MP_19_01_T2_02_04" />
+                        <parameter id="DMND_QTY" reference-id="POP_UI_MP_19_01_T2_08_02" />
+                        <parameter id="PRIORT" reference-id="POP_UI_MP_19_01_T3_03_02" />
+                        <parameter id="PRDUCT_DELIVY_DATE" reference-id="POP_UI_MP_19_01_T3_04_02" />
+                        <parameter id="DELIVY_PLAN_POLICY_CD_ID" reference-id="POP_UI_MP_19_01_T4_01_02" />
+                        <parameter id="MAT_CONST_CD_ID" reference-id="POP_UI_MP_19_01_T4_02_02" />
+                        <parameter id="PARTIAL_PLAN_YN" reference-id="POP_UI_MP_19_01_T4_04_02" />
+                        <parameter id="HEURISTIC_YN" reference-id="POP_UI_MP_19_01_T4_05_02" />
+                        <parameter id="COST_OPTIMIZ_YN" reference-id="POP_UI_MP_19_01_T4_06_02" />
+                        <parameter id="PST" reference-id="POP_UI_MP_19_01_T4_07_02" />
+                        <parameter id="DUE_DATE_FNC" reference-id="POP_UI_MP_19_01_T4_08_02" />
+                        <parameter id="STRATEGY_METHD_ID" reference-id="POP_UI_MP_19_01_T4_09_02" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_MP_19_01_CANCLE" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_MP_19_01_CLOSE">
+                    <component-id>POP_UI_MP_19_01_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

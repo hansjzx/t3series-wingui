@@ -1,0 +1,81 @@
+.optionBox .MuiFormGroup-root {
+  height: auto;
+  padding: 0;
+  flex-direction: column !important;
+}
+
+.optionBox .MuiFormGroup-root .MuiRadio-root {
+  padding: 2.5px 5px;
+}
+
+.optionBox > div > div {
+  display: block;
+  margin-top: 10px;
+}
+
+.optionBox .MuiFormControlLabel-root {
+  margin: 0
+}
+
+.optionBox > div > span {
+  font-weight: bold;
+}
+
+.optionBox .MuiFormControl-root {
+  margin: 0 3.5px !important;
+}
+
+.excelFileImport > div {
+  justify-content: unset !important;
+  align-items: unset !important;
+  margin-top: 5px;
+  margin-left: 14px;
+}
+
+.excelFileImport > div > div {
+  width: auto !important;
+  justify-content: unset !important;
+  align-items: unset !important;
+  height: auto !important;
+  max-height: 150px !important;
+  flex-flow: column !important;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  margin-left: 10px;
+  overflow-x: unset !important;
+}
+
+.excelFileImport > div > div:empty {
+  border: none;
+}
+
+.excelFileImport > div > div > div {
+  padding: 7px;
+  justify-content: space-between;
+  margin-right: 0 !important;
+  width: 350px;
+}
+
+.excelFileImport > div > div > div:not(:last-of-type) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.excelFileImport > div > div > div > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.excelFileImport .MuiIconButton-root {
+  padding: 0 !important;
+  margin: 0 !important; 
+}
+
+.excelFileImport > div > label {
+  height: 28px !important;
+  margin-left: 0 !important;
+}
+
+.tableTree > div,
+.tableTree > div .MuiFormControl-root {
+  margin: 0;
+}

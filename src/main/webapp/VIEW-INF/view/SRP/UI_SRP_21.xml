@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_SRP_21" template="IM/UI_IM_11:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:IM/POP_UI_IM_11_01:IM/POP_UI_IM_11_02:IM/POP_UI_IM_11_03:IM/POP_UI_IM_11_04" copyfrom="UI_IM_11:COMM_HELP:COMM_PREFERENCE:COMM_VIEW_META:POP_UI_IM_11_01:POP_UI_IM_11_02:POP_UI_IM_11_03:POP_UI_IM_11_04" version="2.0">
+    <publish parent="MENU_08_01" open="true" seq="210" />
+</view>

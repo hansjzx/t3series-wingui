@@ -1,0 +1,133 @@
+.noticeboard .rg-root {
+  border: 0;
+  border-top: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+}
+
+.noticeboard .rg-header-focus {
+  background: none;
+}
+
+.noticeboard .rg-rowindicator-cell {
+  background-color: #ffffff;
+  border: 1px solid #e2e5e7;
+}
+
+.noticeboard .rg-head, .noticeboard .rg-header {
+  background: #ffffff;
+}
+
+.noticeboard .rg-head .rg-table tr td,
+.noticeboard .rg-header .rg-table tr td {
+  background: #ffffff !important;
+  border-bottom: 1px solid #e2e5e7;
+}
+
+.noticeboard .rg-header .rg-table tr td:last-child {
+  border-right: none;
+}
+
+.noticeboard .rg-root .rg-table tbody tr {
+  height: 35px !important;
+}
+
+.noticeboard .rg-data-row {
+  height: 35px;
+}
+
+.noticeboard .rg-rowindicator-head {
+  border-right: none;
+}
+
+.noticeboard .rg-body .rg-table tr td, .rg-fixed-body .rg-table tr td {
+  border-right: 0px !important;
+}
+
+.noticeboard .rg-body .rg-table tr td:last-child {
+  border-right: none !important;
+}
+
+.noticeboard .rg-table tr td {
+  border-right: 0px;
+  border-bottom: 1px solid #e2e5e7;
+}
+
+.noticeboard .rg-data-row:hover .rg-data-cell {
+  background-color: #DBEBFB;
+}
+
+.noticeboard .rg-header-cell,
+.noticeboard .rg-data-cell {
+  border-bottom: 1px solid #e2e5e7;
+}
+
+.noticeboard .rg-vscrollbar>div {
+  border: none;
+}
+
+.noticeboard .rg-vscrollbar .rg-scroll-up,
+.noticeboard .rg-vscrollbar .rg-scroll-down {
+  background-color: #f8f9fa;
+}
+
+.noticeboard .rg-hscrollbar > div {
+  border: none;
+}
+
+.noticeboard .rg-hscrollbar .rg-scroll-left,
+.noticeboard .rg-hscrollbar .rg-scroll-right {
+  background-color: #f8f9fa;
+}
+
+.noticeboard .rg-scrolledge {
+  border: none;
+}
+
+.noticeboard .rg-alternate-row {
+  background: #ffffff !important;
+}
+
+.noticeboard .rg-white-rowbarcontainer:not(.rg-statebar-created) {
+  background-color: #ffffff !important;
+}
+
+.noticeboard .rg-border-right-none {
+  border-right: 0 !important;
+}
+
+.noticeboard .rg-rowindicator-focus.rg-white-rowbarcontainer {
+  background-color: #f9d2b9 !important;
+}
+
+.noticeboard .rg-rowindicator-select.rg-white-rowbarcontainer {
+  background-color: #fdf0e8 !important;
+}
+
+.noticeboard .rg-head, .noticeboard .rg-header {
+  background: #f4f6fb !important;
+}
+
+.noticeboard .rg-head .rg-table tr td,
+.noticeboard .rg-header .rg-table tr td,
+.noticeboard .rg-rowgroup-head .rg-table tr:not(.rg-rowgroup-summary) td {
+  background: #f4f6fb !important;
+  border-bottom: 1px solid #e2e5e7 !important;
+}
+
+.noticeboard .rg-header .rg-table tbody tr,
+.noticeboard .rg-head .rg-table tbody tr,
+.noticeboard .rg-rowgroup-head .rg-table tbody tr {
+  height: 35px !important;
+}
+
+.noticeboard .rg-rowgroup-head .rg-table {
+  height: 100% !important;
+}
+
+.noticeboard .rg-fixed-body .rg-alternate-row {
+  background-color: #ededed !important;
+}
+
+.noticeboard .rg-rowgroup-footer {
+  background-color: #e3e3e3 !important;
+}

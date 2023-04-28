@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_SRP_04_02_POPUP" version="2.0">
+    <component id="POP_SRP_04_02_COLUMN_WINDOWS" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>Mapping Table Column Search Popup</title>
+            <width>400</width>
+            <height>600</height>
+            <visible>false</visible>
+            <modal>false</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP2_SRH_CPT_T1_01_07" type="BUTTON">
+        <props>
+            <name>SELECTION</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="op_pop_sel1">
+                    <component-id>RST_CPT_T1_04_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="POP2_RST_CPT_01:checked" extract-by="COLUMN_NAME" delimiter="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="op_close">
+                    <component-id>POP_SRP_04_02_COLUMN_WINDOWS</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP2_RST_CPT_01" type="R_GRID">
+        <props>
+            <height>500</height>
+            <selection-mode>SINGLE_ROW</selection-mode>
+            <check-bar>true</check-bar>
+            <fit-style>even</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_POP_UI_SRP_04_02_GRD_01_REFRESH_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0003" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                    <fail>
+                        <operation-call id="OPC_POP_UI_SRP_04_02_GRD_01_REFRESH_FAIL_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>MESSAGE</operation-id>
+                            <parameters>
+                                <parameter id="msg" value="MSG_0004" />
+                            </parameters>
+                        </operation-call>
+                    </fail>
+                </toolbar-button>
+                <toolbar-button operation-id="LOAD" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" />
+            </toolbar>
+            <columns>
+                <column id="COLUMN_NAME" title="COL_NM" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="DESCRIPTION" title="DESCRIP" type="string">
+                    <width>100</width>
+                    <visible>true</visible>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="REFRESH">
+                <service-call id="SVC_SP_UI_DP_18_POP_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_18_POP_Q1</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_DP_18_POP_Q1">
+                    <service-id>SRV_GET_SP_UI_DP_18_POP_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="SP_UI_DP_18_POP_Q1_01" reference-id="RST_CPT_T1_02_02" default-value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

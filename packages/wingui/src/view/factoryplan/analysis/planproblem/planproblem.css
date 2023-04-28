@@ -1,0 +1,111 @@
+.btn-active-icon {
+  border-top-right-radius: 10rem !important;
+  border-bottom-right-radius: 10rem !important;
+}
+
+.delivery-status-summary {
+  margin: 0 !important;
+}
+
+.card {
+  margin-bottom: 0px;
+}
+
+.delivery-delay-status-grid {
+  overflow: scroll;
+  height: 200px;
+  overflow-x: hidden;
+}
+
+.delivery-delay-status-grid::-webkit-scrollbar {
+  width: 10px;
+}
+
+.delivery-delay-status-grid::-webkit-scrollbar-thumb {
+  background-color: #eeeff1;
+  border: 1px solid #b6bbc3;
+}
+
+.problem-detail-grid {
+  padding: 0.25rem 1.25rem !important;
+}
+#UI_FP_PLAN_PROBLEM-problemDetailGrid .rg-header .rg-table tr td:last-child {
+  border-right: none !important;
+}
+
+/* Grid Style */
+#UI_FP_PLAN_PROBLEM-problemDetailGrid .rg-root {
+  border: 0;
+  border-top: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+}
+
+#UI_FP_PLAN_PROBLEM-problemDetailGrid .rg-header,
+#UI_FP_PLAN_PROBLEM-problemDetailGrid .rg-head {
+  background: #ffffff;
+  border-right: 0;
+  height: 30px !important;
+}
+
+#UI_FP_PLAN_PROBLEM-problemDetailGrid .rg-header-focus {
+  background: none;
+}
+
+#UI_FP_PLAN_PROBLEM-problemDetailGrid .rg-rowindicator-cell {
+  background-color: #ffffff;
+  border-right: 1px solid #e2e5e7;
+  border-bottom: 1px solid #e2e5e7;
+}
+
+#UI_FP_PLAN_PROBLEM-problemDetailGrid .rg-rowindicator-head {
+  border-right: 0;
+  border-bottom: 1px solid #e2e5e7;
+}
+
+#UI_FP_PLAN_PROBLEM-problemDetailGrid .rg-root .rg-table tbody tr {
+  height: 30px !important;
+}
+
+#UI_FP_PLAN_PROBLEM-problemDetailGrid .rg-data-row {
+  height: 30px;
+}
+
+#UI_FP_PLAN_PROBLEM-problemDetailGrid .rg-data-row:hover {
+  background: #DBEBFB;
+}
+
+#UI_FP_PLAN_PROBLEM-problemDetailGrid .rg-header-cell,
+#UI_FP_PLAN_PROBLEM-problemDetailGrid .rg-data-cell {
+  border-right: 1px solid #e2e5e7 !important;
+  border-bottom: 1px solid #e2e5e7;
+}
+
+#UI_FP_PLAN_PROBLEM-problemDetailGrid .rg-data-cell:hover {
+  background: #DBEBFB;
+}
+
+#UI_FP_PLAN_PROBLEM-problemDetailGrid .rg-vscrollbar>div {
+  border: none;
+}
+
+#UI_FP_PLAN_PROBLEM-problemDetailGrid .rg-vscrollbar .rg-scroll-up,
+#UI_FP_PLAN_PROBLEM-problemDetailGrid .rg-vscrollbar .rg-scroll-down {
+  background-color: #f8f9fa;
+}
+
+#UI_FP_PLAN_PROBLEM-problemDetailGrid .rg-alternate-row {
+  background: #fafafa;
+}
+
+#UI_FP_PLAN_PROBLEM-problemDetailGrid .rg-popup-item {
+  height: 23px
+}
+
+.grid-filtering-seletor .rg-filter-selector {
+  /* overflow: auto; */
+  min-height: 160px !important;
+}
+
+.grid-filtering-seletor .rg-filter-list-viewport {
+  height: 80px !important;
+}

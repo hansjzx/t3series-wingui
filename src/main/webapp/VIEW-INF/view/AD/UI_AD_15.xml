@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_AD_15" template="COMM/STANDARD_TYPE:COMM/COMM_HELP" copyfrom="COMM_HELP" version="2.0">
+    <publish parent="MENU_90" open="true" seq="150" />
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <tooltip>search</tooltip>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_01_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsible="true" resizable="false" size="300" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+        <operations>
+            <operation id="OPEN">
+                <service-call id="openTarget">
+                    <parameters>
+                        <parameter id="target" value="rst" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="CLOSE">
+                <service-call id="openTarget">
+                    <parameters>
+                        <parameter id="target" value="rst" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="primary" title="CFG_RELOAD" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>Service Bus</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_04" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="sb_wait_on">
+                    <component-id>COMMON</component-id>
+                    <operation-id>WAIT-ON</operation-id>
+                    <complete>
+                        <operation-call id="SB_load">
+                            <component-id>SRH_CPT_T1_01_04</component-id>
+                            <operation-id>SBSERVER_RELOAD</operation-id>
+                            <success>
+                                <operation-call id="sb_successload">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Success" />
+                                        <parameter id="msg" value="ServiceBus Configuration Reload Success" />
+                                        <parameter id="type" value="info" />
+                                        <parameter id="modal" value="true" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                            <fail>
+                                <operation-call id="sb_failload">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Fail" />
+                                        <parameter id="msg" value="ServiceBus Configuration Reload Fail" />
+                                        <parameter id="type" value="alert" />
+                                        <parameter id="modal" value="true" />
+                                    </parameters>
+                                </operation-call>
+                            </fail>
+                            <complete>
+                                <operation-call id="sb_wait_off">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>WAIT-OFF</operation-id>
+                                </operation-call>
+                            </complete>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SBSERVER_RELOAD">
+                <service-call id="sb_reload">
+                    <service-id>ReadConfiguration</service-id>
+                    <service-target>REGISTRY</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>Data Server</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_02_04" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="ds_wait_on">
+                    <component-id>COMMON</component-id>
+                    <operation-id>WAIT-ON</operation-id>
+                    <complete>
+                        <operation-call id="lg">
+                            <component-id>SRH_CPT_T1_02_04</component-id>
+                            <operation-id>DATASERVER_RELOAD</operation-id>
+                            <success>
+                                <operation-call id="ds_successload">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Success" />
+                                        <parameter id="msg" value="DataServer Configuration Reload Success" />
+                                        <parameter id="type" value="info" />
+                                        <parameter id="modal" value="true" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                            <fail>
+                                <operation-call id="ds_failload">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Fail" />
+                                        <parameter id="msg" value="DataServer Configuration Reload Fail" />
+                                        <parameter id="type" value="alert" />
+                                        <parameter id="modal" value="true" />
+                                    </parameters>
+                                </operation-call>
+                            </fail>
+                            <complete>
+                                <operation-call id="ds_wait_off">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>WAIT-OFF</operation-id>
+                                </operation-call>
+                            </complete>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="DATASERVER_RELOAD">
+                <service-call id="data_reload">
+                    <service-id>ReadConfiguration</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <!--
+    <component id="SRH_CPT_T1_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>Demand Plan Server</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_03_04" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="dp_wait_on">
+                    <component-id>COMMON</component-id>
+                    <operation-id>WAIT-ON</operation-id>
+                    <complete>
+                        <operation-call id="dp_load">
+                            <component-id>SRH_CPT_T1_03_04</component-id>
+                            <operation-id>DPSERVER_RELOAD</operation-id>
+                            <success>
+                                <operation-call id="dp_successload">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Success" />
+                                        <parameter id="msg" value="DemandPlanServer Configuration Reload Success" />
+                                        <parameter id="type" value="info" />
+                                        <parameter id="modal" value="true" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                            <fail>
+                                <operation-call id="dp_failload">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Fail" />
+                                        <parameter id="msg" value="DemandPlanServer Configuration Reload Fail" />
+                                        <parameter id="type" value="alert" />
+                                        <parameter id="modal" value="true" />
+                                    </parameters>
+                                </operation-call>
+                            </fail>
+                            <complete>
+                                <operation-call id="ds_wait_off">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>WAIT-OFF</operation-id>
+                                </operation-call>
+                            </complete>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="DPSERVER_RELOAD">
+                <service-call id="dp_reload">
+                    <service-id>ReadConfiguration</service-id>
+                    <service-target>T3SeriesDemandPlanServer</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    -->
+    <component id="SRH_CPT_T1_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>SupplyNet Server</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_05_04" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="sn_wait_on">
+                    <component-id>COMMON</component-id>
+                    <operation-id>WAIT-ON</operation-id>
+                    <complete>
+                        <operation-call id="sn_load">
+                            <component-id>SRH_CPT_T1_05_04</component-id>
+                            <operation-id>SNSERVER_RELOAD</operation-id>
+                            <success>
+                                <operation-call id="sn_successload">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Success" />
+                                        <parameter id="msg" value="SupplyNetServer Configuration Reload Success" />
+                                        <parameter id="type" value="info" />
+                                        <parameter id="modal" value="true" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                            <fail>
+                                <operation-call id="sn_failload">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Fail" />
+                                        <parameter id="msg" value="SupplyNetServer Configuration Reload Fail" />
+                                        <parameter id="type" value="alert" />
+                                        <parameter id="modal" value="true" />
+                                    </parameters>
+                                </operation-call>
+                            </fail>
+                            <complete>
+                                <operation-call id="sn_wait_off">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>WAIT-OFF</operation-id>
+                                </operation-call>
+                            </complete>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SNSERVER_RELOAD">
+                <service-call id="sn_reload">
+                    <service-id>ReadConfiguration</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_06_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>Sales-RP Server</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_06_04" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="srp_wait_on">
+                    <component-id>COMMON</component-id>
+                    <operation-id>WAIT-ON</operation-id>
+                    <complete>
+                        <operation-call id="srp_load">
+                            <component-id>SRH_CPT_T1_06_04</component-id>
+                            <operation-id>SRPSERVER_RELOAD</operation-id>
+                            <success>
+                                <operation-call id="srp_successload">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Success" />
+                                        <parameter id="msg" value="SRPServer Configuration Reload Success" />
+                                        <parameter id="type" value="info" />
+                                        <parameter id="modal" value="true" />
+                                    </parameters>
+                                </operation-call>
+                            </success>
+                            <fail>
+                                <operation-call id="srp_failload">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>DIALOG</operation-id>
+                                    <parameters>
+                                        <parameter id="title" value="Fail" />
+                                        <parameter id="msg" value="SRPServer Configuration Reload Fail" />
+                                        <parameter id="type" value="alert" />
+                                        <parameter id="modal" value="true" />
+                                    </parameters>
+                                </operation-call>
+                            </fail>
+                            <complete>
+                                <operation-call id="srp_wait_off">
+                                    <component-id>COMMON</component-id>
+                                    <operation-id>WAIT-OFF</operation-id>
+                                </operation-call>
+                            </complete>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SRPSERVER_RELOAD">
+                <service-call id="srp_reload">
+                    <service-id>ReadConfiguration</service-id>
+                    <service-target>T3SeriesSRPServer</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <state-bar>false</state-bar>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <cell-attributes>
+                <cell-attribute id="ca1">
+                    <conditions>
+                        <condition id="cond1" group="A">
+                            <column>connect</column>
+                            <operator>equal</operator>
+                            <value>false</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="tgt0">
+                            <column>id</column>
+                            <attrs>
+                                <background>#FFFFFFFF</background>
+                                <foreground>#FF000000</foreground>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+            </cell-attributes>
+            <toolbar use="true">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right" />
+            </toolbar>
+            <columns>
+                <column id="id" title="SERVER_ID" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="host" title="SERVER_IP" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="port" title="SERVER_PORT" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="connect" title="SERVER_CONN" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="serverload">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="gu">
+                    <service-id>GetServerStatus</service-id>
+                    <service-target>REGISTRY</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+
+    <!--
+    <component id="RST_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t2-1" title="DP Server Status" expand="true" />
+            </tabs>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="RST_CPT_T1_01_01" type="LABEL">
+        <props>
+            <width>200</width>
+            <lang>true</lang>
+            <position>right</position>
+            <init-value>T3SeriesDemandPlanServer</init-value>
+        </props>
+    </component>
+    <component id="RST_CPT_T1_01_02" type="INPUTBOX">
+        <props>
+            <width>400</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <init-value />
+            <value-id>ENGINE_STATUS</value-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_RST_CPT_T1_01_02_LOAD_when_init">
+                    <component-id>RST_CPT_T1_01_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <fail>
+                        <operation-call id="OPC_RST_CPT_T1_01_02_SET_when_init">
+                            <component-id>RST_CPT_T1_01_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="cannot find T3SeriesDemandPlanServer" />
+                            </parameters>
+                        </operation-call>
+                    </fail>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_LOAD_ENGINE_STATUS">
+                    <service-id>GetEngineStatus</service-id>
+                    <service-target>T3SeriesDemandPlanServer</service-target>
+                </service-call>
+            </operation>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="RST_CPT_T1_01_03" type="BUTTON">
+        <props>
+            <tooltip>refresh</tooltip>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_RST_CPT_T1_01_02_LOAD_when_refresh">
+                    <component-id>RST_CPT_T1_01_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <fail>
+                        <operation-call id="OPC_RST_CPT_T1_01_02_SET_02">
+                            <component-id>RST_CPT_T1_01_02</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" value="cannot find T3SeriesDemandPlanServer" />
+                            </parameters>
+                        </operation-call>
+                    </fail>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    -->
+</view>

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_MP_15_04" version="2.0">
+    <component id="POP_TAB_04" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t2-1" title="CHANNEL_TP" expand="true" init-render="true" />
+                <tab id="t2-2" title="MIN_ALLOC" init-render="true" />
+            </tabs>
+        </props>
+        <operations>
+            <operation id="ACTIVATE" />
+        </operations>
+    </component>
+    <component id="POP_ITEM_CD_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_CD</init-value>
+        </props>
+    </component>
+    <component id="POP_ITEM_CD_02_04" type="INPUTBOX">
+        <props>
+            <width>146.6</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_ITEM_CD_02_05" type="BUTTON">
+        <props>
+            <width>30</width>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_ALL_ITEM_WINDOW_01_OPEN">
+                    <component-id>POP_ALL_ITEM_WINDOW_01</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+                <operation-call id="OPC_POP_ALL_ITEM_GRD_LOAD">
+                    <component-id>POP_ALL_ITEM_GRD</component-id>
+                    <operation-id>LOAD</operation-id>
+                    <parameters>
+                        <parameter id="DATA_DIV" value="GET_DP_ITEM" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_RESET_DATA_01">
+                    <component-id>POP_ALL_ITEM_CD_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_RESET_DATA_02">
+                    <component-id>POP_ALL_ITEM_NM_02</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_RESET_DATA_03">
+                    <component-id>POP_ALL_ITEM_TP_02</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="POP_ITEM_NM_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_NM</init-value>
+        </props>
+    </component>
+    <component id="POP_ITEM_NM_02_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_ITEM_TP_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_TP</init-value>
+        </props>
+    </component>
+    <component id="POP_ITEM_TP_02_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="CHANNEL_TP_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>CHANNEL_NM</init-value>
+        </props>
+    </component>
+    <component id="CHANNEL_TP_04" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_CHANNEL_TP_04_INIT_01">
+                    <component-id>CHANNEL_TP_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:CHANNEL_TYPE" />
+            </operation>
+            <operation id="SELECT" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_04_WINDOW_01_CPT_00_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACTV_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_04_WINDOW_01_CPT_00_04" type="CHECKBOX">
+        <props>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_04_WINDOW_01_CPT_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>APPY_YN</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_04_WINDOW_01_CPT_01_04" type="CHECKBOX">
+        <props>
+            <editable>true</editable>
+            <lang>true</lang>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_04_WINDOW_01_CPT_02_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>MIN_ALLOC_APPY_METHD</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_04_WINDOW_01_CPT_02_04" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <editable>false</editable>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>ID</value-id>
+            <text-id>CD_NM</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_POP_UI_MP_15_04_WINDOW_01_CPT_02_04_INIT_01">
+                    <component-id>POP_UI_MP_15_04_WINDOW_01_CPT_02_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <reference-service-call id="DROPDOWN:LOOKUP_CODE" extract="GROUP:MIN_ALLOCATION_APPLY_TYPE" />
+            </operation>
+            <operation id="SELECT" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_04_WINDOW_01_CPT_03_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>DMND_BASE_APPY_RATE</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_04_WINDOW_01_CPT_03_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+            <max>0</max>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_04_WINDOW_01_CPT_04_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>MIN_ALLOC_QTY</init-value>
+        </props>
+    </component>
+    <component id="POP_UI_MP_15_04_WINDOW_01_CPT_04_04" type="INPUTBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <type>number</type>
+            <min>0</min>
+        </props>
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_04_WINDOW_01_CPT_99_01" type="BUTTON">
+        <props>
+            <name>OK</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_MP_15_04_WINDOW_01_CPT_99_01_CLICK_01">
+                    <component-id>POP_UI_MP_15_04_WINDOW_01_CPT_99_01</component-id>
+                    <operation-id>SAVE</operation-id>
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_SAVE_SUCCESS_MSG_03">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="POP_UI_MP_15_04_WINDOW_01_CPT_99_01:SVC_POP_UI_MP_15_04_S_001:IM_DATA" extract-by="SP_UI_MP_15_S1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_POP_UI_MP_15_04_WINDOW_01_CPT_99_01_CLICK_02">
+                            <component-id>RST_CPT_02</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_POP_UI_MP_15_04_WINDOW_01_CPT_99_01_CLICK_03">
+                    <component-id>POP_UI_MP_15_04_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SAVE">
+                <service-call id="SVC_POP_UI_MP_15_04_S_001">
+                    <service-id>SRV_UI_MP_15_S1</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="CATAGY_VAL" value="CHANNEL" />
+                        <parameter id="ITEM_MST_ID" reference-id="POP_ALL_ITEM_DATA_01:ITEM_MST_ID" />
+                        <parameter id="CHANNEL_ID" reference-id="POP_ACCOUNT_DATA_01:ACCOUNT_ID" />
+                        <parameter id="APPY_YN" reference-id="POP_UI_MP_15_04_WINDOW_01_CPT_01_04" />
+                        <parameter id="MIN_ALLOC_APPY_MTD_ID" reference-id="POP_UI_MP_15_04_WINDOW_01_CPT_02_04" />
+                        <parameter id="DMND_BASE_APPY_RATE" reference-id="POP_UI_MP_15_04_WINDOW_01_CPT_03_04" />
+                        <parameter id="MIN_ALLOC_QTY" reference-id="POP_UI_MP_15_04_WINDOW_01_CPT_04_04" />
+                        <parameter id="ACTV_YN" reference-id="POP_UI_MP_15_04_WINDOW_01_CPT_00_04" />
+                        <parameter id="USER_ID" reference-id="COMMON:loginId" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="POP_UI_MP_15_04_WINDOW_01_CPT_99_02" type="BUTTON">
+        <props>
+            <name>CANCEL</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_POP_UI_MP_15_04_WINDOW_01_CPT_99_02_CLICK">
+                    <component-id>POP_UI_MP_15_04_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+</view>

@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="UI_BF_51" template="DP/STANDARD_SPLIT:COMM/COMM_HELP:COMM/COMM_PERSONALIZATION:DP/UI_DP_POPUP_ITEM:DP/UI_DP_POPUP_ACCOUNT:DP/UI_DP_COMM" copyfrom="COMM_HELP:COMM_PREFERENCE:COMM_VIEW_META:UI_DP_POPUP_ITEM:UI_DP_POPUP_ACCOUNT" version="2.0">
+    <publish parent="MENU_07_03" open="true" seq="140" />
+    <component id="DP_DATA_POP_ITEM" type="DATA">
+        <actions>
+            <action event-type="change-data">
+                <operation-call id="pop-item-main-search">
+                    <component-id>SRH_CPT_T1_04_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="DP_DATA_POP_ITEM:ITEM_INFO" extract-by="ITEM_CD" delimiter="|" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="item-type-check">
+                            <component>DP_DATA_POP_ITEM</component>
+                            <key>EVENT_TYPE</key>
+                            <operator>equal</operator>
+                            <value>MAIN_SEARCH</value>
+                        </condition>
+                    </conditions>
+                    <complete>
+                        <operation-call id="op_POP_sel2">
+                            <component-id>SRH_CPT_T1_05_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="DP_DATA_POP_ITEM:ITEM_INFO" extract-by="ITEM_NM" delimiter="|" default-value="" />
+                            </parameters>
+                            <complete>
+                                <operation-call id="op_POP_sel3">
+                                    <component-id>DATA_01</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="ITEM_MST_ID" reference-id="DP_DATA_POP_ITEM:ITEM_INFO" extract-by="ID" delimiter="|" default-value="" />
+                                    </parameters>
+                                </operation-call>
+                            </complete>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="item-set">
+                    <parameters>
+                        <parameter id="ITEM_INFO" />
+                        <parameter id="EVENT_TYPE" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="DP_DATA_POP_ACCT" type="DATA">
+        <actions>
+            <action event-type="change-data">
+                <operation-call id="pop-acct-main-search">
+                    <component-id>SRH_CPT_T1_06_04</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET" reference-id="DP_DATA_POP_ACCT:ACCT_INFO" extract-by="ACCOUNT_CD" delimiter="|" default-value="" />
+                    </parameters>
+                    <conditions>
+                        <condition id="1">
+                            <component>DP_DATA_POP_ACCT</component>
+                            <key>EVENT_TYPE</key>
+                            <operator>equal</operator>
+                            <value>MAIN_SEARCH</value>
+                        </condition>
+                    </conditions>
+                    <complete>
+                        <operation-call id="op_POP_sel10">
+                            <component-id>SRH_CPT_T1_07_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="DP_DATA_POP_ACCT:ACCT_INFO" extract-by="ACCOUNT_NM" delimiter="|" default-value="" />
+                            </parameters>
+                            <complete>
+                                <operation-call id="op_POP_sel11">
+                                    <component-id>DATA_01</component-id>
+                                    <operation-id>SET</operation-id>
+                                    <parameters>
+                                        <parameter id="ACCOUNT_ID" reference-id="DP_DATA_POP_ACCT:ACCT_INFO" extract-by="ID" delimiter="|" default-value="" />
+                                    </parameters>
+                                </operation-call>
+                            </complete>
+                        </operation-call>
+                    </complete>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="ACCT_INFO" />
+                        <parameter id="EVENT_TYPE" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="CONTENT_SPLIT" type="SPLIT">
+        <props>
+            <position>horizontal</position>
+            <splits>
+                <split id="search" collapsed="false" collapsible="true" resizable="false" size="340" />
+                <split id="result" collapsible="false" />
+            </splits>
+        </props>
+    </component>
+    <component id="RESULT_SPLIT" type="SPLIT">
+        <props>
+            <position>vertical</position>
+            <splits>
+                <split id="top" collapsible="false" resizable="false" />
+                <split id="bottom" collapsible="false" size="360" />
+            </splits>
+        </props>
+    </component>
+    <component id="TTL_CPT_04" type="BUTTON">
+        <props>
+            <icon>refresh</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_REFRESH_001">
+                    <component-id>SRH_CPT_T1_04_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="OPC_REFRESH_002">
+                    <component-id>SRH_CPT_T1_05_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="OPC_REFRESH_003">
+                    <component-id>SRH_CPT_T1_06_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+                <operation-call id="OPC_REFRESH_004">
+                    <component-id>SRH_CPT_T1_07_04</component-id>
+                    <operation-id>SET</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="TTL_CPT_05" type="BUTTON">
+        <props>
+            <icon>search</icon>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="OPC_GRID_LOAD">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_TAB" type="TAB">
+        <props>
+            <tabs>
+                <tab id="t1-1" title="SCH_COND" expand="true" />
+            </tabs>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>VERSION_ID</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_01_04" type="COMBOBOX">
+        <props>
+            <width>180</width>
+            <editable>true</editable>
+            <lang>true</lang>
+            <select-index>0</select-index>
+            <value-id>VER_CD</value-id>
+            <text-id>VER_CD</text-id>
+        </props>
+        <actions>
+            <action event-type="init">
+                <operation-call id="OPC_SRH_CPT_T1_01_04_LOAD">
+                    <component-id>SRH_CPT_T1_01_04</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_GET_SP_UI_BF_00_VERSION_Q1">
+                    <service-id>SRV_GET_SP_UI_BF_00_VERSION_Q1</service-id>
+                    <service-target>dp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_04_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_CD</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_04_04" type="INPUTBOX">
+        <props>
+            <width>151</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="enterLoad">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_04_05" type="BUTTON">
+        <props>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="setEventType">
+                    <component-id>DP_DATA_POP_ITEM</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="EVENT_TYPE" value="MAIN_SEARCH" />
+                        <parameter id="ITEM_INFO" value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_openWin_src_item">
+                    <component-id>UI_DP_POPUP_ITEM_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_CPT_T1_05_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ITEM_NM</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_05_04" type="INPUTBOX">
+        <props>
+            <width>181</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="enterLoad2">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_06_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACCOUNT_CD</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_06_04" type="INPUTBOX">
+        <props>
+            <width>151</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="enterLoad3">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="SRH_CPT_T1_06_05" type="BUTTON">
+        <props>
+            <name>...</name>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="click">
+                <operation-call id="setEventTypeAcct">
+                    <component-id>DP_DATA_POP_ACCT</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="EVENT_TYPE" value="MAIN_SEARCH" />
+                        <parameter id="ACCT_INFO" value="" />
+                    </parameters>
+                </operation-call>
+                <operation-call id="OPC_openWindow1">
+                    <component-id>UI_DP_POPUP_ACCOUNT_WINDOWS</component-id>
+                    <operation-id>OPEN</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+    </component>
+    <component id="SRH_CPT_T1_07_01" type="LABEL">
+        <props>
+            <lang>true</lang>
+            <init-value>ACCOUNT_NM</init-value>
+        </props>
+    </component>
+    <component id="SRH_CPT_T1_07_04" type="INPUTBOX">
+        <props>
+            <width>181</width>
+            <lang>true</lang>
+        </props>
+        <actions>
+            <action event-type="key-enter">
+                <operation-call id="enterLoad4">
+                    <component-id>RST_CPT_01</component-id>
+                    <operation-id>LOAD</operation-id>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="SET">
+                <service-call id="1">
+                    <parameters>
+                        <parameter id="SET" value="" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+    <component id="RST_CPT_01" type="R_GRID">
+        <props>
+            <selection-mode>BLOCK</selection-mode>
+            <state-bar>false</state-bar>
+            <check-bar>false</check-bar>
+            <fit-style>even</fit-style>
+            <show-row-count>true</show-row-count>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>false</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <cell-attributes>
+                <cell-attribute id="ca9">
+                    <conditions>
+                        <condition id="cond9">
+                            <column>SELECT_SEQ</column>
+                            <operator>equal</operator>
+                            <value>1</value>
+                        </condition>
+                    </conditions>
+                    <applies>
+                        <apply id="tgt9">
+                            <column>ENGINE_TP_CD,MAPE,MAE,MAE_P,RMSE,RMSE_P,WAPE, MAPE_W</column>
+                            <attrs>
+                                <background>#FFbfff00</background>
+                            </attrs>
+                        </apply>
+                    </applies>
+                </cell-attribute>
+            </cell-attributes>
+            <toolbar use="true">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="SAVE" enable="true" visible="false" position="right" />
+            </toolbar>
+            <!-- <toolbar use="false">
+                <toolbar-button operation-id="EXPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="IMPORT" enable="true" visible="true" position="left" />
+                <toolbar-button operation-id="CONFIG" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="COPY" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="ROLLBACK" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REFRESH" enable="true" visible="false" position="right" />
+                <toolbar-button operation-id="LOAD" enable="true" visible="false" position="right">
+                    <success>
+                        <operation-call id="grid1_load_op1">
+                            <component-id>RST_CPT_02</component-id>
+                            <operation-id>LOAD</operation-id>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+                <toolbar-button operation-id="INSERT_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="REMOVE_ROW" enable="true" visible="true" position="right" />
+                <toolbar-button operation-id="SAVE" enable="true" visible="true" position="right">
+                    <success>
+                        <operation-call id="OPC_RST_CPT_01_SAVE_SUCCESS_MSG">
+                            <component-id>COMMON</component-id>
+                            <operation-id>DIALOG</operation-id>
+                            <parameters>
+                                <parameter id="title" value="Information" />
+                                <parameter id="msg" reference-data="RST_CPT_01:SVC_SP_UI_DP_01_S1:IM_DATA" extract-by="SP_UI_DP_01_S1_P_RT_MSG" />
+                                <parameter id="type" value="info" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="ops3">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>LOAD</operation-id>
+                            <success>
+                                <operation-call id="ops4">
+                                    <component-id>RST_CPT_02</component-id>
+                                    <operation-id>LOAD</operation-id>
+                                </operation-call>
+                            </success>
+                        </operation-call>
+                    </success>
+                </toolbar-button>
+            </toolbar> -->
+            <columns>
+                <column id="ITEM_CD" title="ITEM_CD" type="string" sort="asc">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="ITEM_NM" title="ITEM_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="ACCOUNT_CD" title="ACCOUNT_CD" type="string" sort="asc">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="ACCOUNT_NM" title="ACCOUNT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                    <merge>true</merge>
+                </column>
+                <column id="ENGINE_TP_CD" title="ENGINE_TP_CD" type="string" sort="asc">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <lang>true</lang>
+                </column>
+                <column id="SELECT_SEQ" type="string">
+                    <width>40</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="MAPE" title="MAPE" type="double">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <format>#,###.0</format>
+                </column>
+                <column id="MAE" title="MAE" type="double">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <format>#,###.0</format>
+                </column>
+                <column id="MAE_P" title="MAE_P" type="double">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <format>#,###.0</format>
+                </column>
+                <column id="RMSE" title="RMSE" type="double">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <format>#,###.0</format>
+                </column>
+                <column id="RMSE_P" title="RMSE_P" type="double">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <format>#,###.0</format>
+                </column>
+                <column id="MAPE_W" title="MAPE_W" type="double">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <format>#,###.0</format>
+                </column>
+                <column id="WAPE" title="WAPE" type="double">
+                    <width>80</width>
+                    <editable>false</editable>
+                    <format>#,###.0</format>
+                </column>
+            </columns>
+        </props>
+        <operations>
+            <operation id="SET" />
+            <operation id="LOAD">
+                <service-call id="SVC_SP_UI_BF_51_Q1">
+                    <service-id>SRV_GET_SP_UI_BF_51_Q1</service-id>
+                    <service-target>dp</service-target>
+                    <parameters>
+                        <parameter id="VER_CD" reference-id="SRH_CPT_T1_01_04" />
+                        <parameter id="ITEM_CD" reference-id="SRH_CPT_T1_04_04" />
+                        <parameter id="ITEM_NM" reference-id="SRH_CPT_T1_05_04" />
+                        <parameter id="ACCOUNT_CD" reference-id="SRH_CPT_T1_06_04" />
+                        <parameter id="ACCOUNT_NM" reference-id="SRH_CPT_T1_07_04" />
+                    </parameters>
+                </service-call>
+            </operation>
+            <operation id="EXPORT">
+                <export-lookup>true</export-lookup>
+            </operation>
+        </operations>
+    </component>
+</view>

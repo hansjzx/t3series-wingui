@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_MP_27_21" version="2.0">
+    <component id="POP_UI_MP_27_21_WINDOWS" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>COMM_SRH_POP_LOCAT</title>
+            <width>530</width>
+            <height>320</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_27_21_GRID" type="R_GRID">
+        <props>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <toolbar use="false" />
+            <columns>
+                <column id="CONSUME_LOCAT_ITEM_ID" title="CONSUME_LOCAT_ITEM_ID" type="string">
+                    <visible>false</visible>
+                </column>
+                <column id="CONSUME_LOCAT_TP_NM" title="LOCAT_TP_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="CONSUME_LOCAT_LV" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="CONSUME_LOCAT_CD" title="LOCAT_LV" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+                <column id="CONSUME_LOCAT_NM" title="LOCAT_NM" type="string">
+                    <width>100</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_POP_UI_MP_27_21_GRID_CELL_DB_CLICK_01">
+                    <component-id>POP_UI_MP_27_20_RST_CPT_01</component-id>
+                    <operation-id>SET</operation-id>
+                    <parameters>
+                        <parameter id="SET_VALUE-to-CONSUME_LOCAT_ITEM_ID" reference-id="POP_UI_MP_27_21_GRID:selections" extract-by="CONSUME_LOCAT_ITEM_ID" />
+                        <parameter id="SET_VALUE-to-CONSUME_LOCAT_TP_NM" reference-id="POP_UI_MP_27_21_GRID:selections" extract-by="CONSUME_LOCAT_TP_NM" />
+                        <parameter id="SET_VALUE-to-CONSUME_LOCAT_LV" reference-id="POP_UI_MP_27_21_GRID:selections" extract-by="CONSUME_LOCAT_LV" />
+                        <parameter id="SET_VALUE-to-CONSUME_LOCAT_CD" reference-id="POP_UI_MP_27_21_GRID:selections" extract-by="CONSUME_LOCAT_CD" />
+                        <parameter id="SET_VALUE-to-CONSUME_LOCAT_NM" reference-id="POP_UI_MP_27_21_GRID:selections" extract-by="CONSUME_LOCAT_NM" />
+                    </parameters>
+                    <success>
+                        <operation-call id="OPC_POP_UI_MP_27_21_WINDOWS_CLOSE">
+                            <component-id>POP_UI_MP_27_21_WINDOWS</component-id>
+                            <operation-id>CLOSE</operation-id>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SVC_UI_MP_27_Q5">
+                    <service-id>SRV_UI_MP_27_Q5</service-id>
+                    <service-target>mp</service-target>
+                    <parameters>
+                        <parameter id="SUPPLY_LOCAT_ITEM_ID" reference-id="POP_UI_MP_27_20_RST_CPT_01:selections" extract-by="SUPPLY_LOCAT_ITEM_ID" />
+                    </parameters>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view id="POP_UI_MP_02_02" version="2.0">
+    <component id="POP_UI_MP_02_02_DATA_01" type="DATA">
+        <operations>
+            <operation id="SET" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_02_02_WINDOW_01" type="WINDOW">
+        <props>
+            <lang>true</lang>
+            <title>POP_UI_MP_02_02</title>
+            <width>450</width>
+            <height>405</height>
+            <visible>false</visible>
+            <modal>true</modal>
+        </props>
+        <operations>
+            <operation id="OPEN" />
+            <operation id="CLOSE" />
+        </operations>
+    </component>
+    <component id="POP_UI_MP_02_02_WINDOW_01_R_GRID_01" type="R_GRID">
+        <props>
+            <check-bar>false</check-bar>
+            <fit-style>evenFill</fit-style>
+            <pageable>false</pageable>
+            <grid-summary>false</grid-summary>
+            <group-header>false</group-header>
+            <group-summary>false</group-summary>
+            <group-sort>false</group-sort>
+            <group-merge-mode>true</group-merge-mode>
+            <group-expander>false</group-expander>
+            <toolbar use="false" />
+            <columns>
+                <column id="ID" title="ID" type="string">
+                    <width>150</width>
+                    <visible>false</visible>
+                    <editable>false</editable>
+                </column>
+                <column id="PEGGING_GRP" title="PEGGING_GRP" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                    <init-group-order>1</init-group-order>
+                </column>
+                <column id="PEGGING_ATTR" title="PEGGING_ATTR" type="string">
+                    <width>150</width>
+                    <editable>false</editable>
+                </column>
+            </columns>
+        </props>
+        <actions>
+            <action event-type="cell-double-click">
+                <operation-call id="OPC_Click_RST1_01_02">
+                    <component-id>POP_UI_MP_02_02_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                    <conditions>
+                        <condition id="cond1">
+                            <component>DATA_02</component>
+                            <key>CLICK_FROM</key>
+                            <operator>equal</operator>
+                            <value>RST_CPT_01</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_Click_RST1_02">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET_VALUE-to-PEGGING_GRP_ID" reference-id="POP_UI_MP_02_02_WINDOW_01_R_GRID_01:selections" extract-by="ID" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_Click_RST1_03">
+                            <component-id>RST_CPT_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET_VALUE-to-PEGGING_ATTR" reference-id="POP_UI_MP_02_02_WINDOW_01_R_GRID_01:selections" extract-by="PEGGING_ATTR" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+                <operation-call id="OPC_Click_RST1_POP1_01_02">
+                    <component-id>POP_UI_MP_02_02_WINDOW_01</component-id>
+                    <operation-id>CLOSE</operation-id>
+                    <conditions>
+                        <condition id="cond1">
+                            <component>DATA_02</component>
+                            <key>CLICK_FROM</key>
+                            <operator>equal</operator>
+                            <value>RST1_POP1</value>
+                        </condition>
+                    </conditions>
+                    <success>
+                        <operation-call id="OPC_Click_RST1_POP1_02">
+                            <component-id>POP_UI_MP_02_02_DATA_01</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="PEGGING_GRP_ID" reference-id="POP_UI_MP_02_02_WINDOW_01_R_GRID_01:selections" extract-by="ID" default-value="" />
+                            </parameters>
+                        </operation-call>
+                        <operation-call id="OPC_Click_RST1_POP1_03">
+                            <component-id>POP_UI_MP_02_01_CPT_T3_07_04</component-id>
+                            <operation-id>SET</operation-id>
+                            <parameters>
+                                <parameter id="SET" reference-id="POP_UI_MP_02_02_WINDOW_01_R_GRID_01:selections" extract-by="PEGGING_ATTR" default-value="" />
+                            </parameters>
+                        </operation-call>
+                    </success>
+                </operation-call>
+            </action>
+        </actions>
+        <operations>
+            <operation id="LOAD">
+                <service-call id="SRC_SP_UI_MP_02_POP_Q1_LOAD">
+                    <service-id>SRV_UI_MP_02_POP_Q1</service-id>
+                    <service-target>mp</service-target>
+                </service-call>
+            </operation>
+        </operations>
+    </component>
+</view>
